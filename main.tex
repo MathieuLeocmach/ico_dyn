@@ -1,0 +1,382 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[numbers, sort&compress]{natbib}
+\usepackage{subfig}
+\usepackage{SIunits}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{groupplots}
+\tikzexternalize
+\tikzset{external/force remake}
+\tikzset{every mark/.append style={scale=0.8}}
+
+\newcommand{\wstar}{-0.023}
+\newcommand{\Qstar}{0.25}
+
+\title{Experimental study of the role of icosahedral order in hard spheres glass transition.}
+
+\author{Mathieu Leocmach, Hajime Tanaka}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We study at particle level by confocal microscopy the structural and dynamical heterogeneities in a supercooled colloidal liquid of polydisperse hard-spheres. We identify the locally favoured structures as icosahedral and \textsc{fcc}-like order, excluding any other simple local symmetry. We find that both types of order are statistically associated with slow particles. However, when approaching the glass transition, the icosahedral order do not grow in size whereas crystal-like structures govern dynamics. This questions the influence of the icosahedral state postulated by the frustration-limited domain theory and stresses the importance of the local order compatible with the avoided first order transition.
+\end{abstract}
+
+\section*{Introduction}
+
+The possibility of a non-crystalline order has been discussed mainly in relation to the long standing problem of the glass transition. Even so, its role remains unclear: actively slowing down the system or avoiding crystal formation. This issue may be crucial in the design of good glass formers.
+
+Upon cooling, a liquid usually undergoes a first order transition to an ordered ground state (crystal or quasi-crystal). However, it is generally possible to avoid the transition and to form a metastable supercooled liquid. Upon further cooling the dynamics slows down dramatically by many orders of magnitude, leading to the impossibility to equilibrate the system in the experimental time scale below a temperature $T_g$ named the glass transition temperature. The nature of the glass transition (thermodynamic or kinetic, structural or purely dynamical) is still matter of debates after decades of intensive research (see~\citep{cavagna2009supercooled} for a comprehensive review).
+
+A part of the answer is believed to come from the dynamics in itself: a supercooled liquid is dynamically heterogeneous (see~\citep{Berthier2011} for a review) and the characteristic size of the dynamical heterogeneities is growing when approaching the glass transition~\citep{Donati1999, Berthier2005}. The dynamical arrest may then be the analogue of the slowing down observed near a critical point when the characteristic size of the fluctuations diverges. Note that the length scale defined by the dynamical heterogeneities is not statical (one-time spatial correlation) but dynamical (two-time spatial correlation). 
+
+In order to recover static quantities, it is tempting to link dynamical heterogeneities to structural heterogeneities. Stable structures should move less than unstable ones. \citet{Widmer-Cooper2005} demonstrated that the initial configuration of a simulation, independently of the initial dynamics, had a role in the heterogeneities of the dynamics. \citet{Berthier2007} pointed out later that this influence did not exist at the particle level, but on larger scales: medium range order can be statistically linked to medium range dynamical heterogeneities. However theses arguments are based on the iso-configurational ensemble (starting again and again simulations with different dynamics but with the same initial configuration), a method that has no experimental equivalent yet.
+
+Given that the glass shows no long range periodic order, structures different from the crystal are most often pointed as responsible for the dynamical arrest. Since the pioneering work of \citet{Frank1952}, icosahedral order is the archetypal model of amorphous structure~\citep{Spaepen2000}. Locally, an icosahedron maximises the density of packing, but it's five-fold symmetry is incompatible with long-range periodicity. Evidence of icosahedral ordering have indeed been found in very dense hard sphere packings~\citep{Bernal1960, Clarke1993, Malshe2011}, in various simulation models~\citep{steinhardt1983boo, Tomida1995, Doye2003, Coslovich2007, Pedersen2010, Coslovich2011} and more recently in experimental dense metallic liquids~\citep{Reichert2000, Celino2007} and glasses~\citep{Luo2004, Wang2011}.
+
+Icosahedral order (or more generally locally favoured structures of the liquid) plays a central role in the frustration-limited domain theory of the glass transition (see~\citep{tarjus2005fba} for a review). This theory takes as a reference state an unfrustrated icosahedral order existing in a curved space, even if and because this reference state is impossible to reach for the real system. If the space was curved, the locally preferred order of the liquid (icosahedral) would form a continuous ordered phase upon cooling. In euclidean space this transition is avoided, still the avoided transition temperature acts as a critical point giving rise to diverging length scales (icosahedral domain size and defect size) that would explain the dynamical arrest. The tenants of this theory claim that the frustration-limited domains are the origin of the dynamical heterogeneities. Yet, to our knowledge, the numerical systems where a link between icosahedral order and dynamical heterogeneities has been observed~\citep{Dzugutov2002, Doye2003, Coslovich2007, Pedersen2010, Coslovich2011} have a (quasi)crystalline ground state including icosahedra.
+
+An other way of explaining the phenomenology of the glass transition is based on the structure of the crystal. The crystallisation, even if avoided, may have an influence on the supercooled fluid or the glass~\citep{tanaka1999top, Cavagna2003} and is taken as reference state. Simulations~\cite{kawasaki2007cbd, Kawasaki2010, Pedersen2010, Coslovich2011} and experiments~\citep{watanabe2008} show that a local order compatible with the ground state (crystal) symmetry does extend on medium range in model supercooled systems. These transient but relatively stable structures seems to be correlated with the slow regions. Furthermore, they lack extended positional order and thus could not be detected by macroscopic diffraction experiments.
+
+In the present work, we focus on the hard spheres colloidal supercooled liquid for two reasons. First, hard sphere-like colloidal particles can be tracked by confocal microscopy, giving access to the positions and dynamics of single particles, thus allowing microscopic analysis of the dynamical and structural heterogeneities. Second, hard spheres have a well defined crystalline ground state of \textsc{fcc} symmetry and locally favoured structures of icosahedral symmetry. This allows us to distinguish between the frustration-limited domain scenario and the medium range crystalline order scenario.
+
+
+\section*{Methods}
+
+We used \textsc{pmma} colloids sterically stabilized with methacryloxypropyl terminated \textsc{pdms} and fluorescently labelled with rhodamine isothiocyanate chemically bonded to the \textsc{pmma}~\citep{bosma2002}. The size distribution, as characterised by \textsc{sem} imaging, showed a long tail toward small sizes, leading to about $6\%$ polydispersity. This amount of polydispersity allows to avoid crystallisation but is to low for fractionation to append~\citep{Fasolo2003}. The colloids were suspended in a solvent mixture of cis-decalin and cyclohexyl-bromide for both optical index and density matching. To screen any (weak) electrostatic interactions, we dissolved tetrabutylammonium bromide salt, to a concentration of \unit{300}{\nano\mole\per\liter}~\citep{royall2005}. The estimated Debye screening length is \unit{100}{\nano\metre}, well below the length scale of the colloids. To avoid errors due to the swelling of the particles, their size was measured in the same solvent by the following technique: short ranged depletion attraction was induced by adding non adsorbing polystyrene to a dilute suspension to drive particles into contact; the position of the first peak of the $g(r)$ gave the diameter $\sigma = \unit{3.356\pm0.03}{\micro\meter}$.
+
+After careful shear melting, the samples are filled into square $\unit{500}{\micro\metre}$ capillaries (Vitrocom). The most deeply supercooled sampled showed sign of sedimentation. To monitor this effect we used a thinner $\unit{100}{\micro\metre}\times\unit{1}{\milli\metre}$ cell. The data was collected on a Leica SP5 confocal microscope, using \unit{532}{\nano\meter} laser excitation. The temperature was controlled on both stage and objective lens, allowing a more precise density matching. Our polydisperse colloids where localised using a novel multi-scale algorithm that will be described elsewhere, allowing us to retrieve both position and size of each particle with about $1\%$ precision. The large size of our colloids allows a comparable precision in position for both in-plane and out-of-plane coordinates. The particles are tracked in time~\citep{Crocker1996} to extract dynamical informations. Typically $\approx 5000$ trajectories can be followed for a few relaxation times.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[baseline]
+		\begin{axis}[%
+			small, width=0.45\textwidth, height=0.33\textwidth, %
+			xlabel=$t/\tau_B$, xmode=log,%
+			ylabel={Self ISF}, ymin=0,%
+			legend columns=3, reverse legend, legend style={font=\tiny, at={(1,1.03)}, anchor=south east}, %
+			%every mark/.append style={scale=0.5}%
+			]
+			\addplot file {LS3954.isf};
+			\addplot file {LS4446.isf};
+			\addplot file {LS4582.isf};
+			\addplot file {LS5079.isf};
+			\addplot file {go1.isf};
+			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
+			\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
+		\end{axis}
+	\end{tikzpicture}
+	\begin{tikzpicture}[baseline]
+		\begin{axis}[%
+			small, width=0.45\textwidth, %
+			xlabel=$\phi$,%
+			ylabel=$\tau_\alpha/\tau_B$, ymode=log, %
+			ytick pos=right, ylabel near ticks,%
+			]
+			%\addplot+[mark=none, forget plot, domain=0.49:0.58] {0.7874243*exp(0.32826088*x/(0.60063652-x))};
+			\addplot+[mark=none, forget plot, domain=0.49:0.58] {exp(0.28970401*x/(0.59841615-x))};
+			\addplot+[only marks] table[x index=0, y index=1]{xi_phi.dat};
+			\node at (rel axis cs:0,1) (a) {};
+		\end{axis}
+		\begin{axis}[%
+			tiny, at=(a), anchor=north west, %
+			xlabel=$\phi$, xmin=0.49, xmax=0.58, xlabel near ticks,%
+			ylabel=$\xi/\sigma$, ymin=0, ymax=4.5,%
+			ytick pos=right, ylabel near ticks,%
+			label style={font=\tiny}, %
+			legend pos=north west,%
+			axis background/.style={fill=white},%
+			]
+			\addplot+[mark=none, forget plot, domain=0.49:0.58] {0.41158778*((0.59773962-x)/0.59773962)^(-2.0/3.0)};
+			\addplot+[only marks] table[x index=0, y index=2]{xi_phi.dat};
+			\addplot+[mark=none, forget plot, domain=0.49:0.58] {0.18878182*((0.59773962-x)/0.59773962)^(-2.0/3.0)};
+			\addplot+[only marks] table[x index=0, y index=3]{xi_phi.dat};
+			\legend{$\xi_u$, $\xi_6$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Dynamics of the system. Self intermediate scattering function computed from the positions. Relaxation time $\tau_\alpha$ function of $\phi$. The line is the VFT fit. Inset: Dynamical and structural correlation length. Lines are power law fit.}
+	\label{fig:vft}
+\end{figure}
+
+We were able to follow the volume fraction dependence of the dynamics over nearly three orders of magnitude, confirming the basic phenomenology observed in experiments~\citep{pusey1987ogt, kegel2000swe, weeks2000, Berthier2005} as well as simulations~\citep{Kawasaki2010} of similar systems: super-Arrhenius dependence of the relaxation time $\tau_\alpha$ upon $\phi$, that we fit by a Vogel-Fulcher-Tamman function, non Gaussianity of the dynamics peaking at $t^{dh}(\phi)$ and dynamical heterogeneities of growing size.
+
+The local structures of our suspensions are identified by a detailed analysis of Steinhard's bond orientational order (\textsc{boo})~\citep{steinhardt1983boo}, including original improvements. The \textsc{boo} of the $\ell$-fold symmetry is defined as a $2\ell+1$ vector:
+\begin{equation}
+	q_{\ell m}(i) = \frac{1}{N_i}\sum_{0}^{N_i} Y_{\ell m}(\theta(\vec r_{ij}),\phi(\vec r_{ij}))
+	\label{eq:qlm}
+\end{equation}
+where the $Y_{\ell m}$ are spherical harmonics. In the analysis, one uses the spherical invariants defined as:
+\begin{align}
+	q_\ell =& \sqrt{\frac{4\pi}{2l+1} \sum_{m=-\ell}^{\ell} |q_{\ell m}|^2 }\label{eq:ql}\\
+	w_\ell =& \sum_{m_1+m_2+m_3=0} 
+			\left( \begin{array}{ccc}
+				\ell & \ell & \ell \\
+				m_1 & m_2 & m_3 
+			\end{array} \right)
+			q_{\ell m_1} q_{\ell m_2} q_{\ell m_3} \label{eq:wl}\\
+	\hat{w}_\ell =& w_\ell{\left( \sum_{m=-\ell}^{\ell} |q_{\ell m}|^2 \right)}^{-\frac{3}{2}}
+\end{align}
+where the term in brackets is the Wigner 3-j symbol~\citep{Landau1965}. Note that the popular $\hat{w}_\ell$ can show a large norm if its denominator (or $q_\ell$) has small values (particle with low $\ell$-fold symmetry). Therefore, we will use here mostly the unreduced $w_\ell$ that pulls clearly apart highly symmetric particles from the fluid distribution.
+
+Following \citet{Lechner2008}, one can coarse-grain the \textsc{boo} over the neighbours:
+\begin{equation}
+	Q_{\ell m}(i) = q_{\ell m}(i) + \frac{1}{N(i)} \sum_{j=0}^{N(i)} q_{\ell m}(j)
+	\label{eq:Qlm}
+\end{equation}
+and define coarse-grained invariants $Q_\ell$ and $W_\ell$ in the same way as Eq.~\ref{eq:ql} and \ref{eq:wl}. Structures with some amount of periodicity (crystalline) are then much easier to tell apart~\citep{Lechner2008}. However, non periodic structures like icosahedra see their $Q_\ell$ and $W_\ell$ buried into the liquid distribution. With this in mind, we looked for periodic structures in the $\lbrace Q_\ell, W_\ell\rbrace$ space, and for aperiodic structures in the $\lbrace q_\ell, w_\ell\rbrace$ space, with $\ell=4,6,8,10$.
+
+In both Eq.~\ref{eq:qlm} and Eq.~\ref{eq:Qlm}, the sum runs over the "neighbours" of the particle $i$. The definition of the neighbours is crucial for the consistency of the analysis. The most popular criterion in the literature is that particles closer than $R_{max}$ are neighbours, with $R_{max}$ often fixed at the first minimum of $g(r)$. However, we find that this criterion has two major drawbacks: no account of polydispersity and negative correlation between the number of neighbours and the value of the $q_\ell$ (this effect is less pronounced after coarse-graining). To account for the polydispersity, we used a threshold in scaled distance $\hat{r}_{i j} = r_{i j} /(\sigma_i+\sigma_j) < \hat{R}_{max}$, with $\hat{R}_{max}$ corresponding to the first minimum of $g(\hat{r})$. This allows us to look for structures without assumptions on the number of neighbours.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\begin{groupplot}[
+			small,
+			group style={
+				group size=2 by 2,%
+				yticklabels at=edge left,%
+				horizontal sep=0pt,%
+				},%
+			anchor=north west,%
+			%width=0.4\textwidth,%
+			%height=0.5\textwidth,%
+			ymin=0,ymax=0.6,%
+			xtick scale label code/.code={},%
+			enlargelimits=false,axis on top,
+			colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
+			extra y ticks={\Qstar},
+			extra y tick style={grid=major},
+			extra y tick labels={},%
+			colorbar sampled, colorbar horizontal, colorbar style={%
+				samples=6, xtick={ 0.20,0.4,0.6, 0.8},% 
+				extra y ticks={},%
+				at={(0.5,1.03)}, anchor=south, width=0.9*\pgfkeysvalueof{/pgfplots/parent axis width},
+				xticklabel pos=upper%
+				},%
+			]
+		\nextgroupplot[%
+			ylabel={$Q_6$}, xlabel=$Q_4$,%
+			xmin=0,xmax=0.22,%
+			colorbar style={%
+				xlabel={per units of $Q_4\cdot Q_6$},% 
+				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
+				},%
+			]
+		\addplot graphics
+		[xmin=0,xmax=0.2,ymin=0,ymax=0.6]
+		{Q4Q6go1};
+		\node [below] at (axis cs:0.1909, 0.5745) {\textsc{fcc}};
+		\node [below] at (axis cs:0.0972222, 0.484762) {\textsc{hcp}};
+		\node [below] at (axis cs:0.0363696, 0.510688) {\textsc{bcc}};
+		\draw[->, white,thick] (axis cs:0.05, 0.15) to [out=60, in=220] (axis cs:0.125, 0.4);
+		
+		\nextgroupplot[%
+			xlabel=$10^3 \cdot w_4$, %
+			xmin=-0.002,xmax=0.002,%
+			extra x ticks=0, extra x tick style={grid=major}, extra x tick labels={},
+			colorbar style={%
+				xlabel={per units of $w_4\cdot Q_6$},% 
+				xticklabels={$10^{3}$, $10^{4}$, $10^{5}$, $10^{6}$},%
+				},%
+			]
+		\addplot graphics
+		[xmin=-0.002,xmax=0.002,ymin=0,ymax=0.6]
+		{w4Q6go1};
+		\node [below] at (axis cs:-0.00067221, 0.5745) {\textsc{fcc}};
+		\node [below] at (axis cs:7.47E-05, 0.484762) {\textsc{hcp}};
+		%\node [below] at (axis cs:-0.01274716, 0.510688) {\textsc{bcc}};
+		\node [above] at (axis cs:0.0015, \Qstar) {\footnotesize{$Q_6^*$}};
+		\draw[->, white,thick] (axis cs:0, 0.15) to [out=120, in=280] (axis cs:-0.0005, 0.4);
+		\draw[->, white,thick] (axis cs:0, 0.15) to (axis cs:7E-05, 0.35);
+		\end{groupplot}
+	\end{tikzpicture}
+	\caption{Population of local structures in the $(Q_4,Q_6)$-plane (left) and $(w_4,Q_6)$-plane (right) for our deepest supercooled sample ($\phi=0.575$, right). Colour represent the probability to find the structure (log scale). The arrows stress the crystallisation tendencies.}
+	\label{fig:maps2}
+\end{figure}
+
+Fig.~\ref{fig:maps2} summarizes our structure identification results. We find the distinctive signature of medium ranged crystalline order (\textsc{mrco}) of \textsc{fcc} type (high $Q_6$, high $Q_4$ and $W_4<0$), without excluding some \textsc{hcp} (high $Q_6$ and $W_4>0$). We stress that \textsc{mrco} does not correspond to crystal nucleus or a significant increase in local density. We find no trace of \textsc{bcc}-like structure (high $Q_6$, low $Q_4$, high $Q_{10}$). As for the aperiodic structures, icosahedral order stands out (very negative $w_6$, high $q_6$ and $q_{10}$) without any other obvious rival (Dodecahedron are present at lower $w_6$ but can be considered as twisted icosahedron). We are then left with structures where the particles naturally have 12 neighbours. We start anew the \textsc{boo} analysis, this time taking the first 12 closest particles (in $\hat{r}$) as neighbours. This criterion reduces the noise in the distribution of the invariants and makes detected structures more easily comparable with crystallographic archetypes. It also avoids artefacts near $R_{max}$ in the correlation functions.
+
+\section*{Results}
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\begin{groupplot}[
+			group style={
+				group size=2 by 2,%
+				yticklabels at=edge left,%
+				horizontal sep=0pt,%
+				},%
+			anchor=north west,%
+			width=0.4\textwidth,%
+			height=0.5\textwidth,%
+			xlabel=$10^2 \cdot w_6$,%
+			xmin=-0.052,xmax=0.01,ymin=0,ymax=0.6,%
+			xtick scale label code/.code={},%
+			enlargelimits=false,axis on top,
+			colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
+			extra x ticks={\wstar, -0.00782},
+			extra x tick style={grid=major,	tick label style={anchor=south west}},
+			extra x tick labels={,},
+			extra y ticks={\Qstar},
+			extra y tick style={grid=major},
+			extra y tick labels={},
+			]
+		\nextgroupplot[%
+			ylabel={$Q_6$}
+			]
+		\addplot graphics
+		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
+		{u6Q6phi3954_scale};
+		
+		\nextgroupplot[%
+			colorbar sampled, colorbar style={%
+				samples=6, ylabel=Probability (per units of $w_6\cdot Q_6$), ytick={ 0.20,0.4,0.6, 0.8},% 
+				yticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
+				extra y ticks={}%
+				},%
+				]
+		
+		\addplot graphics
+		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
+		{u6Q6go1_scale};
+		\node at (axis cs:\wstar,0.6) (a) {};
+		\node at (axis cs:-0.00782,0.6) (b) {};
+		\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
+		\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
+		\node [below, right] at (axis cs:-0.052, 0.05) {\textsc{Ico}};
+		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=90, in=275] (axis cs:-0.0015, 0.33);
+		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=180, in=30] (axis cs:-0.025, 0.12);
+		\end{groupplot}
+		\node [above] at (a) {\footnotesize $w_6^*$};
+		\node [above] at (b) {\footnotesize $w_6^{dodec}$};
+	\end{tikzpicture}
+	\caption{Population of local structures in the $(w_6,Q_6)$-plane for a liquid near freezing point (left) and a deeply supercooled liquid ($\phi=0.575$, right). The arrows stress respectively the crystallisation (upward) and icosahedralisation (leftward) tendencies.}
+	\label{fig:maps}
+\end{figure}
+
+We establish that in our system the tendency toward icosahedral order is best monitored by $w_6$, whereas $Q_6$ is the natural crystal-like order parameter. The population of local structures in the $(w_6,Q_6)$-plane is shown in Fig.~\ref{fig:maps}, which confirms that the two tendencies are present in supercooled liquid of hard spheres. In particular to our surprise, icosahedra are present even at relatively low volume fraction (Fig.~\ref{fig:maps} left). Both tendencies become more pronounced with deeper supercooling (Fig.~\ref{fig:maps} right). Furthermore Fig.~\ref{fig:maps} show clearly that icosahedral order and crystalline order are incompatible and frustrate one another.
+
+\begin{figure}
+	\begin{tikzpicture}
+		\pgfplotsset{every axis plot/.append style={only marks}}
+		\begin{groupplot}[%
+			group style={
+				group size=2 by 2,%
+				yticklabels at=edge left,%
+				horizontal sep=0pt,%
+				},%
+			width=0.5\textwidth,%
+			ymin=0, ymax=1.5,%
+			extra x tick style={grid=major,	tick label style={anchor=south west}},%
+			extra y ticks={1},%
+			extra y tick style={grid=major,	tick label style={anchor=south west}}, extra y tick labels={},%
+			%legend columns=5,%
+			legend style={
+				font=\footnotesize,
+				%at={(1,1)}, anchor=south,%
+				at={(1,1)}, anchor=north east
+				},%
+			]
+			\nextgroupplot[%
+				xlabel=$10^2 \cdot w_6$, xmin=-0.0521089193, xmax=0.01,%
+				xtick scale label code/.code={},%
+				ylabel=${\mathcal{P}r(t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,
+				extra x ticks={\wstar, -0.00782}, extra x tick labels={$w_6^*$,$w_6^{dodec}$},%
+				extra y tick labels={bulk}
+				]
+			
+			%\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi3954.txt};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi4446.txt};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi5079.txt};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_go1.txt};
+			\addplot+[domain=-0.0521089193:0.01, sharp plot, no markers] {9.34701 * x + 1.03764};
+			\draw[->, thick] (rel axis cs:0.2, 0.9) to (rel axis cs:0, 0.9);
+			\node[right] at (rel axis cs:0.2, 0.9) {\footnotesize Icosahedron};
+			
+			\nextgroupplot[%
+				xlabel=$Q_6$, xmin=0, xmax=0.5745,%
+				extra x ticks={\Qstar}, extra x tick labels={$Q_6^*$},%				
+				]
+			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
+			\legend{$0.003$,%$0.497$, 
+				$0.535$, $0.555$, $0.575$};
+			%\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_3954.txt};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_4446.txt};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_5079.txt};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_go1.txt};
+			\draw[->, thick] (rel axis cs:0.8, 0.45) to (rel axis cs:1, 0.45);
+			\node[left] at (rel axis cs:0.8, 0.45) {\footnotesize \textsc{fcc}};
+		\end{groupplot}
+	\end{tikzpicture}
+	\caption{Normalised bond order propensity for icosahedral and crystalline order parameters. Bulk mean square displacement is at 1. Perfect structures are on the edge of each plot. The line is a guide for the eye stressing the collapse of the $w_6$-propensity at all volume fractions.}
+	\label{fig:msd_Q6_w6}
+\end{figure}
+
+In the introduction we presented the dynamic propensity invented by \citet{Widmer-Cooper2005} as a trick only accessible to simulations. In our system, since we know the relevant structural order parameters ($w_6$ and $Q_6$), we can compute the square displacement of all the particles with the same initial local structure (iso-bond order ensemble). We define the $w_6$-propensity as
+\begin{equation}
+	\mathcal{P}r(w_6, t) \equiv \left\langle \frac{
+		\sum\limits_i{
+			\left\|\vec{r_i}(t)-\vec{r_i}(0)\right\|^2 \delta(w_6^i-w_6)
+			}
+	}{
+		\sum\limits_i{\delta(w_6^i-w_6)}
+	}\right\rangle 
+	\label{eq:bo_propensity}
+\end{equation}
+where the brackets denote ensemble averaging. $\mathcal{P}r(Q_6, t)$ and $\mathcal{P}r(w_6, Q_6, t)$ can be defined in the same way. Note that this \emph{bond order dynamic propensity} is accessible even in a system that cannot be restarted \emph{ab libitum} from the exact same overall configuration.
+
+Fig.~\ref{fig:msd_Q6_w6} shows the bond order propensity (calculated at $t^{dh}$). Both structural order parameters have a clear correlation with the dynamics: the more structured is the environment, the more likely the particle will be slow. For all volume fractions, the propensity displays the same linear dependence upon $w_6$ (Fig.~\ref{fig:msd_Q6_w6} left). Once scaled by the mean square displacement all points collapse on the same line. This is not the case for the $Q_6$ dependence (Fig.~\ref{fig:msd_Q6_w6} right) which is more and more pronounced with increasing supercooling. In our most deeply supercooled sample, the crystal-like environments can be in average ten times slower than the bulk; whereas the almost perfect icosahedra are in average only $40\%$ slower than the bulk.
+
+To explain our propensity data, we can refer to the cage picture, where a particle is considered as trapped in the cage formed by its neighbours. Once the particle has escaped its cage, it is free to diffuse. In general, this picture is not true due to the dynamical heterogeneities. However in the case of icosahedral environment it seems to hold: the normalisation by the bulk \textsc{msd} takes into account the diffusion once out of the cage, and the remaining universal dependence upon $w_6$ holds the information about the "quality" of the cage. Efficient packing makes the 13 particles icosahedra more stable than a disordered structure. Thus the central particle has a low probability to escape its cage and start diffusing. After that it diffuses in average like any other particle. This suggests that the influence of icosahedral order on the dynamics is only local. By contrast the non trivial $\phi$ dependence of the $Q_6$-propensity calls for non local explanations.
+
+To observe the ordered regions in real space, we define the thresholds $w_6^*$ and $Q_6^*$ so that the bond order propensity at the threshold is half between the bulk and the (extrapolated) prefect structure. In our most deeply supercooled sample, this criterion yields $w_6^* = \wstar$ and $Q_6^* = \Qstar$. These thresholds are arbitrary but coherent with one another. We display in Fig.~\ref{fig:3D} typical configurations of the ordered neighbourhoods in our samples. With our thresholds, we see only small patches of icosahedral order that are not reaching medium range; whereas at the deepest supercooling crystal-like order clusters are connected, spanning sizes comparable to our observation window.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[lab/.style={right, inner sep=0.05em, fill=white, font=\footnotesize}]
+	\node[anchor=west, draw, inner sep=0, outer xsep=0.5em] (all) {\includegraphics[width=0.5\textwidth]{mrco_ico_scale_go1-0023.png}};
+	\matrix[%
+		matrix anchor=east, draw, font=\footnotesize,% 
+		column 1/.style={text height=0.8em, text depth=0.2em},%
+		column 2/.style={circle, shade, inner sep=0.007\textwidth},%
+		] (l)
+	{
+		\node{Icosahedra}; & \node[ball color=red!33!blue] (b2) {}; \\
+		\node{Crystal-like}; & \node[ball color=green!66!black] {}; \\
+	};
+	\node[above] at (l.north) (ico) {\includegraphics[width=0.125\textwidth]{one_ico.png}};
+	\node at (ico.north){$w_6=w_6^*$};
+	\node[below] at (l.south) (mrco) {\includegraphics[width=0.125\textwidth]{one_mrco.png}};
+	\node at (mrco.south) {$Q_6=Q_6^*$};
+	%\node[anchor=north west, draw, inner sep=0] at (all.north east) (a) {\includegraphics[width=0.25\textwidth]{mrco_ico_scale_LS4446-0023.png}};
+	%\node[anchor=south west, draw, inner sep=0] at (all.south east) (b) {\includegraphics[width=0.25\textwidth]{mrco_ico_scale_LS5079-0023.png}};
+	%\node[lab, anchor=east] at (a.east) {$\phi=0.535$};
+	%\node[lab] at (b.west) {$\phi=0.555$};
+	\node[lab, anchor=north] at (all.north) {$\phi=0.575$};
+	\end{tikzpicture}
+	\caption{Computer reconstruction from confocal microscopy coordinates of a typical configuration in our most deeply supercooled sample. Depth is $\sim 12\sigma$. Only ordered particles and their neighbours are displayed. Each particle is plotted with its real radius. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. Left: Example of structures at the respective threshold values: distorted icosahedron (top) and crystal-like cluster (bottom).}
+	\label{fig:3D}
+\end{figure}
+
+Consistently, we were not able to extract a length-scale associated with the sole icosahedral order that would grow when approaching the glass transition. By contrast, crystal-like order spatial extent is well described by $G_6(r)$, the spatial correlation function of $Q_{6 m}$ introduced in~\citep{tanaka2010critical}. We stress that $G_6(r)$ is constructed from the coarse grained \textsc{boo} and thus not sensible to aperiodic structures. Both dynamical and structural length-scales are increasing approaching the glass transition (inset of Fig.~\ref{fig:vft}). In agreement with~\citep{tanaka2010critical} it suggests that the dynamical heterogeneities in hard spheres are the manifestation of critical fluctuations of the crystalline order parameter.
+
+Of course, one can set a more permissive threshold on $w_6$ and observe more icosahedra. A percolating network of icosahedral neighbourhood can even be found at high volume fraction if the threshold encompass enough particles. However, the imperfect icosahedra particles that must be included to form this network have a mobility comparable to the bulk (Fig.~\ref{fig:msd_Q6_w6}). Furthermore, we checked that this percolation is of the 3D random percolation class (cluster size distribution follows a power-law of exponent $\approx 2.1$), meaning that a comparable network could be obtained by picking randomly the same number of particles. We conclude that the concept of icosahedral network is not physically meaningful in our system.
+
+\section*{Discussion}
+
+We have shown in this paper that hard spheres supercooled liquids display local icosahedral ordering while having a well known avoided crystalline (\textsc{fcc}) ground state. Both kind of packing are efficient and thus locally favoured. Yet the icosahedral order remains local even at deep supercooling and (consistently with the arguments of~\citep{Berthier2007}) is not able to influence significantly the global dynamics. By contrast, the slowing down associated with the crystal-like symmetry is non local and the characteristic length scale of the crystalline order grows when approaching the glass transition in the same way as the dynamical heterogeneities. This suggests that the structural origin of the dynamical arrest is linked to the avoided crystallisation and not to the condensation of the local order of the liquid.
+
+For some systems, the first order transition avoided upon supercooling leads to a symmetry compatible with icosahedral order. The symmetry-breaking phase can be a quasi-crystal~\citep{Dzugutov1993} or a Frank-Kasper crystal~\citep{Frank1959,Frank1958} like recently demonstrated for Wahnstr\"om mixture~\citep{Pedersen2010}. In that case, the amorphous order cannot be distinguished from the defective crystalline order that slows down the system, so the amorphous order seems to play a role in the slowing down. However, we showed here that when the amorphous order is not compatible with the crystal symmetry, its role in the slowing down seems to be minor.
+
+We do not say that the local order of the liquid (icosahedral) is unimportant in the glass transition. Actually it plays a role in preventing the first order transition (crystallisation) to append, thus allowing supercooling and the glass transition. Furthermore, this frustration against crystallisation may be linked to the fragility of the glass former~\citep{tanaka1999top}.
+
+\bibliographystyle{unsrtnat}
+\bibliography{ico_dyn}
+
+\end{document}
