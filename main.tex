@@ -166,6 +166,7 @@ In both Eq.~\ref{eq:qlm} and Eq.~\ref{eq:Qlm}, the sum runs over the "neighbours
 				xlabel={per units of $Q_4\cdot Q_6$},% 
 				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
 				},%
+			xticklabel={$\pgfmathprintnumber[fixed,precision=2]{\tick}$}
 			]
 		\addplot graphics
 		[xmin=0,xmax=0.2,ymin=0,ymax=0.6]
@@ -178,6 +179,7 @@ In both Eq.~\ref{eq:qlm} and Eq.~\ref{eq:Qlm}, the sum runs over the "neighbours
 		\nextgroupplot[%
 			xlabel=$10^3 \cdot w_4$, %
 			xmin=-0.002,xmax=0.002,%
+			xtickmin=-0.001,%
 			extra x ticks=0, extra x tick style={grid=major}, extra x tick labels={},
 			colorbar style={%
 				xlabel={per units of $w_4\cdot Q_6$},% 
