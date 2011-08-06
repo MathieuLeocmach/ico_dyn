@@ -1,21 +1,4 @@
-\documentclass[preprint]{revtex4-1}
-\usepackage{graphicx}
-\usepackage{epstopdf}
-\usepackage{amsmath}
-\usepackage{hyperref}
-\usepackage{booktabs}
-\usepackage{color}
-
-\usepackage{SIunits}
-\newcommand{\wstar}{-0.023}
-\newcommand{\Qstar}{0.25}
-
-\setlength{\tabcolsep}{10pt}
-
-\newenvironment{sistema}%
-  {\left\lbrace\begin{array}{@{}l@{}}}%
-  {\end{array}\right.}
-
+\input{preamble}
 
 \begin{document}
 \title{Roles of icosahedral order in hard spheres glass transition} 
@@ -156,8 +139,8 @@ In both Eqs.~(\ref{eq:qlm}) and (\ref{eq:Qlm}), the sum runs over the ``neighbou
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=7cm]{main-figure0.pdf}
-\includegraphics[width=7cm]{main-figure1.pdf}
+\includegraphics{generate_figures-figure0.pdf}
+\includegraphics{generate_figures-figure1.pdf}
 \end{center}
 \caption{{\bf Dynamics of the system.} Self intermediate scattering function computed from the positions. Relaxation time $\tau_\alpha$ function of $\phi$. The line is the VFT fit. Inset: Dynamical and structural correlation length. Lines are power law fit.}
 	\label{fig:vft}
@@ -167,7 +150,7 @@ In both Eqs.~(\ref{eq:qlm}) and (\ref{eq:Qlm}), the sum runs over the ``neighbou
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=10cm]{main-figure2.pdf}
+\includegraphics{generate_figures-figure2.pdf}
 \end{center}
 \caption{{\bf Population of local structures in the $(Q_4,Q_6)$-plane (left) and $(w_4,Q_6)$-plane (right) for our deepest supercooled sample ($\phi=0.575$, right).} Colour represent the probability to find the structure (log scale). The arrows stress the crystallisation tendencies.}
 	\label{fig:maps2}
@@ -177,7 +160,7 @@ In both Eqs.~(\ref{eq:qlm}) and (\ref{eq:Qlm}), the sum runs over the ``neighbou
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=10cm]{main-figure3.pdf}
+\includegraphics{generate_figures-figure3.pdf}
 \end{center}
 \caption{\bf {Population of local structures in the $(w_6,Q_6)$-plane for a liquid near freezing point (left) and a deeply supercooled liquid ($\phi=0.575$, right).} The arrows stress respectively the crystallisation (upward) and icosahedralisation (leftward) tendencies.}
 	\label{fig:maps}
@@ -187,7 +170,7 @@ In both Eqs.~(\ref{eq:qlm}) and (\ref{eq:Qlm}), the sum runs over the ``neighbou
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=10cm]{main-figure4.pdf}
+\includegraphics{generate_figures-figure4.pdf}
 \end{center}
 \caption{{\bf Normalised bond order propensity for icosahedral and crystalline order parameters.} Bulk mean square displacement is at 1. Perfect structures are on the edge of each plot. The line is a guide for the eye stressing the collapse of the $w_6$-propensity at all volume fractions.}
 	\label{fig:msd_Q6_w6}
@@ -197,7 +180,7 @@ In both Eqs.~(\ref{eq:qlm}) and (\ref{eq:Qlm}), the sum runs over the ``neighbou
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=10cm]{main-figure5.pdf}
+\includegraphics{generate_figures-figure5.pdf}
 \end{center}
 \caption{{\bf Computer reconstruction from confocal microscopy coordinates of a typical configuration in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only ordered particles and their neighbours are displayed. Each particle is plotted with its real radius. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. Left: Example of structures at the respective threshold values: distorted icosahedron (top) and crystal-like cluster (bottom).}
 	\label{fig:3D}
