@@ -129,7 +129,7 @@
 		\draw[->, white,thick] (axis cs:0, 0.15) to (axis cs:7E-05, 0.35);
 		
 		\nextgroupplot[%
-			colorbar sampled, colorbar style={%
+			colorbar style={%
 				samples=6, xlabel={per units of $w_6\cdot Q_6$}, xtick={ 0.20,0.4,0.6, 0.8},% 
 				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
 				},%
@@ -149,7 +149,7 @@
 		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=180, in=30] (axis cs:-0.025, 0.12);
 		
 		\nextgroupplot[%
-			colorbar sampled, colorbar style={%
+			colorbar style={%
 				samples=6, xlabel={per units of $w_6\cdot Q_6$}, xtick={ 0.20,0.4,0.6, 0.8},% 
 				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
 				},%
@@ -175,6 +175,42 @@
 
 \begin{figure}
 	\begin{tikzpicture}
+		\begin{axis}[%
+			anchor=below south,%
+			width=0.5\textwidth,%
+			height=0.5\textwidth,%
+			ylabel=$Q_6$,%
+			ymin=0,ymax=0.6,%
+			xlabel=$10^2 \cdot w_6$,%
+			xmin=-0.052,xmax=0.01,%
+			xtick scale label code/.code={},%
+			enlargelimits=false,axis on top,
+			colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
+			extra x ticks={\wstar, -0.00782},%
+			extra x tick style={grid=major,	tick label style={anchor=south west}},%
+			extra x tick labels={,},%
+			extra x tick style={grid=major},
+			extra y ticks={\Qstar},
+			extra y tick style={grid=major},
+			extra y tick labels={},%
+			colorbar sampled, colorbar style={%
+				samples=6, ytick={ 0.20,0.4,0.6, 0.8},% 
+				yticklabels={$0$, $0.5$, $1$, $1.5$},%
+				ylabel=${\mathcal{P}r(t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,%
+				extra x ticks={},%
+				yticklabel pos=right,%
+				label style={font=\footnotesize},
+				},%
+			]
+			\addplot graphics [xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]{sd_u6Q6_go1};
+			\node [anchor=north west] at (rel axis cs:0,1) {(d)};
+			\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
+			\node [anchor=west] at (rel axis cs:0, 0.8) {\footnotesize{$\phi = 0.575 \pm 0.03$}};
+			\node [left] at (axis cs:\wstar,0.55) {\footnotesize $w_6^*$};
+			\node [left] at (axis cs:-0.00782,0.55) {\footnotesize $w_6^{dod}$};
+			\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
+			\node [below, right] at (axis cs:-0.052, 0.05) {\textsc{Ico}};
+		\end{axis}
 		\pgfplotsset{every axis plot/.append style={only marks}}
 		\begin{groupplot}[%
 			group style={
@@ -182,6 +218,7 @@
 				yticklabels at=edge left,%
 				horizontal sep=0pt,%
 				},%
+			anchor=outer north east,%
 			width=0.5\textwidth,%
 			ymin=0, ymax=1.5,%
 			extra x tick style={grid=major,	tick label style={anchor=south west}},%
