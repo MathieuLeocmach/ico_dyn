@@ -12,8 +12,9 @@
 
 \begin{figure}
 	\centering
-	\begin{tikzpicture}[baseline]
+	\begin{tikzpicture}
 		\begin{axis}[%
+			anchor=right of south east,%
 			width=0.45\textwidth, height=0.33\textwidth, %
 			xlabel=$t/\tau_B$, xmode=log,%
 			ylabel={Self ISF}, ymin=0,%
@@ -28,9 +29,8 @@
 			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 			\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
 		\end{axis}
-	\end{tikzpicture}
-	\begin{tikzpicture}[baseline]
 		\begin{axis}[%
+			anchor=left of south west,%
 			width=0.45\textwidth, %
 			xlabel=$\phi$,%
 			ylabel=$\tau_\alpha/\tau_B$, ymode=log, %
