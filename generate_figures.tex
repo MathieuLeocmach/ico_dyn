@@ -63,28 +63,31 @@
 
 \begin{figure}
 	\begin{tikzpicture}
+		\pgfplotsset{
+			extra tick style={grid=major},%
+			every axis/.append style={%
+				height=0.4\textwidth,
+				ymin=0,ymax=0.6,%
+				extra y ticks={\Qstar}, extra y tick labels={},%
+				enlargelimits=false,axis on top,
+				colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
+				colorbar sampled,%
+				},%
+		}
 		\begin{groupplot}[
 			group style={
-				group size=4 by 1,%
+				group size=2 by 1,%
 				yticklabels at=edge left,%
 				horizontal sep=0pt,%
 				},%
-			anchor=north west,%
-			width=0.31\textwidth,%
-			height=0.31\textwidth,%
-			ymin=0,ymax=0.6,%
-			xlabel=$10^2 \cdot w_6$,%
-			xmin=-0.052,xmax=0.01,%
+			anchor=below south west,%
+			width=0.45\textwidth,%
 			xtick scale label code/.code={},%
-			enlargelimits=false,axis on top,
-			colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
-			extra y ticks={\Qstar},
-			extra y tick style={grid=major},
-			extra y tick labels={},%
-			colorbar sampled, colorbar horizontal, colorbar style={%
+			colorbar horizontal, colorbar style={%
 				samples=6, xtick={ 0.20,0.4,0.6, 0.8},% 
 				extra y ticks={},%
-				at={(0.5,1.03)}, anchor=south, width=0.9*\pgfkeysvalueof{/pgfplots/parent axis width},
+				/pgfplots/colorbar shift/.style={yshift=0.3cm},
+				at={(parent axis.north)}, anchor=below south, width=0.9*\pgfkeysvalueof{/pgfplots/parent axis width},
 				xticklabel pos=upper,%
 				label style={font=\footnotesize},
 				},%
@@ -110,8 +113,8 @@
 		\nextgroupplot[%
 			xlabel=$10^3 \cdot w_4$, %
 			xmin=-0.002,xmax=0.002,%
-			xtickmin=-0.001,%
-			extra x ticks=0, extra x tick style={grid=major}, extra x tick labels={},
+			xtickmin=-0.0015,%
+			extra x ticks=0, extra x tick labels={},
 			colorbar style={%
 				xlabel={per units of $w_4\cdot Q_6$},% 
 				xticklabels={$10^{3}$, $10^{4}$, $10^{5}$, $10^{6}$},%
@@ -128,15 +131,32 @@
 		\draw[->, white,thick] (axis cs:0, 0.15) to [out=120, in=280] (axis cs:-0.0005, 0.4);
 		\draw[->, white,thick] (axis cs:0, 0.15) to (axis cs:7E-05, 0.35);
 		
-		\nextgroupplot[%
-			colorbar style={%
-				samples=6, xlabel={per units of $w_6\cdot Q_6$}, xtick={ 0.20,0.4,0.6, 0.8},% 
-				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
+		\end{groupplot}
+		
+		\begin{groupplot}[
+			group style={
+				group size=2 by 1,%
+				yticklabels at=edge left,%
+				horizontal sep=0pt,%
 				},%
+			anchor=above north west,%
+			width=0.38\textwidth,%
+			xlabel=$10^2 \cdot w_6$,%
+			xmin=-0.052,xmax=0.01,%
 			extra x ticks={\wstar, -0.00782},%
-			extra x tick style={grid=major,	tick label style={anchor=south west}},%
-			extra x tick labels={,},
-				]
+			extra x tick labels={,},%
+			xtick scale label code/.code={},%
+			colorbar right, colorbar style={%
+				samples=6, ytick={ 0.20,0.4,0.6, 0.8},% 
+				yticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
+				ylabel={per units of $w_6\cdot Q_6$},%
+				extra x ticks={},%
+				extra y ticks={},%
+				label style={font=\footnotesize},
+				},%
+			]
+		
+		\nextgroupplot[ylabel={$Q_6$}, xtickmax=0,]
 		\addplot graphics
 		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
 		{u6Q6go1_scale};
@@ -148,15 +168,7 @@
 		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=90, in=275] (axis cs:-0.0015, 0.33);
 		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=180, in=30] (axis cs:-0.025, 0.12);
 		
-		\nextgroupplot[%
-			colorbar style={%
-				samples=6, xlabel={per units of $w_6\cdot Q_6$}, xtick={ 0.20,0.4,0.6, 0.8},% 
-				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
-				},%
-			extra x ticks={\wstar, -0.00782},%
-			extra x tick style={grid=major,	tick label style={anchor=south west}},%
-			extra x tick labels={,},%
-			]
+		\nextgroupplot
 		\addplot graphics
 		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
 		{u6Q6phi3954_scale};
