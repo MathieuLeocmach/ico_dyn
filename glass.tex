@@ -54,9 +54,7 @@ $\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$ ($D$: the fragility index)
 
 
 
-Figure~\ref{fig:maps} summarizes our structure identification results. We find the distinctive signature of medium ranged crystalline order (\textsc{mrco}) of \textsc{fcc} type (high $Q_6$, high $Q_4$ and $W_4<0$), without excluding some \textsc{hcp} (high $Q_6$ and $W_4>0$). We stress that \textsc{mrco} does not correspond to crystal nucleus or a significant increase in the local density. We find no trace of \textsc{bcc}-like structure (high $Q_6$, low $Q_4$, high $Q_{10}$). As for the aperiodic structures, icosahedral order stands out (very negative $w_6$, high $q_6$ and $q_{10}$) without any other obvious rivals (Dodecahedron are present at lower $w_6$ but can be considered as twisted icosahedron). We are then left with structures where the particles naturally have 12 neighbours. We take a new \textsc{boo} analysis, this time taking the first 12 closest particles 
-%(in $\hat{r}$) 
-as neighbours. This criterion reduces the noise in the distribution of the invariants and makes detected structures more easily comparable with crystallographic archetypes. It also avoids artefacts near $R_{max}$ in the correlation functions.
+The local structures of our suspensions are identified by a detailed analysis of Steinhardt's bond orientational order (\textsc{boo})~\citep{steinhardt1983boo}, including original improvements (see Methods). Figure~\ref{fig:maps} summarizes our structure identification results. We find the distinctive signature of medium ranged crystalline order (\textsc{mrco}) of \textsc{fcc} type (high $Q_6$, high $Q_4$ and $W_4<0$), without excluding some \textsc{hcp} (high $Q_6$ and $W_4>0$). We stress that \textsc{mrco} does not correspond to crystal nucleus or a significant increase in the local density. We find no trace of \textsc{bcc}-like structure (high $Q_6$, low $Q_4$, high $Q_{10}$). As for the aperiodic structures, icosahedral order stands out (very negative $w_6$, high $q_6$ and $q_{10}$) without any other obvious rivals (Dodecahedron are present at lower $w_6$ but can be considered as twisted icosahedron).
 
 
 
@@ -108,7 +106,7 @@ After careful shear melting, the samples are filled into square $\unit{500}{\mic
 
 
 
-The local structures of our suspensions are identified by a detailed analysis of Steinhardt's bond orientational order (\textsc{boo})~\citep{steinhardt1983boo}, including original improvements. The \textsc{boo} of the $\ell$-fold symmetry is defined as a $2\ell+1$ vector:
+\citet{steinhardt1983boo} defined the \textsc{boo} of the $\ell$-fold symmetry as a $2\ell+1$ vector:
 \begin{equation}
 	q_{\ell m}(i) = \frac{1}{N_i}\sum_{0}^{N_i} Y_{\ell m}(\theta(\vec r_{ij}),\phi(\vec r_{ij}))
 	\label{eq:qlm}
@@ -124,7 +122,7 @@ where the $Y_{\ell m}$ are spherical harmonics. In the analysis, one uses the sp
 			q_{\ell m_1} q_{\ell m_2} q_{\ell m_3} \label{eq:wl}\\
 	\hat{w}_\ell =& w_\ell{\left( \sum_{m=-\ell}^{\ell} |q_{\ell m}|^2 \right)}^{-\frac{3}{2}}
 \end{align}
-where the term in brackets is the Wigner 3-j symbol~\citep{Landau1965}. Note that the popular $\hat{w}_\ell$ can show a large norm if its denominator (or $q_\ell$) has small values (particle with low $\ell$-fold symmetry). Therefore, we will use here mostly the unreduced $w_\ell$ that pulls clearly apart highly symmetric particles from the fluid distribution.
+where the term in brackets is the Wigner 3-j symbol~\citep{Landau1965}. Note that the popular~\citep{vanblaaderen1995rss,ReintenWolde1996,Lechner2008} $\hat{w}_\ell$ can show a large norm if its denominator (or $q_\ell$) has small values (particle with low $\ell$-fold symmetry). Therefore, we have used here mostly the unreduced $w_\ell$ that pulls clearly apart highly symmetric particles from the fluid distribution.
 
 Following~\citet{Lechner2008}, one can coarse-grain the \textsc{boo} over the neighbours:
 \begin{equation}
@@ -133,7 +131,9 @@ Following~\citet{Lechner2008}, one can coarse-grain the \textsc{boo} over the ne
 \end{equation}
 and define coarse-grained invariants $Q_\ell$ and $W_\ell$ in the same way as Eqs.~(\ref{eq:ql}) and (\ref{eq:wl}). Structures with some amount of periodicity (crystalline) are then much easier to tell apart~\citep{Lechner2008}. However, non-periodic structures like icosahedra see their $Q_\ell$ and $W_\ell$ buried into the liquid distribution. With this in mind, we looked for periodic structures in the $\lbrace Q_\ell, W_\ell\rbrace$ space, and for aperiodic structures in the $\lbrace q_\ell, w_\ell\rbrace$ space, with $\ell=4,6,8,10$.
 
-In both Eqs.~(\ref{eq:qlm}) and (\ref{eq:Qlm}), the sum runs over the ``neighbours'' of particle $i$. The definition of the neighbours is crucial for the consistency of the analysis. The most popular criterion in literature is that particles closer than $R_{max}$ are neighbours, with $R_{max}$ often fixed at the first minimum of $g(r)$. However, we find that this criterion has two major drawbacks: no account of polydispersity and negative correlation between the number of neighbours and the value of the $q_\ell$ (this effect is less pronounced after coarse-graining). To account for the polydispersity, we used a threshold in the scaled distance $\hat{r}_{i j} = r_{i j} /(\sigma_i+\sigma_j) < \hat{R}_{max}$, with $\hat{R}_{max}$ corresponding to the first minimum of $g(\hat{r})$. This allows us to look for structures without assumptions on the number of neighbours.
+In both Eqs.~(\ref{eq:qlm}) and (\ref{eq:Qlm}), the sum runs over the ``neighbours'' of particle $i$. The definition of the neighbours is crucial for the consistency of the analysis. The most popular criterion in literature is that particles closer than $R_{max}$ are neighbours, with $R_{max}$ often fixed at the first minimum of $g(r)$. However, we find that this criterion has two major drawbacks: no account of polydispersity and negative correlation between the number of neighbours and the value of the $q_\ell$ (this effect is less pronounced after coarse-graining). To account for the polydispersity, we used a threshold in the scaled distance $\hat{r}_{i j} = r_{i j} /(\sigma_i+\sigma_j) < \hat{R}_{max}$, with $\hat{R}_{max}$ corresponding to the first minimum of $g(\hat{r})$. This allows us to look for structures without assumptions on the number of neighbours. 
+
+We made a first round of analysis using this threshold definition, constructing maps similar to Fig.~\ref{fig:maps} but nosier. These maps allowed us to discard the possibility of \textsc{bcc} and generally any structure except \textsc{fcc, hcp} or icosahedron. We are thus left with structures where the particles naturally have 12 neighbours. We then took a new \textsc{boo} analysis, this time taking the first 12 closest particles (in $\hat{r}$) as neighbours. This criterion reduces the noise in the distribution of the invariants and makes detected structures more easily comparable with crystallographic archetypes. It also avoids artefacts near $R_{max}$ in the correlation functions. The figure presented here where constructed from this second round of analysis.
 
 \bibliographystyle{apsrev4-1}
 %\bibliographystyle{naturemag2}
