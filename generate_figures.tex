@@ -28,6 +28,7 @@
 			\addplot file {go1.isf};
 			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 			\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
+			\node [anchor=south west] at (rel axis cs:0,0) {\bf a};
 		\end{axis}
 		\begin{axis}[%
 			anchor=left of south west,%
@@ -40,6 +41,7 @@
 			\addplot+[mark=none, forget plot, domain=0.49:0.58] {exp(0.28970401*x/(0.59841615-x))};
 			\addplot+[only marks] table[x index=0, y index=1]{xi_phi.dat};
 			\node at (rel axis cs:0,1) (a) {};
+			\node [anchor=south west] at (rel axis cs:0,0) {\bf b};
 		\end{axis}
 		\begin{axis}[%
 			tiny, at=(a), anchor=north west, %
@@ -104,7 +106,7 @@
 		\addplot graphics
 		[xmin=0,xmax=0.2,ymin=0,ymax=0.6]
 		{Q4Q6go1};
-		\node [anchor=north west] at (rel axis cs:0,1) {(a)};
+		\node [anchor=north west] at (rel axis cs:0,1) {\bf a};
 		\node [below] at (axis cs:0.1909, 0.5745) {\textsc{fcc}};
 		\node [below] at (axis cs:0.0972222, 0.484762) {\textsc{hcp}};
 		\node [below] at (axis cs:0.0363696, 0.510688) {\textsc{bcc}};
@@ -123,7 +125,7 @@
 		\addplot graphics
 		[xmin=-0.002,xmax=0.002,ymin=0,ymax=0.6]
 		{w4Q6go1};
-		\node [anchor=north west] at (rel axis cs:0,1) {(b)};
+		\node [anchor=north west] at (rel axis cs:0,1) {\bf b};
 		\node [below] at (axis cs:-0.00067221, 0.5745) {\textsc{fcc}};
 		\node [below] at (axis cs:7.47E-05, 0.484762) {\textsc{hcp}};
 		%\node [below] at (axis cs:-0.01274716, 0.510688) {\textsc{bcc}};
@@ -160,7 +162,7 @@
 		\addplot graphics
 		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
 		{u6Q6go1_scale};
-		\node [anchor=north west] at (rel axis cs:0,1) {(c)};
+		\node [anchor=north west] at (rel axis cs:0,1) {\bf c};
 		\node at (axis cs:\wstar,0.6) (a) {};
 		\node at (axis cs:-0.00782,0.6) (b) {};
 		\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
@@ -172,7 +174,7 @@
 		\addplot graphics
 		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
 		{u6Q6phi3954_scale};
-		\node [anchor=north west] at (rel axis cs:0,1) {(d)};
+		\node [anchor=north west] at (rel axis cs:0,1) {\bf d};
 		\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
 		%\node [anchor=north east] at (rel axis cs:1, 1) {\footnotesize{$\phi = 0.497 \pm 0.03$}};
 		\node [left] at (axis cs:\wstar,0.4) {\footnotesize $w_6^*$};
@@ -215,7 +217,7 @@
 				},%
 			]
 			\addplot graphics [xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]{sd_u6Q6_go1_color};
-			\node [anchor=north west] at (rel axis cs:0,1) {(a)};
+			\node [anchor=north west] at (rel axis cs:0,1) {\bf a};
 			\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
 			\node [anchor=west] at (rel axis cs:0, 0.8) {\footnotesize{$\phi = 0.575 \pm 0.03$}};
 			\node [left] at (axis cs:\wstar,0.55) {\footnotesize $w_6^*$};
@@ -259,7 +261,7 @@
 			\addplot+[domain=-0.0521089193:0.01, sharp plot, no markers] {9.34701 * x + 1.03764};
 			\draw[->, thick] (rel axis cs:0.2, 0.9) to (rel axis cs:0, 0.9);
 			\node[right] at (rel axis cs:0.2, 0.9) {\footnotesize Icosahedron};
-			\node [anchor=south west] at (rel axis cs:0,0) {(b)};
+			\node [anchor=south west] at (rel axis cs:0,0) {\bf b};
 			
 			\nextgroupplot[%
 				xlabel=$Q_6$, xmin=0, xmax=0.5745,%
@@ -274,7 +276,7 @@
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_go1.txt};
 			\draw[->, thick] (rel axis cs:0.8, 0.45) to (rel axis cs:1, 0.45);
 			\node[left] at (rel axis cs:0.8, 0.45) {\footnotesize \textsc{fcc}};
-			\node [anchor=south west] at (rel axis cs:0,0) {(c)};
+			\node [anchor=south west] at (rel axis cs:0,0) {\bf c};
 		\end{groupplot}
 	\end{tikzpicture}
 	\caption{{\bf Bond order propensity.} (a) Normalised propensity in the $(w_6, Q_6)$-plane for our most deeply supercooled sample. The colour scale is saturated at $1.5$ times the bulk mean square displacement. (b-c) Normalised propensity for icosahedral and crystalline order parameters respectively. Bulk mean square displacement is at 1. Perfect structures are on the edge of each plot. The line is a guide for the eye stressing the collapse of the $w_6$-propensity at all volume fractions.}
