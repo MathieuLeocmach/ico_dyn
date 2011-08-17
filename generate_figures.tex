@@ -3,6 +3,7 @@
 \usepackage{pgfplots}
 \usepgfplotslibrary{external}
 \usepgfplotslibrary{groupplots}
+\usetikzlibrary{plotmarks}
 \tikzexternalize
 \tikzset{external/force remake}
 \tikzset{every mark/.append style={scale=0.8}}
@@ -13,13 +14,13 @@
 \begin{figure}
 	\centering
 	\begin{tikzpicture}
+		\pgfplotsset{cycle list name=black white}
 		\begin{axis}[%
 			anchor=right of south east,%
 			width=0.45\textwidth, height=0.33\textwidth, %
 			xlabel=$t/\tau_B$, xmode=log,%
 			ylabel={Self ISF}, ymin=0,%
 			legend columns=3, reverse legend, legend style={font=\tiny, at={(1,1.03)}, anchor=south east}, %
-			%every mark/.append style={scale=0.5}%
 			]
 			\addplot file {LS3954.isf};
 			\addplot file {LS4446.isf};
@@ -55,9 +56,9 @@
 			axis background/.style={fill=white},%
 			]
 			\addplot+[mark=none, forget plot, domain=0.49:0.58] {0.41158778*((0.59773962-x)/0.59773962)^(-2.0/3.0)};
-			\addplot+[only marks] table[x index=0, y index=2]{xi_phi.dat};
+			\addplot+[only marks, fill=white] table[x index=0, y index=2]{xi_phi.dat};
 			\addplot+[mark=none, forget plot, domain=0.49:0.58] {0.18878182*((0.59773962-x)/0.59773962)^(-2.0/3.0)};
-			\addplot+[only marks] table[x index=0, y index=3]{xi_phi.dat};
+			\addplot+[only marks, fill=black] table[x index=0, y index=3]{xi_phi.dat};
 			\legend{$\xi_u$ dynamical, $\xi_6$ structural};
 		\end{axis}
 	\end{tikzpicture}
