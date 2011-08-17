@@ -109,7 +109,7 @@
 		\addplot graphics
 		[xmin=0,xmax=0.2,ymin=0,ymax=0.6]
 		{Q4Q6go1};
-		\node [anchor=north west] at (rel axis cs:0,1) {\bf a};
+		\node [anchor=north west, text height=0.8em, text depth=0.2em] at (rel axis cs:0,1) {\bf a};
 		\node [below] at (axis cs:0.1909, 0.5745) {\textsc{fcc}};
 		\node [below] at (axis cs:0.0972222, 0.484762) {\textsc{hcp}};
 		\node [below] at (axis cs:0.0363696, 0.510688) {\textsc{bcc}};
@@ -128,7 +128,7 @@
 		\addplot graphics
 		[xmin=-0.002,xmax=0.002,ymin=0,ymax=0.6]
 		{w4Q6go1};
-		\node [anchor=north west] at (rel axis cs:0,1) {\bf b};
+		\node [anchor=north west, text height=0.8em, text depth=0.2em] at (rel axis cs:0,1) {\bf b};
 		\node [below] at (axis cs:-0.00067221, 0.5745) {\textsc{fcc}};
 		\node [below] at (axis cs:7.47E-05, 0.484762) {\textsc{hcp}};
 		%\node [below] at (axis cs:-0.01274716, 0.510688) {\textsc{bcc}};
@@ -165,7 +165,7 @@
 		\addplot graphics
 		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
 		{u6Q6go1_scale};
-		\node [anchor=north west] at (rel axis cs:0,1) {\bf c};
+		\node [anchor=north west, text height=0.8em, text depth=0.2em] at (rel axis cs:0,1) {\bf c};
 		\node at (axis cs:\wstar,0.6) (a) {};
 		\node at (axis cs:-0.00782,0.6) (b) {};
 		\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
@@ -177,7 +177,7 @@
 		\addplot graphics
 		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
 		{u6Q6phi3954_scale};
-		\node [anchor=north west] at (rel axis cs:0,1) {\bf d};
+		\node [anchor=north west, text height=0.8em, text depth=0.2em] at (rel axis cs:0,1) {\bf d};
 		\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
 		%\node [anchor=north east] at (rel axis cs:1, 1) {\footnotesize{$\phi = 0.497 \pm 0.03$}};
 		\node [left] at (axis cs:\wstar,0.4) {\footnotesize $w_6^*$};
@@ -308,7 +308,7 @@
 	\node at (ico.north){$w_6=w_6^*$};
 	\node[below] at (l.south) (mrco) {\includegraphics[width=0.2\textwidth]{one_mrco.png}};
 	\node at (mrco.south) {$Q_6=Q_6^*$};
-	\node[lab, anchor=north] at (all.north) {$\phi=0.575$};
+	\node[lab, anchor=north, inner sep=0.2em] at (all.north) {$\phi=0.575$};
 	\end{tikzpicture}
 	\caption{Computer reconstruction from confocal microscopy coordinates of a typical configuration in our most deeply supercooled sample. Depth is $\sim 12\sigma$. Only ordered particles and their neighbours are displayed. Each particle is plotted with its real radius. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. Left: Example of structures at the respective threshold values: distorted icosahedron (top) and crystal-like cluster (bottom).}
 	\label{fig:3D}
