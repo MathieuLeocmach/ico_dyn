@@ -3,6 +3,7 @@
 \usepackage{pgfplots}
 \usepgfplotslibrary{external}
 \usepgfplotslibrary{groupplots}
+\usetikzlibrary{positioning}
 \usetikzlibrary{plotmarks}
 \tikzexternalize
 \tikzset{external/force remake}
@@ -13,7 +14,9 @@
 
 \begin{figure}
 	\centering
-	\begin{tikzpicture}
+	\begin{tikzpicture}[
+		lab/.style={above right, text height=0.8em, text depth=0.2em, font=\bfseries}%
+		]%
 		\pgfplotsset{cycle list name=black white}
 		\begin{axis}[%
 			anchor=right of south east,%
@@ -29,7 +32,7 @@
 			\addplot file {go1.isf};
 			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 			\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
-			\node [anchor=south west] at (rel axis cs:0,0) {\bf a};
+			\node [lab] at (rel axis cs:0,0) {a};
 		\end{axis}
 		\begin{axis}[%
 			anchor=left of south west,%
@@ -42,7 +45,7 @@
 			\addplot+[mark=none, forget plot, domain=0.49:0.58] {exp(0.28970401*x/(0.59841615-x))};
 			\addplot+[only marks] table[x index=0, y index=1]{xi_phi.dat};
 			\node at (rel axis cs:0,1) (a) {};
-			\node [anchor=south west] at (rel axis cs:0,0) {\bf b};
+			\node [lab] at (rel axis cs:0,0) {b};
 		\end{axis}
 		\begin{axis}[%
 			tiny, at=(a), anchor=north west, %
@@ -67,7 +70,9 @@
 \end{figure}
 
 \begin{figure}
-	\begin{tikzpicture}
+	\begin{tikzpicture}[
+		lab/.style={below right, text height=0.8em, text depth=0.2em, font=\bfseries}%
+		]%
 		\pgfplotsset{
 			extra tick style={grid=major},%
 			every axis/.append style={%
@@ -109,7 +114,7 @@
 		\addplot graphics
 		[xmin=0,xmax=0.2,ymin=0,ymax=0.6]
 		{Q4Q6go1};
-		\node [anchor=north west, text height=0.8em, text depth=0.2em] at (rel axis cs:0,1) {\bf a};
+		\node [lab] at (rel axis cs:0,1) {a};
 		\node [below] at (axis cs:0.1909, 0.5745) {\textsc{fcc}};
 		\node [below] at (axis cs:0.0972222, 0.484762) {\textsc{hcp}};
 		\node [below] at (axis cs:0.0363696, 0.510688) {\textsc{bcc}};
@@ -128,7 +133,7 @@
 		\addplot graphics
 		[xmin=-0.002,xmax=0.002,ymin=0,ymax=0.6]
 		{w4Q6go1};
-		\node [anchor=north west, text height=0.8em, text depth=0.2em] at (rel axis cs:0,1) {\bf b};
+		\node [lab] at (rel axis cs:0,1) {b};
 		\node [below] at (axis cs:-0.00067221, 0.5745) {\textsc{fcc}};
 		\node [below] at (axis cs:7.47E-05, 0.484762) {\textsc{hcp}};
 		%\node [below] at (axis cs:-0.01274716, 0.510688) {\textsc{bcc}};
@@ -165,7 +170,7 @@
 		\addplot graphics
 		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
 		{u6Q6go1_scale};
-		\node [anchor=north west, text height=0.8em, text depth=0.2em] at (rel axis cs:0,1) {\bf c};
+		\node [lab] at (rel axis cs:0,1) {c};
 		\node at (axis cs:\wstar,0.6) (a) {};
 		\node at (axis cs:-0.00782,0.6) (b) {};
 		\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
@@ -177,7 +182,7 @@
 		\addplot graphics
 		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
 		{u6Q6phi3954_scale};
-		\node [anchor=north west, text height=0.8em, text depth=0.2em] at (rel axis cs:0,1) {\bf d};
+		\node [lab] at (rel axis cs:0,1) {d};
 		\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
 		%\node [anchor=north east] at (rel axis cs:1, 1) {\footnotesize{$\phi = 0.497 \pm 0.03$}};
 		\node [left] at (axis cs:\wstar,0.4) {\footnotesize $w_6^*$};
@@ -191,7 +196,9 @@
 
 
 \begin{figure}
-	\begin{tikzpicture}
+	\begin{tikzpicture}[
+		lab/.style={text height=0.8em, text depth=0.2em, font=\bfseries}%
+		]%
 		\begin{axis}[%
 			anchor=below south,%
 			width=0.5\textwidth,%
@@ -220,7 +227,7 @@
 				},%
 			]
 			\addplot graphics [xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]{sd_u6Q6_go1_color};
-			\node [anchor=north west] at (rel axis cs:0,1) {\bf a};
+			\node [lab, anchor=north west] at (rel axis cs:0,1) {a};
 			\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
 			\node [anchor=west] at (rel axis cs:0, 0.8) {\footnotesize{$\phi = 0.575 \pm 0.03$}};
 			\node [left] at (axis cs:\wstar,0.55) {\footnotesize $w_6^*$};
@@ -264,7 +271,7 @@
 			\addplot+[domain=-0.0521089193:0.01, sharp plot, no markers] {9.34701 * x + 1.03764};
 			\draw[->, thick] (rel axis cs:0.2, 0.9) to (rel axis cs:0, 0.9);
 			\node[right] at (rel axis cs:0.2, 0.9) {\footnotesize Icosahedron};
-			\node [anchor=south west] at (rel axis cs:0,0) {\bf b};
+			\node [lab, anchor=south west] at (rel axis cs:0,0) {b};
 			
 			\nextgroupplot[%
 				xlabel=$Q_6$, xmin=0, xmax=0.5745,%
@@ -283,7 +290,7 @@
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_go1.txt};
 			\draw[->, thick] (rel axis cs:0.8, 0.45) to (rel axis cs:1, 0.45);
 			\node[left] at (rel axis cs:0.8, 0.45) {\footnotesize \textsc{fcc}};
-			\node [anchor=south west] at (rel axis cs:0,0) {\bf c};
+			\node [lab, anchor=south west] at (rel axis cs:0,0) {c};
 		\end{groupplot}
 	\end{tikzpicture}
 	\caption{{\bf Bond order propensity.} (a) Normalised propensity in the $(w_6, Q_6)$-plane for our most deeply supercooled sample. The colour scale is saturated at $1.5$ times the bulk mean square displacement. (b-c) Normalised propensity for icosahedral and crystalline order parameters respectively. Bulk mean square displacement is at 1. Perfect structures are on the edge of each plot. The line is a guide for the eye stressing the collapse of the $w_6$-propensity at all volume fractions. Scattering away from the lines is due to poor averaging.}
@@ -295,12 +302,18 @@
 	\centering
 	\begin{tikzpicture}[%
 		pic3d/.style={inner sep=0}, %
-		lab/.style={below left=0.005\textwidth, text height=0.8em, text depth=0.2em}%
-		]
+		lab/.style={below left=0.002\textwidth and 0.005\textwidth, text height=0.8em, text depth=0.2em, font=\bfseries},%
+		arr/.style={<->, thick, yellow!75!black}%
+		]%
 	\definecolor{turquoise}{rgb}{0.678431,0.917647,0.917647}
 	\node[right=0.01\textwidth, pic3d] (all) {\includegraphics[width=0.48\textwidth]{mrco_ico_scale_go1-0023.png}};
 	\node[below=0.01\textwidth, pic3d] at (all.south) (dyn) {\includegraphics[width=0.48\textwidth]{cgsd_2tau.png}};
 	\node[left=0.01\textwidth, pic3d] at (dyn.west) (mrco) {\includegraphics[width=0.48\textwidth]{mrco_scale_go1.png}};
+	%\draw [help lines, step=0.1\textwidth] (mrco.south west) grid (mrco.north east);
+	\draw[arr] ($(mrco.south west)+(0.19\textwidth, 0.17\textwidth)$) -- ($(mrco.south west)+(0.19\textwidth, 0.32\textwidth)$);
+	\draw[arr] ($(dyn.south west)+(0.19\textwidth, 0.17\textwidth)$) -- ($(dyn.south west)+(0.19\textwidth, 0.32\textwidth)$);
+	\draw[arr] ($(mrco.south west)+(0.17\textwidth, 0.07\textwidth)$) -- ($(mrco.south west)+(0.43\textwidth, 0.23\textwidth)$);
+	\draw[arr] ($(dyn.south west)+(0.17\textwidth, 0.07\textwidth)$) -- ($(dyn.south west)+(0.43\textwidth, 0.23\textwidth)$);
 	\matrix[%
 		matrix anchor=east, draw, font=\footnotesize,% 
 		column 1/.style={text height=0.8em, text depth=0.2em},%
@@ -315,13 +328,13 @@
 	\node[right=0.01\textwidth] at (one_ico.east){$w_6=w_6^*$};
 	\node[below left=0.01\textwidth, pic3d] at (l.west) (one_mrco) {\includegraphics[width=0.22\textwidth]{one_mrco.png}};
 	\node[right=0.01\textwidth] at (one_mrco.east) {$Q_6=Q_6^*$};
-	\node [lab] at (one_ico.north east) {\bf a};
-	\node [lab] at (one_mrco.north east) {\bf b};
-	\node [lab] at (all.north east) {\bf c};
-	\node [lab] at (mrco.north east) {\bf d};
-	\node [lab] at (dyn.north east) {\bf e};
+	\node [lab] at (one_ico.north east) {a};
+	\node [lab] at (one_mrco.north east) {b};
+	\node [lab] at (all.north east) {c};
+	\node [lab] at (mrco.north east) {d};
+	\node [lab] at (dyn.north east) {e};
 	\end{tikzpicture}
-	\caption{Computer reconstruction from confocal microscopy coordinates of a typical configuration in our most deeply supercooled sample. Depth is $\sim 12\sigma$. Only ordered particles and their neighbours are displayed. Each particle is plotted with its real radius. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. Left: Example of structures at the respective threshold values: distorted icosahedron (top) and crystal-like cluster (bottom).}
+	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates of a typical configuration in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{c,} Bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{d,} Crystal-like particles alone. \textbf{e,} Slow particles (see text). The arrows stress the correlation between \textbf{d} and \textbf{e}. Due to particles going in and out of the field of view, the edges of \textbf{e} may not be accurate. Example of \textbf{a} distorted icosahedron and \textbf{b} crystal-like cluster at the respective threshold values.}
 	\label{fig:3D}
 \end{figure}
 
