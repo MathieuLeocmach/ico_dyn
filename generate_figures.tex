@@ -294,19 +294,20 @@
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={right, inner sep=0.05em, fill=white, font=\footnotesize}]
-	\node[right=1em, draw, inner sep=0] (all) {\includegraphics[width=0.75\textwidth]{mrco_ico_scale_go1-0023.png}};
+	\node[right=0.5em, draw, inner sep=0] (all) {\includegraphics[width=0.4\textwidth]{mrco_ico_scale_go1-0023.png}};
+	\node[right=0.5em, draw, inner sep=0] at (all.east) (dyn) {\includegraphics[width=0.4\textwidth]{cgsd_2tau.png}};
 	\matrix[%
 		matrix anchor=east, draw, font=\footnotesize,% 
 		column 1/.style={text height=0.8em, text depth=0.2em},%
-		column 2/.style={circle, shade, inner sep=0.01\textwidth},%
+		column 2/.style={circle, shade, inner sep=0.008\textwidth},%
 		] (l)
 	{
 		\node{Icosahedra}; & \node[ball color=red!33!blue] (b2) {}; \\
 		\node{Crystal-like}; & \node[ball color=green!66!black] {}; \\
 	};
-	\node[above] at (l.north) (ico) {\includegraphics[width=0.2\textwidth]{one_ico.png}};
+	\node[above] at (l.north) (ico) {\includegraphics[width=0.125\textwidth]{one_ico.png}};
 	\node at (ico.north){$w_6=w_6^*$};
-	\node[below] at (l.south) (mrco) {\includegraphics[width=0.2\textwidth]{one_mrco.png}};
+	\node[below] at (l.south) (mrco) {\includegraphics[width=0.125\textwidth]{one_mrco.png}};
 	\node at (mrco.south) {$Q_6=Q_6^*$};
 	\node[lab, anchor=north, inner sep=0.2em] at (all.north) {$\phi=0.575$};
 	\end{tikzpicture}
