@@ -293,23 +293,33 @@
 
 \begin{figure}
 	\centering
-	\begin{tikzpicture}[lab/.style={right, inner sep=0.05em, fill=white, font=\footnotesize}]
-	\node[right=0.5em, draw, inner sep=0] (all) {\includegraphics[width=0.4\textwidth]{mrco_ico_scale_go1-0023.png}};
-	\node[right=0.5em, draw, inner sep=0] at (all.east) (dyn) {\includegraphics[width=0.4\textwidth]{cgsd_2tau.png}};
+	\begin{tikzpicture}[%
+		pic3d/.style={inner sep=0}, %
+		lab/.style={below left=0.005\textwidth, text height=0.8em, text depth=0.2em}%
+		]
+	\definecolor{turquoise}{rgb}{0.678431,0.917647,0.917647}
+	\node[right=0.01\textwidth, pic3d] (all) {\includegraphics[width=0.48\textwidth]{mrco_ico_scale_go1-0023.png}};
+	\node[below=0.01\textwidth, pic3d] at (all.south) (dyn) {\includegraphics[width=0.48\textwidth]{cgsd_2tau.png}};
+	\node[left=0.01\textwidth, pic3d] at (dyn.west) (mrco) {\includegraphics[width=0.48\textwidth]{mrco_scale_go1.png}};
 	\matrix[%
 		matrix anchor=east, draw, font=\footnotesize,% 
 		column 1/.style={text height=0.8em, text depth=0.2em},%
 		column 2/.style={circle, shade, inner sep=0.008\textwidth},%
 		] (l)
 	{
-		\node{Icosahedra}; & \node[ball color=red!33!blue] (b2) {}; \\
+		\node{Icosahedra}; & \node[ball color=red!50!blue] (b2) {};\node[ball color=red!75!black, left] at (b2.west) {}; \node[ball color=blue!75!black, right] at (b2.east) {};\\
 		\node{Crystal-like}; & \node[ball color=green!66!black] {}; \\
+		\node{Slow}; & \node[ball color=turquoise!75!black] {}; \\
 	};
-	\node[above] at (l.north) (ico) {\includegraphics[width=0.125\textwidth]{one_ico.png}};
-	\node at (ico.north){$w_6=w_6^*$};
-	\node[below] at (l.south) (mrco) {\includegraphics[width=0.125\textwidth]{one_mrco.png}};
-	\node at (mrco.south) {$Q_6=Q_6^*$};
-	\node[lab, anchor=north, inner sep=0.2em] at (all.north) {$\phi=0.575$};
+	\node[above left=0.01\textwidth, pic3d] at (l.west) (one_ico) {\includegraphics[width=0.22\textwidth]{one_ico.png}};
+	\node[right=0.01\textwidth] at (one_ico.east){$w_6=w_6^*$};
+	\node[below left=0.01\textwidth, pic3d] at (l.west) (one_mrco) {\includegraphics[width=0.22\textwidth]{one_mrco.png}};
+	\node[right=0.01\textwidth] at (one_mrco.east) {$Q_6=Q_6^*$};
+	\node [lab] at (one_ico.north east) {\bf a};
+	\node [lab] at (one_mrco.north east) {\bf b};
+	\node [lab] at (all.north east) {\bf c};
+	\node [lab] at (mrco.north east) {\bf d};
+	\node [lab] at (dyn.north east) {\bf e};
 	\end{tikzpicture}
 	\caption{Computer reconstruction from confocal microscopy coordinates of a typical configuration in our most deeply supercooled sample. Depth is $\sim 12\sigma$. Only ordered particles and their neighbours are displayed. Each particle is plotted with its real radius. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. Left: Example of structures at the respective threshold values: distorted icosahedron (top) and crystal-like cluster (bottom).}
 	\label{fig:3D}
