@@ -40,10 +40,14 @@
 			xlabel=$\phi$,%
 			ylabel=$\tau_\alpha/\tau_B$, ymode=log, %
 			ytick pos=right, ylabel near ticks,%
+			legend pos=south east,%
+			cycle list={{black, mark=*},{black, mark=square}},%
 			]
 			%\addplot+[mark=none, forget plot, domain=0.49:0.58] {0.7874243*exp(0.32826088*x/(0.60063652-x))};
 			\addplot+[mark=none, forget plot, domain=0.49:0.58] {exp(0.28970401*x/(0.59841615-x))};
 			\addplot+[only marks] table[x index=0, y index=1]{xi_phi.dat};
+			\addplot+[only marks] table[x index=0, y index=4]{xi_phi.dat};
+			\legend{$\tau_\alpha$, $t^{dh}$};
 			\node at (rel axis cs:0,1) (a) {};
 			\node [lab] at (rel axis cs:0,0) {b};
 		\end{axis}
@@ -65,7 +69,7 @@
 			\legend{$\xi_u$ dynamical, $\xi_6$ structural};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{Dynamics of the system. Self intermediate scattering function computed from the positions. Relaxation time $\tau_\alpha$ function of $\phi$. The line is the VFT fit. Inset: Dynamical and structural correlation length. Lines are power law fit.}
+	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering function computed from the positions for several volume fractions. {\bf b,} The structural relaxation time $\tau_\alpha$ and the characteristic time of the dynamic heterogeneity $t^{dh}$ scaled by the Brownian time $\tau_B$ as a function of $\phi$. The solid curve is the VFT fit of $\tau_\alpha$. Inset: Dynamical ($\xi_u$) and structural correlation length ($\xi_6$). Solid curves are power-law fits (see text).}
 	\label{fig:vft}
 \end{figure}
 
