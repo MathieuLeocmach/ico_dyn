@@ -313,7 +313,9 @@
 	\node[right=0.01\textwidth, pic3d] (all) {\includegraphics[width=0.48\textwidth]{mrco_ico_scale_go1-0023.png}};
 	\node[below=0.01\textwidth, pic3d] at (all.south) (dyn) {\includegraphics[width=0.48\textwidth]{cgsd_2tau.png}};
 	\node[left=0.01\textwidth, pic3d] at (dyn.west) (mrco) {\includegraphics[width=0.48\textwidth]{mrco_scale_go1.png}};
-	%\draw [help lines, step=0.1\textwidth] (mrco.south west) grid (mrco.north east);
+	\draw [help lines, step=0.12\textwidth, shift=(mrco.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
+	\draw [help lines, step=0.12\textwidth, shift=(dyn.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
+	%\draw [help lines, step=0.12\textwidth, shift=(all.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
 	\draw[arr] ($(mrco.south west)+(0.19\textwidth, 0.17\textwidth)$) -- ($(mrco.south west)+(0.19\textwidth, 0.32\textwidth)$);
 	\draw[arr] ($(dyn.south west)+(0.19\textwidth, 0.17\textwidth)$) -- ($(dyn.south west)+(0.19\textwidth, 0.32\textwidth)$);
 	\draw[arr] ($(mrco.south west)+(0.17\textwidth, 0.07\textwidth)$) -- ($(mrco.south west)+(0.37\textwidth, 0.19\textwidth)$);
@@ -338,7 +340,7 @@
 	\node [lab] at (mrco.north east) {d};
 	\node [lab] at (dyn.north east) {e};
 	\end{tikzpicture}
-	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates of a typical configuration in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{c,} Bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{d,} Crystal-like particles alone. \textbf{e,} Slow particles (see text). The arrows stress the correlation between \textbf{d} and \textbf{e}. Due to particles going in and out of the field of view, the edges of \textbf{e} may not be accurate. Example of \textbf{a} distorted icosahedron and \textbf{b} crystal-like cluster at the respective threshold values.}
+	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates of a typical configuration in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{c,} Bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{d,} Crystal-like particles alone. \textbf{e,} Slow particles (see text). The arrows stress the correlation between \textbf{d} and \textbf{e}. Due to particles going in and out of the field of view, the edges of \textbf{d} and \textbf{e} where not be accurate and have been removed. Example of \textbf{a} distorted icosahedron and \textbf{b} crystal-like cluster at the respective threshold values.}
 	\label{fig:3D}
 \end{figure}
 
