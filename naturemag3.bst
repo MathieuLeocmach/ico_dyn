@@ -4,11 +4,11 @@
 %%
 %% The original source files were:
 %%
-%% merlin.mbs  (with options: `head,ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-cm,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
-%% physjour.mbs  (with options: `ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-cm,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
-%% geojour.mbs  (with options: `ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-cm,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
-%% photjour.mbs  (with options: `ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-cm,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
-%% merlin.mbs  (with options: `tail,ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-cm,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
+%% merlin.mbs  (with options: `head,ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-x,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
+%% physjour.mbs  (with options: `ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-x,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
+%% geojour.mbs  (with options: `ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-x,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
+%% photjour.mbs  (with options: `ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-x,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
+%% merlin.mbs  (with options: `tail,ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-x,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
 %% ----------------------------------------
 %% *** Natbib compatible Nature Mag ***
 %% 
@@ -1077,16 +1077,6 @@ FUNCTION {format.vol.num.pages}
     }
   if$
   bolden
-  number "number" bibinfo.check duplicate$ empty$ 'skip$
-    {
-      swap$ duplicate$ empty$
-        { "there's a number but no volume in " cite$ * warning$ }
-        'skip$
-      if$
-      swap$
-      ", " swap$ *
-    }
-  if$ *
   eid empty$
     { format.journal.pages }
     { format.journal.eid }
