@@ -210,22 +210,22 @@
 \begin{frame}{Dynamic vs static ?}\usebeamercolor{block title}
 \begin{flushright}
 	\begin{tikzpicture}[concept/.style={scale=0.8, circle, font=\small, align=center, draw=bg, fill=bg, text width=6em, inner sep=0em}]
-		\node[concept] (root) {glass transition};
+		\node[concept] (root2) {criticality};
+		\node[below left=of root2, concept] (d2) {growing \alert{static} length scale};
+		\node[below right=of root2, concept] (s2) {slow down of global dynamics};
+		\path (root2) to[circle connection bar switch color=from (bg) to (bg)] (d2);
+		\path (root2) to[circle connection bar switch color=from (bg) to (bg)] (s2);
+		\draw [thick, fg, ->] (d2) to [bend right] (s2);		
+		
+		\node[below right=0.15\textwidth and 0.3\textwidth of root2, concept] (root) {glass transition};
 		\node[below right=of root, concept] (s) {slow down of dynamics};
-		\node[below=of root, concept] (d) {growing \emph{dynamic} length scale};
-		\node<2>[below left=of root, concept] (sta) {growing \emph{static} length scale};
+		\node[below=of root, concept] (d) {growing \alert{dynamic} length scale};
+		\node<2>[below left=of root, concept] (sta) {growing \alert{static} length scale};
 		\path (root) to[circle connection bar switch color=from (bg) to (bg)] (d);
 		\path (root) to[circle connection bar switch color=from (bg) to (bg)] (s);
 		\path<2> (root) to[circle connection bar switch color=from (bg) to (bg)] (sta);
 		\draw[thick, dashed, fg, ->] (d) to [bend right] (s);
 		\draw<2>[thick, dashed, fg, ->] (sta) to [bend right] (d);
-		
-		\node[below right=0.15\textwidth and 0.3\textwidth of root, concept] (root2) {criticality};
-		\node[below left=of root2, concept] (d2) {growing \emph{static} length scale};
-		\node[below right=of root2, concept] (s2) {slow down of global dynamics};
-		\path (root2) to[circle connection bar switch color=from (bg) to (bg)] (d2);
-		\path (root2) to[circle connection bar switch color=from (bg) to (bg)] (s2);
-		\draw [thick, fg, ->] (d2) to [bend right] (s2);		
 	\end{tikzpicture}
 \end{flushright}
 \end{frame}
@@ -324,7 +324,7 @@ Random first order, {\footnotesize\citet{lubchenko2007}}
 \section{Hard spheres colloids tracked by confocal microscopy}
 \begin{frame}{Hard spheres and colloids}
 	\begin{textblock*}{0.6\textwidth}(10mm,88mm)
-		\only<2>{\simplephasediagram{}}%
+		\simplephasediagram{}%
 	\end{textblock*}
 	The volume fraction $\phi$ is like an inverse temperature.
 	\bigskip
@@ -465,7 +465,7 @@ Random first order, {\footnotesize\citet{lubchenko2007}}
 	\end{columns}\end{center}
 \end{frame}
 
-\begin{frame}{Particle tracking}
+\begin{frame}<3>{Particle tracking}
 	\begin{columns}
 	\column{0.6\textwidth}
 	\only<1|handout:0>{\includegraphics[width=\columnwidth]{compare_image_tracked3D_0}}%
@@ -679,9 +679,17 @@ We confirm the glassy dynamics
 			xmin=0,xmax=0.22,%
 			ymin=0, ymax=0.6,%
 			enlargelimits=false,axis on top,
+			colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
+			colorbar sampled, colorbar horizontal, 
 			colorbar style={%
 				xlabel={per units of $Q_4\cdot Q_6$},% 
 				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
+				samples=6, xtick={ 0.20,0.4,0.6, 0.8},% 
+				extra y ticks={},%
+				/pgfplots/colorbar shift/.style={yshift=0.3cm},
+				at={(parent axis.north)}, anchor=below south, width=0.9*\pgfkeysvalueof{/pgfplots/parent axis width},
+				xticklabel pos=upper,%
+				label style={font=\footnotesize},
 				},%
 			xticklabel={$\pgfmathprintnumber[fixed,precision=2]{\tick}$},%
 			extra tick style={grid=major},%
@@ -696,97 +704,6 @@ We confirm the glassy dynamics
 		\draw[->, white,thick] (axis cs:0.05, 0.15) to [out=60, in=220] (axis cs:0.125, 0.4);
 		\end{axis}
 	\end{tikzpicture}}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Crystal-like bond order}
-	\begin{textblock*}{0.6\textwidth}(10mm,88mm)
-		\simplephasediagram{\node at (0.576,0) [xp marker, fill=green!50!black] {};}
-	\end{textblock*}
-	\begin{columns}
-	\column{0.7\textwidth}
-	\begin{tikzpicture}
-		\pgfplotsset{
-			extra tick style={grid=major},%
-			every axis/.append style={%
-				height=0.55\textwidth,
-				ymin=0,ymax=0.6,%
-				extra y ticks={\Qstar}, extra y tick labels={},%
-				enlargelimits=false,axis on top,
-				colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
-				colorbar sampled,%
-				},%
-		}
-		\begin{groupplot}[
-			group style={
-				group size=2 by 1,%
-				yticklabels at=edge left,%
-				horizontal sep=0pt,%
-				},%
-			anchor=below south west,%
-			width=0.55\columnwidth,%
-			xtick scale label code/.code={},%
-			colorbar horizontal, colorbar style={%
-				samples=6, xtick={ 0.20,0.4,0.6, 0.8},% 
-				extra y ticks={},%
-				/pgfplots/colorbar shift/.style={yshift=0.3cm},
-				at={(parent axis.north)}, anchor=below south, width=0.9*\pgfkeysvalueof{/pgfplots/parent axis width},
-				xticklabel pos=upper,%
-				label style={font=\footnotesize},
-				},%
-			]
-		\nextgroupplot[%
-			ylabel={$Q_6$}, xlabel=$Q_4$,%
-			xmin=0,xmax=0.22,%
-			colorbar style={%
-				xlabel={per units of $Q_4\cdot Q_6$},% 
-				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
-				},%
-			xticklabel={$\pgfmathprintnumber[fixed,precision=2]{\tick}$}
-			]
-		\addplot graphics
-		[xmin=0,xmax=0.2,ymin=0,ymax=0.6]
-		{Q4Q6go1};
-		\node [below] at (axis cs:0.1909, 0.5745) {\textsc{fcc}};
-		\node [below] at (axis cs:0.0972222, 0.484762) {\textsc{hcp}};
-		\node [below] at (axis cs:0.0363696, 0.510688) {\textsc{bcc}};
-		\draw[->, white,thick] (axis cs:0.05, 0.15) to [out=60, in=220] (axis cs:0.125, 0.4);
-		
-		\nextgroupplot[%
-			xlabel=$10^3 \cdot w_4$, %
-			xmin=-0.002,xmax=0.002,%
-			xtickmin=-0.0015,%
-			extra x ticks=0, extra x tick labels={},
-			colorbar style={%
-				xlabel={per units of $w_4\cdot Q_6$},% 
-				xticklabels={$10^{3}$, $10^{4}$, $10^{5}$, $10^{6}$},%
-				},%
-			]
-		\addplot graphics
-		[xmin=-0.002,xmax=0.002,ymin=0,ymax=0.6]
-		{w4Q6go1};
-		\node [below] at (axis cs:-0.00067221, 0.5745) {\textsc{fcc}};
-		\node [below] at (axis cs:7.47E-05, 0.484762) {\textsc{hcp}};
-		\node [above] at (axis cs:0.0015, \Qstar) {\footnotesize{$Q_6^*$}};
-		\draw[->, white,thick] (axis cs:0, 0.15) to [out=120, in=280] (axis cs:-0.0005, 0.4);
-		\draw[->, white,thick] (axis cs:0, 0.15) to (axis cs:7E-05, 0.35);
-		
-		\end{groupplot}
-	\end{tikzpicture}
-	\column{0.3\textwidth}
-	$w_\ell$ indicates how the $\ell$-fold symmetry is "rotating"
-
-	\bigskip	
-	
-	\begin{itemize}
-		\item No \textsc{bcc}
-		\item Mainly \textsc{fcc}
-		\item Some \textsc{hcp}
-	\end{itemize}
-	
-	\bigskip
-	
-	We keep $Q_6$ as crystal axis
 	\end{columns}
 \end{frame}
 

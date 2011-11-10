@@ -194,6 +194,97 @@
 	\footnotesize{\citet{lechner2008}}
 \end{frame}
 
+\begin{frame}{Crystal-like bond order}
+	\begin{textblock*}{0.6\textwidth}(10mm,88mm)
+		\simplephasediagram{\node at (0.576,0) [xp marker, fill=green!50!black] {};}
+	\end{textblock*}
+	\begin{columns}
+	\column{0.7\textwidth}
+	\begin{tikzpicture}
+		\pgfplotsset{
+			extra tick style={grid=major},%
+			every axis/.append style={%
+				height=0.55\textwidth,
+				ymin=0,ymax=0.6,%
+				extra y ticks={\Qstar}, extra y tick labels={},%
+				enlargelimits=false,axis on top,
+				colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
+				colorbar sampled,%
+				},%
+		}
+		\begin{groupplot}[
+			group style={
+				group size=2 by 1,%
+				yticklabels at=edge left,%
+				horizontal sep=0pt,%
+				},%
+			anchor=below south west,%
+			width=0.55\columnwidth,%
+			xtick scale label code/.code={},%
+			colorbar horizontal, colorbar style={%
+				samples=6, xtick={ 0.20,0.4,0.6, 0.8},% 
+				extra y ticks={},%
+				/pgfplots/colorbar shift/.style={yshift=0.3cm},
+				at={(parent axis.north)}, anchor=below south, width=0.9*\pgfkeysvalueof{/pgfplots/parent axis width},
+				xticklabel pos=upper,%
+				label style={font=\footnotesize},
+				},%
+			]
+		\nextgroupplot[%
+			ylabel={$Q_6$}, xlabel=$Q_4$,%
+			xmin=0,xmax=0.22,%
+			colorbar style={%
+				xlabel={per units of $Q_4\cdot Q_6$},% 
+				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
+				},%
+			xticklabel={$\pgfmathprintnumber[fixed,precision=2]{\tick}$}
+			]
+		\addplot graphics
+		[xmin=0,xmax=0.2,ymin=0,ymax=0.6]
+		{Q4Q6go1};
+		\node [below] at (axis cs:0.1909, 0.5745) {\textsc{fcc}};
+		\node [below] at (axis cs:0.0972222, 0.484762) {\textsc{hcp}};
+		\node [below] at (axis cs:0.0363696, 0.510688) {\textsc{bcc}};
+		\draw[->, white,thick] (axis cs:0.05, 0.15) to [out=60, in=220] (axis cs:0.125, 0.4);
+		
+		\nextgroupplot[%
+			xlabel=$10^3 \cdot w_4$, %
+			xmin=-0.002,xmax=0.002,%
+			xtickmin=-0.0015,%
+			extra x ticks=0, extra x tick labels={},
+			colorbar style={%
+				xlabel={per units of $w_4\cdot Q_6$},% 
+				xticklabels={$10^{3}$, $10^{4}$, $10^{5}$, $10^{6}$},%
+				},%
+			]
+		\addplot graphics
+		[xmin=-0.002,xmax=0.002,ymin=0,ymax=0.6]
+		{w4Q6go1};
+		\node [below] at (axis cs:-0.00067221, 0.5745) {\textsc{fcc}};
+		\node [below] at (axis cs:7.47E-05, 0.484762) {\textsc{hcp}};
+		\node [above] at (axis cs:0.0015, \Qstar) {\footnotesize{$Q_6^*$}};
+		\draw[->, white,thick] (axis cs:0, 0.15) to [out=120, in=280] (axis cs:-0.0005, 0.4);
+		\draw[->, white,thick] (axis cs:0, 0.15) to (axis cs:7E-05, 0.35);
+		
+		\end{groupplot}
+	\end{tikzpicture}
+	\column{0.3\textwidth}
+	$w_\ell$ indicates how the $\ell$-fold symmetry is "rotating"
+
+	\bigskip	
+	
+	\begin{itemize}
+		\item No \textsc{bcc}
+		\item Mainly \textsc{fcc}
+		\item Some \textsc{hcp}
+	\end{itemize}
+	
+	\bigskip
+	
+	We keep $Q_6$ as crystal axis
+	\end{columns}
+\end{frame}
+
 \subsection{Lifetime}
 
 \begin{frame}{Time correlation}
