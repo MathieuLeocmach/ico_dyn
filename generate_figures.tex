@@ -5,6 +5,7 @@
 \usepgfplotslibrary{groupplots}
 \usetikzlibrary{positioning}
 \usetikzlibrary{plotmarks}
+\usetikzlibrary{matrix}
 \tikzexternalize
 \tikzset{external/force remake}
 \tikzset{every mark/.append style={scale=0.8}}
@@ -337,6 +338,30 @@
 	\end{tikzpicture}
 	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates of a typical configuration in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{c,} Bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{d,} Crystal-like particles alone. \textbf{e,} Slow particles (see text). The arrows stress the correlation between \textbf{d} and \textbf{e}. Due to particles going in and out of the field of view, the edges of \textbf{d} and \textbf{e} where not be accurate and have been removed. Example of \textbf{a} distorted icosahedron and \textbf{b} crystal-like cluster at the respective threshold values.}
 	\label{fig:3D}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[%
+		pic3d/.style={inner sep=0}, %
+		lab/.style={below left=0.002\textwidth and 0.005\textwidth, text height=0.8em, text depth=0.2em, font=\bfseries},%
+		]%
+	\node[above left=0.01\textwidth, pic3d] (X) {\includegraphics[width=0.48\textwidth]{X_go1.png}};
+	\node[above right=0.01\textwidth, pic3d] (mrco) {\includegraphics[width=0.48\textwidth]{X_ngb_mrco_go1.png}};
+	\matrix[%
+		matrix anchor=north, matrix of nodes, ampersand replacement=\&,%
+		%every even column/.style={text height=0.8em, text depth=0.2em},%
+		every odd column/.style={circle, shade, inner sep=0.25em, above},%
+		]{%
+		|[ball color=magenta]| \& Crystal \&
+		|[ball color=cyan]| \& Crystal neighbour \&
+		|[ball color=green!66!black]| \& Crystal-like \\
+	};
+	\node [lab] at (X.north east) {a};
+	\node [lab] at (mrco.north east) {b};
+	\end{tikzpicture}
+	\caption{\textbf{Particles with more than $7$ crystalline bonds and their neighbours.} Particles with $Q_6>Q_6^*$ and their neighbours are also plotted in \textbf{b} for comparison. Crystalline particles and their neighbours are always included in high $Q_6$ regions. However, the fluctuations of the crystal-like order cannot be reduced to sub-critical nucleation.}
+	\label{fig:X_3D}
 \end{figure}
 
 \end{document}
