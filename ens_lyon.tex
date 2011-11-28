@@ -69,7 +69,7 @@
 \newcommand{\wstar}{-0.023}
 \newcommand{\Qstar}{0.25}
 
-%\includeonly{current_slide}
+%\includeonly{}
 
 \begin{document}
 \tikzset{every mark/.append style={scale=0.8}}
@@ -251,22 +251,42 @@
 
 \begin{frame}{Candidates of structural order}
 \small{Without long-ranged positional order}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Locally favoured structure (LFS) of the liquid}
+Cannot fill space because of geometrical frustrations
 
-\begin{tabular}{|>{\raggedleft}p{0.14\textwidth}||p{0.37\textwidth}|p{0.37\textwidth}|}
-\hline \structure{Structure} & \structure{Icosahedral} & \structure{Crystal-like} \tabularnewline 
-\hline Reference & Ideal glass (curved space) & Crystal \tabularnewline 
-\hline Theory & Spin-glass type & Tow order parameters \tabularnewline
-&{\footnotesize\citet{steinhardt1983boo}} & {\footnotesize\citet{tanaka2010critical}} \tabularnewline 
-&Frustration-limited domain & \tabularnewline
-&{\footnotesize\citet{tarjus2005fba}} & \tabularnewline
-\hline &%
 \centering\begin{tikzpicture}[pen/.style={regular polygon, regular polygon sides=5, draw, minimum size=1cm}]
 	\node[pen] (base) {};
 	\node[pen,anchor=south, rotate=180] at (base.side 3) {};
 	\node[pen,anchor=south, rotate=-108] at (base.side 4) {};
-\end{tikzpicture} &  %
-\centering\begin{tikzpicture}[scale=0.12]
-		\tikzset{particle/.style={circle, ball color=blue!50!white, inner sep=0, minimum size=1em}}
+\end{tikzpicture}
+\end{block}
+Example: Icosahedron
+\column{0.5\textwidth}
+\centering\includegraphics[width=0.5\textwidth]{d20.png}
+
+\includegraphics[width=0.5\textwidth]{ico_13}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Candidates of structural order}
+\small{Without long-ranged positional order}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Influence of the crystal}
+Cannot fill space because
+\begin{itemize}
+	\item Energy barrier
+	\item Other structures locally more stable
+	\item Kinetic barrier
+	\item Size polydispersity
+\end{itemize}
+\end{block}
+Example: Depends on the underlying crystal structure
+\column{0.5\textwidth}
+	\centering\begin{tikzpicture}[scale=0.2, rotate=-90]
+		\tikzset{particle/.style={circle, ball color=blue!50!white, inner sep=0, minimum size=1.5em}}
 		\tikzset{ar/.style={->, draw=red!80!black, thick}}
 		\node[particle] at (14.356, 47.436) (a) {};
 		\node[particle] at (17.000, 52.387) (b) {};
@@ -294,16 +314,63 @@
 		\path[green!50!black,<->] (a) edge [bend left] (b);
 		\draw[green!50!black] (n) -- (l) -- (o);
 		\path[green!50!black,<->] (n) edge [bend left] (o);
-	\end{tikzpicture} \tabularnewline 
-\hline \multirow{2}{0.1\textwidth}{Length} & Icosahedral domain size & \multirow{2}{0.37\textwidth}{Bond order coherence length}\tabularnewline
-& Defect size & \tabularnewline
-\hline 
-\end{tabular}
+	\end{tikzpicture}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Different structural cause $\Rightarrow$ different theory}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\structure{Liquid's order}
+\begin{itemize}
+	\item Spin-glass type\\{\footnotesize\citet{steinhardt1983boo}}
+	\item Frustration-limited domain\\{\footnotesize\citet{tarjus2005fba}}
+\end{itemize}
+Icosahedral domain size\\
+Defect size
+
+\column{0.5\textwidth}
+\structure{Crystal's order}
+\begin{itemize}
+	\item Tow order parameters\\{\footnotesize\citet{TanakaGJPCM}}
+\end{itemize}
 
 \bigskip
+Bond order coherence length
+\end{columns}
+\begin{columns}
+\column{0.5\textwidth}
+\rotatebox{90}{\footnotesize \citet{Dzugutov2002}}
+\includegraphics[width=0.5\columnwidth]{Dzugutov_LFS}
+\column{0.5\textwidth}
+\begin{tabular}{cc}
+\resizebox{0.45\columnwidth}{!}{\input{kawa_nm_psi6.pdf_tex}} & \resizebox{0.45\columnwidth}{!}{\input{kawa_nm_msd.pdf_tex}} \\ 
+$\Psi_6$ & $\Delta r^2$ \\ 
+\end{tabular}
+{\footnotesize\citet{tanaka2010critical}}
+\end{columns}
+\end{frame}
 
-\structure{Exotic-amorphous}
-Random first order, {\footnotesize\citet{lubchenko2007}}
+\begin{frame}{"Crystal" is \ldots}
+\ldots the symmetry breaking phase, avoided \alert{by definition} to get the supercooled liquid.
+\begin{itemize}
+	\item A classical crystal (\textsc{fcc, hcp, bcc}, \ldots)
+\end{itemize}
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\centering
+	\begin{itemize}\item A quasi-crystal\end{itemize}
+	\includegraphics[height=0.5\columnwidth]{Ho-Mg-ZnQuasicrystal.jpg}\\
+	{\footnotesize\citet{Doye2003}}
+	\column{0.5\textwidth}
+	\centering
+	\begin{itemize}\item A Frank-Kasper phase\end{itemize}
+	\includegraphics[height=0.5\columnwidth]{frankkasper.png}\\
+	{\footnotesize\citet{Pedersen2010, Coslovich2011}}
+\end{columns}
+
+\bigskip
+$\Rightarrow$ "Crystal" may contain icosahedral motif
 \end{frame}
 
 \begin{frame}{Slow icosahedral cluster means \dots}
