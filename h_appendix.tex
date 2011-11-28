@@ -285,6 +285,55 @@
 	\end{columns}
 \end{frame}
 
+\begin{frame}{Why $w_6$ and not $\hat{w}_6$}
+\begin{columns}
+\column{0.5\textwidth}
+\resizebox{\columnwidth}{!}{\input{w6Q6quarter.pdf_tex}}
+\column{0.5\textwidth}
+\begin{tikzpicture}
+		\pgfplotsset{
+			extra tick style={grid=major},%
+			every axis/.append style={%
+				height=0.8\columnwidth,
+				ymin=0,ymax=0.6,%
+				extra y ticks={\Qstar}, extra y tick labels={},%
+				enlargelimits=false,axis on top,
+				colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
+				colorbar sampled,%
+				},%
+		}
+		\begin{axis}[
+			anchor=above north west,%
+			width=0.8\columnwidth,%
+			xlabel=$10^2 \cdot w_6$,%
+			xmin=-0.052,xmax=0.01,%
+			extra x ticks={\wstar, -0.00782},%
+			extra x tick labels={,},%
+			xtick scale label code/.code={},%
+			colorbar right, colorbar style={%
+				samples=6, ytick={ 0.20,0.4,0.6, 0.8},% 
+				yticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
+				ylabel={per units of $w_6\cdot Q_6$},%
+				extra x ticks={},%
+				extra y ticks={},%
+				label style={font=\footnotesize},
+				},%
+			]
+		\addplot graphics
+		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
+		{u6Q6go1_scale};
+		\node at (axis cs:\wstar,0.6) (a) {};
+		\node at (axis cs:-0.00782,0.6) (b) {};
+		\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
+		\node [below, right] at (axis cs:-0.052, 0.05) {\textsc{Ico}};
+		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=90, in=275] (axis cs:-0.0015, 0.33);
+		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=180, in=30] (axis cs:-0.025, 0.12);
+		\end{axis}
+	\end{tikzpicture}
+\end{columns}
+\[\hat{w}_\ell = w_\ell{\left( \sum_{m=-\ell}^{\ell} |q_{\ell m}|^2 \right)}^{-\frac{3}{2}} \propto \frac{w_\ell}{q_\ell^3}\]
+\end{frame}
+
 \subsection{Lifetime}
 
 \begin{frame}{Time correlation}
