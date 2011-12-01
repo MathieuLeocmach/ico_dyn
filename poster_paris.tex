@@ -133,7 +133,7 @@ Hajime Tanaka \hspace{5cm} \textothersc{Institute of Industrial science, The Uni
 %Central block of 3D reconstructions
 \begin{textblock}{7}(4,7)
 	\Head{Reconstruction from experimental coordinates}
-	Colloidal hard spheres (\textsc{pmma} in cis-decalin and \textsc{chb} with \textsc{tbab}) are tracked by confocal microscopy. Diameter is $\approx\SI{3}{\micro\metre}$ and polydispersity is $\approx 6\%$ to avoid crystallisation. Tracking precision in position and size is $\approx \SI{30}{\nano\metre}$.
+	Colloidal hard spheres (\textsc{pmma} in cis-decalin and \textsc{chb} with \textsc{tbab}) are tracked by confocal microscopy. Diameter is $\approx\SI{3}{\micro\metre}$ and polydispersity is $\approx 6\%$ to avoid crystallisation.
 	
 	\begin{tikzpicture}[%
 		pic3d/.style={inner sep=0}, %
@@ -218,10 +218,10 @@ Hajime Tanaka \hspace{5cm} \textothersc{Institute of Industrial science, The Uni
 	\end{itemize}
 \end{textblock}
 
-\begin{textblock}{7}(4,3)
+\begin{textblock}{5}(4,3)
 	\Head{Liquid's locally favoured structures}
 \end{textblock}
-\begin{textblock}{2}(4,3.5)
+\begin{textblock}{1.5}(4,3.5)
 	Cannot fill space because of geometrical frustrations
 
 \begin{center}\begin{tikzpicture}[pen/.style={regular polygon, regular polygon sides=5, draw, minimum size=4em}]
@@ -232,19 +232,30 @@ Hajime Tanaka \hspace{5cm} \textothersc{Institute of Industrial science, The Uni
 	Domain size\\
 	Defect size
 \end{textblock}
-
-\begin{textblock}{2}(6.5,3.5)
+\begin{textblock}{3}(6,3.5)
 	Theories
 	\begin{itemize}
 	\raggedright
 	\item Spin-glass type\\{\footnotesize\bibentry{steinhardt1983boo}}
 	\item Frustration-limited domain\\{\footnotesize\bibentry{tarjus2005fba}}
 	\end{itemize}
-	\raggedright Canonical example: \textsf{Icosahedron}
+	Canonical example: \textsf{Icosahedron}
+	
+	\begin{center}
+	\includegraphics[height=\TPVertModule]{d20}
+	\end{center}
 \end{textblock}
-\begin{textblock}{2}(9,3.5)
-\includegraphics[height=\textwidth]{Dzugutov_LFS}\\
-{\footnotesize \bibentry{Dzugutov2002}}
+
+
+\begin{textblock}{1.5}(9.5,3)
+\Head{Tracking}
+\begin{center}
+\includegraphics[height=2\TPVertModule]{comp2D3D_crop2}
+\end{center}
+
+Tracking precision in \textsf{position and size} is $\approx \sigma/100$.
+%\includegraphics[height=\textwidth]{Dzugutov_LFS}\\
+%{\footnotesize \bibentry{Dzugutov2002}}
 \end{textblock}
 
 \begin{textblock}{3}(0,7)
@@ -549,8 +560,7 @@ Hajime Tanaka \hspace{5cm} \textothersc{Institute of Industrial science, The Uni
 \end{textblock}%Dynamics
 
 \begin{textblock}{10}(5,17)
-	\Head{Bond order propensity}
-	
+	\Head{Dynamics function of the initial structure}
 	\begin{tikzpicture}
 	\node at (-0.8\TPHorizModule,0) (a){};
 		\begin{axis}[%
