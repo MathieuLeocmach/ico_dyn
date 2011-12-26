@@ -225,7 +225,7 @@
 			colorbar sampled, colorbar style={%
 				samples=5, ytick={ 0, 0.25, 0.5, 0.75},% 
 				yticklabels={$0$, $0.5$, $1$, $1.5$},%
-				ylabel=${\mathcal{P}r(t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,%
+				ylabel=${\Delta r^2(w_6, Q_6, t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,%
 				extra x ticks={},%
 				yticklabel pos=right,%
 				label style={font=\footnotesize},
@@ -264,7 +264,7 @@
 				xlabel=$10^2 \cdot w_6$, xmin=-0.0521089193, xmax=0.01,%
 				xtickmax={0},%
 				xtick scale label code/.code={},%
-				ylabel=${\mathcal{P}r(t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,
+				ylabel=${\Delta r^2(w_6,Q_6,t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,
 				extra x ticks={\wstar, -0.00782}, extra x tick labels={$w_6^*$,$w_6^{dod}$},%
 				extra y tick labels={bulk}
 				]
@@ -298,7 +298,7 @@
 			\node [lab, anchor=south west] at (rel axis cs:0,0) {c};
 		\end{groupplot}
 	\end{tikzpicture}
-	\caption{{\bf Bond order propensity.} (a) Normalised propensity in the $(w_6, Q_6)$-plane for our most deeply supercooled sample. The colour scale is saturated at $1.5$ times the bulk mean square displacement. (b-c) Normalised propensity for icosahedral and crystalline order parameters respectively. Bulk mean square displacement is at 1. Perfect structures are on the edge of each plot. The line is a guide for the eye stressing the collapse of the $w_6$-propensity at all volume fractions. Scattering away from the lines is due to poor averaging.}
+	\caption{{\bf Bond order mobility.} (a) Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample. The colour scale is saturated at $1.5$ times the bulk mean square displacement. (b-c) Normalised mobility for icosahedral and crystalline order parameters respectively. Bulk mean square displacement is at 1. Perfect structures are on the edge of each plot. The line is a guide for the eye stressing the collapse of the $w_6$-mobility at all volume fractions. Scattering away from the lines is due to poor averaging.}
 	\label{fig:msd_Q6_w6}
 \end{figure}
 
@@ -336,7 +336,7 @@
 	\node [lab] at (mrco.north east) {d};
 	\node [lab] at (dyn.north east) {e};
 	\end{tikzpicture}
-	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates of a typical configuration in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{c,} Bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{d,} Crystal-like particles alone. \textbf{e,} Slow particles (see text). The arrows stress the correlation between \textbf{d} and \textbf{e}. Due to particles going in and out of the field of view, the edges of \textbf{d} and \textbf{e} where not be accurate and have been removed. Example of \textbf{a} distorted icosahedron and \textbf{b} crystal-like cluster at the respective threshold values.}
+	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius.  Example of \textbf{a} distorted icosahedron and \textbf{b} crystal-like cluster at the respective threshold values. \textbf{c,} A typical configuration of bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{d,} Crystal-like particles alone (the order parameter was averaged over $t^{dh}/2$). \textbf{e,} Slow particles (see text). Due to particles going in and out of the field of view, the edges of \textbf{d} and \textbf{e} were not accurate and have been removed.}
 	\label{fig:3D}
 \end{figure}
 
