@@ -48,8 +48,7 @@ In the present work, we focus on the colloidal (hard spheres) supercooled liquid
 
 
 
-We were able to follow the volume fraction dependence of the dynamics over nearly three orders of magnitude (see Fig.~\ref{fig:vft}), confirming the basic phenomenology observed in experiments~\citep{pusey1987ogt, kegel2000swe, weeks2000, BerthierR} as well as simulations~\citep{tanaka2010critical} of similar systems: super-Arrhenius dependence of the structural relaxation time $\tau_\alpha$ upon $\phi$, that we fit by the Vogel-Fulcher-Tammann law, 
-$\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$ ($D$: the fragility index), non-Gaussianity of the dynamics peaking at $t^{dh}(\phi)$, and dynamical heterogeneity of growing size $\xi_u$. 
+We were able to follow the volume fraction dependence of the dynamics over nearly three orders of magnitude (see Fig.~\ref{fig:vft}), confirming the basic phenomenology observed in experiments~\citep{pusey1987ogt, kegel2000swe, weeks2000, BerthierR} as well as simulations~\citep{tanaka2010critical} of similar systems: super-Arrhenius dependence of the structural relaxation time $\tau_\alpha$ upon $\phi$, that we fit by the Vogel-Fulcher-Tammann law; non-Gaussianity of the dynamics, peaking at $t^{dh}(\phi)$, and dynamical heterogeneity of growing size $\xi_u$ (see supplementary information for definitions).
 
 
 
@@ -203,6 +202,26 @@ H. T.
 \end{figure}
 \clearpage
 \section*{Supplementary information}
+
+\subsection*{Dynamics}
+
+In Fig.~\ref{fig:vft}a we fit the self intermediate scattering function by the Vogel-Fulcher-Tammann law $\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$ ($D$ is the fragility index) to get the structural relaxation time $\tau_\alpha$ upon $\phi$. The non-Gaussianity of the dynamics is monitored by the kurtosis of the distribution of the displacements 
+\begin{equation}
+	\alpha_2(t) = \frac{3 \left\langle {\Delta r}^4(t) \right\rangle}{5 {\left\langle {\Delta r}^2(t) \right\rangle}^2}-1
+	\label{eq:ng}
+\end{equation}
+At a given volume fraction, $\alpha_2(t)$ peaks at the characteristic time scale of the dynamic heterogeneity $t^{dh}(\phi)$. The volume fraction dependence of both $\tau_\alpha$ and $t^{dh}$ is plotted in Fig.~\ref{fig:vft}b. We notice that $t^{dh}$ corresponds to the end of plateau, always shorter than $\tau_\alpha$.
+
+To define the characteristic length scale of the dynamic heterogeneity, we compute the mobility-mobility spatial correlation function~\cite{Donati1999}
+\begin{equation}
+	\mathcal{G}_u(r,t) = \frac{
+		\left\langle \sum_{i,j}{\delta u_i(t) \delta u_j(t) \delta(r_{ij} -r)} \right\rangle 
+	}{
+		\left\langle \sum_{i,j}{\delta(r_{ij} -r)} \right\rangle
+	}
+	\label{eq:mobility_correl}
+\end{equation}
+which is a kind of four-point correlation function~\cite{cavagna2009supercooled}. The length scale $\xi_u$ is given by the fit of the envelope of $\mathcal{G}_u(r,t^{dh})$ in real space, at the characteristic time of the dynamic heterogeneity, by Orstein-Zernike form $\propto r^{-1}\exp( -r/\xi_u)$.
 
 \subsection*{Difference between {\sc mrco} and crystal nuclei}
 
