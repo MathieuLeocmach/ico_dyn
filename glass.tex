@@ -234,9 +234,18 @@ To avoid any confusion between our imperfect crystal-like order and well-formed 
 	}
 	\label{eq:boo_dot_product}
 \end{equation}
-The bond between particles $i$ and $j$ is considered crystalline if $s_{ij}>0.7$. A particle is crystalline if more than half of its bonds ($\geq 7$) are crystalline. 
+The bond between particles $i$ and $j$ is considered crystalline if $s_{ij}>0.7$ (this threshold depends on the system). A particle is crystalline if more than half of its bonds ($\geq 7$) are crystalline. 
 
 Our small amount of polydispersity do not systematically prevent crystallisation~\cite{Zaccarelli2009}, thus we had to discard samples that append to crystallise. We find no large crystal nucleus in the samples analysed in the text. Even at deep supercooling a crystal nucleus never gathers more than 8 particles, and in total truly crystalline particles account for less than $0.1\%$ of the system. Fig.~\ref{fig:X_3D} compares the spatial extent of crystal nuclei and of the crystal-like clusters. Nuclei are systematically embedded into much larger \textsc{mrco}. One can explain this phenomenon as perfect wetting of the nuclei by coherently bond-ordered regions. However, examples of crystal-like structures without an embedded crystal nucleus, in addition to the continuity of $Q_6$ values (Fig.~\ref{fig:maps}), rather suggests that the crystal nuclei are the extreme part of the bond order fluctuations. In any case, trivial crystallisation cannot be responsible for the spatial extent of the dynamical heterogeneities (see Fig.~\ref{fig:3D}a and Fig.~\ref{fig:X_3D}e).
+
+\subsection*{Bond order spatial correlation}
+
+We used the same definition as in~\cite{tanaka2010critical} for coarse-grained bond order correlation function
+\begin{equation}
+	G_6(r) = \frac{\sum_{i,j} \sum_{m=-6}^{6} Q_{6 m}(i) Q_{6 m}^{*}(j) \delta(r_{ij}-r)}{\sum_{i,j} \delta(r_{ij}-r)}
+	\label{eq:G_6}
+\end{equation}
+which is not sensible to the aperiodic structures. The envelope of $G_6(r)$ is fitted by Orstein-Zernike form to extract the crystal-like order correlation length $\xi_6$.
 
 \clearpage
 
