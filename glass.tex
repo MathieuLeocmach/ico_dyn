@@ -205,6 +205,27 @@ H. T.
 \clearpage
 \section*{Supplementary information}
 
+\subsection*{Particle localisation and sizing}
+
+Particle-level confocal microscopy experiments usually access the coordinates of the particles via the algorithm proposed by \citet{Crocker1996}. The original noisy image is blurred by convolution with a Gaussian kernel of width $\sigma$ to yield a soft peak per particle. Local intensity maxima within this blurred image give the coordinates of the particles with pixel resolution. Sub-pixel resolution ($0.1~0.3$~pixels error) can be achieved by taking the center of mass of a neighbourhood around the local maxima. The extension of this algorithm in 3D has been done in two ways: either tracking particles in each confocal plane and reconstructing the results (2D-flavour), or full image analysis on three dimensional pictures (3D-flavour).
+
+The choice of the width $\sigma$ of the blurring kernel is critical: too small and the intensity profile is flat near the center of a particle, leading to multiple and ill-localized maxima per particle; too large and the peaks of nearby particles overlap, leading to shifts in the detected positions, or even fusion of the particles (only one particle detected instead of two). If the colloids are fairly monodisperse one can argue (at least in the 3D-flavour) that a range of possible width exist where the choice of $\sigma$ has almost no effect on the number of particle detected. Choosing $\sigma$ within this range gives confidence in the localisation results.
+
+However, we found that no such ``good blur width'' exists in our $6\%$~polydisperse sample. The detection of smaller particles fails for blurring widths too small to detect properly the larger particles. This unacceptable failure of the \citet{Crocker1996} algorithm, as well as the want of the particles' radii data, triggered our design of a localisation algorithm that would be robust in the polydisperse case. We briefly disclose here our method, leaving full details to a future publication.
+
+The key notion to detect objects of unknown an possibly diverse sizes in an image is the \emph{scale space}~\cite{Lindeberg1993}. A popular implementation for isotropic objects (or ``blobs'') is the Scale Invariant Feature Transform (\textsc{sift}) of \citet{Lowe2004}. It consist in blurring the image by Gaussian kernels of logarithmically increasing widths ($\sigma_{i+1} = 2^{1/n} \sigma_i$, with $n$ a fixed integer, $n=3$ being a good choice) and taking the difference between consecutive blurred images. The difference of Gaussians (DoG) response function defined in this way depends on the position in space and on the scale. Bright object in the original image are detected as local minima of the DoG in both space and scale, thus localisation \emph{and size} are determined simultaneously, without any assumption on the target size.
+
+The \textsc{sift} is often used to match between different images complex objects consisting of many rigidly linked features. To our knowledge, this method was never used for the quantitative localisation and sizing of independent simple objects like spherical colloids. The object by object optimal scale determination allows us to perform the spatial sub-pixel resolution step for each object on an image that is blurred just enough to have neither a flat intensity profile nor nearby peak overlap. This leads to a spatial resolution below $0.3$~pixels when two $10$-pixels wide particles are at hard-core contact, and less than $0.03$~pixels error ($0.3\%$ of the diameter) when any other particle's surface is further that $1$~pixel from the surface of the particle of interest.
+
+At infinite dilution the scale $\sigma$ is simply proportional to the radius $R$ of the particle. Assuming a binary ball object, one finds
+\begin{equation}
+	R = \sigma \sqrt{\frac{3 \log 2}{n(1-2^{-2/n})}}
+	\label{eq:scale_dil}
+\end{equation}
+We found that the radius of an isolated pixelated ball can be indeed measured within $0.3\%$ relative error with this method, provided a sub-scale resolution step similar to the spatial sub-pixel resolution step.
+
+In dense suspensions, the neighbouring particles influence the scale dependence of DoG response. This effectively shifts the minima of the DoG toward smaller scales. Assuming once again binary ball objects, one can take this effect into account and construct a $N\times N$ system, with $N$ the number of particles, whose solutions are the radii and whose coefficients depend on the inter-particle distances. This system is actually very sparse (less than two dozen non-zero coefficients per line, even in the dense suspensions studied here) and the results converges in about two iterations. We measured the error in the resulting radii to be around $1\%$.
+
 \subsection*{Dynamics}
 
 In Fig.~\ref{fig:vft}a we fit the self intermediate scattering function by the VFT law $\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$ ($D$ is the fragility index) to get the structural relaxation time $\tau_\alpha$ upon $\phi$. The non-Gaussianity of the dynamics is monitored by the kurtosis of the distribution of the displacements 
