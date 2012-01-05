@@ -7,7 +7,7 @@
 \usetikzlibrary{plotmarks}
 \usetikzlibrary{matrix}
 \tikzexternalize
-\tikzset{external/force remake}
+%\tikzset{external/force remake}
 \tikzset{every mark/.append style={scale=0.8}}
 \pgfplotsset{every axis/.append style={small}}
 
@@ -391,6 +391,56 @@
 	\caption{\textbf{Visualisation of the results of various tracking methods for the same portion of image.} \textbf{a} Multiscale 3D tracking. \textbf{b} Reconstruction from multiscale 2D tracking. \textbf{c-h} Crocker and Grier in 3D with blurring radius increasing from \unit{2}{px} to \unit{4.5}{px} by steps of \unit{0.5}{px}. The circles on each picture are the result of 2D multiscale tracking of each XY slice of the 3D pictures. Sphere are displayed with radii determined by the tracking methods in \textbf{a-b}, and equal to the blurring radius for \textbf{c-h}.}
 	\label{fig:localise}
 \end{figure}
-
+\tikzset{external/force remake}
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[lab/.style={below left, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
+	\begin{axis}[%
+		name=hist,
+		width=0.45\textwidth,%
+		%scale only axis,
+		xmin=1, xmax=5,
+		axis y line*=left,
+		ymin=0, ytick=\empty,%
+		ylabel={Size distribution (a.u.)},%
+		ylabel near ticks,
+		]
+		\addplot[ybar, ybar interval] file {SEM_size_distrib.txt};
+	\end{axis}
+	\begin{axis}[%
+		%scale only axis,
+		width=0.45\textwidth,%
+		xmin=1, xmax=5,
+		axis y line*=right,
+		xlabel={Diameters [$\micro\metre$]},%
+		ymin=0, ytick=\empty,%
+		no marks,%
+		]
+		\addplot+[dashed] file {go1.sizes};
+		\addplot table [x expr ={\thisrowno{0}/1.23}, y index=1] {go1.sizes};
+		\draw[->, ultra thick] (axis cs:3.15,0.05) -- (axis cs: 3.9, 0.05) node[right] {swelling};
+		\node[lab] at (rel axis cs:0.95,0.95) {a};
+	\end{axis}
+	\node[right=3em of hist.right of south east] (a){};
+	\begin{axis}[%
+		at=(a),
+		anchor=south west,%
+		width=0.45\textwidth,%
+		xmin=0, xmax=1.5,%
+		xlabel ={$r/\left\langle \sigma\right\rangle$, $\hat{r}$},%
+		ymin=0,%
+		ylabel=$g(r)$, ylabel near ticks,%
+		no marks,%
+		legend style={legend pos=north west}
+		]
+		\addplot+[dashed] table [x expr ={\thisrowno{0}/13}, y index=1] {go1.rdf};
+		\addplot table [x expr ={\thisrowno{0}/0.9096}, y expr={\thisrowno{1}*7.5}] {go1.srdf};
+		\legend{$g(r)$, $g(\hat{r})$};
+		\node[lab] at (rel axis cs:0.95,0.95) {b};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{\textbf{Sizing} of our colloids. \textbf{a} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.8\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from scanning electron microscopy of only $140$ dry particles (steps) is possible once controlled for $23\%$ of swelling (full line). A careful comparison between confocal images and algorithm output suggest that the thick tail of small particles is not an artefact, thus the relative lack of small particles in the SEM measurement is probably due to bad sampling. \textbf{b} First peak of the radial distribution function with (full line) and without (dashed) the size data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
+	\label{fig:sizing}
+\end{figure}
 
 \end{document}
