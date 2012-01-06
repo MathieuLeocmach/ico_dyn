@@ -1,6 +1,6 @@
 \input{preamble}
 \usepackage{xr}
-\externaldocument{glass}
+\externaldocument[M-]{glass}
 
 %% HACKS %%
  
@@ -49,14 +49,15 @@
 
 \author{Mathieu Leocmach} 
 
-\author{Hajime Tanaka \footnote{E-mail: tanaka@iis.u-tokyo.ac.jp}} 
+\author{Hajime Tanaka}
+\email{tanaka@iis.u-tokyo.ac.jp}
 \affiliation{ {Institute of Industrial Science, University of Tokyo, 4-6-1 Komaba, Meguro-ku, Tokyo 153-8505, Japan} }
 
-\date{}
+%\date{}
 
 \maketitle
 
-
+\section*{Supplementary information}
 
 \subsection*{Particle localisation and sizing}
 
@@ -79,7 +80,7 @@ We found that the radius of an isolated pixelated ball can be indeed measured wi
 
 In dense suspensions, the neighbouring particles influence the scale dependence of DoG response. This effectively shifts the minima of the DoG toward smaller scales, leading to smaller radii if one uses Eq.~\ref{eq:scale_dil} alone. Assuming once again binary ball objects, one can take this coupling into account and construct a $N\times N$ system, with $N$ the number of particles, whose solutions are the radii and whose coefficients depend on the inter-particle distances. This system is actually very sparse (less than two dozen non-zero coefficients per line, even in the dense suspensions studied here) and the results converges in about two iterations. In synthetic images we measured the error in the resulting radii to be around $1\%$.
 
-Figure~S\ref{fig:sizing}a shows the size distribution of the suspensions investigated in the main text. Once controlled for a solvent swelling of $23\%$ in radius, our \emph{in situ} measurements compare well with the size distribution obtained from scanning electron microscopy (\textsc{sem}) of the same dry colloids. However we note that our method finds relatively more small particles than the \textsc{sem}. A careful comparison between confocal images and algorithm output suggest that this is not an artefact: the objects detected as small ($\unit{1.5}{\micro\metre}$ to $\unit{3}{\micro\metre}$) do correspond to small spots (3-4 pixels width) in the confocal images. Thus we conclude that the relative lack of small particles in the \textsc{sem} measurement is probably due to bad sampling (the sizes of only $140$ particles were measured). 
+Figure~S\ref{fig:sizing}a shows the size distribution of the suspensions investigated in the main text. Once controlled for a solvent swelling of $23\%$ in radius, our \emph{in situ} measurements compare well with the size distribution obtained from scanning electron microscopy (\textsc{sem}) of the same dry colloids. However we note that our method finds relatively more small particles than the \textsc{sem}. A careful comparison between confocal images and algorithm output suggest that this is not an artefact: the objects detected as small ($\unit{1.5}{\micro\metre}$ to $\unit{3}{\micro\metre}$) do correspond to small spots (3-6 pixels width) in the confocal images. Thus we conclude that the relative lack of small particles in the \textsc{sem} measurement is probably due to bad sampling (the sizes of only $140$ particles were measured). 
 
 The consistency of our method can be checked by constructing the radial distribution function $g(r)$. In monodisperse hard spheres, the $g(r)$ has a sharp first peak at $r=1\sigma$ corresponding to hard core contact. Polydispersity implies hard core contacts at various $r$ and thus broadens the peak. One can recover a sharp peak by constructing $g(\hat{r})$, with $\hat{r}_{ij} = r_{ij}/(R_i+R_j)$. In Figure~S\ref{fig:sizing}b we successfully used the sizes measured by our method to rectify the first peak.
 
@@ -87,12 +88,12 @@ Recently \citet{Kurita2011,Kurita2011b} have designed a sizing method using part
 
 \subsection*{Dynamics}
 
-In Fig.~M\ref{fig:vft}a we fit the self intermediate scattering function by the VFT law $\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$ ($D$ is the fragility index) to get the structural relaxation time $\tau_\alpha$ upon $\phi$. The non-Gaussianity of the dynamics is monitored by the kurtosis of the distribution of the displacements 
+In Fig.~M\ref{M-fig:vft}a we fit the self intermediate scattering function by the VFT law $\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$ ($D$ is the fragility index) to get the structural relaxation time $\tau_\alpha$ upon $\phi$. The non-Gaussianity of the dynamics is monitored by the kurtosis of the distribution of the displacements 
 \begin{equation}
 	\alpha_2(t) = \frac{3 \left\langle {\Delta r}^4(t) \right\rangle}{5 {\left\langle {\Delta r}^2(t) \right\rangle}^2}-1
 	\label{eq:ng}
 \end{equation}
-At a given volume fraction, $\alpha_2(t)$ peaks at the characteristic time scale of the dynamic heterogeneity $t^{dh}(\phi)$. The volume fraction dependence of both $\tau_\alpha$ and $t^{dh}$ is plotted in Fig.~M\ref{fig:vft}b. We notice that $t^{dh}$ corresponds to the end of plateau, always shorter than $\tau_\alpha$.
+At a given volume fraction, $\alpha_2(t)$ peaks at the characteristic time scale of the dynamic heterogeneity $t^{dh}(\phi)$. The volume fraction dependence of both $\tau_\alpha$ and $t^{dh}$ is plotted in Fig.~M\ref{M-fig:vft}b. We notice that $t^{dh}$ corresponds to the end of plateau, always shorter than $\tau_\alpha$.
 
 To define the characteristic length scale of the dynamic heterogeneity, we compute the mobility-mobility spatial correlation function~\cite{Donati1999}
 \begin{equation}
@@ -118,7 +119,7 @@ To avoid any confusion between our imperfect crystal-like order and well-formed 
 \end{equation}
 The bond between particles $i$ and $j$ is considered crystalline if $s_{ij}>0.7$~\cite{Zaccarelli2009}. A particle is crystalline if more than half of its bonds ($\geq 7$) are crystalline. 
 
-Our small amount of polydispersity do not systematically prevent crystallisation~\cite{Zaccarelli2009}, thus we had to discard samples that append to crystallise. We find no large crystal nucleus in the samples analysed in the text. Even at deep supercooling a crystal nucleus never gathers more than 8 particles, and in total truly crystalline particles account for less than $1\%$ of the system. Fig.~S\ref{fig:X_3D} compares the spatial extent of crystal nuclei and of the crystal-like clusters. Nuclei are systematically embedded into much larger \textsc{mrco}. One can explain this phenomenon as perfect wetting of the nuclei by coherently bond-ordered regions. However, examples of crystal-like structures without an embedded crystal nucleus, in addition to the continuity of $Q_6$ values (Fig.~M\ref{fig:maps}), rather suggests that the crystal nuclei are the extreme part of the bond order fluctuations. In any case, trivial crystallisation cannot be responsible for the spatial extent of the dynamical heterogeneities (see Fig.~M\ref{fig:3D}a and Fig.~S\ref{fig:X_3D}e).
+Our small amount of polydispersity do not systematically prevent crystallisation~\cite{Zaccarelli2009}, thus we had to discard samples that append to crystallise. We find no large crystal nucleus in the samples analysed in the text. Even at deep supercooling a crystal nucleus never gathers more than 8 particles, and in total truly crystalline particles account for less than $1\%$ of the system. Fig.~S\ref{fig:X_3D} compares the spatial extent of crystal nuclei and of the crystal-like clusters. Nuclei are systematically embedded into much larger \textsc{mrco}. One can explain this phenomenon as perfect wetting of the nuclei by coherently bond-ordered regions. However, examples of crystal-like structures without an embedded crystal nucleus, in addition to the continuity of $Q_6$ values (Fig.~M\ref{M-fig:maps}), rather suggests that the crystal nuclei are the extreme part of the bond order fluctuations. In any case, trivial crystallisation cannot be responsible for the spatial extent of the dynamical heterogeneities (see Fig.~M\ref{M-fig:3D}a and Fig.~S\ref{fig:X_3D}e).
 
 \subsection*{Bond order spatial correlation}
 
