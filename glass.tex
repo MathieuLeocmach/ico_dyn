@@ -224,9 +224,13 @@ At infinite dilution the scale $\sigma$ is simply proportional to the radius $R$
 \end{equation}
 We found that the radius of an isolated pixelated ball can be indeed measured within $0.3\%$ relative error with this method, provided a sub-scale resolution step similar to the spatial sub-pixel resolution step.
 
-In dense suspensions, the neighbouring particles influence the scale dependence of DoG response. This effectively shifts the minima of the DoG toward smaller scales, leading to smaller radii if one uses Eq.~\ref{eq:scale_dil} alone. Assuming once again binary ball objects, one can take this coupling into account and construct a $N\times N$ system, with $N$ the number of particles, whose solutions are the radii and whose coefficients depend on the inter-particle distances. This system is actually very sparse (less than two dozen non-zero coefficients per line, even in the dense suspensions studied here) and the results converges in about two iterations. We measured the error in the resulting radii to be around $1\%$.
+In dense suspensions, the neighbouring particles influence the scale dependence of DoG response. This effectively shifts the minima of the DoG toward smaller scales, leading to smaller radii if one uses Eq.~\ref{eq:scale_dil} alone. Assuming once again binary ball objects, one can take this coupling into account and construct a $N\times N$ system, with $N$ the number of particles, whose solutions are the radii and whose coefficients depend on the inter-particle distances. This system is actually very sparse (less than two dozen non-zero coefficients per line, even in the dense suspensions studied here) and the results converges in about two iterations. In synthetic images we measured the error in the resulting radii to be around $1\%$.
 
-Recently \citet{Kurita2011,Kurita2011b} have designed a sizing method using particle coordinates from confocal experiments. However their method relies on coordinates extracted via the \citet{Crocker1996} algorithm which is defective when the size distribution is too broad, as described above. It may be possible to combine the two methods by feeding our coordinates and size as input to their method. We would expect an increase in sizing precision when the particles are close to contact.
+Figure~\ref{fig:sizing}a shows the size distribution of the suspensions investigated in the main text. Once controlled for a solvent swelling of $23\%$ in radius, our \emph{in situ} measurements compare well with the size distribution obtained from scanning electron microscopy (\textsc{sem}) of the same dry colloids. However we note that our method finds relatively more small particles than the \textsc{sem}. A careful comparison between confocal images and algorithm output suggest that this is not an artefact: the objects detected as small ($\unit{1.5}{\micro\metre}$ to $\unit{3}{\micro\metre}$) do correspond to small spots (3-4 pixels width) in the confocal images. Thus we conclude that the relative lack of small particles in the \textsc{sem} measurement is probably due to bad sampling (the sizes of only $140$ particles were measured). 
+
+The consistency of our method can be checked by constructing the radial distribution function $g(r)$. In monodisperse hard spheres, the $g(r)$ has a sharp first peak at $r=1\sigma$ corresponding to hard core contact. Polydispersity implies hard core contacts at various $r$ and thus broadens the peak. One can recover a sharp peak by constructing $g(\hat{r})$, with $\hat{r}_{ij} = r_{ij}/(R_i+R_j)$. In Figure~\ref{fig:sizing}b we successfully used the sizes measured by our method to rectify the first peak.
+
+Recently \citet{Kurita2011,Kurita2011b} have designed a sizing method using particle coordinates from confocal experiments. However their method do not work at the image processing level and relies on coordinates extracted via the \citet{Crocker1996} algorithm which, as described above, is defective when the size distribution is too broad. It may be possible to combine the two methods by feeding our coordinates and size as input to their method. We would expect an increase in sizing precision when the particles are close to contact.
 
 \subsection*{Dynamics}
 
@@ -284,6 +288,14 @@ In addition, the symmetry-breaking phase of the binary hard sphere mixture of~\c
 \end{center}
 \caption{\textbf{Visualisation of the results of various tracking methods for the same portion of image.} \textbf{a} Multiscale 3D tracking. \textbf{b} Reconstruction from multiscale 2D tracking. \textbf{c-h} Crocker and Grier in 3D with blurring radius increasing from \unit{2}{px} to \unit{4.5}{px} by steps of \unit{0.5}{px}. The circles on each picture are the result of 2D multiscale tracking of each XY slice of the 3D pictures. Sphere are displayed with radii determined by the tracking methods in \textbf{a-b}, and equal to the blurring radius for \textbf{c-h}.}
 	\label{fig:localise}
+\end{figure}
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics{generate_figures-figure6.pdf}
+\end{center}
+	\caption{\textbf{Sizing} of our colloids. \textbf{a} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.8\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once controlled for $23\%$ of swelling (full line). \textbf{b} First peak of the radial distribution function with (full line) and without (dashed) the size data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
+	\label{fig:sizing}
 \end{figure}
 \clearpage
 \begin{figure}
