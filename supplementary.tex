@@ -1,3 +1,4 @@
+%\documentclass[preprint,notitlepage]{revtex4-1}
 \documentclass[prl,twocolumn,notitlepage]{revtex4-1}
 \usepackage{graphicx}
 \usepackage{epstopdf}
@@ -53,8 +54,7 @@
 %END HACKS
 
 \begin{document}
-\title{SUPPLEMENTARY INFORMATION \\
- for ``Roles of icosahedral and crystal-like order \\ in hard spheres glass transition''} 
+\title{SUPPLEMENTARY INFORMATION for ``Roles of icosahedral and crystal-like order \\ in hard spheres glass transition''} 
 %\title{Role of structural heterogeneity of the supercooled liquid\\ in the crystallization of hard spheres}
 %\title{On the origin of polymorphism during the nucleation of hard spheres}
 %\title{On the origin of crystal polymorphism in hard spheres}
@@ -79,42 +79,42 @@
 
 \section*{Particle localisation and sizing}
 
-Particle-level confocal microscopy experiments usually access the coordinates of the particles via the algorithm proposed by \citet{Crocker1996}. The original noisy image is blurred by convolution with a Gaussian kernel of width $\sigma$ to yield a soft peak per particle. Local intensity maxima within this blurred image give the coordinates of the particles with pixel resolution. Sub-pixel resolution ($0.1\sim0.3$~pixels error) can be achieved by taking the center of mass of a neighbourhood around the local maxima. The extension of this algorithm in 3D has been done in two ways: either tracking particles in each confocal plane and reconstructing the results (2D-flavour)~\citep{dinsmore2001tdc}, or full image analysis on three dimensional pictures (3D-flavour)~\citep{vanblaaderen1995rss, Lu2007}.
+Particle-level confocal microscopy experiments usually access the coordinates of the particles via the algorithm proposed by \citet{Crocker1996}. The original noisy image is blurred by convolution with a Gaussian kernel of width $\sigma$ to yield a soft peak per particle. Local intensity maxima within this blurred image give the coordinates of the particles with pixel resolution. Sub-pixel resolution ($0.1\sim0.3$~pixels error) can be achieved by taking the centre of mass of a neighbourhood around the local maxima. The extension of this algorithm in 3D has been done in two ways: either tracking particles in each confocal plane and reconstructing the results (2D-flavour)~\citep{dinsmore2001tdc}, or full image analysis on three dimensional pictures (3D-flavour)~\citep{vanblaaderen1995rss, Lu2007}.
 
-The choice of the width $\sigma$ of the blurring kernel is critical: too small and the intensity profile is flat near the center of a particle, leading to multiple and ill-localized maxima per particle; too large and the peaks of nearby particles overlap, leading to shifts in the detected positions, or even fusion of the particles (only one particle detected instead of two). If the colloids are fairly monodisperse one can argue (at least in the 3D-flavour) that a range of possible width exist where the choice of $\sigma$ has almost no effect on the number of particle detected. Choosing $\sigma$ within this range gives confidence in the localisation results.
+The choice of the width $\sigma$ of the blurring kernel is critical: if it is too small, then the intensity profile is flat near the centre  of a particle, leading to multiple and ill-localized maxima per particle; if it is too large, then the peaks of nearby particles overlap, leading to shifts in the detected positions, or even fusion of the particles (only one particle detected instead of two). If the colloids are fairly monodisperse one can argue (at least in the 3D-flavour) that there exists a range of possible width where the choice of $\sigma$ has almost no effect on the number of particles detected. Choosing $\sigma$ within this range gives confidence in the localisation results.
 
 \begin{figure*}
 \begin{center}
 \includegraphics{generate_figures-figure5.pdf}
 \end{center}
-\caption{\textbf{Visualisation of the results of various tracking methods for the same portion of image.} \textbf{a} Multiscale 3D tracking. \textbf{b} Reconstruction from multiscale 2D tracking. \textbf{c-h} Crocker and Grier in 3D with blurring radius increasing from \unit{2}{px} to \unit{4.5}{px} by steps of \unit{0.5}{px}. The circles on each picture are the result of 2D multiscale tracking of each XY slice of the 3D pictures. Sphere are displayed with radii determined by the tracking methods in \textbf{a-b}, and equal to the blurring radius for \textbf{c-h}.}
+\caption{\textbf{Visualisation of the results of various tracking methods for the same portion of image.} \textbf{a,} Multiscale 3D tracking. \textbf{b,} Reconstruction from multiscale 2D tracking. \textbf{c-h,} Crocker and Grier in 3D with blurring radius increasing from \unit{2}{px} to \unit{4.5}{px} by steps of \unit{0.5}{px}. The circles on each picture are the result of 2D multiscale tracking of each XY slice of the 3D pictures. Sphere are displayed with radii determined by the tracking methods in \textbf{a-b}, and equal to the blurring radius for \textbf{c-h}.}
 	\label{fig:localise}
 \end{figure*}
 
-However, we found that no such ``good blur width'' exists in our $6\%$~polydisperse sample (see Fig.~S\ref{fig:localise}c-h). The detection of smaller particles fails for blurring widths too small to detect properly the larger particles. This unacceptable failure of the \citet{Crocker1996} algorithm, as well as the want of the particles' radii data, triggered our design of a localisation algorithm that would be robust in the polydisperse case. Here we briefly disclose our method, leaving full details to a future publication.
+However, we found that no such ``good blur width'' exists in our polydisperse sample (see Fig.~S\ref{fig:localise}c-h). The detection of smaller particles with small blurring widths leads to the failure in detecting properly the larger particles. This unacceptable failure of the \citet{Crocker1996} algorithm, as well as the want of the particles' radii data, triggered our design of a novel localisation algorithm that would be robust even for a system of polydispersity, which is unavoidable in real experiments. Here we briefly disclose our method, leaving full details to a future publication.
 
-The key notion to detect objects of unknown an possibly diverse sizes in an image is the \emph{scale space}~\cite{Lindeberg1993}. A popular implementation for isotropic objects (or ``blobs'') is the Scale Invariant Feature Transform (\textsc{sift}) of \citet{Lowe2004}. It consist in blurring the image by Gaussian kernels of logarithmically increasing widths ($\sigma_{i+1} = 2^{1/n} \sigma_i$, with $n$ a fixed integer, $n=3$ being a good choice) and taking the difference between consecutive blurred images. The difference of Gaussians (DoG) response function defined in this way depends on the position in space and on the scale. Bright objects in the original image are detected as local minima of the DoG in both space and scale, thus localisation \emph{and size} are determined simultaneously, without any assumption on the target size (see Fig.~S\ref{fig:localise}a).
+The key notion to detect objects of unknown and possibly diverse sizes in an image is the \emph{scale space}~\cite{Lindeberg1993}. A popular implementation for isotropic objects (or ``blobs'') is the Scale Invariant Feature Transform (\textsc{sift}) of \citet{Lowe2004}. It consists  in blurring the image by Gaussian kernels of logarithmically increasing widths ($\sigma_{i+1} = 2^{1/n} \sigma_i$, with $n$ a fixed integer, $n=3$ being a good choice) and taking the difference between consecutive blurred images. The difference of Gaussians (DoG) response function defined in this way depends on the position in space and on the scale. Bright objects in the original image are detected as local minima of the DoG in both space and scale, thus localisation and \emph{size} are determined simultaneously, without any assumption on the target size (see Fig.~S\ref{fig:localise}a).
 
-The \textsc{sift} is often used to match between different images complex objects consisting of many rigidly linked blobs further characterised by local histograms~\citep{Lowe2004}. To our knowledge, this method was never used for the quantitative localisation and sizing of independent single-blob objects like spherical colloids. The object-by-object optimal scale determination allows us to perform the spatial sub-pixel resolution step for each object on an image that is blurred just enough to have neither a flat intensity profile nor nearby peak overlap. This leads to a spatial resolution below $0.3$~pixels when two $10$-pixels wide particles are at hard-core contact, and less than $0.03$~pixels error ($0.3\%$ of the diameter) when any other particle's surface is further that $1$~pixel from the surface of the particle of interest.
+The \textsc{sift} is often used to match between different images from complex objects consisting of many rigidly linked blobs and further characterised by local histograms~\citep{Lowe2004}. To our knowledge, this method was never used for the quantitative localisation and sizing of independent single-blob objects like spherical colloids. The object-by-object optimal scale determination allows us to perform the spatial sub-pixel resolution step for each object on an image that is blurred just enough to have neither a flat intensity profile nor a nearby peak overlap. This leads to a spatial resolution below $0.3$~pixels when two $10$-pixels wide particles are at hard-core contact, and less than $0.03$~pixels error ($0.3\%$ of the diameter) when any other particle's surface is further than $1$~pixel from the surface of the particle of interest.
 
 At infinite dilution the scale $\sigma$ is simply proportional to the radius $R$ of the particle. Assuming a binary ball object, one finds
 \begin{equation}
-	R = \sigma \sqrt{\frac{3 \log 2}{n(1-2^{-2/n})}}
+	R = \sigma \sqrt{\frac{3 \log 2}{n(1-2^{-2/n})}}. 
 	\label{eq:scale_dil}
 \end{equation}
 We found that the radius of an isolated pixelated ball can be indeed measured within $0.3\%$ relative error with this method, provided a sub-scale resolution step similar to the spatial sub-pixel resolution step.
 
-In dense suspensions, the neighbouring particles influence the scale dependence of DoG response. This effectively shifts the minima of the DoG toward smaller scales, leading to smaller radii if one uses Eq.~S\ref{eq:scale_dil} alone. Assuming once again binary ball objects, one can take this coupling into account and construct a $N\times N$ system, with $N$ the number of particles, whose solutions are the radii and whose coefficients depend on the inter-particle distances. This system is actually very sparse (less than two dozen non-zero coefficients per line, even in the dense suspensions studied here) and the results converges in about two iterations. In synthetic images we measured the error in the resulting radii to be around $1\%$.
+In dense suspensions, the neighbouring particles influence the scale dependence of DoG response. This effectively shifts the minima of the DoG towards smaller scales, leading to smaller radii if one uses Eq.~(S\ref{eq:scale_dil}) alone. Assuming once again binary ball objects, one can take this coupling into account and construct a $N\times N$ system, with $N$ the number of particles, whose solutions are the radii and whose coefficients depend on the inter-particle distances. This system is actually very sparse (less than two dozen non-zero coefficients per line, even in the dense suspensions studied here) and the results converges in about two iterations. In synthetic images we measured the error in the resulting radii to be around $1\%$.
 
 \begin{figure*}
 \begin{center}
 \includegraphics{generate_figures-figure6.pdf}
 \end{center}
-	\caption{\textbf{Sizing} of our colloids. \textbf{a} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.8\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once controlled for $23\%$ of swelling (full line). \textbf{b} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
+	\caption{\textbf{Sizing of our colloids.} \textbf{a,} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.8\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once $23\%$ of swelling of particle diameters is taken into account (full line). \textbf{b,} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
 	\label{fig:sizing}
 \end{figure*}
 
-Figure~S\ref{fig:sizing}a shows the size distribution of the suspensions investigated in the main text. Once controlled for a solvent swelling of $23\%$ in radius, our \emph{in situ} measurements compare well with the size distribution obtained from scanning electron microscopy (\textsc{sem}) of the same dry colloids. However we note that our method finds relatively more small particles than the \textsc{sem}. A careful comparison between confocal images and algorithm output suggest that this is not an artefact: the objects detected as small ($\unit{1.5}{\micro\metre}$ to $\unit{3}{\micro\metre}$) do correspond to small spots (3-6 pixels) in the confocal images of intensity well above the noise. Thus we conclude that the relative lack of small particles in the \textsc{sem} measurement is probably due to bad sampling (the sizes of only $140$ particles were measured), to inhomogeneous repartition of the dye in some particles (bright core, dim shell), or to particles swelling differently~\cite{Poon2012}. Taking into account this thick tail of small particles we computed a polydispersity of $14\%$. We stress this is an upper bound; where the polydispersity computed from \textsc{sem} is a lower bound at only $6\%$.
+Figure~S\ref{fig:sizing}a shows the size distribution of the suspensions investigated in the main text. Once a solvent swelling of $23\%$ in radius is taken into account, our \emph{in situ} measurements compare very well with the size distribution obtained from scanning electron microscopy (\textsc{sem}) of the same `dry' colloids. However we note that our method finds relatively more small particles than the \textsc{sem}. A careful comparison between confocal images and algorithm output suggest that this is not an artefact: the objects detected as small ($\unit{1.5}{\micro\metre}$ to $\unit{3}{\micro\metre}$) do correspond to small spots (3-6 pixels) in the confocal images of intensity well above the noise. Thus we conclude that the relative lack of small particles in the \textsc{sem} measurement is probably due to bad sampling (the sizes of only $140$ particles were measured), to inhomogeneous repartition of the dye in some particles (bright core, dim shell), or to particles swelling differently~\cite{Poon2012}. Taking into account this thick tail of small particles we computed a polydispersity of $14\%$. We stress this is an upper bound; where the polydispersity computed from \textsc{sem} is a lower bound at only $6\%$.
 
 The consistency of our method can be checked by constructing the radial distribution function $g(r)$. In monodisperse hard spheres, the $g(r)$ has a sharp first peak at $r=1\sigma$ corresponding to hard core contact. Polydispersity implies hard core contacts at various $r$ and thus broadens the peak. One can recover a sharp peak by constructing $g(\hat{r})$, with $\hat{r}_{ij} = r_{ij}/(R_i+R_j)$. In Figure~S\ref{fig:sizing}b we successfully used the sizes measured by our method to rectify the first peak.
 
@@ -122,12 +122,12 @@ Recently \citet{Kurita2011,Kurita2011b} have designed a sizing method using part
 
 \section*{Dynamics}
 
-In main Fig. \ref{M-fig:vft}a we fit the self intermediate scattering function by the VFT law $\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$ ($D$ is the fragility index) to get the structural relaxation time $\tau_\alpha$ upon $\phi$. The non-Gaussianity of the dynamics is monitored by the kurtosis of the distribution of the displacements 
+In Fig. \ref{M-fig:vft}a (in the main text) we fit the self intermediate scattering function by the VFT law $\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$ ($D$ is the fragility index) to get the structural relaxation time $\tau_\alpha$ as a function of $\phi$. The non-Gaussianity of the dynamics is monitored by the kurtosis of the distribution of the displacements 
 \begin{equation}
-	\alpha_2(t) = \frac{3 \left\langle {\Delta r}^4(t) \right\rangle}{5 {\left\langle {\Delta r}^2(t) \right\rangle}^2}-1
+	\alpha_2(t) = \frac{3 \left\langle {\Delta r}^4(t) \right\rangle}{5 {\left\langle {\Delta r}^2(t) \right\rangle}^2}-1. 
 	\label{eq:ng}
 \end{equation}
-At a given volume fraction, $\alpha_2(t)$ peaks at the characteristic time scale of the dynamic heterogeneity $t^{dh}(\phi)$. The volume fraction dependence of both $\tau_\alpha$ and $t^{dh}$ is plotted in main Fig. \ref{M-fig:vft}b. We notice that $t^{dh}$ corresponds to the end of plateau, always shorter than $\tau_\alpha$.
+At a given volume fraction, $\alpha_2(t)$ peaks at the characteristic time scale of the dynamic heterogeneity $t^{dh}(\phi)$. The volume fraction dependence of both $\tau_\alpha$ and $t^{dh}$ is plotted in Fig. \ref{M-fig:vft}b. We notice that $t^{dh}$ corresponds to the end of plateau, always shorter than $\tau_\alpha$.
 
 To define the characteristic length scale of the dynamic heterogeneity, we compute the mobility-mobility spatial correlation function~\cite{Donati1999}
 \begin{equation}
@@ -135,10 +135,10 @@ To define the characteristic length scale of the dynamic heterogeneity, we compu
 		\left\langle \sum_{i,j}{\delta u_i(t) \delta u_j(t) \delta(r_{ij} -r)} \right\rangle 
 	}{
 		\left\langle \sum_{i,j}{\delta(r_{ij} -r)} \right\rangle
-	}
+	},
 	\label{eq:mobility_correl}
 \end{equation}
-which is a kind of four-point correlation function~\cite{cavagna2009supercooled}. The length scale $\xi_u$ is given by the fit of the envelope of $\mathcal{G}_u(r,t^{dh})$ in real space, at the characteristic time of the dynamic heterogeneity, by Orstein-Zernike form $\propto r^{-1}\exp( -r/\xi_u)$.
+which is a kind of four-point correlation function~\cite{cavagna2009supercooled}. The length scale $\xi_u$ is eatimated from the fit of the envelope of $\mathcal{G}_u(r,t^{dh})$ in real space, at the characteristic time of the dynamic heterogeneity, by the Ornstein-Zernike form $\propto r^{-1}\exp( -r/\xi_u)$.
 
 \section*{Difference between {\sc mrco} and crystal nuclei}
 
@@ -146,35 +146,35 @@ which is a kind of four-point correlation function~\cite{cavagna2009supercooled}
 \begin{center}
 \includegraphics{generate_figures-figure4.pdf}
 \end{center}
-\caption{\textbf{Particles with more than $7$ crystalline bonds.} Particles with $Q_6>Q_6^*$ and their neighbours are also plotted in \textbf{b} for comparison. Crystalline particles are always included in high $Q_6$ regions. However, the fluctuations of the crystal-like order cannot be reduced to sub-critical nucleation.}
+\caption{\textbf{Medium-range bond orientational order and crystalline bonds} {\bf a,} Particles with more than $7$ crystalline bonds.  {\bf b,} Particles with $Q_6>Q_6^*$ and their neighbours are also plotted for comparison. Crystalline particles are always included in high $Q_6$ regions and thus a part of bond order parameter fluctuations. They do not grow and thus appear only transiently.}
 	\label{fig:X_3D}
 \end{figure*}
 
-To avoid any confusion between our imperfect crystal-like order and well-formed but small crystals, we detect crystal nuclei \emph{via} the most standard method in the literature~\cite{ReintenWolde1996, Zaccarelli2009}. For each neighbouring particle, we compute the normalized scalar product of the (non coarse-grained) $q_{6 m}$:
+To avoid any confusion between our imperfect crystal-like order and well-formed but small transient crystals, we detect crystal nuclei \emph{via} the most standard method in the literature~\cite{ReintenWolde1996, Zaccarelli2009}. For each neighbouring particle, we compute the normalized scalar product of the (non coarse-grained) $q_{6 m}$:
 \begin{equation}
 	s(i,j) = \frac{
 		\sum_{m=-6}^{6} q_{6 m}(i) q_{6 m}^{*}(j)
 	}{
 		\sqrt{\sum_{m=-6}^{6} |q_{6 m}(i)|^2} \sqrt{\sum_{m=-6}^{6} |q_{6 m}(j)|^2}
-	}
+	}.
 	\label{eq:boo_dot_product}
 \end{equation}
 The bond between particles $i$ and $j$ is considered crystalline if $s_{ij}>0.7$~\cite{Zaccarelli2009}. A particle is crystalline if more than half of its bonds ($\geq 7$) are crystalline. 
 
-Our small amount of polydispersity do not systematically prevent crystallisation~\cite{Zaccarelli2009}, thus we had to discard samples that append to crystallise. We find no large crystal nucleus in the samples analysed in the text. Even at deep supercooling a crystal nucleus never gathers more than 8 particles, and in total truly crystalline particles account for less than $1\%$ of the system. Fig.~S\ref{fig:X_3D} compares the spatial extent of crystal nuclei and of the crystal-like clusters. Nuclei are systematically embedded into much larger \textsc{mrco}. One can explain this phenomenon as perfect wetting of the nuclei by coherently bond-ordered regions. However, examples of crystal-like structures without an embedded crystal nucleus, in addition to the continuity of $Q_6$ values (main Fig. \ref{M-fig:maps}), rather suggests that the crystal nuclei are the extreme part of the bond order fluctuations. In any case, trivial crystallisation cannot be responsible for the spatial extent of the dynamical heterogeneities (see main Fig. \ref{M-fig:3D}a and Fig.~S\ref{fig:X_3D}e).
+Our small amount of polydispersity do not systematically prevent crystallisation~\cite{Zaccarelli2009}, thus we had to discard samples that append to crystallise. We find no large crystal nucleus in the samples analysed in the text. Even at deep supercooling a crystal nucleus never gathers more than 8 particles, and in total truly crystalline particles account for less than $1\%$ of the system. We emphasize that the size of these crystals is far smaller than the critical nucleus size and thus appear only transiently without growth. Figure~S\ref{fig:X_3D} compares the spatial extent of crystal nuclei with that of the crystal-like clusters. Nuclei are systematically embedded into much larger \textsc{mrco}. One can explain this phenomenon as perfect wetting of the nuclei by coherently bond-ordered regions. However, examples of crystal-like structures without an embedded crystal nucleus, in addition to the continuity of $Q_6$ values (Fig. \ref{M-fig:maps}), rather suggests that the crystal nuclei are the extreme part of the bond order fluctuations. In any case, trivial crystallisation can be responsible for neither the spatial extent of the dynamical heterogeneities (see Fig. \ref{M-fig:3D}a and Fig.~S\ref{fig:X_3D}e) nor glassy slow dynamics.
 
 \section*{Bond order spatial correlation}
 
 We used the same definition as in~\cite{tanaka2010critical} for coarse-grained bond order correlation function
 \begin{equation}
-	G_6(r) = \frac{4\pi}{13}\frac{\sum_{i,j} \sum_{m=-6}^{6} Q_{6 m}(i) Q_{6 m}^{*}(j) \delta(r_{ij}-r)}{\sum_{i,j} \delta(r_{ij}-r)}
+	G_6(r) = \frac{4\pi}{13}\frac{\sum_{i,j} \sum_{m=-6}^{6} Q_{6 m}(i) Q_{6 m}^{*}(j) \delta(r_{ij}-r)}{\sum_{i,j} \delta(r_{ij}-r)},
 	\label{eq:G_6}
 \end{equation}
-which is not sensible to the aperiodic structures. The envelope of $G_6(r)$ is fitted by Orstein-Zernike form to extract the crystal-like order correlation length $\xi_6$.
+which is not sensible to the aperiodic structures. The envelope of $G_6(r)$ is fitted by the Ornstein-Zernike form to extract the crystal-like bond orientational order correlation length $\xi_6$.
 
-We stress that the correlation function defined by \citet{steinhardt1983boo} and used by \citet{Charbonneau} is correlating non-coarse-grained $q_{\ell m}$ and would be called $g_6(r)$ within our notation. As a consequence, it is sensible to crystal-like (slightly periodic) and icosahedral (aperiodic) order. We have seen in the main text that the first type of order reaches medium range where the second is not. However on the non-coarse-grained $q_6$ axis icosahedra stand out with the stronger signal and thus dominate the correlation measured by $g_6(r)$, making it appear short range and not growing. We think that this technical argument explains why \citet{Charbonneau} are not finding growing bond order lengthscale in their polydisperse ($8.5\%$) hard sphere simulations.
+We stress that the correlation function defined by \citet{steinhardt1983boo} and used by \citet{Charbonneau} is correlating non-coarse-grained $q_{\ell m}$ and would be called $g_6(r)$ within our notation. As a consequence, it is sensible to both crystal-like (slightly periodic) and icosahedral (aperiodic) order. We have seen in the main text that the first type of order reaches medium range where the second is not. However on the non-coarse-grained $q_6$ axis icosahedra stand out with the stronger signal and thus dominate the correlation measured by $g_6(r)$, making it appear short range and not growing. We think that this technical argument explains why \citet{Charbonneau} are not finding growing bond order lengthscale in their polydisperse ($8.5\%$) hard sphere simulations.
 
-In addition, the symmetry-breaking phase of the binary hard sphere mixture of~\citep{Charbonneau} is not known and could possibly be not 6-fold symmetric. This would explain, in a coherent way with the main point of the main text, why 6-fold bond order parameters and correlation functions are not detecting growing static order. Indeed, the study of \textsc{boo} in binary systems is more problematic, as reported in~\citep{tanaka2010critical} for 2D binary soft disk simulations.
+In addition, the symmetry-breaking phase of the binary hard sphere mixture of~\citep{Charbonneau} is not known and could possibly be not 6-fold symmetric. This would explain, in a coherent way with the main point of the main text, why 6-fold bond order parameters and correlation functions are not detecting growing static order. Indeed, the study of \textsc{boo} in binary systems is very problematic, as reported in~\citep{tanaka2010critical,KawasakiJPCM} for 2D binary soft disk simulations.
 
 \bibliographystyle{naturemag3}
 %\bibliographystyle{apsrev4-1}
