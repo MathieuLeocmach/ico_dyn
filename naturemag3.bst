@@ -60,6 +60,7 @@ ENTRY
     author
     booktitle
     chapter
+    doi
     edition
     editor
     eid
@@ -123,6 +124,7 @@ FUNCTION {output.check}
     'output.nonnull
   if$
 }
+FUNCTION {bbl.shut} { "\BibitemShut" }
 FUNCTION {fin.entry}
 { add.period$
   write$
@@ -135,6 +137,11 @@ FUNCTION {new.block}
     { after.block 'output.state := }
   if$
 }
+
+FUNCTION {new.block.comma}
+{
+}
+
 FUNCTION {new.sentence}
 { output.state after.block =
     'skip$
@@ -734,6 +741,47 @@ FUNCTION {format.editors}
     }
   if$
 }
+FUNCTION {doi.base}
+{
+  "http://dx.doi.org/"
+}
+
+FUNCTION {doi.command}
+{
+  "\doi"
+}
+
+FUNCTION {doi.command.href}
+{
+  "\Doi"
+}
+
+FUNCTION {format.doi}
+{ doi "doi" bibinfo.check
+  duplicate$ empty$ 'skip$
+    {
+      new.block.comma
+      doi.command "{" * swap$ * "}" *
+    }
+  if$
+}
+
+FUNCTION {add.doi}
+{
+  duplicate$ empty$ 'skip$
+    {
+      doi duplicate$ empty$ 'pop$
+        {
+          "{" swap$ * "}" *
+          swap$
+          "{" swap$ * "}" *
+          *
+          doi.command.href swap$ *
+        }
+      if$
+    }
+  if$
+}
 FUNCTION {format.note}
 {
  note empty$
@@ -1188,6 +1236,7 @@ FUNCTION {article}
     {
       journal
       "journal" bibinfo.check
+      pages empty$ 'skip$ { add.doi } if$
       emphasize
       "journal" output.check
       add.blank
@@ -1198,6 +1247,9 @@ FUNCTION {article}
       format.pages output
     }
   if$
+  pages empty$ {
+  format.doi output
+  } 'skip$ if$
   new.block
   format.note output
   fin.entry
@@ -1454,6 +1506,17 @@ FUNCTION {unpublished}
 
 FUNCTION {default.type} { misc }
 READ
+FUNCTION {init.bib.doi}
+{
+  "\@ifxundefined \urlstyle {%"  write$ newline$
+  "  \providecommand \doi [1]{doi:\discretionary{}{}{}#1}%"  write$ newline$
+  "}{%"  write$ newline$
+  "  \providecommand \doi [0]{doi:\discretionary{}{}{}\begingroup \urlstyle{rm}\Url }%"
+  write$ newline$
+  "}%"  write$ newline$
+  "\providecommand \doibase [0]{" doi.base * "}%" * write$ newline$
+  doi.command.href "\providecommand " swap$ * "[1]{\href{\doibase#1}}%" * write$ newline$
+}
 FUNCTION {sortify}
 { purify$
   "l" change.case$
@@ -1736,6 +1799,29 @@ FUNCTION {bib.sort.order}
 }
 ITERATE {bib.sort.order}
 SORT
+
+FUNCTION {warn.bib}
+{
+}
+FUNCTION {init.bib}
+{
+  warn.bib
+  "\makeatletter" write$ newline$
+  "\providecommand \@ifxundefined [1]{%"     write$ newline$
+  " \ifx #1\undefined \expandafter \@firstoftwo" write$ newline$
+  " \else \expandafter \@secondoftwo"      write$ newline$
+  "\fi"                                    write$ newline$
+  "}%"                                     write$ newline$
+  "\providecommand \@ifnum [1]{%"          write$ newline$
+  " \ifnum #1\expandafter \@firstoftwo"    write$ newline$
+  " \else \expandafter \@secondoftwo"      write$ newline$
+  "\fi"                                    write$ newline$
+  "}%"                                     write$ newline$
+  init.bib.doi
+  "\providecommand " bbl.shut * " [1]{\csname bibitem#1\endcsname}%" * write$ newline$
+  "%</preamble>" write$
+}
+
 FUNCTION {begin.bib}
 { preamble$ empty$
     'skip$
@@ -1745,6 +1831,7 @@ FUNCTION {begin.bib}
   write$ newline$
   "\providecommand{\natexlab}[1]{#1}"
   write$ newline$
+  init.bib
 }
 EXECUTE {begin.bib}
 EXECUTE {init.state.consts}
