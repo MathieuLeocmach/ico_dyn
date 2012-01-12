@@ -638,7 +638,7 @@ FUNCTION {format.names}
       't :=
       nameptr #1 >
         {
-          nameptr #5
+          nameptr #6
           #1 + =
           numnames #5
           > and
@@ -655,7 +655,7 @@ FUNCTION {format.names}
               if$
               t "others" =
                 {
-                  " " * bbl.etal *
+                  " " * bbl.etal emphasize *
                 }
                 {
                   "\&"
