@@ -964,14 +964,31 @@ FUNCTION {word.in}
   " " * }
 
 FUNCTION {format.date}
-{ year "year" bibinfo.check duplicate$ empty$
-    {
-      "empty year in " cite$ * "; set to ????" * warning$
-       pop$ "????"
+{
+  ""
+  duplicate$ empty$
+  year  "year"  bibinfo.check duplicate$ empty$
+    { swap$ 'skip$
+        { "there's a month but no year in " cite$ * warning$ }
+      if$
+      *
     }
-    'skip$
+    { swap$ 'skip$
+        {
+          swap$
+          " " * swap$
+        }
+      if$
+      *
+    }
   if$
-  extra.label *
+  duplicate$ empty$
+    'skip$
+    {
+      before.all 'output.state :=
+    " (" swap$ * ")" *
+    }
+  if$
 }
 FUNCTION {format.btitle}
 { title "title" bibinfo.check
