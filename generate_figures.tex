@@ -416,8 +416,8 @@
 		ymin=0, ytick=\empty,%
 		no marks,%
 		]
-		\addplot+[dashed] file {go1.sizes};
-		\addplot table [x expr ={\thisrowno{0}/1.23}, y index=1] {go1.sizes};
+		\addplot+[dashed] file {go1_intensity.sizes};
+		\addplot table [x expr ={\thisrowno{0}/1.23}, y index=1] {go1_intensity.sizes};
 		\draw[->, ultra thick] (axis cs:3.15,0.05) -- (axis cs: 3.9, 0.05) node[right] {swelling};
 		\node[lab] at (rel axis cs:0.95,0.95) {a};
 	\end{axis}
