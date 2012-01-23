@@ -90,6 +90,13 @@ The choice of the width $\sigma$ of the blurring kernel is critical: if it is to
 \caption{\textbf{Visualisation of the results of various tracking methods for the same portion of image.} \textbf{a,} Multiscale 3D tracking. \textbf{b,} Reconstruction from multiscale 2D tracking. \textbf{c-h,} Crocker and Grier in 3D with blurring radius increasing from \unit{2}{px} to \unit{4.5}{px} by steps of \unit{0.5}{px}. The circles on each picture are the result of 2D multiscale tracking of each XY slice of the 3D pictures. Sphere are displayed with radii determined by the tracking methods in \textbf{a-b}, and equal to the blurring radius for \textbf{c-h}.}
 	\label{fig:localise}
 \end{figure*}
+\begin{figure*}
+\begin{center}
+\includegraphics{generate_figures-figure6.pdf}
+\end{center}
+	\caption{\textbf{Sizing of our colloids.} \textbf{a,} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.7\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once $23\%$ of swelling of particle diameters is taken into account (full line). \textbf{b,} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
+	\label{fig:sizing}
+\end{figure*}
 
 However, we found that no such ``good blur width'' exists in our polydisperse sample (see Fig.~S\ref{fig:localise}c-h). The detection of smaller particles with small blurring widths leads to the failure in detecting properly the larger particles. This unacceptable failure of the \citet{Crocker1996} algorithm, as well as the want of the particles' radii data, triggered our design of a novel localisation algorithm that would be robust even for a system of polydispersity, which is unavoidable in real experiments. Here we briefly disclose our method, leaving full details to a future publication.
 
@@ -106,19 +113,62 @@ We found that the radius of an isolated pixelated ball can be indeed measured wi
 
 In dense suspensions, the neighbouring particles influence the scale dependence of DoG response. This effectively shifts the minima of the DoG towards smaller scales, leading to smaller radii if one uses Eq.~(S\ref{eq:scale_dil}) alone. Assuming once again binary ball objects, one can take this coupling into account and construct a $N\times N$ system, with $N$ the number of particles, whose solutions are the radii and whose coefficients depend on the inter-particle distances. This system is actually very sparse (less than two dozen non-zero coefficients per line, even in the dense suspensions studied here) and the results converges in about two iterations. In synthetic images we measured the error in the resulting radii to be around $1\%$. In an experimental image, the particles are not uniformly bright due to synthesis imperfection (quantity of dye fixed by each particle) and photo bleaching. If one does not take into account the relative brightness of the particles the less bright will appear smaller.
 
-\begin{figure*}
-\begin{center}
-\includegraphics{generate_figures-figure6.pdf}
-\end{center}
-	\caption{\textbf{Sizing of our colloids.} \textbf{a,} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.7\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once $23\%$ of swelling of particle diameters is taken into account (full line). \textbf{b,} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
-	\label{fig:sizing}
-\end{figure*}
-
 Figure~S\ref{fig:sizing}a shows the size distribution of the suspensions investigated in the main text. Once a solvent swelling of $23\%$ in radius is taken into account, our \emph{in situ} measurements compare very well with the size distribution obtained from scanning electron microscopy (\textsc{sem}) of the same `dry' colloids. The polydispersity measured \emph{in situ} is $6.9\%$, where the polydispersity computed from \textsc{sem} is $6.2\%$.
 
 The consistency of our method can be checked by constructing the radial distribution function $g(r)$. In monodisperse hard spheres, the $g(r)$ has a sharp first peak at $r=1\sigma$ corresponding to hard core contact. Polydispersity implies hard core contacts at various $r$ and thus broadens the peak. One can recover a sharp peak by constructing $g(\hat{r})$, with $\hat{r}_{ij} = r_{ij}/(R_i+R_j)$. In Figure~S\ref{fig:sizing}b we successfully used the sizes measured by our method to rectify the first peak.
 
 Recently \citet{Kurita2011,Kurita2011b} have designed a sizing method using particle coordinates from confocal experiments. However their method do not work at the image processing level and relies on coordinates extracted via the \citet{Crocker1996} algorithm which, as described above, is defective when the size distribution is too broad. It may be possible to combine the two methods by feeding our coordinates and size as input to their method. We would expect an increase in sizing precision when the particles are close to contact.
+
+
+\section*{Difference between {\sc mrco} and crystal nuclei}
+
+\begin{figure}
+\begin{center}
+\includegraphics{generate_figures-figure4.pdf}
+\end{center}
+\caption{\textbf{Medium-range bond orientational order and crystalline bonds} {\bf a,} Particles with more than $7$ crystalline bonds.  {\bf b,} Particles with $Q_6>Q_6^*$ and their neighbours are also plotted for comparison. Crystalline particles are always included in high $Q_6$ regions and thus a part of bond order parameter fluctuations. They do not grow and thus appear only transiently.}
+	\label{fig:X_3D}
+\end{figure}
+
+To avoid any confusion between our imperfect crystal-like order and well-formed but small transient crystals, we detect crystal nuclei \emph{via} the most standard method in the literature~\cite{ReintenWolde1996, Zaccarelli2009}. For each neighbouring particle, we compute the normalized scalar product of the (non coarse-grained) $q_{6 m}$:
+\begin{equation}
+	s(i,j) = \frac{
+		\sum_{m=-6}^{6} q_{6 m}(i) q_{6 m}^{*}(j)
+	}{
+		\sqrt{\sum_{m=-6}^{6} |q_{6 m}(i)|^2} \sqrt{\sum_{m=-6}^{6} |q_{6 m}(j)|^2}
+	}.
+	\label{eq:boo_dot_product}
+\end{equation}
+The bond between particles $i$ and $j$ is considered crystalline if $s_{ij}>0.7$~\cite{Zaccarelli2009}. A particle is crystalline if more than half of its bonds ($\geq 7$) are crystalline. 
+
+Our small amount of polydispersity do not systematically prevent crystallisation~\cite{Zaccarelli2009}, thus we had to discard samples that append to crystallise. We find no large crystal nucleus in the samples analysed in the text. Even at deep supercooling a crystal nucleus never gathers more than 8 particles, and in total truly crystalline particles account for less than $1\%$ of the system. We emphasize that the size of these crystals is far smaller than the critical nucleus size and thus appear only transiently without growth. Figure~S\ref{fig:X_3D} compares the spatial extent of crystal nuclei with that of the crystal-like clusters. Nuclei are systematically embedded into much larger \textsc{mrco}. One can explain this phenomenon as perfect wetting of the nuclei by coherently bond-ordered regions. However, examples of crystal-like structures without an embedded crystal nucleus, in addition to the continuity of $Q_6$ values (Fig.~\ref{M-fig:maps}), rather suggests that the crystal nuclei are the extreme part of the bond order fluctuations. In any case, trivial crystallisation can be responsible for neither the spatial extent of the dynamical heterogeneities (see Fig.~\ref{M-fig:3D}a and Fig.~S\ref{fig:X_3D}e) nor glassy slow dynamics.
+
+\section*{Icosahedral network}
+
+\begin{figure*}
+\begin{center}
+\includegraphics{generate_figures-figure7.pdf}
+\end{center}
+	\caption{\textbf{Imperfect icosahedral network.} \textbf{a} Cluster size distribution (compatible with random percolation) and \textbf{b} radius of gyration (indicating a fractal dimension $d_f\approx 2$) for nearly percolating threshold ($w_6<-0.012$). \textbf{c} Size of the largest non percolating cluster function of the threshold on $w_6$. Percolation takes place near $w_6\approx -0.011$. \textbf{d} translates \textbf{c} in terms of fraction of activated particles (dots) and also shows the probability of the onset of percolation when particles are randomly activated (line). Activating particles function of icosahedral order or randomly do not change the position of the percolation ($\approx7.5\%$ of the particles activated).}
+	\label{fig:percolation}
+\end{figure*}
+
+We studied the clusters formed by icosahedral particles as a bidirectional graph. The nodes of the graph are all the particles, and at the beginning we have no edge. When a particle is `activated' the bonds between this particle and its 12 neighbours are added to the graph. It is often meaningful to activate the particles as a function of an order parameter, for example sorted by increasing $w_6$; the most icosahedral particle connects first and we activate particles that are less and less icosahedral until percolation and beyond. For our most supercooled sample, the percolation threshold is identified near $w_6\approx -0.011$ (see Fig.~S\ref{fig:percolation}) which corresponds to $7.5\%$ of the particles activated. We stress that this level of icosahedral order corresponds to an average mobility very close ($\gtrsim 90\%$) to the bulk (see Fig.~\ref{M-fig:msd_Q6_w6} of the main text).
+
+In this way, cluster size distribution and fractal dimension can be studied systematically at each value of the threshold on the order parameter. In Figure~S\ref{fig:percolation} we report the characteristics of the icosahedral clusters when the threshold is set just below percolation (all particles with $w_6<-0.012$ are activated). Cluster size distribution shows an exponent of $2.1$, characteristic of the random percolation universality class. Fractal dimension is close to $2$.
+
+One can also activate particles in a random fashion and measure the fraction of activated particles needed for the percolation to occurs. We performed 100 try of this Metropolis algorithm on 160 configurations, to estimate the percolation probability function of the fraction of activated particles. The results are reported in Figure~S\ref{fig:percolation} and indicate that the peculiar case of icosahedral order clusters has nothing special.
+
+\section*{Bond order spatial correlation}
+
+We used the same definition as in~\cite{tanaka2010critical} for coarse-grained bond order correlation function
+\begin{equation}
+	G_6(r) = \frac{4\pi}{13}\frac{\sum_{i,j} \sum_{m=-6}^{6} Q_{6 m}(i) Q_{6 m}^{*}(j) \delta(r_{ij}-r)}{\sum_{i,j} \delta(r_{ij}-r)},
+	\label{eq:G_6}
+\end{equation}
+which is not sensible to the aperiodic structures. The envelope of $G_6(r)$ is fitted by the Ornstein-Zernike form to extract the crystal-like bond orientational order correlation length $\xi_6$. We checked that $g_6(r)$, defined from the non-coarse-grained bond order in the same way as Eq.~S\ref{eq:G_6} yield similar results. The insensibility against aperiodic structures comes from the scalar product in Eq.~S\ref{eq:G_6}, not from the coarse-graining.
+
+We note that \citet{Charbonneau} are not finding growing bond order lengthscale in a binary hard sphere mixture. The symmetry-breaking phase of this system is not known and could possibly be not 6-fold symmetric. This would explain, in a coherent way with the main point of the main text, why 6-fold bond order parameters and correlation functions are not detecting growing static order. Indeed, the study of \textsc{boo} in binary systems is very problematic, as reported in~\citep{tanaka2010critical, KawasakiJPCM} for 2D binary soft disk simulations.
 
 \section*{Dynamics}
 
@@ -140,55 +190,6 @@ To define the characteristic length scale of the dynamic heterogeneity, we compu
 \end{equation}
 which is a kind of four-point correlation function~\cite{cavagna2009supercooled}. The length scale $\xi_u$ is eatimated from the fit of the envelope of $\mathcal{G}_u(r,t^{dh})$ in real space, at the characteristic time of the dynamic heterogeneity, by the Ornstein-Zernike form $\propto r^{-1}\exp( -r/\xi_u)$.
 
-\section*{Difference between {\sc mrco} and crystal nuclei}
-
-\begin{figure*}
-\begin{center}
-\includegraphics{generate_figures-figure4.pdf}
-\end{center}
-\caption{\textbf{Medium-range bond orientational order and crystalline bonds} {\bf a,} Particles with more than $7$ crystalline bonds.  {\bf b,} Particles with $Q_6>Q_6^*$ and their neighbours are also plotted for comparison. Crystalline particles are always included in high $Q_6$ regions and thus a part of bond order parameter fluctuations. They do not grow and thus appear only transiently.}
-	\label{fig:X_3D}
-\end{figure*}
-
-To avoid any confusion between our imperfect crystal-like order and well-formed but small transient crystals, we detect crystal nuclei \emph{via} the most standard method in the literature~\cite{ReintenWolde1996, Zaccarelli2009}. For each neighbouring particle, we compute the normalized scalar product of the (non coarse-grained) $q_{6 m}$:
-\begin{equation}
-	s(i,j) = \frac{
-		\sum_{m=-6}^{6} q_{6 m}(i) q_{6 m}^{*}(j)
-	}{
-		\sqrt{\sum_{m=-6}^{6} |q_{6 m}(i)|^2} \sqrt{\sum_{m=-6}^{6} |q_{6 m}(j)|^2}
-	}.
-	\label{eq:boo_dot_product}
-\end{equation}
-The bond between particles $i$ and $j$ is considered crystalline if $s_{ij}>0.7$~\cite{Zaccarelli2009}. A particle is crystalline if more than half of its bonds ($\geq 7$) are crystalline. 
-
-Our small amount of polydispersity do not systematically prevent crystallisation~\cite{Zaccarelli2009}, thus we had to discard samples that append to crystallise. We find no large crystal nucleus in the samples analysed in the text. Even at deep supercooling a crystal nucleus never gathers more than 8 particles, and in total truly crystalline particles account for less than $1\%$ of the system. We emphasize that the size of these crystals is far smaller than the critical nucleus size and thus appear only transiently without growth. Figure~S\ref{fig:X_3D} compares the spatial extent of crystal nuclei with that of the crystal-like clusters. Nuclei are systematically embedded into much larger \textsc{mrco}. One can explain this phenomenon as perfect wetting of the nuclei by coherently bond-ordered regions. However, examples of crystal-like structures without an embedded crystal nucleus, in addition to the continuity of $Q_6$ values (Fig.~\ref{M-fig:maps}), rather suggests that the crystal nuclei are the extreme part of the bond order fluctuations. In any case, trivial crystallisation can be responsible for neither the spatial extent of the dynamical heterogeneities (see Fig.~\ref{M-fig:3D}a and Fig.~S\ref{fig:X_3D}e) nor glassy slow dynamics.
-
-\section*{Bond order spatial correlation}
-
-We used the same definition as in~\cite{tanaka2010critical} for coarse-grained bond order correlation function
-\begin{equation}
-	G_6(r) = \frac{4\pi}{13}\frac{\sum_{i,j} \sum_{m=-6}^{6} Q_{6 m}(i) Q_{6 m}^{*}(j) \delta(r_{ij}-r)}{\sum_{i,j} \delta(r_{ij}-r)},
-	\label{eq:G_6}
-\end{equation}
-which is not sensible to the aperiodic structures. The envelope of $G_6(r)$ is fitted by the Ornstein-Zernike form to extract the crystal-like bond orientational order correlation length $\xi_6$. We checked that $g_6(r)$, defined from the non-coarse-grained bond order in the same way as Eq.~S\ref{eq:G_6} yield similar results. The insensibility against aperiodic structures comes from the scalar product in Eq.~S\ref{eq:G_6}, not from the coarse-graining.
-
-We note that \citet{Charbonneau} are not finding growing bond order lengthscale in a binary hard sphere mixture. The symmetry-breaking phase of this system is not known and could possibly be not 6-fold symmetric. This would explain, in a coherent way with the main point of the main text, why 6-fold bond order parameters and correlation functions are not detecting growing static order. Indeed, the study of \textsc{boo} in binary systems is very problematic, as reported in~\citep{tanaka2010critical, KawasakiJPCM} for 2D binary soft disk simulations.
-
-\section*{Icosahedral network}
-
-\begin{figure*}
-\begin{center}
-\includegraphics{generate_figures-figure7.pdf}
-\end{center}
-	\caption{\textbf{Imperfect icosahedral network.} \textbf{a} Cluster size distribution (compatible with random percolation) and \textbf{b} radius of gyration (indicating a fractal dimension $d_f\approx 2$) for nearly percolating threshold ($w_6<-0.012$). \textbf{c} Size of the largest non percolating cluster function of the threshold on $w_6$. Percolation takes place near $w_6\approx -0.011$. \textbf{d} translates \textbf{c} in terms of fraction of activated particles (dots) and also shows the probability of the onset of percolation when particles are randomly activated (line). Activating particles function of icosahedral order or randomly do not change the position of the percolation ($\approx7.5\%$ of the particles activated).}
-	\label{fig:percolation}
-\end{figure*}
-
-We studied the clusters formed by icosahedral particles as a bidirectional graph. The nodes of the graph are all the particles, and at the beginning we have no edge. When a particle is `activated' the bonds between this particle and its 12 neighbours are added to the graph. It is often meaningful to activate the particles as a function of an order parameter, for example sorted by increasing $w_6$; the most icosahedral particle connects first and we activate particles that are less and less icosahedral until percolation and beyond. For our most supercooled sample, the percolation threshold is identified near $w_6\approx -0.011$ (see Fig.~S\ref{fig:percolation}) which corresponds to $7.5\%$ of the particles activated. We stress that this level of icosahedral order corresponds to an average mobility very close ($\approx 90\%$) to the bulk (see Fig.~\ref{M-fig:msd_Q6_w6} of the main text).
-
-In this way, cluster size distribution and fractal dimension can be studied systematically at each value of the threshold on the order parameter. In Figure~S\ref{fig:percolation} we report the characteristics of the icosahedral clusters when the threshold is set just below percolation (all particles with $w_6<-0.012$ are activated). Cluster size distribution shows an exponent of $2.1$, characteristic of the random percolation universality class. Fractal dimension is close to $2$.
-
-One can also activate particles in a random fashion and measure the fraction of activated particles needed for the percolation to occurs. We performed 100 try of this Metropolis algorithm on 160 configurations, to estimate the percolation probability function of the fraction of activated particles. The results are reported in Figure~S\ref{fig:percolation} and indicate that the peculiar case of icosahedral order clusters has nothing special.
 
 \bibliographystyle{naturemag3}
 %\bibliographystyle{apsrev4-1}
