@@ -391,7 +391,7 @@
 	\caption{\textbf{Visualisation of the results of various tracking methods for the same portion of image.} \textbf{a} Multiscale 3D tracking. \textbf{b} Reconstruction from multiscale 2D tracking. \textbf{c-h} Crocker and Grier in 3D with blurring radius increasing from \unit{2}{px} to \unit{4.5}{px} by steps of \unit{0.5}{px}. The circles on each picture are the result of 2D multiscale tracking of each XY slice of the 3D pictures. Sphere are displayed with radii determined by the tracking methods in \textbf{a-b}, and equal to the blurring radius for \textbf{c-h}.}
 	\label{fig:localise}
 \end{figure}
-\tikzset{external/force remake}
+%\tikzset{external/force remake}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={below left, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
@@ -442,5 +442,85 @@
 	\caption{\textbf{Sizing} of our colloids. \textbf{a} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.8\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from scanning electron microscopy of only $140$ dry particles (steps) is possible once controlled for $23\%$ of swelling (full line). A careful comparison between confocal images and algorithm output suggest that the thick tail of small particles is not an artefact, thus the relative lack of small particles in the SEM measurement is probably due to bad sampling. \textbf{b} First peak of the radial distribution function with (full line) and without (dashed) the size data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
 	\label{fig:sizing}
 \end{figure}
-
+\tikzset{external/force remake}
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
+	\pgfplotsset{ every axis/.append style={ width=0.45\textwidth }}
+	\begin{loglogaxis}[%
+		xmin=10, xmax=1000, xlabel={Cluster size},%
+		ymin=1, ylabel={Number of clusters},%
+		]
+		\addplot+[only marks] table {go1_w6_0012_sizes_rgs_noROI.hist};
+		\addplot+[no marks, domain=50:500] {1e6*x^(-2.1)};
+		\node[above right,red] at (axis cs:100,100) {$x^{-2.1}$};
+		\node[below left] at (rel axis cs:0.95,0.8) {$w_6<-0.012$};
+		\node[lab] at (rel axis cs:0.5, 0.95) {a};
+	\end{loglogaxis}
+	\begin{loglogaxis}[%
+		at={(0.45\textwidth,0)},%
+		xmin=10, xmax=1000, xlabel={Cluster size},%
+		ymin=1, ylabel={$R_g/\sigma $},%
+		ytick={1,10}, minor y tick num=10,%
+		yticklabel={%
+			\pgfmathfloatparsenumber{\tick}%
+			\pgfmathfloatexp{\pgfmathresult}%
+			\pgfmathprintnumber{\pgfmathresult}%
+		},%
+		]
+		\addplot+[only marks] table[y expr=\thisrowno{2}/6.14] {go1_w6_0012_sizes_rgs_noROI.hist};
+		\addplot+[no marks, domain=25:100] {0.75*x^(0.5)};
+		\node[left,red] at (axis cs:40,6) {$d_f=2$};
+		\addplot+[no marks, domain=100:1000] {x^(1/3.)};
+		\node[below right,brown] at (axis cs:100,5) {$d_f=3$};
+		\addplot+[no marks, domain=20:30] {0.1*x};
+		\node[below right,black] at (axis cs:30,3) {$d_f=1$};
+		\node[below right] at (rel axis cs:0.05,0.8) {$w_6<-0.012$};
+		\node[lab] at (rel axis cs:0.5, 0.95) {b};
+	\end{loglogaxis}
+	\begin{axis}[%
+		at={(0, -0.36\textwidth)},%
+		xlabel=$10^2 \cdot w_6$,%
+		xmin=-0.03, xmax=0, xtick={-0.03, -0.02, -0.01}, xticklabels={$-3$, $-2$, $-1$}, minor x tick num=1,%
+		xtick scale label code/.code={},%
+		extra tick style={grid=major},%
+		extra x ticks={\wstar, -0.00782},%
+		extra x tick labels={,},%
+		ymin=0,%
+		ylabel={Largest cluster size},%
+		]
+		\addplot+[only marks] table {go1_w6.perco};
+		\node [left] at (axis cs:\wstar,1e3) {\footnotesize $w_6^*$};
+		\node [right] at (axis cs:-0.00782,1e3) {\footnotesize $w_6^{dod}$};
+		\node[lab] at (rel axis cs:0.5, 0.95) {c};
+	\end{axis}
+	\begin{axis}[%
+		at={(0.45\textwidth, -0.36\textwidth)},%
+		xlabel={Fraction of activated particles},%
+		xmin=0, xmax=0.6,ymin=0,%
+		ylabel={Largest cluster size},%
+		axis y line*=left,%
+		y label style ={blue},%
+		]
+		\addplot+[only marks] table [x index=2] {go1_w6.perco};
+	\end{axis}
+	\begin{axis}[%
+		at={(0.45\textwidth, -0.36\textwidth)},%
+		%xlabel={Fraction of activated particles},%
+		xmin=0, xmax=0.6, ymin=0,%
+		axis x line=none,%
+		axis y line*=right, ytick=\empty,%
+		ylabel={Percolation probability (a.u.)},%
+		ylabel near ticks,%
+		y label style ={red},%
+		]
+		\addplot+[only marks] coordinates{(1, 0)};
+		\addplot+[no marks, red] file {go1_percol_thrs.hist};
+		\legend{{by $w_6$},random}
+		\node[lab] at (rel axis cs:0.5, 0.95) {d};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{\textbf{Imperfect icosahedral network.} \textbf{a} Cluster size distribution (compatible with random percolation) and \textbf{b} radius of gyration (indicating a fractal dimension $d_f\approx 2$) for nearly percolating threshold ($w_6<-0.012$). \textbf{c} Size of the largest non percolating cluster function of the threshold on $w_6$. Percolation takes place near $w_6\approx -0.011$. \textbf{d} translates \textbf{c} in terms of fraction of activated particles (dots) and also shows the probability of the onset of percolation when particles are randomly activated (line). Activating particles function of icosahedral order or randomly do not change the position of the percolation ($\approx7.5\%$ of the particles activated).}
+	\label{fig:percolation}
+\end{figure}
 \end{document}
