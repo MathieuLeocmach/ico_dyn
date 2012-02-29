@@ -364,7 +364,7 @@
 	\caption{\textbf{Particles with more than $7$ crystalline bonds.} Particles with $Q_6>Q_6^*$ and their neighbours are also plotted in \textbf{b} for comparison. Crystalline particles are always included in high $Q_6$ regions. However, the fluctuations of the crystal-like order cannot be reduced to sub-critical nucleation.}
 	\label{fig:X_3D}
 \end{figure}
-\tikzset{external/force remake}
+%\tikzset{external/force remake}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[
@@ -391,10 +391,13 @@
 	\caption{\textbf{Visualisation of the results of various tracking methods for the same portion of image.} The circles on each picture are identical and result from 2D multiscale tracking of each XY slice of the 3D pictures. \textbf{a} XZ and YZ slices of the image (fake colors). \textbf{b} Multiscale 3D tracking. Spheres are drawn with the radius determined by the tracking methods. \textbf{c-h} Crocker and Grier in 3D with blurring radius increasing from \unit{2}{px} to \unit{4.5}{px} by steps of \unit{0.5}{px} (Sphere radii correspond to the blurring radius).}
 	\label{fig:localise}
 \end{figure}
-%\tikzset{external/force remake}
+\tikzset{external/force remake}
 \begin{figure}
 	\centering
-	\begin{tikzpicture}[lab/.style={below left, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
+	\begin{tikzpicture}[%
+		pic3d/.style={inner sep=0}, %
+		lab/.style={below left, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
+		]
 	\begin{axis}[%
 		name=hist,
 		width=0.45\textwidth,%
@@ -419,12 +422,17 @@
 		\addplot+[dashed] file {go1_intensity.sizes};
 		\addplot table [x expr ={\thisrowno{0}/1.23}, y index=1] {go1_intensity.sizes};
 		\draw[->, ultra thick] (axis cs:3.15,0.05) -- (axis cs: 3.9, 0.05) node[right] {swelling};
-		\node[lab] at (rel axis cs:0.95,0.95) {a};
+		\node[lab] at (rel axis cs:0.95,0.95) {c};
 	\end{axis}
-	\node[right=3em of hist.right of south east] (a){};
+	\node[pic3d, below left=0 of hist.left of north west] (XY) {\includegraphics[width=0.14\textwidth]{sliceXY}};
+	\node[lab, below=-0.2em of XY.south east, anchor=north east] {a};
+	\node[pic3d, below=1.4em of XY] (XZ) {\includegraphics[width=0.14\textwidth]{sliceXZ}};
+	\node[lab, below=0 of XZ.south east, anchor=north east] {b};
+	\draw[black, ultra thick] (XY.south west) ++(0,-0.2em) -- ++(0.036951014\textwidth,0) node[pos=0,below right=0.2em and 0,inner sep=0] {\tiny\unit{10}{\micro\metre}};
+	
 	\begin{axis}[%
-		at=(a),
-		anchor=south west,%
+		at={(hist.right of south east)},
+		anchor=left of south west,%
 		width=0.45\textwidth,%
 		xmin=0, xmax=1.5,%
 		xlabel ={$r/\left\langle \sigma\right\rangle$, $\hat{r}$},%
@@ -436,10 +444,10 @@
 		\addplot+[dashed] table [x expr ={\thisrowno{0}/13}, y index=1] {go1.rdf};
 		\addplot table [x expr ={\thisrowno{0}/0.9096}, y expr={\thisrowno{1}*7.5}] {go1.srdf};
 		\legend{$g(r)$, $g(\hat{r})$};
-		\node[lab] at (rel axis cs:0.95,0.95) {b};
+		\node[lab] at (rel axis cs:0.95,0.95) {d};
 	\end{axis}
 	\end{tikzpicture}
-	\caption{\textbf{Sizing} of our colloids. \textbf{a} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.8\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from scanning electron microscopy of only $140$ dry particles (steps) is possible once controlled for $23\%$ of swelling (full line). A careful comparison between confocal images and algorithm output suggest that the thick tail of small particles is not an artefact, thus the relative lack of small particles in the SEM measurement is probably due to bad sampling. \textbf{b} First peak of the radial distribution function with (full line) and without (dashed) the size data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
+	\caption{\textbf{Sizing of our colloids.} \textbf{a,b} XY and XZ slices (detail) of a typical confocal 3D image of our sample. Note the excellent Z resolution, almost not affected by the point spread function. \textbf{c,} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.7\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once $23\%$ of swelling of particle diameters is taken into account (full line). \textbf{d,} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
 	\label{fig:sizing}
 \end{figure}
 %\tikzset{external/force remake}
