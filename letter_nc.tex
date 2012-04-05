@@ -1,0 +1,65 @@
+\documentclass[10pt,a4paper]{letter}
+\usepackage[utf8x]{inputenc} \usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\address{Mathieu Leocmach and Hajime Tanaka,\\ Institute of Industrial Science,\\ University of Tokyo,\\ 4-6-1 Komaba, Meguro-ku,\\ Tokyo 153-8505,\\ Japan}
+\signature{your signature} 
+\begin{document} 
+\begin{letter}{}
+\opening{Dear editor,\\Dear reviewers,} 
+ 
+Reviewer \#2
+\begin{quotation}
+I thank the authors for the material they included in the SI section. It better emphasizes their experimental innovations, and clarifies their analysis. Yet, in light of these explanations, more questions about the physical interpretation of the results emerge, which prevents the manuscript from being recommended for publication.
+
+1) (SI, p.3) The small crystal-like regions observed are claimed to be much smaller than the critical nucleus size, and can therefore be neglected. One may presume that this critical nucleus estimate is based on the polydisperse crystallization results of Auer and Frenkel [Nature 413, 771 (2001) - not cited in the text] for neighboring polydispersity 5\% and 8.5\%. A rough calculation based on these results and classical nucleation theory indeed suggests that the radius of the critical clusters should be between 2 and 3 particle diameters wide at the highest density studied, which is much larger than the crystal-like regions reported. The recent work of Schilling et al. [Phys. Rev. Lett. 105, 025701 (2010) - not cited in the text] suggests, however, that a description of nucleation beyond the classical scenario better captures the process of hard sphere crystallization at these relatively high densities. Schilling's low symmetry crystal regions (LSC), whose definition resembles the
+MRCO's, are observed to be at the origin of crystallization. As this manuscript's authors themselves recognize, their experimental system is studied under conditions where crystallization is kinetically accessible (crystallizing samples were discarded). These crystal-like regions thus cannot be assumed to be unrelated to early stages of crystallization. If the LSC-MRCO equivalence is correct, it suggests that a MRCO-based mechanism for a growing static length scale in glass formers is unlikely to be very general, as it relies on the system's partial crystallization.
+
+\end{quotation}
+\begin{quotation}
+2) Yet even assuming that crystallization does not taint the measure of the growing the static correlation length, problems with the dynamical length scale extraction shed serious doubts on the subsequent analysis. The SI material does not report the exact definition of mobility used (Eq. S5), but it is probably similar to that used by Flenner, Zhang, and Szamel [PRE 83 (2011) - not cited in the text] for studying a similar four-point function in a binary mixture of hard spheres. Although the particle-size distributions of the two systems are different, one expects that at the lower-end of the density range studied (a density that is even below the 52\% packing fraction generally considered to be the onset of caging, and a density where the two fluids present essentially the same local order) a same dynamical length, i.e., at most one particle diameter, is expected. In Fig. 1b), however, the value reported is closer to 1.5, which suggests that the numerical/experimental error on
+that point is $\geq 50\%$. Such error is understandable because describing the envelope around a noisy, slowly oscillating yet rapidly decaying function is numerically quite challenging (a reciprocal space analysis could help - see Flenner et al. above). Assuming that the lowest-density data point is indeed close to 1.0, the quality of the fit for the dynamical length scale (described on p. 6) would then be much diminished. Additionally, the dynamical length scale would then grow by a factor of 4 over a density interval where the static length scale increases by at most 80\%. This decoupling of the two phenomena, which suggests a correlation rather than a causation between the two observables, is the opposite of the conclusion presented in the manuscript. Interestingly, this alternate conclusion is broadly in line with the analysis of Charbonneau et al [Phys. Rev. Lett (201)], with which the authors claim disagreement.
+\end{quotation}
+
+This part that was the longest to answer. We thank both reviewers for pointing us the differences between our method and the one used more generally to characterise the spatial extent of dynamical heterogeneity. We thank peculiarly Reviewer \#2 for pointing to us the method of Flenner, Zhang, and Szamel. The analysis in Fourier space yields indeed clearer results for real scalar order parameter fields.
+
+In the previous version of our paper we were correlating in space $\delta u_i(t) = \Delta r_i(t)-\langle\Delta r(t)\rangle$ the fluctuation of the norm of the displacement of the particles. This was indeed a rather archaic method used in the first studies of dynamical heterogeneity. Why was it abandoned ? Probably because the distribution of $\delta u_i(t)$ is extremely skewed, thus the few very fast particles are given a very large weight in the correlation function. Therefore the resulting correlation length $\xi_u$ corresponds to the size of the fast regions. This method was not coherent with the main topic of our paper, i.e. the study of the ordered (slow) regions. Actually the previous version of the inset of Figure 1 was showing two length scales ($\xi_6$ structural and $\xi_u$ dynamical) with the same volume fraction dependence, but with very different absolute values (prefactors). This made our point, the coupling between structure and dynamics, less convincing.
+
+The state of the art method, kindly indicated by Reviewer \#2, relies on an overlap function that distinguishes in a binary way between fast and slow particles. More precisely, the overlap function reduces the original system into a system where only slow particles are left. The correlation length $\xi_4$ extracted is thus the size of the slow regions, on which our interest focusses. We discovered that $\xi_4$ was systematically smaller than $\xi_u$ by a factor of $\approx 2$, leading to values very close to our structural correlation length $\xi_6$. It was not the sole lowest density point that was overestimated by our previous method but the whole density range.
+
+We rewrote part of our paper and redraw Figure 1 around the correlation length $\xi_4$. The former $\xi_u$ is now discussed solely in supplementary information, including a discussion about the prefactor difference. We think it is due to the respective dimensionality of the fast (in general elongated) and slow (compact in our system) regions.
+
+\begin{quotation}
+3) Finally, the previous reviews missed the following point. Although clarifying Ref. 3's description of a spin-glass-type theory of the glass transition is a useful aim, Ref. 3's treatment should not be considered as "the" spin-glass type theory for structural glasses. More modern spin-glass-type descriptions for a growing static length indeed make no direct reference to growing icosahedral order, e.g., Biroli et al. Nature Physics (2008), Parisi and Zamponi, Rev. Mod. Phys. (2010). The analysis therefore does not allow one to conclude that the spin-glass nor the RFOT approaches are generally at odds with their results.
+
+Small corrections:
+\begin{itemize}
+\item The first author of SI-Ref. 9 should be listed as ten Wolde, P. R.
+\item The values for the fitted $\phi_0$ and the fragility index D should be reported.
+\item The definition of delta u (Eq. S5) should be reported.
+\item The binary mixture system studied by SI-Ref. 13 does indeed have a "symmetry-broken" (crystal) phase with six-fold symmetry (FCC or HCP), although that phase does require demixing [see Hopkins, Stillinger, and Torquato Phys. Rev. E 85, 021130 (2012) and Phys. Rev. Lett (2011) - not cited in the text].
+\end{itemize}
+
+\end{quotation}
+
+Reviewer \#3 (Remarks to the Author):
+
+The revised manuscript has addressed my concerns. However, having seen the supplemental material, I now have some additional concerns (which are all small). I do not need to see the manuscript again, although I would be happy to re-review it if the editors wish. 1. The value of $\phi_0$ should be given (page 6, the fit to Fig. 1).
+
+2. There are some minor typos: prefect (page 6) should be perfect, nosier (page 10) should be noisier, eatimated (SI page 5) should be estimated.
+
+3. In the supplemental materials, the authors should show a raw image from their experiments. This should be done so that one can judge the quality of the imaging, but also equally important, it would be a simple way to present information about the sample. We might be able to see the polydispersity, for example, to get a sense of it to match the data of Fig. S2a.
+
+4. Eqn. S1 uses sigma. It should be clarified that this is the sigma of the best fit, at least, I think that's what this means. Although given that sigma, I am not sure why 'n' appears in Eqn. S1. In general I am confused by Eqn. S1 and not quite sure how it is used. Also, I wonder about the statement that sigma is proportional to R. Is this strictly true? Wouldn't the point spread function broaden out sigma? I would have expected a linear relationship, sigma = a*R + b, with 'b' related to the point spread function. The word "proportional" implies b=0.
+
+5. On page 2, it says that if the relative brightness of the particles isn't accounted for, then it changes the size. Reading the text, I have the implication that the relative brightness is not taken into account. Is that correct? What amount of error does this introduce for the particles in this experiment? I assume it is not a big problem, but this should be explained.
+
+6. Figure S1 is hard to understand. What is the difference between a and b? Which method (a or b) is used for these experiments? Are the 2D circles the same in all panels (a-h); is the only difference the grey spheres? Why are some of the spheres missing in b? One solution might be to omit (b) entirely, if the authors have only used (a) for the results in the main text. Otherwise, all of this needs to be explained. 
+ 
+\closing{saying goodbye} 
+%\cc{Cclist} 
+%\ps{adding a postscript} 
+%\encl{list of enclosed material} 
+\end{letter} 
+\end{document}
