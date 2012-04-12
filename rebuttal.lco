@@ -11,7 +11,7 @@
 %\setkomavar{fromurl}{http://stefano.italians.nl}
 %\setkomavar{frombank}{Postbank 9307157}
 %\setkomavar{place}{Amsterdam}
-\setkomavar{signature}{Hajime Tanaka and Mathieu Leocmach\\
+\setkomavar{signature}{Hajime~Tanaka and Mathieu~Leocmach\\
 {\small Institute of Industrial Science}\\ {\small University of Tokyo}}
 
 %\firsthead{}
