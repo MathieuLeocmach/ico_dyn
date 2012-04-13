@@ -6,13 +6,14 @@
 \usetikzlibrary{positioning}
 \usetikzlibrary{plotmarks}
 \usetikzlibrary{matrix}
+\usetikzlibrary{shadows}
 \tikzexternalize
 %\tikzset{external/force remake}
 \tikzset{every mark/.append style={scale=0.8}}
 \pgfplotsset{every axis/.append style={small}}
 
 \begin{document}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[
@@ -76,13 +77,15 @@
 	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering function computed from the positions for several volume fractions. {\bf b,} The structural relaxation time $\tau_\alpha$ and the characteristic time of the dynamic heterogeneity $t^{dh}$ scaled by the Brownian time $\tau_B$ as a function of $\phi$. The solid curve is the VFT fit of $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$) and structural correlation length ($\xi_6$). Curves are power-law fits (see text).}
 	\label{fig:vft}
 \end{figure}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 \begin{figure}
 	\begin{tikzpicture}[
 		lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
 		]%
 		\pgfplotsset{
-			extra tick style={grid=major},%
+			extra tick style={grid=major, major grid style={
+				copy shadow={very thick, shadow xshift=0, shadow yshift=0, white, semitransparent}, 
+				black}},%
 			every axis/.append style={%
 				height=0.4\textwidth,
 				ymin=0,ymax=0.6,%
@@ -201,12 +204,16 @@
 	\caption{Population of local structures function of \textsc{boo}. (a-c) For our deepest supercooled sample ($\phi=0.575\pm 0.03$) in the $(Q_4,Q_6)$-plane (a), $(w_4,Q_6)$-plane (b) and $(w_6,Q_6)$-plane (c). (d) is the same as (c) but for a liquid near the freezing point ($\phi = 0.497 \pm 0.03$). Colour represent the probability to find the structure (log scale). The arrows stress the ordering tendencies: the tendency toward \textsc{fcc} is always visible, but a tendency toward \textsc{hcp} can be distinguished in (b) and the tendency toward icosahedral order is visible in (c).}
 	\label{fig:maps}
 \end{figure}
-
+\tikzset{external/force remake}
 
 \begin{figure}
 	\begin{tikzpicture}[
 		lab/.style={text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
 		]%
+		\pgfplotsset{extra tick style={%
+			grid=major, major grid style={%
+				copy shadow={very thick, shadow xshift=0, shadow yshift=0, white, semitransparent}, %
+				black}},}
 		\begin{axis}[%
 			anchor=below south,%
 			width=0.5\textwidth,%
@@ -221,9 +228,7 @@
 			extra x ticks={\wstar, -0.00782},%
 			extra x tick style={grid=major,	tick label style={anchor=south west}},%
 			extra x tick labels={,},%
-			extra x tick style={grid=major},
 			extra y ticks={\Qstar},
-			extra y tick style={grid=major},
 			extra y tick labels={},%
 			colorbar sampled, colorbar style={%
 				samples=5, ytick={ 0, 0.25, 0.5, 0.75},% 
@@ -304,7 +309,7 @@
 	\caption{{\bf Bond order mobility.} (a) Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample. The colour scale is saturated at $1.5$ times the bulk mean square displacement. (b-c) Normalised mobility for icosahedral and crystalline order parameters respectively. Bulk mean square displacement is at 1. Perfect structures are on the edge of each plot. The line is a guide for the eye stressing the collapse of the $w_6$-mobility at all volume fractions. Scattering away from the lines is due to poor averaging.}
 	\label{fig:msd_Q6_w6}
 \end{figure}
-
+\tikzset{external/force remake=false}
 
 \begin{figure}
 	\centering
@@ -535,7 +540,7 @@
 	\label{fig:percolation}
 \end{figure}
 
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
