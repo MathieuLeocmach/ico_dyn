@@ -1,0 +1,78 @@
+\documentclass[a4paper, rebuttal, parskip=true, firsthead=false, fromemail=true, foldmarks=false]{scrlttr2}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[british]{babel}
+%\address{Mathieu Leocmach and Hajime Tanaka,\\ Institute of Industrial Science,\\ University of Tokyo}
+%\signature{Mathieu Leocmach and Hajime Tanaka} 
+\begin{document} 
+\begin{letter}{Dr. Nicky Dean\\
+Associate Editor\\
+Nature Communications}
+\opening{\bf Dear Nicky,}
+
+Thank you very much for your e-mail concerning our manuscript (NCOMMS\nobreakdash-12\nobreakdash-00580\nobreakdash-T) together with the comments of the Reviewers. 
+
+Following the constructive comments and suggestions of the Reviewers, we have revised our manuscript. 
+We believe that we have been able to answer the comments of both reviewers on a satisfactory level and thus the revised manuscript has been much improved, thanks to the valuable comments of both Reviewers. 
+
+At the same time, we revised our manuscript to follow the format requirements of Nature Communication: the abstract has been reduced to 150 words, 
+
+We note that revised parts have been highlighted with blue characters in the revised manuscript. 
+
+We hope that you and your reviewers would find that the revised manuscript is now suitable for publication in Nature Communications. 
+
+\closing{\bf Sincerely yours,} 
+\clearpage
+
+\textsf{\textbf{Replies to the comments of Reviewer \#2}}
+
+First, we thank the Reviewer for having carefully read our revised manuscript and provided useful comments to improve our manuscript. 
+Hereafter we reply to the comments one by one. 
+
+\begin{quotationi}
+The authors have substantially addressed the criticisms that were previously made, but a key point that arises from the latest modifications remains to be addressed.
+
+The calculation of the dynamical length scale from fitting the four-point function (S5) with an OZ form (S7) relies on having a good estimate of $\chi_4(t)$ for the $q\rightarrow 0$ intercept. As the authors point out, this intercept would be extremely difficult to measure experimentally through the approach used in the simulations of SI Ref. 24. The alternate approach of directly measuring the $q\rightarrow 0$ limit of $S_4(q,t)$ is also more difficult here than in the simulations of SI Ref. 24, presumably because of the specifics of the experimental setup (although the experimental cell contains a lot more particle than the 80k used in simulations). This difficulty, however, is expected to have a larger impact on the $S_4$ results at high $\phi$ than at low $\phi$, because at high $\phi$: (1) the low $q$ regime becomes more important for the OZ (S7) fit and (2) the corrections to $\chi_4(t)$ become more significant (see SI Ref. 24 Fig. 8). It is therefore unclear why the authors claim that their $\phi<0.56$ results are less robust than the ones at $\phi>0.56$ (SI p.6). Fortunately, according to SI Ref. 24's Fig. 6, at high $\phi$ the real space $G_4(r,t)$ function should bypass both of these difficulties in estimating $\xi_4$. Because the core of the author's thesis relies on having a reliable estimate of the dynamical length scale and that the authors' results for that length scale are now remarkably smaller at high $\phi$ than those of SI Ref. 24's Fig. 11, such check is not superfluous. If the difference between simulation and experiment is sustained, a brief discussion of the difference would be in order. Note also that a figure like SI Ref. 24's Fig. 17 would be more instructive than the current Fig. S5.
+\end{quotationi}
+
+\begin{quotationi}
+Minor points:
+\begin{itemize}
+\item For completion, the authors should define explicitly $\tau_\alpha$ and $\chi_4(t)$.
+\end{itemize}
+\end{quotationi}
+
+\begin{quotationi}
+~
+\begin{itemize}
+\item On p. 3 4th line, the authors probably mean to write ``Modern spin-glass-type theories of the structural glass transition''.
+\end{itemize}
+\end{quotationi}
+You are right. We corrected this sentence.
+
+We hope that the Reviewer would think that the revised manuscript has been much improved and is now suitable for publication in Nature Communications. 
+ 
+\clearpage
+
+\textsf{\textbf{Replies to the comments of Reviewer \#3}}
+
+First, we thank the Reviewer for having carefully read our revised manuscript and provided useful comments to improve our manuscript. Hereafter we reply to the comments one by one. 
+
+\begin{quotationi}
+I will state one last confusion I have, and the authors can determine if they this is my problem alone or if this is something they can clarify. This regards the supplemental information and in particular Eqn. S1. These should be regarded as optional comments; the manuscript can be published as-is if the authors like.
+
+First, I am still confused why the point spread function does not result in an offset. I am happy to consider the case of a symmetric, Gaussian point spread function, as the authors suggest. Shouldn't this result in a raw image with a larger-than-real particle size? For that matter, if the dye within the particle is some function of the radial distance within the particle, might not that influence the results? For example, if most of the dye was concentrated in the core of the particle?If the authors could explain this better that might be nice, at the very least they could do so in their future paper that promises to go into more detail on this method.
+
+Second, I do not understand how the right-hand side of Eqn. S1 is n-independent, although I am willing to assume that the authors are correct. Here is my logic, and hopefully the authors can explain to me the flaw in my reasoning. One looks for the best sigma for a given particle. Given that the sigma's are chosen from a sequence of sigma's, I could say that the best sigma for a given particle is $\sigma_j = 2^(j/n) \sigma_0$, using the formula defining sigma in the text. Then the particle radius is $R = 2^(j/n) \sigma_0 \sqrt{3 ln 2 / (n*(1-2^(-2/n)))}$. For different choices of $n$, I understand that the ratio $j/n$ will be approximately the same but vary slightly depending on which $j$ is optimal. But how then does the $n$-dependence in the square root cancel out? I just can't see this mathematically. Perhaps there is some reason that the ratio $j/n$ does change when $n$ is changed? Similar to the first point, I am willing to trust that the authors have done the work correctly but I do not think I could reproduce their algorithm with my current level of understanding of what is written. And, the algorithm sounds straightforward enough and in general is clear, so I am frustrated by the gap in my understanding.
+\end{quotationi}
+
+
+We hope that the Reviewer would think that the revised manuscript is now suitable for publication in Nature Communications. 
+
+
+%\cc{Cclist} 
+%\ps{adding a postscript} 
+%\encl{list of enclosed material} 
+\end{letter} 
+\end{document}
