@@ -16,7 +16,7 @@ Thank you very much for your e-mail concerning our manuscript (NCOMMS\nobreakdas
 Following the constructive comments and suggestions of the Reviewers, we have revised our manuscript. 
 We believe that we have been able to answer the comments of both reviewers on a satisfactory level and thus the revised manuscript has been much improved, thanks to the valuable comments of both Reviewers. 
 
-At the same time, we revised our manuscript to follow the format requirements of Nature Communication: the abstract has been reduced to 150 words, 
+At the same time, we revised our manuscript to follow the format requirements of Nature Communication: the abstract has been reduced to 150 words, we added headings and subheading, a final paragraph was added to the (shortened) introduction
 
 We note that revised parts have been highlighted with blue characters in the revised manuscript. 
 
@@ -27,14 +27,23 @@ We hope that you and your reviewers would find that the revised manuscript is no
 
 \textsf{\textbf{Replies to the comments of Reviewer \#2}}
 
-First, we thank the Reviewer for having carefully read our revised manuscript and provided useful comments to improve our manuscript. 
-Hereafter we reply to the comments one by one. 
+First, we thank the Reviewer for his commitment to the improvement of our manuscript. Provided your kind and knowledgeable comments, we were able to make significant progresses.
 
 \begin{quotationi}
 The authors have substantially addressed the criticisms that were previously made, but a key point that arises from the latest modifications remains to be addressed.
 
 The calculation of the dynamical length scale from fitting the four-point function (S5) with an OZ form (S7) relies on having a good estimate of $\chi_4(t)$ for the $q\rightarrow 0$ intercept. As the authors point out, this intercept would be extremely difficult to measure experimentally through the approach used in the simulations of SI Ref. 24. The alternate approach of directly measuring the $q\rightarrow 0$ limit of $S_4(q,t)$ is also more difficult here than in the simulations of SI Ref. 24, presumably because of the specifics of the experimental setup (although the experimental cell contains a lot more particle than the 80k used in simulations). This difficulty, however, is expected to have a larger impact on the $S_4$ results at high $\phi$ than at low $\phi$, because at high $\phi$: (1) the low $q$ regime becomes more important for the OZ (S7) fit and (2) the corrections to $\chi_4(t)$ become more significant (see SI Ref. 24 Fig. 8). It is therefore unclear why the authors claim that their $\phi<0.56$ results are less robust than the ones at $\phi>0.56$ (SI p.6). Fortunately, according to SI Ref. 24's Fig. 6, at high $\phi$ the real space $G_4(r,t)$ function should bypass both of these difficulties in estimating $\xi_4$. Because the core of the author's thesis relies on having a reliable estimate of the dynamical length scale and that the authors' results for that length scale are now remarkably smaller at high $\phi$ than those of SI Ref. 24's Fig. 11, such check is not superfluous. If the difference between simulation and experiment is sustained, a brief discussion of the difference would be in order. Note also that a figure like SI Ref. 24's Fig. 17 would be more instructive than the current Fig. S5.
 \end{quotationi}
+
+The absence of $q\rightarrow 0$ value of $S_4$ is indeed a weakness of our analysis. Rather than going back to real-space correlation function (the Reviewer previously stressed that ``describing the envelope around a noisy, slowly oscillating yet rapidly decaying function is numerically quite challenging'' and we could not agree more) we found a way to measure directly $\chi_4$ from our data.
+
+The comment of the Reviewer reminded us about a discussion we had with Grzegorz Szamel about his paper (above SI Ref. 24). The main issue in measuring $\chi_4$ from the fluctuation of the number of overlapping particles $N_s$ in simulation is the lack of variation of the total number of particles $N$. However in our experimental window we do not have a fixed number of particles and we can write
+\[
+\chi_4(t) = (\langle N_s^2\rangle - \langle N_s\rangle^2) /  \langle N\rangle
+\]
+Another way of formalising the situation is that we have a very large system (all the suspension) that reaches the thermodynamic limit where all ensembles are equivalent. Our experimental window is probing a small part of this large system. At a given time, we have access to a limited range of wave numbers. However a time average probes the whole large system state and is thus ensemble independent.
+
+We use the value of $\chi_4$ given by the above formula as $S_4(q=0,t)$ in our fit. The figures were updated accordingly. You may notice decrease at low $\phi$ and increase a high $\phi$, leading to a slightly larger slope.
 
 \begin{quotationi}
 Minor points:

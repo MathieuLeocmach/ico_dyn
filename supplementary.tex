@@ -217,8 +217,11 @@ where $\chi_4(t)$ is the four-point susceptibility and $\xi_4(t)$ is the four-po
 t^{dh} \leq \tau_\alpha \leq t_{\chi_4}.
 \end{equation}
 
-In Supplementary Fig.~S\ref{fig:S4} we show the fit by Eq.~(S\ref{eq:OZ_Fourier}) of $S_4(q,t)$ when $\chi_4(t)$ is maximum. \citet{Flenner2011} were able to access $\chi_4(t)$ directly using $\phi$ derivatives; we could not do so in our experiments, thus our correlation length may be slightly underestimated, especially below $\phi\approx 0.56$. The volume fraction dependence of the resulting correlation length is plotted in the inset of Fig.~\ref{M-fig:vft} of the main text. 
-The dynamical correlation length $\xi_4$ almost coincides with the static one $\xi_6$, which further supports a static structural origin of dynamic heterogeneity in our system.
+In Supplementary Fig.~S\ref{fig:S4} we show the fit by Eq.~(S\ref{eq:OZ_Fourier}) of $S_4(q,t)$ when $\chi_4(t)$ is maximum. As stressed in \citep{Flenner2011}, the value $S_4(q\rightarrow 0, t)$ is crucial for the quality of the fit. In the thermodynamic limit we have
+\begin{equation}
+\chi_4(t) = (\langle N_s^2\rangle - \langle N_s\rangle^2) /  \langle N\rangle,
+\end{equation}
+where $N$ is the total number of particles and $N_s$ is the number of overlapping particles. In a simulation with a fixed $N$ and a limited size, some fluctuations are forbidden, thus the above equation do not give the right value of $\chi_4(t)$ (see \citep{Flenner2011}). However in our experiments we are looking at a small portion of a very large system (the whole colloidal suspension), thus we can use time average to sample all the fluctuations of this large system, and the above equation becomes exact. We use this value as $S_4(q=0,t)$ in our fitting procedure. The volume fraction dependence of the resulting correlation length is plotted in the inset of Fig.~\ref{M-fig:vft} of the main text. The dynamical correlation length $\xi_4$ almost coincides with the static one $\xi_6$, which further supports a static structural origin of dynamic heterogeneity in our system.
 
 As an aside, we have also computed the mobility-mobility spatial correlation function~\cite{Donati1999}
 \begin{equation}
