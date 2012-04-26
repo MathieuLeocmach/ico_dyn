@@ -20,6 +20,7 @@
 		lab/.style={above right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
 		]%
 		\pgfplotsset{cycle list name=black white}
+		\pgfplotsset{fitc/.style={solid, no markers, forget plot, domain=1:1e4}}
 		\begin{axis}[%
 			anchor=right of south east,%
 			width=0.45\textwidth, height=0.33\textwidth, %
@@ -27,11 +28,16 @@
 			ylabel={Self ISF}, ymin=0,%
 			legend columns=3, reverse legend, legend style={font=\tiny, at={(1,1.03)}, anchor=south east}, %
 			]
-			\addplot file {LS3954.isf};
-			\addplot file {LS4446.isf};
-			\addplot file {LS4582.isf};
-			\addplot file {LS5079.isf};
-			\addplot file {go1.isf};
+			\addplot+[only marks] file {LS3954.isf};
+			\addplot+[only marks] file {LS4446.isf};
+			\addplot+[only marks] file {LS4582.isf};
+			\addplot+[only marks] file {LS5079.isf};
+			\addplot+[only marks] file {go1.isf};
+			\addplot+[fitc] {0.943 * exp(-(x/4.60)^0.72)};
+			\addplot+[fitc] {0.901 * exp(-(x/10.78)^0.72)};
+			\addplot+[fitc] {0.894 * exp(-(x/15.51)^0.70)};
+			\addplot+[fitc] {0.876 * exp(-(x/60.18)^0.60)};
+			\addplot+[fitc] {0.787 * exp(-(x/2408.)^0.70)};
 			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 			\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
 			\node [lab] at (rel axis cs:0,0) {a};
@@ -74,7 +80,7 @@
 			\legend{$\xi_6$ structural, $\xi_4$ dynamical};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering function computed from the positions for several volume fractions. {\bf b,} The structural relaxation time $\tau_\alpha$ and the characteristic time of the dynamic heterogeneity $t^{dh}$ scaled by the Brownian time $\tau_B$ as a function of $\phi$. The solid curve is the VFT fit of $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$) and structural correlation length ($\xi_6$). Curves are power-law fits (see text).}
+	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering function computed from the positions for several volume fractions. Lines are stretched exponential fit from which is extracted the structural relaxation time $\tau_\alpha$ {\bf b,} $\tau_\alpha$ and the characteristic time of the dynamic heterogeneity $t^{dh}$ scaled by the Brownian time $\tau_B$ as a function of $\phi$. The solid curve is the VFT fit of $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$) and structural correlation length ($\xi_6$). Curves are power-law fits (see text).}
 	\label{fig:vft}
 \end{figure}
 \tikzset{external/force remake=false}
@@ -550,7 +556,6 @@
 		cycle list name=mark list,%
 		xmin=0.2, xmax=10, ymin=0.06,%
 		width=0.45\textwidth,%
-		%legend columns=3, 
 		legend pos=south west, reverse legend, legend style={font=\scriptsize}, %
 		]
 		\addplot+[blue, fitc] {0.634/(1+0.703^2*x^2)};
@@ -574,7 +579,6 @@
 		xmin=0.25, xmax=5, ymin=0.05,%
 		xtick={0.5, 1, 2, 4},
 		xticklabel=\pgfmathparse{exp(\tick)}\pgfmathprintnumber{\pgfmathresult},
-		%legend columns=3, 
 		legend pos=south west, reverse legend, legend style={font=\scriptsize}, %
 		]
 		\addplot+[blue, only marks] table[x expr={\thisrowno{0}*0.703}, y expr={\thisrowno{1}/0.634}] {LS3954.S4};
