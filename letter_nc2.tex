@@ -67,16 +67,31 @@ We hope that the Reviewer would think that the revised manuscript has been much 
 
 \textsf{\textbf{Replies to the comments of Reviewer \#3}}
 
-First, we thank the Reviewer for having carefully read our revised manuscript and provided useful comments to improve our manuscript. Hereafter we reply to the comments one by one. 
-
 \begin{quotationi}
 I will state one last confusion I have, and the authors can determine if they this is my problem alone or if this is something they can clarify. This regards the supplemental information and in particular Eqn. S1. These should be regarded as optional comments; the manuscript can be published as-is if the authors like.
-
-First, I am still confused why the point spread function does not result in an offset. I am happy to consider the case of a symmetric, Gaussian point spread function, as the authors suggest. Shouldn't this result in a raw image with a larger-than-real particle size? For that matter, if the dye within the particle is some function of the radial distance within the particle, might not that influence the results? For example, if most of the dye was concentrated in the core of the particle?If the authors could explain this better that might be nice, at the very least they could do so in their future paper that promises to go into more detail on this method.
-
-Second, I do not understand how the right-hand side of Eqn. S1 is n-independent, although I am willing to assume that the authors are correct. Here is my logic, and hopefully the authors can explain to me the flaw in my reasoning. One looks for the best sigma for a given particle. Given that the sigma's are chosen from a sequence of sigma's, I could say that the best sigma for a given particle is $\sigma_j = 2^(j/n) \sigma_0$, using the formula defining sigma in the text. Then the particle radius is $R = 2^(j/n) \sigma_0 \sqrt{3 ln 2 / (n*(1-2^(-2/n)))}$. For different choices of $n$, I understand that the ratio $j/n$ will be approximately the same but vary slightly depending on which $j$ is optimal. But how then does the $n$-dependence in the square root cancel out? I just can't see this mathematically. Perhaps there is some reason that the ratio $j/n$ does change when $n$ is changed? Similar to the first point, I am willing to trust that the authors have done the work correctly but I do not think I could reproduce their algorithm with my current level of understanding of what is written. And, the algorithm sounds straightforward enough and in general is clear, so I am frustrated by the gap in my understanding.
 \end{quotationi}
 
+First, we thank the Reviewer for having carefully read our revised manuscript and provided useful comments to improve our manuscript. Hereafter we reply to the comments one by one.
+
+\begin{quotationi}
+First, I am still confused why the point spread function does not result in an offset. I am happy to consider the case of a symmetric, Gaussian point spread function, as the authors suggest. Shouldn't this result in a raw image with a larger-than-real particle size? For that matter, if the dye within the particle is some function of the radial distance within the particle, might not that influence the results? For example, if most of the dye was concentrated in the core of the particle? If the authors could explain this better that might be nice, at the very least they could do so in their future paper that promises to go into more detail on this method.
+\end{quotationi}
+
+Indeed the gaussian point spread function do result in a larger-than-real particle size. However, the real radii are proportional to the measured radii thus the problem reduces to the determination of a system-wise proportionality constant. This can be done by analysis of the point spread function or by measurement of the position of the first peak of $g(\hat{r})$ defined in the supplementary (that is what we have done here). One can also deconvolve the image prior to the tracking.
+
+We haven't thought about the dye repartition within a particle, probably because our colloids had a rather uniform repartition. We that you for this idea and we may discuss about that in our paper on the subject (80\% written).
+
+\begin{quotationi}
+Second, I do not understand how the right-hand side of Eqn. S1 is n-independent, although I am willing to assume that the authors are correct. Here is my logic, and hopefully the authors can explain to me the flaw in my reasoning. One looks for the best sigma for a given particle. Given that the sigma's are chosen from a sequence of sigma's, I could say that the best sigma for a given particle is $\sigma_j = 2^{j/n} \sigma_0$, using the formula defining sigma in the text. Then the particle radius is $R = 2^{j/n} \sigma_0 \sqrt{3 \ln 2 / (n (1-2^{-2/n}))}$. For different choices of $n$, I understand that the ratio $j/n$ will be approximately the same but vary slightly depending on which $j$ is optimal. But how then does the $n$-dependence in the square root cancel out? I just can't see this mathematically. Perhaps there is some reason that the ratio $j/n$ does change when $n$ is changed? Similar to the first point, I am willing to trust that the authors have done the work correctly but I do not think I could reproduce their algorithm with my current level of understanding of what is written. And, the algorithm sounds straightforward enough and in general is clear, so I am frustrated by the gap in my understanding.
+\end{quotationi}
+
+The cancelling of the $n$ dependence is indeed not obvious in Eq. S1 alone, so we reformulate this paragraph.
+
+The analytical response of a binary ball to a Gaussian blur, at the center of the ball is a function of dimensionless ratio $x=R/\sigma$: $G(x)$. The DoG response function is the difference between the two such functions. However, the choice of the width of the two functions is not arbitrary: we make the difference between two consecutive blurred images, the image blurred by $\sigma_{j+1}$ and the image blurred by $\sigma_j$. Therefore, 
+\[
+DoG(R,\sigma, \alpha) = DoG(x, \alpha) = G(x/\alpha) - G(x) \quad\text{with }\alpha=2^{1/n}.
+\]
+Here it is clear that minimizing $DoG(x, \alpha)$ with respect to $x$ yields a value of $x$ that depends only on $\alpha$. This means the optimal value of $\sigma$ is proportional to $R$.  Both $\sigma$ and the proportionality constant are function of $n$, but $R$ is an absolute value independent of the way we measure it.
 
 We hope that the Reviewer would think that the revised manuscript is now suitable for publication in Nature Communications. 
 
