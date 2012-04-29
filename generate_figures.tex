@@ -13,7 +13,7 @@
 \pgfplotsset{every axis/.append style={small}}
 
 \begin{document}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[
@@ -464,18 +464,19 @@
 	\caption{\textbf{Sizing of our colloids.} \textbf{a,b} XY and XZ slices (detail) of a typical confocal 3D image of our sample. Note the excellent Z resolution, almost not affected by the point spread function. \textbf{c,} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.7\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once $23\%$ of swelling of particle diameters is taken into account (full line). \textbf{d,} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
 	\label{fig:sizing}
 \end{figure}
-%\tikzset{external/force remake}
+\tikzset{external/force remake}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
-	\pgfplotsset{ every axis/.append style={ width=0.45\textwidth }}
+	\pgfplotsset{ every axis/.append style={ width=0.45\textwidth, cycle list name=black white }}
+	\pgfplotsset{cycle list name=black white}
 	\begin{loglogaxis}[%
 		xmin=10, xmax=1000, xlabel={Cluster size},%
 		ymin=1, ylabel={Number of clusters},%
 		]
 		\addplot+[only marks] table {go1_w6_0012_sizes_rgs_noROI.hist};
 		\addplot+[no marks, domain=50:500] {1e6*x^(-2.1)};
-		\node[above right,red] at (axis cs:100,100) {$x^{-2.1}$};
+		\node[above right] at (axis cs:100,100) {$x^{-2.1}$};
 		\node[below left] at (rel axis cs:0.95,0.8) {$w_6<-0.012$};
 		\node[lab] at (rel axis cs:0.5, 0.95) {a};
 	\end{loglogaxis}
@@ -492,11 +493,11 @@
 		]
 		\addplot+[only marks] table[y expr=\thisrowno{2}/6.14] {go1_w6_0012_sizes_rgs_noROI.hist};
 		\addplot+[no marks, domain=25:100] {0.75*x^(0.5)};
-		\node[left,red] at (axis cs:40,6) {$d_f=2$};
+		\node[left] at (axis cs:40,6) {$d_f=2$};
 		\addplot+[no marks, domain=100:1000] {x^(1/3.)};
-		\node[below right,brown] at (axis cs:100,5) {$d_f=3$};
+		\node[below right] at (axis cs:100,5) {$d_f=3$};
 		\addplot+[no marks, domain=20:30] {0.1*x};
-		\node[below right,black] at (axis cs:30,3) {$d_f=1$};
+		\node[below right] at (axis cs:30,3) {$d_f=1$};
 		\node[below right] at (rel axis cs:0.05,0.8) {$w_6<-0.012$};
 		\node[lab] at (rel axis cs:0.5, 0.95) {b};
 	\end{loglogaxis}
@@ -522,7 +523,6 @@
 		xmin=0, xmax=0.6,ymin=0,%
 		ylabel={Largest cluster size},%
 		axis y line*=left,%
-		y label style ={blue},%
 		]
 		\addplot+[only marks] table [x index=2] {go1_w6.perco};
 	\end{axis}
@@ -534,10 +534,9 @@
 		axis y line*=right, ytick=\empty,%
 		ylabel={Percolation probability (a.u.)},%
 		ylabel near ticks,%
-		y label style ={red},%
 		]
 		\addplot+[only marks] coordinates{(1, 0)};
-		\addplot+[no marks, red] file {go1_percol_thrs.hist};
+		\addplot[const plot, gray, fill=gray, semitransparent, area legend] file {go1_percol_thrs.hist};
 		\legend{{by $w_6$},random}
 		\node[lab] at (rel axis cs:0.5, 0.95) {d};
 	\end{axis}
@@ -546,7 +545,7 @@
 	\label{fig:percolation}
 \end{figure}
 
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
