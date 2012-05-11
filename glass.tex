@@ -55,7 +55,7 @@ In present work, we study colloidal hard spheres supercooled liquid~\cite{pusey1
 
 \subsection*{Dynamics}
 
-We were able to follow the volume fraction dependence of the dynamics over nearly three orders of magnitude (see Fig.~\ref{fig:vft}), confirming the basic phenomenology observed in experiments~\citep{pusey1987ogt, kegel2000swe, weeks2000, BerthierR} as well as simulations~\citep{tanaka2010critical} of similar systems: super-Arrhenius dependence of the structural relaxation time $\tau_\alpha$ upon $\phi$, that we fit by the Vogel-Fulcher-Tammann (VFT) law; non-Gaussianity of the dynamics, peaking at $t^{dh}(\phi)$, and dynamical heterogeneity of growing size $\xi_4$ (see Supplementary Information for the definitions and the details of the analyses). 
+We were able to follow the volume fraction dependence of the dynamics over nearly three orders of magnitude (see Fig.~\ref{fig:vft}), confirming the basic phenomenology observed in experiments~\citep{pusey1987ogt, kegel2000swe, weeks2000, BerthierR} as well as simulations~\citep{tanaka2010critical} of similar systems: super-Arrhenius dependence of the structural relaxation time $\tau_\alpha$ upon $\phi$, that we fit by the Vogel-Fulcher-Tammann (VFT) law; non-Gaussianity of the dynamics, peaking at $t^{dh}(\phi)$, and dynamical heterogeneity of growing size $\xi_4$ (see Methods and Supplementary Information for the definitions and the details of the analyses). 
 
 
 \subsection*{Structure}
@@ -122,38 +122,7 @@ In Fig.~\ref{fig:vft}a we fit the self-intermediate scattering function \textcol
 	\alpha_2(t) = \frac{3 \left\langle {\Delta r}^4(t) \right\rangle}{5 {\left\langle {\Delta r}^2(t) \right\rangle}^2}-1. 
 	\label{eq:ng}
 \end{equation}
-At a given volume fraction, $\alpha_2(t)$ peaks at the characteristic time scale of the dynamic heterogeneity $t^{dh}(\phi)$. The volume fraction dependence of both $\tau_\alpha$ and $t^{dh}$ is plotted in Fig.~\ref{fig:vft}b. We notice that $t^{dh}$ corresponds to the end of plateau, always shorter than $\tau_\alpha$.
-
-To define the characteristic length scale of the dynamic heterogeneity, we define a microscopic overlap function $w_n(t)$ so that $w_n(t)=1$ if the particle $n$ moved less than $0.3\langle\sigma\rangle$ during $t$ and $w_n(t)=0$ otherwise. From this we can compute the four-point structure factor~\cite{Flenner2011}
-\begin{equation}
-	S_4(q,t) = N^{-1}(\left\langle W(\vec{q},t) W(-\vec{q},t) \right\rangle - | \left\langle W(\vec{q},t) \right\rangle^2 |)
-	\label{eq:S4}
-\end{equation}
-where $W(\vec{q},t)$ is the Fourier transform of $w_n(t)$
-\begin{equation}
-	W(\vec{q},t) = \sum_n w_n(t)\exp(-\imath \vec{q}\cdot\vec{r}_n(0))
-\end{equation}
-
-To give a more understandable picture, we note that $S_4(q,t)$ is the structure factor of a system containing only the ``slow'' (overlapping) particles divided by the ratio of overlapping particles. Our experimental data do \emph{not} have periodic boundary conditions, so we must use a window function to ensure the correct correlation, especially at small $q$. Here we use Hamming window, but we checked that our results are not affected by other reasonable choices of window function. Results are shown in Supplementary Fig.~S\ref{S-fig:S4}.
-
-The long wavelength (small wave-vector) behaviour of $S_4(q,t)$ is well described by the asymptotic Ornstein-Zernike in Fourier space:
-\begin{equation}
-	S_4(q,t) \approx \frac{\chi_4(t)}{1+\xi_4(t)^2 q^2} \quad \text{as } q\rightarrow 0
-	\label{eq:OZ_Fourier}
-\end{equation}
-where $\chi_4(t)$ is the four-point susceptibility and $\xi_4(t)$ is the four-point correlation length, both depending on the time difference $t$. We found that at each volume fraction the maximum of $\chi_4(t)$ is reached at times longer that the relaxation time $\tau_\alpha$. In summary, we have
-\begin{equation}
-t^{dh} \leq \tau_\alpha \leq t_{\chi_4}.
-\end{equation}
-For clarity, we omit time dependence in $S_4$, $\xi_4$ and $\chi_4$ when $t=t_{\chi_4}$.
-
-In Supplementary Fig.~S\ref{S-fig:S4} we show the fit by Eq.~(\ref{eq:OZ_Fourier}) of $S_4(q)$. \textcolor{blue}{As stressed in \citep{Flenner2011}, the value $S_4(q\rightarrow 0)$ is crucial for the quality of the fit. In the thermodynamic limit we have
-\begin{equation}
-\chi_4 = (\langle N_s^2\rangle - \langle N_s\rangle^2) /  \langle N\rangle,
-\end{equation}
-where $N$ is the total number of particles and $N_s$ is the number of overlapping particles. In a simulation with a fixed $N$ and a limited size, some fluctuations are forbidden, thus the above equation do not give the right value of $\chi_4$ (see \citep{Flenner2011}). However in our experiments we are looking at a small portion of a very large system (the whole colloidal suspension), thus we can use time average to sample all the fluctuations of this large system, and the above equation becomes exact. We use this value as $S_4(q=0)$ in our fitting procedure.} 
-
-The volume fraction dependence of the resulting correlation length is plotted in the inset of Fig.~\ref{fig:vft} of the main text. The dynamical correlation length $\xi_4$ almost coincides with the static one $\xi_6$, which further supports a static structural origin of dynamic heterogeneity in our system. \textcolor{blue}{We do not claim universality on the absolute value of both correlation lengths; indeed our $\xi_4$ is shorter than the one of \citet{Flenner2011} at the same distance to $\phi_0$. This may be linked to the difference in fragility between the two systems (or their underlying crystal).}
+At a given volume fraction, $\alpha_2(t)$ peaks at the characteristic time scale of the dynamic heterogeneity $t^{dh}(\phi)$. The volume fraction dependence of both $\tau_\alpha$ and $t^{dh}$ is plotted in Fig.~\ref{fig:vft}b. We notice that $t^{dh}$ corresponds to the end of plateau, always shorter than $\tau_\alpha$. The characteristic length scale of the dynamic heterogeneity is extracted from the four-point structure factor as explained in details in Supplementary informations.
 
 \subsection*{Structure identification}
 
