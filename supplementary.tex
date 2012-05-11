@@ -122,7 +122,6 @@ The consistency of our method can be checked by constructing the radial distribu
 Recently \citet{Kurita2011,Kurita2011b} have designed a sizing method using particle coordinates from confocal experiments. However their method do not work at the image processing level and relies on coordinates extracted via the \citet{Crocker1996} algorithm which, as described above, is defective when the size distribution is too broad. It may be possible to combine the two methods by feeding our coordinates and size as input to their method. We would expect an increase in sizing precision when the particles are close to contact.
 
 
-\section*{Difference between {\sc mrco} and crystal nuclei}
 
 \begin{figure}
 \begin{center}
@@ -132,33 +131,15 @@ Recently \citet{Kurita2011,Kurita2011b} have designed a sizing method using part
 	\label{fig:X_3D}
 \end{figure}
 
-To avoid any confusion between our imperfect crystal-like order and well-formed but small transient crystals, we detect crystal nuclei \emph{via} the most standard method in the literature~\cite{ReintenWolde1996, Zaccarelli2009}. For each neighbouring particle, we compute the normalized scalar product of the (non coarse-grained) $q_{6 m}$:
-\begin{equation}
-	s(i,j) = \frac{
-		\sum_{m=-6}^{6} q_{6 m}(i) q_{6 m}^{*}(j)
-	}{
-		\sqrt{\sum_{m=-6}^{6} |q_{6 m}(i)|^2} \sqrt{\sum_{m=-6}^{6} |q_{6 m}(j)|^2}
-	}.
-	\label{eq:boo_dot_product}
-\end{equation}
-The bond between particles $i$ and $j$ is considered crystalline if $s_{ij}>0.7$~\cite{Zaccarelli2009}. A particle is crystalline if more than half of its bonds ($\geq 7$) are crystalline. 
-
-The polydispersity is an important controlling factor which determines the ease of crystallization of colloidal suspensions (see, e.g., \cite{Zaccarelli2009}). 
-The polydispersity of our sample was high enough to prevent crystallisation in bulk over our experimental timescales. 
-However, heterogeneous nucleation from the walls sometimes interfered our experiments, thus we had to discard such samples that accompanied crystallisation. 
-We find no large crystal nucleus in our samples analysed in the text. Even at deep supercooling a crystal nucleus never gathers more than 8 particles, and in total truly crystalline particles account for less than $1\%$ of the system. We emphasize that the size of these crystals is still smaller than the critical nucleus size (between 2 and 3 particle diameters according to~\cite{Auer2001} and classical nucleation theory). This was confirmed by the fact that crystal-like solid regions (see Supplementary Fig.~S\ref{fig:X_3D}a) appear only transiently without growth. In other words, we never observed crystal nucleation in bulk for our samples. Supplementary Figure~S\ref{fig:X_3D} compares the spatial extent of crystal nuclei with that of the crystal-like clusters. Visual inspection of the patterns in Fig.~\ref{M-fig:3D}e and Supplementary Fig.~S\ref{fig:X_3D}a,b  demonstrates that trivial crystallisation can be responsible for neither the spatial extent of the dynamical heterogeneities nor glassy slow dynamics.
-
-However, sub-critical nuclei are not unrelated to crystal-like order. Nuclei are systematically embedded into much larger \textsc{mrco}. One can explain this phenomenon as perfect wetting of the nuclei by coherently bond-ordered regions. However, examples of crystal-like structures without an embedded crystal nucleus, in addition to the continuity of $Q_6$ values (Fig.~\ref{M-fig:maps}), rather suggests that the crystal nuclei are the extreme part of the bond order fluctuations. Indeed it has been shown in hard spheres~\cite{OMalley2005, Schilling2010, Kawasaki2010c, Russo2011}, gaussian-core model~\cite{Russo2012} and probably Wahnstr\"om binary Lennard-Jones~\cite{Pedersen2010} that parts of \textsc{mrco}, fluid regions with a structure reminiscent of the crystal, act as precursors to crystallisation if the local density there is high enough. However in these systems the presence of precursors to crystallisation does not imply the formation of a critical nucleus and growth. Furthermore, \textsc{mrco} is always present (transiently) in the supercooled liquid and its size is often used to characterise dynamical heterogeneity of the supercooled liquid: \textsc{mrco} are usual fluctuations of the system, as common as the fast and slow regions of the dynamic heterogeneity~\cite{tanaka2010critical}. We also note that the average density within \textsc{mrco} is the same as within disordered liquid regions and thus different from within crystal nuclei~\cite{Kawasaki2010c}.
-
 \section*{Dynamics}
 
-\begin{figure}
+\begin{figure*}
 \begin{center}
 \includegraphics{generate_figures-figure8.pdf}
 \end{center}
 \caption{\textbf{Four-point structure factor} at different volume fractions, computed for a time difference $t$ so that $\chi_4(t)$ is maximum.}
 	\label{fig:S4}
-\end{figure}
+\end{figure*}
 
 To define the characteristic length scale of the dynamic heterogeneity, we define a microscopic overlap function $w_n(t)$ so that $w_n(t)=1$ if the particle $n$ moved less than $0.3\langle\sigma\rangle$ during $t$ and $w_n(t)=0$ otherwise. From this we can compute the four-point structure factor~\cite{Flenner2011}
 \begin{equation}
