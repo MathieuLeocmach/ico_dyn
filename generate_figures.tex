@@ -210,18 +210,19 @@
 	\caption{Population of local structures function of \textsc{boo}. (a-c) For our deepest supercooled sample ($\phi=0.575\pm 0.03$) in the $(Q_4,Q_6)$-plane (a), $(w_4,Q_6)$-plane (b) and $(w_6,Q_6)$-plane (c). (d) is the same as (c) but for a liquid near the freezing point ($\phi = 0.497 \pm 0.03$). Colour represent the probability to find the structure (log scale). The arrows stress the ordering tendencies: the tendency toward \textsc{fcc} is always visible, but a tendency toward \textsc{hcp} can be distinguished in (b) and the tendency toward icosahedral order is visible in (c).}
 	\label{fig:maps}
 \end{figure}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 
 \begin{figure}
 	\begin{tikzpicture}[
-		lab/.style={text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
+		lab/.style={anchor=north west, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
 		]%
 		\pgfplotsset{extra tick style={%
 			grid=major, major grid style={%
 				copy shadow={very thick, shadow xshift=0, shadow yshift=0, white, semitransparent}, %
 				black}},}
 		\begin{axis}[%
-			anchor=below south,%
+			name=twod,%
+			at={(0, 0.425\textwidth)},
 			width=0.5\textwidth,%
 			height=0.5\textwidth,%
 			ylabel=$Q_6$,%
@@ -246,7 +247,7 @@
 				},%
 			]
 			\addplot graphics [xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]{sd_u6Q6_go1_color};
-			\node [lab, anchor=north west] at (rel axis cs:0,1) {a};
+			\node [lab] at (rel axis cs:0,1) {a};
 			\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
 			\node [anchor=west] at (rel axis cs:0, 0.8) {\footnotesize{$\phi = 0.575 \pm 0.03$}};
 			\node [left] at (axis cs:\wstar,0.55) {\footnotesize $w_6^*$};
@@ -261,7 +262,6 @@
 				yticklabels at=edge left,%
 				horizontal sep=0pt,%
 				},%
-			anchor=outer north east,%
 			width=0.5\textwidth,%
 			ymin=0, ymax=1.5,%
 			extra x tick style={grid=major,	tick label style={anchor=south west}},%
@@ -288,9 +288,9 @@
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi5079.txt};
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_go1.txt};
 			\addplot+[domain=-0.0521089193:0.01, sharp plot, no markers] {9.34701 * x + 1.03764};
-			\draw[->, thick] (rel axis cs:0.2, 0.9) to (rel axis cs:0, 0.9);
-			\node[right] at (rel axis cs:0.2, 0.9) {\footnotesize Icosahedron};
-			\node [lab, anchor=south west] at (rel axis cs:0,0) {b};
+			\draw[->, thick] (rel axis cs:0.15, 0.1) to (rel axis cs:0, 0.1);
+			\node[right] at (rel axis cs:0.15, 0.1) {\footnotesize Icosahedron};
+			\node [lab] at (rel axis cs:0,1) {b};
 			
 			\nextgroupplot[%
 				xlabel=$Q_6$, xmin=0, xmax=0.5745,%
@@ -309,13 +309,22 @@
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_go1.txt};
 			\draw[->, thick] (rel axis cs:0.8, 0.45) to (rel axis cs:1, 0.45);
 			\node[left] at (rel axis cs:0.8, 0.45) {\footnotesize \textsc{fcc}};
-			\node [lab, anchor=south west] at (rel axis cs:0,0) {c};
+			\node [lab] at (rel axis cs:0,1) {c};
 		\end{groupplot}
+		\path (twod.outer south) ++(0.525\textwidth, 0.6em) 
+			node[anchor=south] {$w_6=w_6^*$} 
+			node[inner sep=0, above=0] (one_ico) {\includegraphics[width=0.22\textwidth]{one_ico.png}};
+		\node at(one_ico.south){$w_6=w_6^*$};
+		\path (twod.outer north) ++(0.525\textwidth, -0.6em)
+			node[inner sep=0, below=0] (one_mrco) {\includegraphics[width=0.22\textwidth]{one_mrco.png}};
+		\node at (one_mrco.south) {$Q_6=Q_6^*$};
+		\node [lab] at (one_mrco.north west) {d};
+		\node [lab] at (one_ico.north west) {e};
 	\end{tikzpicture}
-	\caption{{\bf Bond order mobility.} (a) Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample. The colour scale is saturated at $1.5$ times the bulk mean square displacement. (b-c) Normalised mobility for icosahedral and crystalline order parameters respectively. Bulk mean square displacement is at 1. Perfect structures are on the edge of each plot. The line is a guide for the eye stressing the collapse of the $w_6$-mobility at all volume fractions. Scattering away from the lines is due to poor averaging.}
+	\caption{\textbf{Bond order mobility.} {\bf a,} Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample. The colour scale is saturated at $1.5$ times the bulk mean square displacement. {\bf b-c,} Normalised mobility for icosahedral and crystalline order parameters respectively. Bulk mean square displacement is scaled to be at 1. Perfect structures are on the edge of each plot. The lines are a guide for the eye, stressing the collapse of the $w_6$-mobility at all volume fractions in {\bf b} and the absence of collapse in {\bf c}. The scattering at low volume fractions is due to poor averaging of rare structures. Example of \textbf{d} crystal-like cluster and \textbf{e} distorted icosahedron at the respective threshold values.}
 	\label{fig:msd_Q6_w6}
 \end{figure}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 
 \begin{figure}
 	\centering
@@ -343,10 +352,6 @@
 		\node{Crystal-like}; & \node[ball color=green!66!black] {}; \\
 		\node{Slow}; & \node[ball color=turquoise!75!black] {}; \\
 	};
-%	\node[above left=0.01\textwidth, pic3d] at (l.west) (one_ico) {\includegraphics[width=0.22\textwidth]{one_ico.png}};
-%	\node[right=0.01\textwidth] at (one_ico.east){$w_6=w_6^*$};
-%	\node[below left=0.01\textwidth, pic3d] at (l.west) (one_mrco) {\includegraphics[width=0.22\textwidth]{one_mrco.png}};
-%	\node[right=0.01\textwidth] at (one_mrco.east) {$Q_6=Q_6^*$};
 	\node [lab] at (X.north east) {a};
 	\node [lab] at (all.north east) {b};
 	\node [lab] at (mrco.north east) {c};
