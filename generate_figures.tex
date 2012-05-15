@@ -315,7 +315,7 @@
 	\caption{{\bf Bond order mobility.} (a) Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample. The colour scale is saturated at $1.5$ times the bulk mean square displacement. (b-c) Normalised mobility for icosahedral and crystalline order parameters respectively. Bulk mean square displacement is at 1. Perfect structures are on the edge of each plot. The line is a guide for the eye stressing the collapse of the $w_6$-mobility at all volume fractions. Scattering away from the lines is due to poor averaging.}
 	\label{fig:msd_Q6_w6}
 \end{figure}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 
 \begin{figure}
 	\centering
@@ -325,35 +325,37 @@
 		arr/.style={<->, thick, yellow!75!black}%
 		]%
 	\definecolor{turquoise}{rgb}{0.678431,0.917647,0.917647}
+	\definecolor{gold}{rgb}{0.8, 0.498039, 0.196078}
 	\node[right=0.01\textwidth, pic3d] (all) {\includegraphics[width=0.48\textwidth]{mrco_ico_scale_go1-0023.png}};
+	\node[left=0.01\textwidth, pic3d] at (all.west) (X) {\includegraphics[width=0.48\textwidth]{X_go1.png}};
 	\node[below=0.01\textwidth, pic3d] at (all.south) (dyn) {\includegraphics[width=0.48\textwidth]{cgsd_2tau.png}};
 	\node[left=0.01\textwidth, pic3d] at (dyn.west) (mrco) {\includegraphics[width=0.48\textwidth]{mrco24_scale_go1_t040_t048.png}};
 	\draw [help lines, step=0.12\textwidth, shift=(mrco.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
 	\draw [help lines, step=0.12\textwidth, shift=(dyn.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
 	\matrix[%
-		matrix anchor=east, draw, font=\footnotesize,% 
-		column 1/.style={text height=0.8em, text depth=0.2em},%
-		column 2/.style={circle, shade, inner sep=0.008\textwidth},%
+		above left=0.01\textwidth of X.south east, fill=gray!25!white, semitransparent, text opacity=1, font=\footnotesize,% 
+		column 1/.style={right, text height=0.8em, text depth=0.2em},%
+		column 2/.style={left, circle, shade, inner sep=0.008\textwidth},%
 		] (l)
 	{
+		\node{Crystal}; & \node[ball color=gold] {};\\
 		\node{Icosahedra}; & \node[ball color=red!50!blue] (b2) {};\node[ball color=red!75!black, left] at (b2.west) {}; \node[ball color=blue!75!black, right] at (b2.east) {};\\
 		\node{Crystal-like}; & \node[ball color=green!66!black] {}; \\
 		\node{Slow}; & \node[ball color=turquoise!75!black] {}; \\
 	};
-	\node[above left=0.01\textwidth, pic3d] at (l.west) (one_ico) {\includegraphics[width=0.22\textwidth]{one_ico.png}};
-	\node[right=0.01\textwidth] at (one_ico.east){$w_6=w_6^*$};
-	\node[below left=0.01\textwidth, pic3d] at (l.west) (one_mrco) {\includegraphics[width=0.22\textwidth]{one_mrco.png}};
-	\node[right=0.01\textwidth] at (one_mrco.east) {$Q_6=Q_6^*$};
-	\node [lab] at (one_ico.north east) {a};
-	\node [lab] at (one_mrco.north east) {b};
-	\node [lab] at (all.north east) {c};
-	\node [lab] at (mrco.north east) {d};
-	\node [lab] at (dyn.north east) {e};
+%	\node[above left=0.01\textwidth, pic3d] at (l.west) (one_ico) {\includegraphics[width=0.22\textwidth]{one_ico.png}};
+%	\node[right=0.01\textwidth] at (one_ico.east){$w_6=w_6^*$};
+%	\node[below left=0.01\textwidth, pic3d] at (l.west) (one_mrco) {\includegraphics[width=0.22\textwidth]{one_mrco.png}};
+%	\node[right=0.01\textwidth] at (one_mrco.east) {$Q_6=Q_6^*$};
+	\node [lab] at (X.north east) {a};
+	\node [lab] at (all.north east) {b};
+	\node [lab] at (mrco.north east) {c};
+	\node [lab] at (dyn.north east) {d};
 	\end{tikzpicture}
-	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius.  Example of \textbf{a} distorted icosahedron and \textbf{b} crystal-like cluster at the respective threshold values. \textbf{c,} A typical configuration of bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{d,} Crystal-like particles alone (the order parameter was averaged over $t^{dh}/2$). \textbf{e,} Slow particles (see text). Due to particles going in and out of the field of view, the edges of \textbf{d} and \textbf{e} were not accurate and have been removed.}
+	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{a} Sub-critical crystal nuclei. \textbf{b,} A typical configuration of bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{c,} Crystal-like particles alone (the order parameter was averaged over $t^{dh}/2$). \textbf{d,} Slow particles (see text). Due to particles going in and out of the field of view, the edges of \textbf{c} and \textbf{d} were not accurate and have been removed.}
 	\label{fig:3D}
 \end{figure}
-%\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[%
@@ -545,7 +547,7 @@
 	\label{fig:percolation}
 \end{figure}
 
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]

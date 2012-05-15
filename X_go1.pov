@@ -152,7 +152,7 @@ union
   {
     pigment
     {
-      color Magenta
+      color Gold
     }
   }
 }
