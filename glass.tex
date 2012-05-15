@@ -56,7 +56,23 @@ In the present work, we focus on the colloidal (hard spheres) supercooled liquid
 
 \subsection*{Dynamics}
 
-We were able to follow the volume fraction dependence of the dynamics over nearly three orders of magnitude (see Fig.~\ref{fig:vft}), confirming the basic phenomenology observed in experiments~\citep{pusey1987ogt, kegel2000swe, weeks2000, BerthierR} as well as simulations~\citep{tanaka2010critical} of similar systems: super-Arrhenius dependence of the structural relaxation time $\tau_\alpha$ upon $\phi$, that we fit by the Vogel-Fulcher-Tammann (VFT) law; non-Gaussianity of the dynamics, peaking at $t^{dh}(\phi)$, and dynamical heterogeneity of growing size $\xi_4$ (see Methods and Supplementary Information for the definitions and the details of the analyses). 
+We were able to follow the volume fraction dependence of the dynamics over nearly three orders of magnitude (see Fig.~\ref{fig:vft}), confirming the basic phenomenology observed in experiments~\citep{pusey1987ogt, kegel2000swe, weeks2000, BerthierR} as well as simulations~\citep{tanaka2010critical} of similar systems. In Fig.~\ref{fig:vft}a we fit the self-intermediate scattering function \textcolor{blue}{by a stretched exponential $\propto e^{-(t/\tau_\alpha)^\beta}$ that defines the structural relaxation time $\tau_\alpha$}. The volume fraction dependence of $\tau_\alpha$ is super-Arrhenius and we fit it in Fig.~\ref{fig:vft}b by the VFT law $\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$ ($D$ being the fragility index). The non-Gaussianity of the dynamics is monitored by the kurtosis of displacements distribution 
+\begin{equation}
+	\alpha_2(t) = \frac{3 \left\langle {\Delta r}^4(t) \right\rangle}{5 {\left\langle {\Delta r}^2(t) \right\rangle}^2}-1. 
+	\label{eq:ng}
+\end{equation}
+At a given volume fraction, $\alpha_2(t)$ peaks at the characteristic time scale of the dynamic heterogeneity $t^{dh}(\phi)$. We notice that $t^{dh}$ corresponds to the end of the plateau, always shorter than $\tau_\alpha$.
+
+The spatial heterogeneity of the dynamics is characterised by a four-point susceptibility $\chi_4(t)$ and a four-point structure factor $S_4(q,t)$~\cite{Flenner2011}, that we fit to the Ornstein-Zernike form to extract the four-point correlation length $\xi_4(t)$ (see Methods). We found that at each volume fraction the maximum of $\chi_4(t)$ is reached at times longer that the relaxation time $\tau_\alpha$. In summary, we have
+\begin{equation}
+t^{dh} \leq \tau_\alpha \leq t_{\chi_4}.
+\end{equation}
+For concision, we omit time dependence in $S_4$, $\xi_4$ and $\chi_4$ when $t=t_{\chi_4}$. The volume fraction dependence of the resulting correlation length is plotted in the inset of Fig.~\ref{fig:vft}. In the volume fraction range that we were able to study, it follows a power law
+\begin{equation}
+\xi_{4} \propto (\phi/(\phi_0-\phi))^{-\nu},
+\label{eq:xi4ofphi}
+\end{equation}
+where $\nu=2/3$ and $\phi_0$ is given by the above VFT fit; thus the bare correlation length $\xi_{4,0}$ is the only fitting parameter~\citep{tanaka2010critical}. Note that the lengths are in units of the mean diameter $\sigma$ whereas \citet{Flenner2011} express them in unit of the smaller diameter of their binary system.
 
 
 \subsection*{Structure}
@@ -93,7 +109,7 @@ To observe the ordered regions in real space, we define the thresholds $w_6^*$ a
 
 
 
-Consistently, we were not able to extract a lengthscale associated with the sole icosahedral order that would grow when approaching the glass transition. By contrast, the spatial extent of crystal-like order is well described by $G_6(r)$, the spatial correlation function of $Q_{6 m}$ (see, e.g., \cite{tanaka2010critical}). Both dynamical and structural lengthscales (defined in Supplementary Information) are increasing while approaching the glass transition in a coherent manner (the inset of Fig.~\ref{fig:vft}). We can see that near $\phi_0$ the growth of both dynamic and static correlation length can be well expressed by the power law, $\xi_{4,6} \propto (\phi/(\phi_0-\phi))^{-\nu}$ with $\nu=2/3$. In agreement with~\citep{tanaka2010critical} it suggests that the dynamical heterogeneity in hard spheres is a manifestation of critical-like fluctuations of the crystal-like bond orientational order parameter, and neither those of icosahedral nor amorphous order. In relation to this, we stress that $G_6(r)$ is not sensible to aperiodic structures such as icosahedral and amorphous order (see Methods). 
+Consistently, we were not able to extract a lengthscale associated with the sole icosahedral order that would grow when approaching the glass transition. By contrast, the spatial extent of crystal-like order is well described by $G_6(r)$, the spatial correlation function of $Q_{6 m}$ (see, e.g., \cite{tanaka2010critical}). Both dynamical and structural lengthscales (defined in Methods) are increasing while approaching the glass transition in a coherent manner (the inset of Fig.~\ref{fig:vft}). We can see that near $\phi_0$ the growth of both dynamic and static correlation length can be well expressed by the same power law (Eq.~(\ref{eq:xi4ofphi})). In agreement with~\citep{tanaka2010critical} it suggests that the dynamical heterogeneity in hard spheres is a manifestation of critical-like fluctuations of the crystal-like bond orientational order parameter, and neither those of icosahedral nor amorphous order. In relation to this, we stress that $G_6(r)$ is not sensible to aperiodic structures such as icosahedral and amorphous order (see Methods). 
 
 Of course, one can set a more permissive threshold on $w_6$ and observe more icosahedra. A percolating network of icosahedral neighbourhood can even be found at a high volume fraction if the threshold encompasses enough particles (see Fig.~\ref{fig:percolation}c). However, the imperfect icosahedra particles that must be included to form this network have a mobility comparable to the bulk (Fig.~\ref{fig:msd_Q6_w6}b). Furthermore, we checked that this percolation is of the 3D random percolation class (cluster size distribution follows a power-law of exponent $\approx 2.1$, see Fig.~\ref{fig:msd_Q6_w6}a), meaning that a comparable network could be obtained by picking randomly the same number of particles (see Fig.~\ref{fig:percolation}d). We conclude that the concept of icosahedral network is not physically meaningful at least in our system.
 
@@ -123,12 +139,32 @@ After careful shear melting, the samples are filled into square $\unit{500}{\mic
 
 \subsection*{Dynamics}
 
-In Fig.~\ref{fig:vft}a we fit the self-intermediate scattering function \textcolor{blue}{by a stretched exponential $\propto e^{-(t/\tau_\alpha)^\beta}$ that defines the relaxation time $\tau_\alpha$. We fit the $\phi$ dependence of $\tau_\alpha$} by the VFT law $\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$ ($D$ being the fragility index). The non-Gaussianity of the dynamics is monitored by the kurtosis of displacements distribution 
+To characterise the dynamic heterogeneity, we define a microscopic overlap function $w_n(t)$ so that $w_n(t)=1$ if the particle $n$ moved less than $0.3\langle\sigma\rangle$ during $t$ and $w_n(t)=0$ otherwise. The number of overlapping (slow) particles is $N_s(t)$ and in the thermodynamic limit its fluctuations define the four-point susceptibility
 \begin{equation}
-	\alpha_2(t) = \frac{3 \left\langle {\Delta r}^4(t) \right\rangle}{5 {\left\langle {\Delta r}^2(t) \right\rangle}^2}-1. 
-	\label{eq:ng}
+\chi_4 = (\langle N_s^2\rangle - \langle N_s\rangle^2) /  \langle N\rangle,
+\label{eq:chi_4}
 \end{equation}
-At a given volume fraction, $\alpha_2(t)$ peaks at the characteristic time scale of the dynamic heterogeneity $t^{dh}(\phi)$. The volume fraction dependence of both $\tau_\alpha$ and $t^{dh}$ is plotted in Fig.~\ref{fig:vft}b. We notice that $t^{dh}$ corresponds to the end of plateau, always shorter than $\tau_\alpha$. The characteristic length scale of the dynamic heterogeneity is extracted from the four-point structure factor as explained in details in Supplementary informations.
+
+In a simulation with a fixed number of particles $N$ and a limited size, some fluctuations are forbidden, thus Eq.~(\ref{eq:chi_4}) do not give the right value of $\chi_4$ (see \citep{Flenner2011}). However in our experiments we are looking at a small portion of a very large system (the whole colloidal suspension), thus we can use time average to sample all the fluctuations of this large system, and Eq.~(\ref{eq:chi_4}) becomes exact.
+
+We also compute the four-point structure factor~\cite{Flenner2011}
+\begin{equation}
+	S_4(q,t) = N^{-1}(\left\langle W(\vec{q},t) W(-\vec{q},t) \right\rangle - | \left\langle W(\vec{q},t) \right\rangle^2 |)
+	\label{eq:S4}
+\end{equation}
+where $W(\vec{q},t)$ is the Fourier transform of $w_n(t)$
+\begin{equation}
+	W(\vec{q},t) = \sum_n w_n(t)\exp(-\imath \vec{q}\cdot\vec{r}_n(0))
+\end{equation}
+
+To give a more understandable picture, we note that $S_4(q,t)\times N_s/N$ is the structure factor of a system containing only the slow particles. Our experimental data do \emph{not} have periodic boundary conditions, so we must use a window function to ensure the correct correlation, especially at small $q$. Here we use the Hamming window, but we checked that our results are not affected by other reasonable choices of window function. The results are shown in Supplementary Fig.~S\ref{S-fig:S4}.
+
+The small wave-vector behaviour of $S_4(q,t)$ is well described by the asymptotic Ornstein-Zernike in Fourier space:
+\begin{equation}
+	S_4(q\rightarrow 0,t) \approx \frac{\chi_4(t)}{1+\xi_4(t)^2 q^2}.
+	\label{eq:OZ_Fourier}
+\end{equation}
+\textcolor{blue}{As stressed in \citep{Flenner2011}, the value $S_4(q=0)$ is crucial for the quality of the fit. Here we use the value of $\chi_4$ given by Eq.~(\ref{eq:chi_4}) and we fit $S_4(q)$ for $q<1.5/\xi_4$.}
 
 \subsection*{Structure identification}
 
