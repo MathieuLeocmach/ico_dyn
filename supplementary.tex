@@ -110,16 +110,14 @@ The \textsc{sift} is often used to match between different images from complex o
 \begin{equation}
 DoG(R,\sigma, \alpha) = DoG(x, \alpha) = G(x/\alpha) - G(x),
 \end{equation}
-with $\alpha=2^{1/n}$. Here it is clear that minimizing $DoG(x, \alpha)$ with respect to $x$ yields a value $x^*$ that depends only on $\alpha$. 
-Practically $x^*$ is obtained by a polynomial fit for discrete data $x_j$. 
-This means the optimal value of $\sigma$, $\sigma^*$, is proportional to $R$.  Both $\sigma^*$ and the proportionality constant are function of $n$, but $R$ is an absolute value independent of the way we measure it. Formally, we have
+with $\alpha=2^{1/n}$. Here it is clear that minimizing $DoG(x, \alpha)$ with respect to $x$ yields a value $x^*$ that depends only on $\alpha$. Exact calculation yields:
 \begin{equation}
-	R = \sigma^* \sqrt{\frac{6\ln \alpha}{1-\alpha^{-2}}}, 
+	x^* = R/\sigma^* = \sqrt{\frac{6\ln \alpha}{1-\alpha^{-2}}}, 
 	\label{eq:scale_dil}
 \end{equation}
-that allows to translate the $n$-dependent $\sigma^*$ to the parameter-free real radius of the particle, $R$.} The error on $R$ does depend on the number of subdivisions.
+Practically one obtains $\sigma^*$, the value of $\sigma$ that minimises $DoG(R,\sigma, \alpha)$, by a polynomial fit for discrete data $\sigma_j$. Eq.~(S\ref{eq:scale_dil}) allows to translate the $n$-dependent $\sigma^*$ to the parameter-free real radius of the particle, $R$.} The error on $R$ does depend on the number of subdivisions.
 
-We found that the radius of an isolated pixelated ball can be indeed measured within $0.3\%$ relative error with this method, provided a sub-scale resolution step similar to the spatial sub-pixel resolution step. The point spread function of real confocal images acts like an blur in the Z direction. As long as this blur can be approximated to a Gaussian, one can show that it affects the proportionality constant without adding a constant term in Eq.~(S\ref{eq:scale_dil}).
+We found that the radius of an isolated pixelated ball can be indeed measured within $0.3\%$ relative error with this method. The point spread function of real confocal images acts like an blur in the Z direction. As long as this blur can be approximated to a Gaussian, one can show that it affects the proportionality constant without adding a constant term in Eq.~(S\ref{eq:scale_dil}).
 
 In dense suspensions, the neighbouring particles influence the scale dependence of DoG response. This effectively shifts the minima of the DoG towards smaller scales, leading to smaller radii if one uses Eq.~(S\ref{eq:scale_dil}) alone. Assuming once again binary ball objects, one can take this coupling into account and construct an $N\times N$ system, with $N$ the number of particles, whose solutions are the radii and whose coefficients depend on the inter-particle distances. This system is actually very sparse (less than two dozen non-zero coefficients per line, even in the dense suspensions studied here) and the results converge in about two iterations. In synthetic images we measured the error in the resulting radii to be around $1\%$. In an experimental image, the particles are not uniformly bright due to synthesis imperfection (quantity of dye fixed by each particle) and photo bleaching. If one does not take into account the relative brightness of the particles the less bright will appear smaller. We were able to relate the magnitude of the DoG response (environment-dependent) to a measure of the brightness and thus correct the influence of the relative brightness on the sizing.
 
