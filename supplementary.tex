@@ -105,12 +105,17 @@ The key notion to detect objects of unknown and possibly diverse sizes in an ima
 
 The \textsc{sift} is often used to match between different images from complex objects consisting of many rigidly linked blobs and further characterised by local histograms~\citep{Lowe2004}. To our knowledge, this method has never been used for the quantitative localisation and sizing of independent single-blob objects like spherical colloids. The object-by-object optimal scale determination allows us to perform the spatial sub-pixel resolution step for each object on an image that is blurred just enough to have neither a flat intensity profile nor a nearby peak overlap. This leads to a spatial resolution below $0.3$~pixels when two $10$-pixels wide particles are at hard-core contact, and less than $0.03$~pixels error ($0.3\%$ of the diameter) when any other particle's surface is further than $1$~pixel from the surface of the particle of interest.
 
-At infinite dilution the optimal scale $\sigma^*$ is simply proportional to the radius $R$ of the particle. Assuming a binary ball object, one finds\textcolor{blue}{
+
+\textcolor{blue}{The analytical response of a binary ball to a Gaussian blur, at the center of the ball is a function of dimensionless ratio $x=R/\sigma$: $G(x)$. The DoG response function is the difference between the two such functions. However, the choice of the width of the two functions is not arbitrary: we make the difference between two consecutive blurred images, the image blurred by $\sigma_{j+1}$ and the image blurred by $\sigma_j$. Therefore, 
+\begin{equation}
+DoG(R,\sigma, \alpha) = DoG(x, \alpha) = G(x/\alpha) - G(x),
+\end{equation}
+with $\alpha=2^{1/n}$. Here it is clear that minimizing $DoG(x, \alpha)$ with respect to $x$ yields a value $x^*$ that depends only on $\alpha$. This means the optimal value of $\sigma$ is proportional to $R$.  Both $\sigma^*$ and the proportionality constant are function of $n$, but $R$ is an absolute value independent of the way we measure it. Formally, we have
 \begin{equation}
 	R = \sigma^* \sqrt{\frac{6\ln \alpha}{1-\alpha^{-2}}}, 
 	\label{eq:scale_dil}
 \end{equation}
-where $\alpha = 2^{1/n}$ is the step of the discrete scale space. Eq.~(S\ref{eq:scale_dil}) allows to translate the $n$-dependent $\sigma^*$ to the parameter-free real radius of the particle, $R$.} The error on $R$ does depend on the number of subdivisions.
+that allows to translate the $n$-dependent $\sigma^*$ to the parameter-free real radius of the particle, $R$.} The error on $R$ does depend on the number of subdivisions.
 
 We found that the radius of an isolated pixelated ball can be indeed measured within $0.3\%$ relative error with this method, provided a sub-scale resolution step similar to the spatial sub-pixel resolution step. The point spread function of real confocal images acts like an blur in the Z direction. As long as this blur can be approximated to a Gaussian, one can show that it affects the proportionality constant without adding a constant term in Eq.~(S\ref{eq:scale_dil}).
 
