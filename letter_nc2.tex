@@ -16,18 +16,18 @@ Thank you very much for your e-mail concerning our manuscript (NCOMMS\nobreakdas
 Following the constructive comments and suggestions of the Reviewers, we have revised our manuscript. 
 We believe that we have been able to answer the comments of both reviewers on a satisfactory level and thus the revised manuscript has been much improved, thanks to the valuable comments of both Reviewers. 
 
-At the same time, we revised our manuscript to follow the format requirements of Nature Communication: the abstract has been reduced to 150 words, we added headings and subheading, a final paragraph was added to the (shortened) introduction. We also transferred most of the supplementary material to the method section, as you kindly suggested.
+At the same time, we have revised our manuscript to follow the format requirements of Nature Communication: the abstract has been reduced to 150 words, we added headings and subheading, a final paragraph was added to the (shortened) introduction. We also transferred most of the supplementary material to the method section, as you kindly suggested.
 
 We note that revised parts have been highlighted with blue characters in the revised manuscript. 
 
 We hope that you and your reviewers would find that the revised manuscript is now suitable for publication in Nature Communications. 
 
 \closing{\bf Sincerely yours,} 
-\clearpage
+%\clearpage
 
 \textsf{\textbf{Replies to the comments of Reviewer \#2}}
 
-First, we thank the Reviewer for his commitment to the improvement of our manuscript. Provided your kind and knowledgeable comments, we were able to make significant progresses.
+First, we thank the Reviewer for his or her commitment to the improvement of our manuscript. Following the kind and knowledgeable comments of the Reviewer, we have been able to make significant progresses.
 
 \begin{quotationi}
 The authors have substantially addressed the criticisms that were previously made, but a key point that arises from the latest modifications remains to be addressed.
@@ -35,20 +35,27 @@ The authors have substantially addressed the criticisms that were previously mad
 The calculation of the dynamical length scale from fitting the four-point function (S5) with an OZ form (S7) relies on having a good estimate of $\chi_4(t)$ for the $q\rightarrow 0$ intercept. As the authors point out, this intercept would be extremely difficult to measure experimentally through the approach used in the simulations of SI Ref. 24. The alternate approach of directly measuring the $q\rightarrow 0$ limit of $S_4(q,t)$ is also more difficult here than in the simulations of SI Ref. 24, presumably because of the specifics of the experimental setup (although the experimental cell contains a lot more particle than the 80k used in simulations). This difficulty, however, is expected to have a larger impact on the $S_4$ results at high $\phi$ than at low $\phi$, because at high $\phi$: (1) the low $q$ regime becomes more important for the OZ (S7) fit and (2) the corrections to $\chi_4(t)$ become more significant (see SI Ref. 24 Fig. 8). It is therefore unclear why the authors claim that their $\phi<0.56$ results are less robust than the ones at $\phi>0.56$ (SI p.6). Fortunately, according to SI Ref. 24's Fig. 6, at high $\phi$ the real space $G_4(r,t)$ function should bypass both of these difficulties in estimating $\xi_4$. Because the core of the author's thesis relies on having a reliable estimate of the dynamical length scale and that the authors' results for that length scale are now remarkably smaller at high $\phi$ than those of SI Ref. 24's Fig. 11, such check is not superfluous. If the difference between simulation and experiment is sustained, a brief discussion of the difference would be in order. Note also that a figure like SI Ref. 24's Fig. 17 would be more instructive than the current Fig. S5.
 \end{quotationi}
 
-The absence of $q\rightarrow 0$ value of $S_4$ is indeed a weakness of our analysis. Rather than going back to real-space correlation function (the Reviewer previously stressed that ``describing the envelope around a noisy, slowly oscillating yet rapidly decaying function is numerically quite challenging'' and we could not agree more) we found a way to measure directly $\chi_4$ from our data.
+The absence of $q\rightarrow 0$ value of $S_4$ was indeed a weakness of our analysis. Rather than going back to real-space correlation function (the Reviewer previously stressed that ``describing the envelope around a noisy, slowly oscillating yet rapidly decaying function is numerically quite challenging'' and we could not agree more) we found a way to measure directly $\chi_4$ from our data.
 
-The comment of the Reviewer reminded us about a discussion we had with Grzegorz Szamel about his paper (above SI Ref. 24). The main issue in measuring $\chi_4$ from the fluctuation of the number of overlapping particles $N_s$ in simulation is the lack of variation of the total number of particles $N$. However in our experimental window we do not have a fixed number of particles and we can write
+The comment of the Reviewer reminded us of a discussion we had with Grzegorz Szamel about his paper (above SI Ref. 24). The main issue in measuring $\chi_4$ from the fluctuations of the number of overlapping particles $N_s$ in simulation is the lack of variation of the total number of particles $N$. This is a consequence of the ensemble of fixed $N$ used in simulations and its small size. However in our experimental window we do not have a fixed number of particles and furthermore our sample volume has contact with a large reservoir 
+(the whole sample). Thus we can have the following relation:
 \[
-\chi_4(t) = (\langle N_s^2\rangle - \langle N_s\rangle^2) /  \langle N\rangle
+\chi_4(t) = (\langle N_s^2\rangle - \langle N_s\rangle^2) /  \langle N\rangle. 
 \]
-Another way of formalising the situation is that we have a very large system (all the suspension) that reaches the thermodynamic limit where all ensembles are equivalent. Our experimental window is probing a small part of this large system. At a given time, we have access to a limited range of wave numbers. However a time average probes the whole large system state and is thus ensemble independent.
+We may say that we have a very large system (the entire suspension in a sample tube) that reaches the thermodynamic limit where all ensembles become equivalent. Our experimental window is probing a small part of this large system. At a given time, we have access to a limited range of wave numbers. However a time average probes the whole large system state and is thus ensemble independent.
 
-We use the value of $\chi_4$ given by the above formula as $S_4(q=0,t)$ in our fit. The figures were updated accordingly and Fig. S5 is now on the model of Ref. 24's Fig. 17. You may notice decrease at low $\phi$ and increase a high $\phi$, leading to a slightly larger slope. We argue that the difference in value with Ref. 24 has two possible causes:
+We use the value of $\chi_4$ given by the above formula as $S_4(q=0,t)$ in our fit. The figures were updated accordingly and Fig. S5 is now on the model of Ref. 24's Fig. 17. You may notice decrease at low $\phi$ and increase a high $\phi$, leading to a slightly larger slope. 
+We have found that the dynamic correlation length $\xi_4$ behaves coherent with the static correlation length $\xi_6$ (see the inset of Fig. 1), 
+with a slight difference in the bare correlation length. 
+We note that their absolute values are consistent with the corresponding ones which we obtained 
+from numerical simulations of a colloidal suspensions of the comparable polydispersity (see below). 
+
+We argue that the difference in value between ours and those in Ref. 24 has two possible causes:
 \begin{enumerate}
 \item In Ref. 24 the length are given in unit of the smaller diameter. In our system we use the mean diameter. This may account for a global factor up to $1.4$ (the size ratio of Ref. 24).
 \item A fundamental difference between systems: binary vs polydisperse, different fragilities, different underlying crystal structures.
 \end{enumerate} 
-Actually our simulations of polydisperse ($6\%$) WCA spheres (see e.g. Tanaka, Kawasaki \emph{et al.} Nature Materials and J.Chem.: Phys. 2010) have the same kind of absolute values for their length scales.
+Actually our simulations of polydisperse ($6\%$) WCA spheres (see e.g. Tanaka, Kawasaki \emph{et al.} Nature Materials [7] and J. Phys.: Condens. Matter 2010) have the same kind of absolute values for their length scales, as mentioned above.
 
 \begin{quotationi}
 Minor points:
@@ -56,7 +63,7 @@ Minor points:
 \item For completion, the authors should define explicitly $\tau_\alpha$ and $\chi_4(t)$.
 \end{itemize}
 \end{quotationi}
-We have now defined both terms.
+Thanks. We have now defined both terms.
 
 \begin{quotationi}
 ~
@@ -64,7 +71,7 @@ We have now defined both terms.
 \item On p. 3 4th line, the authors probably mean to write ``Modern spin-glass-type theories of the structural glass transition''.
 \end{itemize}
 \end{quotationi}
-You are right. We corrected this sentence.
+Following the kind suggestion, we corrected this sentence.
 
 We hope that the Reviewer would think that the revised manuscript has been much improved and is now suitable for publication in Nature Communications. 
  
@@ -82,15 +89,16 @@ First, we thank the Reviewer for having carefully read our revised manuscript an
 First, I am still confused why the point spread function does not result in an offset. I am happy to consider the case of a symmetric, Gaussian point spread function, as the authors suggest. Shouldn't this result in a raw image with a larger-than-real particle size? For that matter, if the dye within the particle is some function of the radial distance within the particle, might not that influence the results? For example, if most of the dye was concentrated in the core of the particle? If the authors could explain this better that might be nice, at the very least they could do so in their future paper that promises to go into more detail on this method.
 \end{quotationi}
 
-Indeed the gaussian point spread function do result in a larger-than-real particle size. However, the real radii are proportional to the measured radii thus the problem reduces to the determination of a system-wise proportionality constant. This can be done by analysis of the point spread function or by measurement of the position of the first peak of $g(\hat{r})$ defined in the supplementary (that is what we have done here). One can also deconvolve the image prior to the tracking.
+Indeed the gaussian point spread function do result in a larger-than-real particle size. However, the real radii are proportional to the measured radii thus the problem reduces to the determination of a system-wise proportionality constant. This can be done by analysis of the point spread function or by measurement of the position of the first peak of $g(\hat{r})$ defined in Supplementary Information (that is what we have done here). One can also deconvolve the image prior to the tracking.
 
-We haven't thought about the dye repartition within a particle, probably because our colloids had a rather uniform repartition. We that you for this idea and we may discuss about that in our paper on the subject (80\% written).
+We have not thought about the dye repartition within a particle, probably because our colloids had a rather uniform repartition. We thank the Reviewer for this idea and we may discuss about that in our future paper on the subject.
 
 \begin{quotationi}
-Second, I do not understand how the right-hand side of Eqn. S1 is n-independent, although I am willing to assume that the authors are correct. Here is my logic, and hopefully the authors can explain to me the flaw in my reasoning. One looks for the best sigma for a given particle. Given that the sigma's are chosen from a sequence of sigma's, I could say that the best sigma for a given particle is $\sigma_j = 2^{j/n} \sigma_0$, using the formula defining sigma in the text. Then the particle radius is $R = 2^{j/n} \sigma_0 \sqrt{3 \ln 2 / (n (1-2^{-2/n}))}$. For different choices of $n$, I understand that the ratio $j/n$ will be approximately the same but vary slightly depending on which $j$ is optimal. But how then does the $n$-dependence in the square root cancel out? I just can't see this mathematically. Perhaps there is some reason that the ratio $j/n$ does change when $n$ is changed? Similar to the first point, I am willing to trust that the authors have done the work correctly but I do not think I could reproduce their algorithm with my current level of understanding of what is written. And, the algorithm sounds straightforward enough and in general is clear, so I am frustrated by the gap in my understanding.
+Second, I do not understand how the right-hand side of Eqn. (S1) is n-independent, although I am willing to assume that the authors are correct. Here is my logic, and hopefully the authors can explain to me the flaw in my reasoning. One looks for the best sigma for a given particle. Given that the sigma's are chosen from a sequence of sigma's, I could say that the best sigma for a given particle is $\sigma_j = 2^{j/n} \sigma_0$, using the formula defining sigma in the text. Then the particle radius is $R = 2^{j/n} \sigma_0 \sqrt{3 \ln 2 / (n (1-2^{-2/n}))}$. For different choices of $n$, I understand that the ratio $j/n$ will be approximately the same but vary slightly depending on which $j$ is optimal. But how then does the $n$-dependence in the square root cancel out? I just can't see this mathematically. Perhaps there is some reason that the ratio $j/n$ does change when $n$ is changed? Similar to the first point, I am willing to trust that the authors have done the work correctly but I do not think I could reproduce their algorithm with my current level of understanding of what is written. And, the algorithm sounds straightforward enough and in general is clear, so I am frustrated by the gap in my understanding.
 \end{quotationi}
 
-The cancelling of the $n$ dependence is indeed not obvious in Eq. S1 alone, so we reformulate this paragraph.
+The cancelling of the $n$ dependence is indeed not obvious in Eq. (S1) alone, so we have reformulated this paragraph.
+
 
 The analytical response of a binary ball to a Gaussian blur, at the center of the ball is a function of dimensionless ratio $x=R/\sigma$: $G(x)$. The DoG response function is the difference between the two such functions. However, the choice of the width of the two functions is not arbitrary: we make the difference between two consecutive blurred images, the image blurred by $\sigma_{j+1}$ and the image blurred by $\sigma_j$. Therefore, 
 \[
