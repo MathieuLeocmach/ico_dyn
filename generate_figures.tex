@@ -13,7 +13,7 @@
 \pgfplotsset{every axis/.append style={small}}
 
 \begin{document}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[
@@ -64,23 +64,20 @@
 			width=0.3\textwidth, %
 			xlabel=$\phi$, xmin=0.49, xmax=0.58, xlabel near ticks,%
 			xtick={0.5,0.52,...,0.6},%
-			ylabel=$\xi/\sigma$, ymin=0.5, ymax=2.1,%
-			ytick={0.75, 1, 1.25, 1.5, 1.75},%
+			ylabel=$\xi/\xi_0$, ymax=10,
+			ytick={2,4,6,8},
 			ytick pos=right, ylabel near ticks,%
 			label style={font=\tiny}, %
 			legend pos=north west,%
 			axis background/.style={fill=white},%
 			]
-			%\addplot+[mark=none, forget plot, domain=0.49:0.58] {0.41158778*(1-x/0.59773962)^(-2.0/3.0)};
-			%\addplot+[only marks, fill=white] table[x index=0, y index=2]{xi_phi.dat};
-			\addplot+[mark=none, forget plot, domain=0.49:0.58] {0.18878182*(1-x/0.59773962)^(-2.0/3.0)};
-			\addplot+[only marks, fill=black] table[x index=0, y index=3]{scale.xi};
-			\addplot+[mark=none, dashed, forget plot, domain=0.49:0.58] {0.194752*(1-x/0.59773962)^(-2.0/3.0)};
-			\addplot+[only marks, fill=white] table[x index=0, y index=5]{scale.xi};
+			\addplot+[only marks, fill=black] table[x index=0, y expr=\thisrowno{3}/0.135]{scale.xi};
+			\addplot+[mark=none, forget plot, domain=0.49:0.58] {(0.6/x-1)^(-2.0/3.0)};
+			\addplot+[only marks, fill=white] table[x index=0, y expr=\thisrowno{5}/0.216]{scale.xi};
 			\legend{$\xi_6$ structural, $\xi_4$ dynamical};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering function computed from the positions for several volume fractions. Lines are stretched exponential fit from which is extracted the structural relaxation time $\tau_\alpha$ {\bf b,} $\tau_\alpha$ and the characteristic time of the dynamic heterogeneity $t^{dh}$ scaled by the Brownian time $\tau_B$ as a function of $\phi$. The solid curve is the VFT fit of $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$) and structural correlation length ($\xi_6$). Curves are power-law fits (see text).}
+	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering function computed from the positions for several volume fractions. Lines are stretched exponential fit from which is extracted the structural relaxation time $\tau_\alpha$ {\bf b,} $\tau_\alpha$ and the characteristic time of the dynamic heterogeneity $t^{dh}$ scaled by the Brownian time $\tau_B$ as a function of $\phi$. The solid curve is the VFT fit of $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$) and structural correlation length ($\xi_6$) scaled by their respective bare correlation length, respectively $\xi_{4,0}=0.206\sigma$ and $\xi_{6,0}=0.129\sigma$. The curve is the power-law given in the text.}
 	\label{fig:vft}
 \end{figure}
 \tikzset{external/force remake=false}
@@ -210,7 +207,7 @@
 	\caption{Population of local structures function of \textsc{boo}. (a-c) For our deepest supercooled sample ($\phi=0.575\pm 0.03$) in the $(Q_4,Q_6)$-plane (a), $(w_4,Q_6)$-plane (b) and $(w_6,Q_6)$-plane (c). (d) is the same as (c) but for a liquid near the freezing point ($\phi = 0.497 \pm 0.03$). Colour represent the probability to find the structure (log scale). The arrows stress the ordering tendencies: the tendency toward \textsc{fcc} is always visible, but a tendency toward \textsc{hcp} can be distinguished in (b) and the tendency toward icosahedral order is visible in (c).}
 	\label{fig:maps}
 \end{figure}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 
 \begin{figure}
 	\begin{tikzpicture}[
