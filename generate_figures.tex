@@ -321,7 +321,7 @@
 	\caption{\textbf{Bond order mobility.} {\bf a,} Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample. The colour scale is saturated at $1.5$ times the bulk mean square displacement. {\bf b-c,} Normalised mobility for icosahedral and crystalline order parameters respectively. Bulk mean square displacement is scaled to be at 1. Perfect structures are on the edge of each plot. The lines are a guide for the eye, stressing the collapse of the $w_6$-mobility at all volume fractions in {\bf b} and the absence of collapse in {\bf c}. The scattering at low volume fractions is due to poor averaging of rare structures. Example of \textbf{d} crystal-like cluster and \textbf{e} distorted icosahedron at the respective threshold values.}
 	\label{fig:msd_Q6_w6}
 \end{figure}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 
 \begin{figure}
 	\centering
@@ -550,10 +550,10 @@
 	\label{fig:percolation}
 \end{figure}
 
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 \begin{figure}
 	\centering
-	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
+	\begin{tikzpicture}[lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
 	\pgfplotsset{fitc/.style={no markers, forget plot, domain=0.3:3}}
 	\begin{loglogaxis}[%
 		xlabel={$q\sigma$}, ylabel={$S_4(q)$},
@@ -574,6 +574,7 @@
 		\addplot+[red, only marks] file {go1.S4};
 		\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 		\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
+		\node[lab] at (rel axis cs:0, 1) {a};
 	\end{loglogaxis}
 	\begin{loglogaxis}[%
 		at={(0.5\textwidth,0)},
@@ -593,6 +594,7 @@
 		\addplot+[black, fitc] {1/(1+x^2)};
 		\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 		\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
+		\node[lab] at (rel axis cs:0, 1) {b};
 	\end{loglogaxis}
 	\end{tikzpicture}
 	\caption{\textbf{Four-point structure factor} at different volume fractions}
