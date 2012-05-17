@@ -97,6 +97,8 @@ First, I am still confused why the point spread function does not result in an o
 
 Indeed the gaussian point spread function do result in a larger-than-real particle size. However, the real radii are proportional to the measured radii thus the problem reduces to the determination of a system-wise proportionality constant. This can be done by analysis of the point spread function or by measurement of the position of the first peak of $g(\hat{r})$ defined in Supplementary Information (that is what we have done here). One can also deconvolve the image prior to the tracking.
 
+We stress that the usefulness of our method here is not so much the exact size determination of each particle (very good in ideal case, probably perfectible in real conditions) but the localisation of \emph{all} the particles of a polydisperse sample. This feature is lacking in standard Crocker-Grier tracking method.
+
 We have not thought about the dye repartition within a particle, probably because our colloids had a rather uniform repartition. We thank the Reviewer for this idea and we may discuss about that in our future paper on the subject.
 
 \begin{quotationi}
@@ -106,11 +108,15 @@ Second, I do not understand how the right-hand side of Eqn. (S1) is n-independen
 The cancelling of the $n$ dependence is indeed not obvious in Eq. (S1) alone, so we have reformulated this paragraph.
 
 
-The analytical response of a binary ball to a Gaussian blur, at the center of the ball is a function of dimensionless ratio $x=R/\sigma$: $G(x)$. The DoG response function is the difference between the two such functions. However, the choice of the width of the two functions is not arbitrary: we make the difference between two consecutive blurred images, the image blurred by $\sigma_{j+1}$ and the image blurred by $\sigma_j$. Therefore, 
+The analytical response of a binary ball to a Gaussian blur, at the center of the ball is a function of dimensionless ratio $x=R/\sigma$: $G(x)$. The DoG response function is the difference between two such functions with same $R$ and different $\sigma$. However, the choice of the width of the two Gaussians is not arbitrary: we make the difference between two consecutive blurred images, the image blurred by $\sigma_{j+1}$ and the image blurred by $\sigma_j$. Therefore, in each of our discreet DoG images the value at the center of the particle can be expressed as
 \[
-DoG(R,\sigma, \alpha) = DoG(x, \alpha) = G(x/\alpha) - G(x) \quad\text{with }\alpha=2^{1/n}.
+DoG(R,\sigma_j, \alpha) = DoG(x_j, \alpha) = G(x_j/\alpha) - G(x_j) \quad\text{with }\alpha=2^{1/n}.
 \]
-Here it is clear that minimizing $DoG(x, \alpha)$ with respect to $x$ yields a value $x^*$ that depends only on $\alpha$. This means the optimal value of $\sigma$ is proportional to $R$.  Both $\sigma^*$ and the proportionality constant are function of $n$, but $R$ is an absolute value independent of the way we measure it.
+Given sub-scale refinement (polynomial fit), this can be written as a continuous function of $\sigma$:
+\[
+DoG(R,\sigma, \alpha) = DoG(x, \alpha) = G(x/\alpha) - G(x).
+\]
+Here it is clear that minimizing $DoG(x, \alpha)$ with respect to $x$ yields a value $x^*$ that depends only on $\alpha$. This means the optimal value of $\sigma$ is proportional to $R$.  Both $\sigma^*$ and the proportionality constant $x^*$ are function of $n$, but $R$ is an absolute value independent of the way we measure it.
 
 We hope that the Reviewer would think that the revised manuscript is now suitable for publication in Nature Communications. 
 
