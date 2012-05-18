@@ -75,7 +75,9 @@
 				error bars/.cd, y dir=both, y explicit relative,%
 				] table[x index=0, y expr=\thisrowno{3}/0.126, y error index=6]{scale.xi};
 			\addplot+[mark=none, forget plot, domain=0.49:0.58] {(0.6/x-1)^(-2.0/3.0)};
-			\addplot+[only marks, mark=square] table[x index=0, y expr=\thisrowno{5}/0.216]{scale.xi};
+			\addplot+[only marks, mark=square, %
+				error bars/.cd, y dir=both, y explicit relative,%
+				] table[x index=0, y expr=\thisrowno{5}/0.216, y error index=7]{scale.xi};
 			\legend{$\xi_6$ structural, $\xi_4$ dynamical};
 		\end{axis}
 	\end{tikzpicture}
