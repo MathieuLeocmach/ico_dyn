@@ -13,6 +13,15 @@
 \pgfplotsset{every axis/.append style={small, %
 	axis x line=bottom, axis y line=left
 	}}
+	
+\pgfplotscreateplotcyclelist{grade5}{%
+blue, every mark/.append style={fill=blue},mark=*\\%
+blue!30!gray,every mark/.append style={fill=blue!30!gray},mark=square*\\%
+gray!50!black,mark=star\\%
+red!30!gray, every mark/.append style={fill=red!30!gray}, mark=triangle*\\%
+red, every mark/.append style={fill=red},mark=diamond*\\%
+}
+
 
 \begin{document}
 \tikzset{external/force remake}
@@ -21,7 +30,6 @@
 	\begin{tikzpicture}[
 		lab/.style={above right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
 		]%
-		\pgfplotsset{cycle list name=black white}
 		\pgfplotsset{fitc/.style={solid, no markers, forget plot, domain=1:1e4}}
 		\begin{axis}[%
 			anchor=right of south east,%
@@ -29,21 +37,23 @@
 			xlabel=$t/\tau_B$, xmode=log,%
 			ylabel={Self ISF}, ymin=0,%
 			legend columns=3, reverse legend, legend style={font=\tiny, at={(1,1.03), nodes={anchor=east}}, anchor=south east}, %
+			cycle list name=grade5,%
 			]
-			\addplot+[only marks] file {LS3954.isf};
-			\addplot+[only marks] file {LS4446.isf};
-			\addplot+[only marks] file {LS4582.isf};
-			\addplot+[only marks] file {LS5079.isf};
-			\addplot+[only marks] file {go1.isf};
 			\addplot+[fitc] {0.943 * exp(-(x/4.60)^0.72)};
+			\addplot+[only marks] file {LS3954.isf};
 			\addplot+[fitc] {0.901 * exp(-(x/10.78)^0.72)};
+			\addplot+[only marks] file {LS4446.isf};
 			\addplot+[fitc] {0.894 * exp(-(x/15.51)^0.70)};
+			\addplot+[only marks] file {LS4582.isf};
 			\addplot+[fitc] {0.876 * exp(-(x/60.18)^0.60)};
+			\addplot+[only marks] file {LS5079.isf};
 			\addplot+[fitc] {0.787 * exp(-(x/2408.)^0.70)};
+			\addplot+[only marks] file {go1.isf};
 			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 			\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
 			\node [lab] at (rel axis cs:0,0) {a};
 		\end{axis}
+		\pgfplotsset{cycle list name=black white}
 		\begin{axis}[%
 			anchor=left of south west,%
 			width=0.45\textwidth, %
@@ -84,7 +94,7 @@
 	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering function computed from the positions for several volume fractions. Lines are stretched exponential fit from which is extracted the structural relaxation time $\tau_\alpha$ {\bf b,} $\tau_\alpha$ and the characteristic time of the dynamic heterogeneity $t^\text{dh}$ scaled by the Brownian time $\tau_B$ as a function of $\phi$. The solid curve is the VFT fit of $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$) and structural correlation length ($\xi_6$) scaled by their respective bare correlation length, respectively $\xi_{4,0}=0.206\sigma$ and $\xi_{6,0}=0.126\sigma$. The curve is the power-law given in the text.}
 	\label{fig:vft}
 \end{figure}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \begin{figure}
 	\begin{tikzpicture}[
 		lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
@@ -289,7 +299,7 @@
 			extra x tick style={grid=major,	tick label style={anchor=south west}},%
 			extra y ticks={1},%
 			extra y tick style={grid=major,	tick label style={anchor=south west}}, extra y tick labels={},%
-			%legend columns=5,%
+			cycle list name=grade5,%
 			legend style={
 				font=\footnotesize,
 				%at={(1,1)}, anchor=south,%
@@ -302,11 +312,13 @@
 				xtick scale label code/.code={},%
 				ylabel=${\Delta r^2(w_6,t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$,
 				extra x ticks={\wstar, -0.00782}, extra x tick labels={$w_6^*$,$w_6^\text{dod}$},%
-				extra y tick labels={bulk}
+				extra y tick labels={bulk},%
 				]
 			
 			%\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi3954.txt};
+			\pgfplotsset{cycle list shift=1}
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi4446.txt};
+			\pgfplotsset{cycle list shift=2}
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi5079.txt};
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_go1.txt};
 			\addplot+[domain=-0.0521089193:0.01, sharp plot, no markers] {9.34701 * x + 1.03764};
@@ -323,9 +335,11 @@
 			\legend{$0.003$,%$0.497$, 
 				$0.535$, $0.555$, $0.575$};
 			%\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_3954.txt};
+			\pgfplotsset{cycle list shift=1}
 			\addplot+[domain=0.05:0.3, sharp plot, no markers, forget plot] {-0.76 * x + 1.1};
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_4446.txt};
 			%\addplot+[domain=0.05:0.3, sharp plot, no markers, forget plot] {1.09-1.18*x+8.95*x^2-38*x^3};
+			\pgfplotsset{cycle list shift=2}
 			\addplot+[smooth, no markers, forget plot] coordinates {(0.08, 1.04) (0.2, 0.92) (0.32, .62)};
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_5079.txt};
 			\addplot+[smooth, no markers, forget plot] coordinates {(0.08, 1.23) (0.1, 1.22) (0.15, 1.07) (0.25, 0.65) (0.35, 0.33) (0.45, 0.18) (0.5, 0.15)};
@@ -435,7 +449,7 @@
 	\caption{\textbf{Visualisation of the results of various tracking methods for the same portion of image.} The circles on each picture are identical and result from 2D multiscale tracking of each XY slice of the 3D pictures. \textbf{a} XZ and YZ slices of the image (fake colors). \textbf{b} Multiscale 3D tracking. Spheres are drawn with the radius determined by the tracking methods. \textbf{c-h} Crocker and Grier in 3D with blurring radius increasing from \unit{2}{px} to \unit{4.5}{px} by steps of \unit{0.5}{px} (Sphere radii correspond to the blurring radius).}
 	\label{fig:localise}
 \end{figure}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[%
@@ -493,7 +507,7 @@
 	\caption{\textbf{Sizing of our colloids.} \textbf{a,b} XY and XZ slices (detail) of a typical confocal 3D image of our sample. Note the excellent Z resolution, almost not affected by the point spread function. \textbf{c,} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.7\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once $23\%$ of swelling of particle diameters is taken into account (full line). \textbf{d,} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
 	\label{fig:sizing}
 \end{figure}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
@@ -581,21 +595,21 @@
 	\pgfplotsset{fitc/.style={no markers, forget plot, domain=0.3:3}}
 	\begin{loglogaxis}[%
 		xlabel={$q\sigma$}, ylabel={$S_4(q)$},
-		cycle list name=mark list,%
+		cycle list name=grade5,%
 		xmin=0.2, xmax=10, ymin=0.06,%
 		width=0.45\textwidth,%
 		legend pos=south west, reverse legend, legend style={font=\scriptsize}, %
 		]
-		\addplot+[blue, fitc] {0.634/(1+0.703^2*x^2)};
-		\addplot+[blue, only marks] file {LS3954.S4};
-		\addplot+[blue!30!gray, fitc] {0.744/(1+0.804^2*x^2)};
-		\addplot+[blue!30!gray, only marks] file {LS4446.S4};
-		\addplot+[gray, fitc] {0.778/(1+0.835^2*x^2)};
-		\addplot+[gray, only marks] file {LS4582.S4};
-		\addplot+[red!50!gray, fitc] {1.011/(1+1.017^2*x^2)};
-		\addplot+[red!50!gray, only marks] file {LS5079.S4};
-		\addplot+[red, fitc] {2.950/(1+1.959^2*x^2)};
-		\addplot+[red, only marks] file {go1.S4};
+		\addplot+[fitc] {0.634/(1+0.703^2*x^2)};
+		\addplot+[only marks] file {LS3954.S4};
+		\addplot+[fitc] {0.744/(1+0.804^2*x^2)};
+		\addplot+[only marks] file {LS4446.S4};
+		\addplot+[fitc] {0.778/(1+0.835^2*x^2)};
+		\addplot+[only marks] file {LS4582.S4};
+		\addplot+[fitc] {1.011/(1+1.017^2*x^2)};
+		\addplot+[only marks] file {LS5079.S4};
+		\addplot+[fitc] {2.950/(1+1.959^2*x^2)};
+		\addplot+[only marks] file {go1.S4};
 		\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 		\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
 		\node[lab] at (rel axis cs:0, 1) {a};
@@ -604,17 +618,18 @@
 		at={(0.5\textwidth,0)},
 		width=0.45\textwidth,%
 		xlabel={$q\xi_4$}, ylabel={$S_4(q)/\chi_4$},
-		cycle list name=mark list,%
+		cycle list name=grade5,%
 		xmin=0.25, xmax=5, ymin=0.05,%
 		xtick={0.5, 1, 2, 4},
-		xticklabel=\pgfmathparse{exp(\tick)}\pgfmathprintnumber{\pgfmathresult},
+		xticklabel=\pgfmathparse{exp(\tick)}%
+			\pgfmathprintnumber{\pgfmathresult},
 		legend pos=south west, reverse legend, legend style={font=\scriptsize}, %
 		]
-		\addplot+[blue, only marks] table[x expr={\thisrowno{0}*0.703}, y expr={\thisrowno{1}/0.634}] {LS3954.S4};
-		\addplot+[blue!30!gray, only marks] table[x expr={\thisrowno{0}*0.804}, y expr={\thisrowno{1}/0.744}] {LS4446.S4};
-		\addplot+[gray, only marks] table[x expr={\thisrowno{0}*0.835}, y expr={\thisrowno{1}/0.778}] {LS4582.S4};
-		\addplot+[red!50!gray, only marks] table[x expr={\thisrowno{0}*1.017}, y expr={\thisrowno{1}/1.011}] {LS5079.S4};
-		\addplot+[red, only marks] table[x expr={\thisrowno{0}*1.959}, y expr={\thisrowno{1}/2.950}] {go1.S4};
+		\addplot+[only marks] table[x expr={\thisrowno{0}*0.703}, y expr={\thisrowno{1}/0.634}] {LS3954.S4};
+		\addplot+[only marks] table[x expr={\thisrowno{0}*0.804}, y expr={\thisrowno{1}/0.744}] {LS4446.S4};
+		\addplot+[only marks] table[x expr={\thisrowno{0}*0.835}, y expr={\thisrowno{1}/0.778}] {LS4582.S4};
+		\addplot+[only marks] table[x expr={\thisrowno{0}*1.017}, y expr={\thisrowno{1}/1.011}] {LS5079.S4};
+		\addplot+[only marks] table[x expr={\thisrowno{0}*1.959}, y expr={\thisrowno{1}/2.950}] {go1.S4};
 		\addplot+[black, fitc] {1/(1+x^2)};
 		\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 		\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
