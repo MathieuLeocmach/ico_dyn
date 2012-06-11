@@ -24,7 +24,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 
 
 \begin{document}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[
@@ -94,7 +94,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering (ISF) function computed for several volume fractions at wave vector $q=2\pi/\left\langle \sigma\right\rangle$ . Lines are stretched exponential fits from which we extract the structural relaxation time $\tau_\alpha$. {\bf b,} $\phi$-dependence of $\tau_\alpha$ (circles) and of the characteristic time of the dynamic heterogeneity $t^\text{dh}$ (squares) scaled by the Brownian time $\tau_B$. The solid curve is the VFT fit for $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$, squares) and structural correlation length ($\xi_6$, circles) scaled by their respective bare correlation length, respectively $\xi_{4,0}=0.206\sigma$ and $\xi_{6,0}=0.129\sigma$. The curve is the power-law given in the text.}
 	\label{fig:vft}
 \end{figure}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 \begin{figure}
 	\begin{tikzpicture}[
 		lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
@@ -114,16 +114,18 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 		\begin{groupplot}[
 			group style={
 				group name=X,
-				group size=2 by 1,%
+				group size=2 by 2,%
 				horizontal sep=0.1\textwidth,
+				vertical sep=0.1\textwidth,
 				},%
 			anchor=below south west,%
-			width=0.45\textwidth,%
+			width=0.48\textwidth,%
 			xtick scale label code/.code={},%
 			]
 		\nextgroupplot[%
 			xlabel=$Q_4$,%
 			xmin=0,xmax=0.22,%
+			xtick = {0,0.05,...,0.25},%
 			xticklabel={$\pgfmathprintnumber[fixed,precision=2]{\tick}$}
 			]
 		\addplot graphics
@@ -152,8 +154,46 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 		\draw[->, white,thick] (axis cs:0, 0.15) to [out=120, in=280] (axis cs:-0.0005, 0.4);
 		\draw[->, white,thick] (axis cs:0, 0.15) to (axis cs:7E-05, 0.35);
 		
+		
+		\nextgroupplot[
+			xtickmax=0,%
+			xmin=-0.052,%xmax=0.01,%
+			xlabel=$10^2 \cdot w_6$,%
+			extra x ticks={\wstar, -0.00782},%
+			extra x tick labels={,},%
+			xtick scale label code/.code={},%
+			]
+		\addplot graphics
+		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
+		{u6Q6go1_scale};
+		\node [lab] at (rel axis cs:0,1) {c};
+		\node at (axis cs:\wstar,0.6) (a) {};
+		\node at (axis cs:-0.00782,0.6) (b) {};
+		\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
+		\node [below, right] at (axis cs:-0.052, 0.05) {\textsc{Ico}};
+		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=90, in=275] (axis cs:-0.0015, 0.33);
+		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=180, in=30] (axis cs:-0.025, 0.12);
+		
+		\nextgroupplot[
+			xtickmax=0,%
+			xmin=-0.052,%xmax=0.01,%
+			xlabel=$10^2 \cdot w_6$,%
+			extra x ticks={\wstar, -0.00782},%
+			extra x tick labels={,},%
+			xtick scale label code/.code={},%
+			]
+		\addplot graphics
+		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
+		{u6Q6phi3954_scale};
+		\node [lab] at (rel axis cs:0,1) {d};
+		\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
+		%\node [anchor=north east] at (rel axis cs:1, 1) {\footnotesize{$\phi = 0.497 \pm 0.03$}};
+		\node [left] at (axis cs:\wstar,0.4) {\footnotesize $w_6^*$};
+		\node [right] at (axis cs:-0.00782,0.4) {\footnotesize $w_6^\text{dod}$};
+		
 		\end{groupplot}
-		%color scales by hand
+		
+		color scales by hand
 		\matrix (l1) [at={(X c1r1.above north)}, matrix of nodes, minimum width=2em, minimum height=1em, inner sep=0, draw=black]
 		{
 			|[fill=white]| & 
@@ -179,48 +219,9 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 		\node[above, at=(l2-1-2.north east)] {$10^4$};
 		\node[above, at=(l2-1-3.north east)] {$10^5$};
 		\node[above, at=(l2-1-4.north east)] {$10^6$};
-
 		
-		\begin{groupplot}[
-			group style={
-				group name=w6Q6,
-				group size=2 by 1,%
-				horizontal sep=0.1\textwidth,
-				},%
-			anchor=above north west,%
-			width=0.38\textwidth,%
-			xlabel=$10^2 \cdot w_6$,%
-			xmin=-0.052,xmax=0.01,%
-			extra x ticks={\wstar, -0.00782},%
-			extra x tick labels={,},%
-			xtick scale label code/.code={},%
-			]
-		
-		\nextgroupplot[xtickmax=0,]
-		\addplot graphics
-		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
-		{u6Q6go1_scale};
-		\node [lab] at (rel axis cs:0,1) {c};
-		\node at (axis cs:\wstar,0.6) (a) {};
-		\node at (axis cs:-0.00782,0.6) (b) {};
-		\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
-		\node [below, right] at (axis cs:-0.052, 0.05) {\textsc{Ico}};
-		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=90, in=275] (axis cs:-0.0015, 0.33);
-		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=180, in=30] (axis cs:-0.025, 0.12);
-		
-		\nextgroupplot
-		\addplot graphics
-		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
-		{u6Q6phi3954_scale};
-		\node [lab] at (rel axis cs:0,1) {d};
-		\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
-		%\node [anchor=north east] at (rel axis cs:1, 1) {\footnotesize{$\phi = 0.497 \pm 0.03$}};
-		\node [left] at (axis cs:\wstar,0.4) {\footnotesize $w_6^*$};
-		\node [right] at (axis cs:-0.00782,0.4) {\footnotesize $w_6^\text{dod}$};
-		
-		\end{groupplot}
-		%color scales by hand
-		\matrix (l3) [right=of w6Q6 c2r1.right of east, matrix of nodes, minimum width=1em, minimum height=2em, inner sep=0, draw=black]
+		\fill[white] (X c1r2.east) ++(0, 6em) rectangle ++(-5em, -12em);
+		\matrix (l3) [left=of X c1r2.right of east, matrix of nodes, minimum width=1em, minimum height=2em, inner sep=0, draw=black]
 		{
 			|[fill=black]| \\ 
 			|[fill=black!75!white]| \\
@@ -232,8 +233,23 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 		\node[right, at=(l3-2-1.south east)] {$10^3$};
 		\node[right, at=(l3-3-1.south east)] {$10^2$};
 		\node[right, at=(l3-4-1.south east)] {$10^1$};
+		
+		\fill[white] (X c2r2.east) ++(0, 6em) rectangle ++(-5em, -12em);
+		\matrix (l4) [left=of X c2r2.right of east, matrix of nodes, minimum width=1em, minimum height=2em, inner sep=0, draw=black]
+		{
+			|[fill=black]| \\ 
+			|[fill=black!75!white]| \\
+			|[fill=black!50!white]| \\
+			|[fill=black!25!white]| \\
+			|[fill=white]| \\
+		};
+		\node[right, at=(l4-1-1.south east)] {$10^4$};
+		\node[right, at=(l4-2-1.south east)] {$10^3$};
+		\node[right, at=(l4-3-1.south east)] {$10^2$};
+		\node[right, at=(l4-4-1.south east)] {$10^1$};
 	\end{tikzpicture}
-	\caption{Population of local structures function of \textsc{boo}. (a-c) For our deepest supercooled sample ($\phi=0.575\pm 0.03$) in the $(Q_4,Q_6)$-plane (a), $(w_4,Q_6)$-plane (b) and $(w_6,Q_6)$-plane (c). (d) is the same as (c) but for a liquid near the freezing point ($\phi = 0.497 \pm 0.03$). Colour represent the probability to find the structure (log scale). The arrows stress the ordering tendencies: the tendency toward \textsc{fcc} is always visible, but a tendency toward \textsc{hcp} can be distinguished in (b) and the tendency toward icosahedral order is visible in (c).}
+	\caption{\textbf{Population of local particle configurations specified by the }\textsc{boo}\textbf{ parameters}. The value of \textsc{boo} parameter for a perfect structure is  indicated by its name's position on each map. \textbf{a} in the $(Q_4,Q_6)$-plane, \textbf{b} $(w_4,Q_6)$-plane and \textbf{c-d} $(w_6,Q_6)$-plane. \textbf{a-c} are the population at deep supercooling ($\phi=0.575\pm 0.03$); \textbf{d} is the same as \textbf{c} but for a liquid near the freezing point ($\phi = 0.497 \pm 0.03$). Colour represents the population having the structure  specified by a combination of a couple of \textsc{boo}'s (log scale, per units of area in the respective planes). The arrows stress the ordering tendencies: the tendency towards \textsc{fcc} is always visible, a weak tendency towards \textsc{hcp} can also be distinguished in \textbf{b}, and the tendency towards icosahedral order (\textsc{ico}) is visible in \textbf{c}. 
+Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a manifestation of competing orderings, or frustration, between them. Straight lines are drawn at important thresholds: $Q_6^*$, $w_6^*$, $w_6^\text{dod}$ and $w_4=0$ that differentiates between \textsc{fcc} and \textsc{hcp}.}
 	\label{fig:maps}
 \end{figure}
 \tikzset{external/force remake=false}
