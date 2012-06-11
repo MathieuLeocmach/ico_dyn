@@ -55,7 +55,7 @@
 			\addplot+[mark=none, forget plot, domain=0.49:0.58] {exp(0.28970401*x/(0.59841615-x))};
 			\addplot+[only marks] table[x index=0, y index=1]{xi_phi.dat};
 			\addplot+[only marks] table[x index=0, y index=4]{xi_phi.dat};
-			\legend{$\tau_\alpha$, $t^{dh}$};
+			\legend{$\tau_\alpha$, $t^\text{dh}$};
 			\node at (rel axis cs:0,1) (a) {};
 			\node [lab] at (rel axis cs:0,0) {b};
 		\end{axis}
@@ -73,16 +73,16 @@
 			]
 			\addplot+[only marks, fill=black, %
 				error bars/.cd, y dir=both, y explicit relative,%
-				] table[x index=0, y expr=\thisrowno{3}/0.126, y error index=6]{scale.xi};
+				] table[x index=0, y expr=\thisrowno{3}/0.126]{scale.xi};
 			\addplot+[mark=none, forget plot, domain=0.49:0.58] {(0.6/x-1)^(-2.0/3.0)};
 			\addplot+[only marks, mark=square] table[x index=0, y expr=\thisrowno{5}/0.216]{scale.xi};
 			\legend{$\xi_6$ structural, $\xi_4$ dynamical};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering function computed from the positions for several volume fractions. Lines are stretched exponential fit from which is extracted the structural relaxation time $\tau_\alpha$ {\bf b,} $\tau_\alpha$ and the characteristic time of the dynamic heterogeneity $t^{dh}$ scaled by the Brownian time $\tau_B$ as a function of $\phi$. The solid curve is the VFT fit of $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$) and structural correlation length ($\xi_6$) scaled by their respective bare correlation length, respectively $\xi_{4,0}=0.206\sigma$ and $\xi_{6,0}=0.126\sigma$. The curve is the power-law given in the text.}
+	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering function computed from the positions for several volume fractions. Lines are stretched exponential fit from which is extracted the structural relaxation time $\tau_\alpha$ {\bf b,} $\tau_\alpha$ and the characteristic time of the dynamic heterogeneity $t^\text{dh}$ scaled by the Brownian time $\tau_B$ as a function of $\phi$. The solid curve is the VFT fit of $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$) and structural correlation length ($\xi_6$) scaled by their respective bare correlation length, respectively $\xi_{4,0}=0.206\sigma$ and $\xi_{6,0}=0.126\sigma$. The curve is the power-law given in the text.}
 	\label{fig:vft}
 \end{figure}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 \begin{figure}
 	\begin{tikzpicture}[
 		lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
@@ -202,14 +202,14 @@
 		\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
 		%\node [anchor=north east] at (rel axis cs:1, 1) {\footnotesize{$\phi = 0.497 \pm 0.03$}};
 		\node [left] at (axis cs:\wstar,0.4) {\footnotesize $w_6^*$};
-		\node [right] at (axis cs:-0.00782,0.4) {\footnotesize $w_6^{dod}$};
+		\node [right] at (axis cs:-0.00782,0.4) {\footnotesize $w_6^\text{dod}$};
 		
 		\end{groupplot}
 	\end{tikzpicture}
 	\caption{Population of local structures function of \textsc{boo}. (a-c) For our deepest supercooled sample ($\phi=0.575\pm 0.03$) in the $(Q_4,Q_6)$-plane (a), $(w_4,Q_6)$-plane (b) and $(w_6,Q_6)$-plane (c). (d) is the same as (c) but for a liquid near the freezing point ($\phi = 0.497 \pm 0.03$). Colour represent the probability to find the structure (log scale). The arrows stress the ordering tendencies: the tendency toward \textsc{fcc} is always visible, but a tendency toward \textsc{hcp} can be distinguished in (b) and the tendency toward icosahedral order is visible in (c).}
 	\label{fig:maps}
 \end{figure}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 
 \begin{figure}
 	\begin{tikzpicture}[
@@ -239,7 +239,7 @@
 			colorbar sampled, colorbar style={%
 				samples=5, ytick={ 0, 0.25, 0.5, 0.75},% 
 				yticklabels={$0$, $0.5$, $1$, $1.5$},%
-				ylabel=${\Delta r^2(w_6, Q_6, t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,%
+				ylabel=${\Delta r^2(w_6, Q_6, t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$,%
 				extra x ticks={},%
 				yticklabel pos=right,%
 				label style={font=\footnotesize},
@@ -250,7 +250,7 @@
 			\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
 			\node [anchor=west] at (rel axis cs:0, 0.8) {\footnotesize{$\phi = 0.575 \pm 0.03$}};
 			\node [left] at (axis cs:\wstar,0.55) {\footnotesize $w_6^*$};
-			\node [left] at (axis cs:-0.00782,0.55) {\footnotesize $w_6^{dod}$};
+			\node [left] at (axis cs:-0.00782,0.55) {\footnotesize $w_6^\text{dod}$};
 			\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
 			\node [below, right] at (axis cs:-0.052, 0.05) {\textsc{Ico}};
 		\end{axis}
@@ -277,8 +277,8 @@
 				xlabel=$10^2 \cdot w_6$, xmin=-0.0521089193, xmax=0.01,%
 				xtickmax={0},%
 				xtick scale label code/.code={},%
-				ylabel=${\Delta r^2(w_6,Q_6,t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,
-				extra x ticks={\wstar, -0.00782}, extra x tick labels={$w_6^*$,$w_6^{dod}$},%
+				ylabel=${\Delta r^2(w_6,Q_6,t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$,
+				extra x ticks={\wstar, -0.00782}, extra x tick labels={$w_6^*$,$w_6^\text{dod}$},%
 				extra y tick labels={bulk}
 				]
 			
@@ -356,7 +356,7 @@
 	\node [lab] at (mrco.north east) {c};
 	\node [lab] at (dyn.north east) {d};
 	\end{tikzpicture}
-	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{a} Particles with more than $7$ crystalline bonds. \textbf{b,} A typical configuration of bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{c,} Crystal-like particles alone (the order parameter was averaged over $t^{dh}/2$). \textbf{d,} Slow particles (see text). Due to particles going in and out of the field of view, the edges of \textbf{c} and \textbf{d} were not accurate and have been removed.}
+	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{a} Particles with more than $7$ crystalline bonds. \textbf{b,} A typical configuration of bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{c,} Crystal-like particles alone (the order parameter was averaged over $t^\text{dh}/2$). \textbf{d,} Slow particles (see text). Due to particles going in and out of the field of view, the edges of \textbf{c} and \textbf{d} were not accurate and have been removed.}
 	\label{fig:3D}
 \end{figure}
 \tikzset{external/force remake=false}
@@ -470,7 +470,7 @@
 	\caption{\textbf{Sizing of our colloids.} \textbf{a,b} XY and XZ slices (detail) of a typical confocal 3D image of our sample. Note the excellent Z resolution, almost not affected by the point spread function. \textbf{c,} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.7\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once $23\%$ of swelling of particle diameters is taken into account (full line). \textbf{d,} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
 	\label{fig:sizing}
 \end{figure}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
@@ -520,7 +520,7 @@
 		]
 		\addplot+[only marks] table {go1_w6.perco};
 		\node [left] at (axis cs:\wstar,1e3) {\footnotesize $w_6^*$};
-		\node [right] at (axis cs:-0.00782,1e3) {\footnotesize $w_6^{dod}$};
+		\node [right] at (axis cs:-0.00782,1e3) {\footnotesize $w_6^\text{dod}$};
 		\node[lab] at (rel axis cs:0.5, 0.95) {c};
 	\end{axis}
 	\begin{axis}[%
