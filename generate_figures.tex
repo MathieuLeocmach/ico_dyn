@@ -10,7 +10,9 @@
 \tikzexternalize
 %\tikzset{external/force remake}
 \tikzset{every mark/.append style={scale=0.8}}
-\pgfplotsset{every axis/.append style={small}}
+\pgfplotsset{every axis/.append style={small, %
+	axis x line=bottom, axis y line=left
+	}}
 
 \begin{document}
 \tikzset{external/force remake}
@@ -93,38 +95,25 @@
 				black}},%
 			every axis/.append style={%
 				height=0.4\textwidth,
+				ylabel={$Q_6$},%
 				ymin=0,ymax=0.6,%
 				extra y ticks={\Qstar}, extra y tick labels={},%
 				enlargelimits=false,axis on top,
-				colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
-				colorbar sampled,%
 				},%
 		}
 		\begin{groupplot}[
 			group style={
+				group name=X,
 				group size=2 by 1,%
-				yticklabels at=edge left,%
-				horizontal sep=0pt,%
+				horizontal sep=0.1\textwidth,
 				},%
 			anchor=below south west,%
 			width=0.45\textwidth,%
 			xtick scale label code/.code={},%
-			colorbar horizontal, colorbar style={%
-				samples=6, xtick={ 0.20,0.4,0.6, 0.8},% 
-				extra y ticks={},%
-				/pgfplots/colorbar shift/.style={yshift=0.3cm},
-				at={(parent axis.north)}, anchor=below south, width=0.9*\pgfkeysvalueof{/pgfplots/parent axis width},
-				xticklabel pos=upper,%
-				label style={font=\footnotesize},
-				},%
 			]
 		\nextgroupplot[%
-			ylabel={$Q_6$}, xlabel=$Q_4$,%
+			xlabel=$Q_4$,%
 			xmin=0,xmax=0.22,%
-			colorbar style={%
-				xlabel={per units of $Q_4\cdot Q_6$},% 
-				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
-				},%
 			xticklabel={$\pgfmathprintnumber[fixed,precision=2]{\tick}$}
 			]
 		\addplot graphics
@@ -141,10 +130,6 @@
 			xmin=-0.002,xmax=0.002,%
 			xtickmin=-0.0015,%
 			extra x ticks=0, extra x tick labels={},
-			colorbar style={%
-				xlabel={per units of $w_4\cdot Q_6$},% 
-				xticklabels={$10^{3}$, $10^{4}$, $10^{5}$, $10^{6}$},%
-				},%
 			]
 		\addplot graphics
 		[xmin=-0.002,xmax=0.002,ymin=0,ymax=0.6]
@@ -158,12 +143,39 @@
 		\draw[->, white,thick] (axis cs:0, 0.15) to (axis cs:7E-05, 0.35);
 		
 		\end{groupplot}
+		%color scales by hand
+		\matrix (l1) [at={(X c1r1.above north)}, matrix of nodes, minimum width=2em, minimum height=1em, inner sep=0, draw=black]
+		{
+			|[fill=white]| & 
+			|[fill=black!25!white]| &
+			|[fill=black!50!white]| &
+			|[fill=black!75!white]| &
+			|[fill=black]| \\
+		};
+		\node[above, at=(l1-1-1.north east)] {$10^1$};
+		\node[above, at=(l1-1-2.north east)] {$10^2$};
+		\node[above, at=(l1-1-3.north east)] {$10^3$};
+		\node[above, at=(l1-1-4.north east)] {$10^4$};
+		
+		\matrix (l2) [at={(X c2r1.above north)}, matrix of nodes, minimum width=2em, minimum height=1em, inner sep=0, draw=black]
+		{
+			|[fill=white]| & 
+			|[fill=black!25!white]| &
+			|[fill=black!50!white]| &
+			|[fill=black!75!white]| &
+			|[fill=black]| \\
+		};
+		\node[above, at=(l2-1-1.north east)] {$10^3$};
+		\node[above, at=(l2-1-2.north east)] {$10^4$};
+		\node[above, at=(l2-1-3.north east)] {$10^5$};
+		\node[above, at=(l2-1-4.north east)] {$10^6$};
+
 		
 		\begin{groupplot}[
 			group style={
+				group name=w6Q6,
 				group size=2 by 1,%
-				yticklabels at=edge left,%
-				horizontal sep=0pt,%
+				horizontal sep=0.1\textwidth,
 				},%
 			anchor=above north west,%
 			width=0.38\textwidth,%
@@ -172,17 +184,9 @@
 			extra x ticks={\wstar, -0.00782},%
 			extra x tick labels={,},%
 			xtick scale label code/.code={},%
-			colorbar right, colorbar style={%
-				samples=6, ytick={ 0.20,0.4,0.6, 0.8},% 
-				yticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
-				ylabel={per units of $w_6\cdot Q_6$},%
-				extra x ticks={},%
-				extra y ticks={},%
-				label style={font=\footnotesize},
-				},%
 			]
 		
-		\nextgroupplot[ylabel={$Q_6$}, xtickmax=0,]
+		\nextgroupplot[xtickmax=0,]
 		\addplot graphics
 		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
 		{u6Q6go1_scale};
@@ -205,6 +209,19 @@
 		\node [right] at (axis cs:-0.00782,0.4) {\footnotesize $w_6^\text{dod}$};
 		
 		\end{groupplot}
+		%color scales by hand
+		\matrix (l3) [right=of w6Q6 c2r1.right of east, matrix of nodes, minimum width=1em, minimum height=2em, inner sep=0, draw=black]
+		{
+			|[fill=black]| \\ 
+			|[fill=black!75!white]| \\
+			|[fill=black!50!white]| \\
+			|[fill=black!25!white]| \\
+			|[fill=white]| \\
+		};
+		\node[right, at=(l3-1-1.south east)] {$10^4$};
+		\node[right, at=(l3-2-1.south east)] {$10^3$};
+		\node[right, at=(l3-3-1.south east)] {$10^2$};
+		\node[right, at=(l3-4-1.south east)] {$10^1$};
 	\end{tikzpicture}
 	\caption{Population of local structures function of \textsc{boo}. (a-c) For our deepest supercooled sample ($\phi=0.575\pm 0.03$) in the $(Q_4,Q_6)$-plane (a), $(w_4,Q_6)$-plane (b) and $(w_6,Q_6)$-plane (c). (d) is the same as (c) but for a liquid near the freezing point ($\phi = 0.497 \pm 0.03$). Colour represent the probability to find the structure (log scale). The arrows stress the ordering tendencies: the tendency toward \textsc{fcc} is always visible, but a tendency toward \textsc{hcp} can be distinguished in (b) and the tendency toward icosahedral order is visible in (c).}
 	\label{fig:maps}
@@ -230,20 +247,11 @@
 			xmin=-0.052,xmax=0.01,%
 			xtick scale label code/.code={},%
 			enlargelimits=false,axis on top,
-			colormap={sd}{color(0cm)=(black) rgb(1cm)=(0.5, 0, 0) rgb(2cm)=(1, 0.5, 0) color(3cm)=(yellow) rgb(4cm)=(0.5, 0.75, 1) rgb(5cm)=(0.5, 0.75, 1)},%
 			extra x ticks={\wstar, -0.00782},%
 			extra x tick style={grid=major,	tick label style={anchor=south west}},%
 			extra x tick labels={,},%
 			extra y ticks={\Qstar},
 			extra y tick labels={},%
-			colorbar sampled, colorbar style={%
-				samples=5, ytick={ 0, 0.25, 0.5, 0.75},% 
-				yticklabels={$0$, $0.5$, $1$, $1.5$},%
-				ylabel=${\Delta r^2(w_6, Q_6, t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$,%
-				extra x ticks={},%
-				yticklabel pos=right,%
-				label style={font=\footnotesize},
-				},%
 			]
 			\addplot graphics [xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]{sd_u6Q6_go1_color};
 			\node [lab] at (rel axis cs:0,1) {a};
@@ -254,14 +262,29 @@
 			\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
 			\node [below, right] at (axis cs:-0.052, 0.05) {\textsc{Ico}};
 		\end{axis}
+		%color scales by hand
+		\definecolor{mybrown}{rgb}{0.5, 0, 0}
+		\definecolor{myblue}{rgb}{0.5, 0.75, 1}
+		\matrix (l3) [right=0.0125\textwidth of twod.right of east, matrix of nodes, minimum width=1em, minimum height=4em, inner sep=0, draw=black]
+		{
+			|[fill=myblue]| \\
+			|[fill=yellow]| \\
+			|[fill=orange]| \\
+			|[fill=mybrown]| \\
+		};
+		\node[right, at=(l3-1-1.south east)] {$1.5$};
+		\node[right, at=(l3-2-1.south east)] {$1$};
+		\node[right, at=(l3-3-1.south east)] {$0.5$};
+		\node[right, at=(l3-4-1.south east)] {$0$};
+		\node[right=0.05\textwidth of l3.east, rotate=90, anchor=north] {${\Delta r^2(w_6, Q_6, t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$};
+		
 		\pgfplotsset{every axis plot/.append style={only marks}}
 		\begin{groupplot}[%
 			group style={
-				group size=2 by 2,%
-				yticklabels at=edge left,%
-				horizontal sep=0pt,%
+				group size=2 by 1,%
+				horizontal sep=0.1\textwidth,%
 				},%
-			width=0.5\textwidth,%
+			width=0.48\textwidth,%
 			ymin=0, ymax=1.5,%
 			extra x tick style={grid=major,	tick label style={anchor=south west}},%
 			extra y ticks={1},%
@@ -277,7 +300,7 @@
 				xlabel=$10^2 \cdot w_6$, xmin=-0.0521089193, xmax=0.01,%
 				xtickmax={0},%
 				xtick scale label code/.code={},%
-				ylabel=${\Delta r^2(w_6,Q_6,t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$,
+				ylabel=${\Delta r^2(w_6,t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$,
 				extra x ticks={\wstar, -0.00782}, extra x tick labels={$w_6^*$,$w_6^\text{dod}$},%
 				extra y tick labels={bulk}
 				]
@@ -293,7 +316,8 @@
 			
 			\nextgroupplot[%
 				xlabel=$Q_6$, xmin=0, xmax=0.5745,%
-				extra x ticks={\Qstar}, extra x tick labels={$Q_6^*$},%				
+				extra x ticks={\Qstar}, extra x tick labels={$Q_6^*$},%	
+				ylabel=${\Delta r^2(Q_6,t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$,			
 				]
 			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 			\legend{$0.003$,%$0.497$, 
@@ -310,11 +334,11 @@
 			\node[left] at (rel axis cs:0.8, 0.45) {\footnotesize \textsc{fcc}};
 			\node [lab] at (rel axis cs:0,1) {c};
 		\end{groupplot}
-		\path (twod.outer south) ++(0.525\textwidth, 0.6em) 
+		\path (twod.outer south) ++(0.575\textwidth, 0.6em) 
 			node[anchor=south] {$w_6=w_6^*$} 
 			node[inner sep=0, above=0] (one_ico) {\includegraphics[width=0.22\textwidth]{one_ico.png}};
 		\node at(one_ico.south){$w_6=w_6^*$};
-		\path (twod.outer north) ++(0.525\textwidth, -0.6em)
+		\path (twod.outer north) ++(0.575\textwidth, -0.6em)
 			node[inner sep=0, below=0] (one_mrco) {\includegraphics[width=0.22\textwidth]{one_mrco.png}};
 		\node at (one_mrco.south) {$Q_6=Q_6^*$};
 		\node [lab] at (one_mrco.north west) {d};
@@ -323,7 +347,7 @@
 	\caption{\textbf{Bond order mobility.} {\bf a,} Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample. The colour scale is saturated at $1.5$ times the bulk mean square displacement. {\bf b-c,} Normalised mobility for icosahedral and crystalline order parameters respectively. Bulk mean square displacement is scaled to be at 1. Perfect structures are on the edge of each plot. The lines are a guide for the eye, stressing the collapse of the $w_6$-mobility at all volume fractions in {\bf b} and the absence of collapse in {\bf c}. The scattering at low volume fractions is due to poor averaging of rare structures. Example of \textbf{d} crystal-like cluster and \textbf{e} distorted icosahedron at the respective threshold values.}
 	\label{fig:msd_Q6_w6}
 \end{figure}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 
 \begin{figure}
 	\centering
@@ -411,7 +435,7 @@
 	\caption{\textbf{Visualisation of the results of various tracking methods for the same portion of image.} The circles on each picture are identical and result from 2D multiscale tracking of each XY slice of the 3D pictures. \textbf{a} XZ and YZ slices of the image (fake colors). \textbf{b} Multiscale 3D tracking. Spheres are drawn with the radius determined by the tracking methods. \textbf{c-h} Crocker and Grier in 3D with blurring radius increasing from \unit{2}{px} to \unit{4.5}{px} by steps of \unit{0.5}{px} (Sphere radii correspond to the blurring radius).}
 	\label{fig:localise}
 \end{figure}
-%\tikzset{external/force remake}
+\tikzset{external/force remake}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[%
@@ -422,7 +446,7 @@
 		name=hist,
 		width=0.45\textwidth,%
 		%scale only axis,
-		xmin=1, xmax=5,
+		xmin=1, xmax=5, xtick=\empty,%
 		axis y line*=left,
 		ymin=0, ytick=\empty,%
 		ylabel={Size distribution (a.u.)},%
@@ -434,7 +458,6 @@
 		%scale only axis,
 		width=0.45\textwidth,%
 		xmin=1, xmax=5,
-		axis y line*=right,
 		xlabel={Diameters [$\micro\metre$]},%
 		ymin=0, ytick=\empty,%
 		no marks,%
@@ -551,7 +574,7 @@
 	\label{fig:percolation}
 \end{figure}
 
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
