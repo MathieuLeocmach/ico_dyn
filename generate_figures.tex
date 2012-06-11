@@ -252,7 +252,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a manifestation of competing orderings, or frustration, between them. Straight lines are drawn at important thresholds: $Q_6^*$, $w_6^*$, $w_6^\text{dod}$ and $w_4=0$ that differentiates between \textsc{fcc} and \textsc{hcp}.}
 	\label{fig:maps}
 \end{figure}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 
 \begin{figure}
 	\begin{tikzpicture}[
@@ -374,13 +374,13 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\caption{\textbf{Bond order mobility.} {\bf a,} Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample ($\phi = 0.575 \pm 0.03$). The colour scale is saturated at $1.5$ times the bulk mean square displacement. Straight lines corresponds to the important thresholds: $Q_6^*$, $w_6^*$ and $w_6^\text{dod}$. {\bf b-c,} Normalised mobility for icosahedral and crystalline order parameters respectively at volume fraction $0.535$ (squares), $0.555$ (triangles) and $0.575$ (diamonds), all $\pm 0.03$. Bulk mean square displacement is scaled to be at 1. Perfect structures are on the edge of each plot. The lines are a guide for the eye, stressing the collapse of the $w_6$-mobility at all volume fractions in {\bf b} and the absence of such collapse in {\bf c}. The scattering at low volume fractions is due to poor averaging of rare structures. Examples of crystal-like cluster and distorted icosahedron at the respective threshold values are shown in \textbf{d} and \textbf{e}, respectively.}
 	\label{fig:msd_Q6_w6}
 \end{figure}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[%
 		pic3d/.style={inner sep=0}, %
-		lab/.style={below left=0.5em and 0.5em, text height=0.8em, text depth=0.2em, font=\Large\bfseries},%
+		lab/.style={below left=0 and 0, text height=0.8em, text depth=0.2em, font=\Large\bfseries},%
 		arr/.style={<->, thick, yellow!75!black}%
 		]%
 	\definecolor{turquoise}{rgb}{0.678431,0.917647,0.917647}
@@ -389,8 +389,8 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\node[left=0.01\textwidth, pic3d] at (all.west) (X) {\includegraphics[width=0.48\textwidth]{X_go1.png}};
 	\node[below=0.01\textwidth, pic3d] at (all.south) (dyn) {\includegraphics[width=0.48\textwidth]{cgsd_2tau.png}};
 	\node[left=0.01\textwidth, pic3d] at (dyn.west) (mrco) {\includegraphics[width=0.48\textwidth]{mrco24_scale_go1_t040_t048.png}};
-	\draw [help lines, step=0.12\textwidth, shift=(mrco.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
-	\draw [help lines, step=0.12\textwidth, shift=(dyn.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
+	%\draw [help lines, step=0.12\textwidth, shift=(mrco.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
+	%\draw [help lines, step=0.12\textwidth, shift=(dyn.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
 	\matrix[%
 		above left=0.01\textwidth of X.south east, font=\footnotesize,% 
 		column 1/.style={right, text height=0.8em, text depth=0.2em},%
@@ -407,7 +407,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\node [lab] at (mrco.north east) {c};
 	\node [lab] at (dyn.north east) {d};
 	\end{tikzpicture}
-	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{a} Particles with more than $7$ crystalline bonds. \textbf{b,} A typical configuration of bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{c,} Crystal-like particles alone (the order parameter was averaged over $t^\text{dh}/2$). \textbf{d,} Slow particles (see text). Due to particles going in and out of the field of view, the edges of \textbf{c} and \textbf{d} were not accurate and have been removed.}
+	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{a,} Particles with more than $7$ crystalline bonds. \textbf{b,} A typical configuration of bond ordered particles. Icosahedral particles are shown in the same colour if they belong to the same cluster. If a particle is neighbouring both crystal-like and icosahedral structures, it is displayed as icosahedral. \textbf{c,} Crystal-like particles alone (the order parameter was averaged over $t^\text{dh}/2$). \textbf{d,} Slow particles with respect to the coarse-grained displacement. Due to particles going in and out of the field of view, assignment of particles located very near the edges of \textbf{c} and \textbf{d} were not accurate and have been removed.}
 	\label{fig:3D}
 \end{figure}
 \tikzset{external/force remake=false}
