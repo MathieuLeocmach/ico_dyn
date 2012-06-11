@@ -374,7 +374,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\caption{\textbf{Bond order mobility.} {\bf a,} Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample ($\phi = 0.575 \pm 0.03$). The colour scale is saturated at $1.5$ times the bulk mean square displacement. Straight lines corresponds to the important thresholds: $Q_6^*$, $w_6^*$ and $w_6^\text{dod}$. {\bf b-c,} Normalised mobility for icosahedral and crystalline order parameters respectively at volume fraction $0.535$ (squares), $0.555$ (triangles) and $0.575$ (diamonds), all $\pm 0.03$. Bulk mean square displacement is scaled to be at 1. Perfect structures are on the edge of each plot. The lines are a guide for the eye, stressing the collapse of the $w_6$-mobility at all volume fractions in {\bf b} and the absence of such collapse in {\bf c}. The scattering at low volume fractions is due to poor averaging of rare structures. Examples of crystal-like cluster and distorted icosahedron at the respective threshold values are shown in \textbf{d} and \textbf{e}, respectively.}
 	\label{fig:msd_Q6_w6}
 \end{figure}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 
 \begin{figure}
 	\centering
@@ -520,7 +520,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\caption{\textbf{Sizing of our colloids.} \textbf{a,b} XY and XZ slices (detail) of a typical confocal 3D image of our sample. Note the excellent Z resolution, almost not affected by the point spread function. \textbf{c,} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.7\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once $23\%$ of swelling of particle diameters is taken into account (full line). \textbf{d,} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
 	\label{fig:sizing}
 \end{figure}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
@@ -532,8 +532,6 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		]
 		\addplot+[only marks] table {go1_w6_0012_sizes_rgs_noROI.hist};
 		\addplot+[no marks, domain=50:500] {1e6*x^(-2.1)};
-		\node[above right] at (axis cs:100,100) {$x^{-2.1}$};
-		\node[below left] at (rel axis cs:0.95,0.8) {$w_6<-0.012$};
 		\node[lab] at (rel axis cs:0.5, 0.95) {a};
 	\end{loglogaxis}
 	\begin{loglogaxis}[%
@@ -549,12 +547,6 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		]
 		\addplot+[only marks] table[y expr=\thisrowno{2}/6.14] {go1_w6_0012_sizes_rgs_noROI.hist};
 		\addplot+[no marks, domain=25:100] {0.75*x^(0.5)};
-		\node[left] at (axis cs:40,6) {$d_f=2$};
-		\addplot+[no marks, domain=100:1000] {x^(1/3.)};
-		\node[below right] at (axis cs:100,5) {$d_f=3$};
-		\addplot+[no marks, domain=20:30] {0.1*x};
-		\node[below right] at (axis cs:30,3) {$d_f=1$};
-		\node[below right] at (rel axis cs:0.05,0.8) {$w_6<-0.012$};
 		\node[lab] at (rel axis cs:0.5, 0.95) {b};
 	\end{loglogaxis}
 	\begin{axis}[%
@@ -593,11 +585,11 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		]
 		\addplot+[only marks] coordinates{(1, 0)};
 		\addplot[const plot, gray, fill=gray, semitransparent, area legend] file {go1_percol_thrs.hist};
-		\legend{{by $w_6$},random}
 		\node[lab] at (rel axis cs:0.5, 0.95) {d};
 	\end{axis}
 	\end{tikzpicture}
-	\caption{\textbf{Imperfect icosahedral network.} \textbf{a} Cluster size distribution (compatible with random percolation) and \textbf{b} radius of gyration (indicating a fractal dimension $d_f\approx 2$) for nearly percolating threshold ($w_6<-0.012$). \textbf{c} Size of the largest non percolating cluster function of the threshold on $w_6$. Percolation takes place near $w_6\approx -0.011$. \textbf{d} translates \textbf{c} in terms of fraction of activated particles (dots) and also shows the probability of the onset of percolation when particles are randomly activated (line). Activating particles function of icosahedral order or randomly do not change the position of the percolation ($\approx7.5\%$ of the particles activated).}
+	\caption{\textbf{Imperfect icosahedral clusters.} \textbf{a,} Cluster size distribution for nearly percolating threshold ($w_6<-0.012$). The exponent of random percolation ($-2.1$) is given by the straight line. 
+\textbf{b,} Radius of gyration (indicating a fractal dimension $d_f\approx 2$ given by the straight line) for the case of {\bf a}. \textbf{c,} Size of the largest non-percolating cluster as a function of the threshold on $w_6$. Percolation takes place near $w_6\approx -0.011$. Vertical lines indicate the position of $w_6^*$ and $w_6^\text{dod}$ respectively. \textbf{d,} Translation of \textbf{c} in terms of the fraction of activated particles (dots) together with the probability of the onset of percolation when particles are randomly activated (gray shading). We can see that activating particles as a function of icosahedral order and those activated randomly have almost the same percolation threshold ($\approx7.5\%$ of the particles activated).}
 	\label{fig:percolation}
 \end{figure}
 
