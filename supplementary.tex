@@ -2,11 +2,8 @@
 %\documentclass[preprint,notitlepage]{revtex4-1}
 \documentclass[prl,reprint,notitlepage]{revtex4-1}
 \usepackage{graphicx}
-\usepackage{epstopdf}
 \usepackage{amsmath}
-\usepackage{hyperref}
-\usepackage{booktabs}
-\usepackage{color}
+
 
 \usepackage{SIunits}
 \newcommand{\wstar}{-0.023}
@@ -50,8 +47,18 @@
  
 %\renewcommand{\figurename}{Figure}
  
- 
- 
+%Hack to make the bibliography numbering following the main text
+\let\oldthebibliography=\thebibliography
+\let\oldendthebibliography=\endthebibliography
+\renewenvironment{thebibliography}[1]{%
+   \oldthebibliography{#1}%
+   \setcounter{NAT@ctr}{53}%
+}{\oldendthebibliography}
+
+%Hack to remove the separator between text and bibliography
+\let\bibsectionbis\bibsection
+\renewcommand{\bibsection}{\section*{Supplementary references}}
+
 %END HACKS
 
 \begin{document}
@@ -107,7 +114,7 @@
 \clearpage
 
 \section*{Supplementary Methods}
-\label{SMet}
+
 
 \subsection*{Particle localisation and sizing}
 
@@ -147,25 +154,8 @@ The consistency of our method can be checked by constructing the radial distribu
 
 Recently \citet{Kurita2011,Kurita2011b} have designed a sizing method using particle coordinates from confocal experiments. However their method do not work at the image processing level and relies on coordinates extracted via the \citet{Crocker1996} algorithm which, as described above, is defective when the size distribution is too broad. It may be possible to combine the two methods by feeding our coordinates and size as input to their method. We would expect an increase in sizing precision when the particles are close to contact.
 
-\subsection*{Dynamics}
-
-As an aside, we have also computed the mobility-mobility spatial correlation function~\cite{Donati1999}
-\begin{equation}
-	\mathcal{G}_u(r,t) = \frac{
-		\left\langle \sum_{i,j}{\delta u_i(t) \delta u_j(t) \delta(r_{ij} -r)} \right\rangle 
-	}{
-		\left\langle \sum_{i,j}{\delta(r_{ij} -r)} \right\rangle
-	},
-	\label{eq:mobility_correl}
-\end{equation}
-where $\delta u_i(t)$ is the fluctuations of the norm of the displacements $\delta u_i(t) = \Delta r_i(t)-\langle\Delta r(t)\rangle$. $\mathcal{G}_u$ is a kind of four-point correlation function~\cite{cavagna2009supercooled}. The length scale $\xi_u$ is estimated from the fit of the envelope of $\mathcal{G}_u(r,t^{dh})$ in real space, at the characteristic time of the dynamic heterogeneity, by the Ornstein-Zernike form $\propto r^{-1}\exp( -r/\xi_u)$. 
-
-We found that $\xi_u$ obeys the same power-law dependence upon $\phi$ as $\xi_4$ and $\xi_6$, but with a prefactor about two times larger. We rationalise this result by considering the distribution of the norm of the displacements, which is not symmetric compared to its mean value. Thus $\delta u_i(t)$ reaches much larger positive values for the few fast particles than low values for the slow ones. We can say that the mobility-mobility correlation reflects mainly the spatial distribution of the fastest particles, and that $\xi_u$ is the length scale of the fastest regions. By definition $\xi_4$ is the characteristic length scale of the slow regions. We know that rearranging regions are usually string-like~\cite{Donati1999} whereas in our system the slow regions are compact. Even with approximatively the same number of particles involved, the lower-dimensional fast regions should be longer than the compact slow regions.
-
-\section*{Supplementary References}
 \bibliographystyle{naturemag3}
-%\bibliographystyle{apsrev4-1}
+%\bibliographystyle{unsrtnat}
 \bibliography{ico_dyn}
-
 
 \end{document}
