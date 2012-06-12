@@ -1,6 +1,6 @@
 
 %\documentclass[preprint,notitlepage]{revtex4-1}
-\documentclass[prl,reprint,notitlepage]{revtex4-1}
+\documentclass[reprint,notitlepage]{revtex4-1}
 \usepackage{graphicx}
 \usepackage{amsmath}
 
@@ -84,10 +84,11 @@
 %\date{}
 
 \maketitle
+\onecolumngrid
 
 \section*{Supplementary Figures}
 
-\begin{figure*}
+\begin{figure*}[!h]
 \begin{center}
 \includegraphics{generate_figures-figure6.pdf}
 \end{center}
@@ -112,11 +113,13 @@
 \end{figure*}
 
 \clearpage
+\twocolumngrid
+
 
 \section*{Supplementary Methods}
 
 
-\subsection*{Particle localisation and sizing}
+%\subsection*{Particle localisation and sizing}
 
 Particle-level confocal microscopy experiments usually access the coordinates of the particles via the algorithm proposed by \citet{Crocker1996}. The original noisy image is blurred by convolution with a Gaussian kernel of width $\sigma$ to yield a soft peak per particle. Local intensity maxima within this blurred image give the coordinates of the particles with pixel resolution. Sub-pixel resolution ($0.1\sim0.3$~pixels error) can be achieved by taking the centre of mass of a neighbourhood around the local maximum. The extension of this algorithm in 3D has been done in two ways: either tracking particles in each confocal plane and reconstructing the results (2D-flavour)~\citep{dinsmore2001tdc}, or full image analysis on three dimensional pictures (3D-flavour)~\citep{vanblaaderen1995rss, Lu2007}.
 
