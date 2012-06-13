@@ -8,6 +8,7 @@
 \usetikzlibrary{matrix}
 \usetikzlibrary{shadows}
 \tikzexternalize
+\tikzsetexternalprefix{fig_}
 %\tikzset{external/force remake}
 \tikzset{every mark/.append style={scale=0.8}}
 \pgfplotsset{every axis/.append style={small, %
@@ -25,6 +26,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 
 \begin{document}
 \tikzset{external/force remake=false}
+\tikzsetnextfilename{vft}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[
@@ -95,6 +97,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 	\label{fig:vft}
 \end{figure}
 \tikzset{external/force remake=false}
+\tikzsetnextfilename{maps}
 \begin{figure}
 	\begin{tikzpicture}[
 		lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
@@ -253,7 +256,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\label{fig:maps}
 \end{figure}
 \tikzset{external/force remake=false}
-
+\tikzsetnextfilename{msd_Q6_w6}
 \begin{figure}
 	\begin{tikzpicture}[
 		lab/.style={anchor=north west, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
@@ -375,7 +378,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\label{fig:msd_Q6_w6}
 \end{figure}
 \tikzset{external/force remake=false}
-
+\tikzsetnextfilename{3D}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[%
@@ -410,32 +413,9 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{a,} Particles with more than $7$ crystalline bonds. \textbf{b,} A typical configuration of bond ordered particles. Icosahedral particles are shown in the same colour if they belong to the same cluster. If a particle is neighbouring both crystal-like and icosahedral structures, it is displayed as icosahedral. \textbf{c,} Crystal-like particles alone (the order parameter was averaged over $t^\text{dh}/2$). \textbf{d,} Slow particles with respect to the coarse-grained displacement. Due to particles going in and out of the field of view, assignment of particles located very near the edges of \textbf{c} and \textbf{d} were not accurate and have been removed.}
 	\label{fig:3D}
 \end{figure}
+
 \tikzset{external/force remake=false}
-\begin{figure}
-	\centering
-	\begin{tikzpicture}[%
-		pic3d/.style={inner sep=0}, %
-		lab/.style={below left=0.5em and 0.5em, text height=0.8em, text depth=0.2em, font=\Large\bfseries},%
-		]%
-	\node[above=0.01\textwidth, pic3d] (X) {\includegraphics[width=0.48\textwidth]{X_go1.png}};
-	\node[below=0.01\textwidth, pic3d] (mrco) {\includegraphics[width=0.48\textwidth]{X_mrco_go1.png}};
-	\matrix[%
-		above left=0.1\textwidth of X.south east, matrix of nodes, ampersand replacement=\&,%
-		draw,%
-		%every even column/.style={text height=0.8em, text depth=0.2em},%
-		every odd column/.style={circle, shade, inner sep=0.25em, above},%
-		]{%
-		|[ball color=magenta]| \& Crystal \\
-		%|[ball color=cyan]| \& Crystal neighbour \&
-		|[ball color=green!66!black]| \& Crystal-like \\
-	};
-	\node [lab] at (X.north east) {a};
-	\node [lab] at (mrco.north east) {b};
-	\end{tikzpicture}
-	\caption{\textbf{Particles with more than $7$ crystalline bonds.} Particles with $Q_6>Q_6^*$ and their neighbours are also plotted in \textbf{b} for comparison. Crystalline particles are always included in high $Q_6$ regions. However, the fluctuations of the crystal-like order cannot be reduced to sub-critical nucleation.}
-	\label{fig:X_3D}
-\end{figure}
-%\tikzset{external/force remake}
+\tikzsetnextfilename{localise}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[
@@ -463,6 +443,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\label{fig:localise}
 \end{figure}
 \tikzset{external/force remake=false}
+\tikzsetnextfilename{sizing}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[%
@@ -521,6 +502,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\label{fig:sizing}
 \end{figure}
 \tikzset{external/force remake}
+\tikzsetnextfilename{percolation}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
@@ -594,6 +576,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 \end{figure}
 
 \tikzset{external/force remake=false}
+\tikzsetnextfilename{S4}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
