@@ -55,18 +55,20 @@ In the present work, we focus on the colloidal (hard spheres) supercooled liquid
 \subsection*{Dynamics}
 
 We were able to follow the volume fraction dependence of the dynamics over nearly three orders of magnitude (see Fig.~\ref{fig:vft}), confirming the basic phenomenology observed in experiments~\citep{pusey1987ogt, kegel2000swe, weeks2000, BerthierR} as well as simulations~\citep{tanaka2010critical} of similar systems. In Fig.~\ref{fig:vft}a we fit the self-intermediate scattering function by a stretched exponential $\propto e^{-(t/\tau_\alpha)^\beta}$ that defines the structural relaxation time $\tau_\alpha$. 
-Here $\beta$ is the stretching exponent. The volume fraction dependence of $\tau_\alpha$ is super-Arrhenius and we fit it in Fig.~\ref{fig:vft}b by the Vogel-Fulcher-Tammann (VFT) law $\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$, where $D$ is the fragility index, $\phi_0$ is the hypothetical ideal glass transition volume fraction, and $\tau_\alpha^0$ is the microscopic timescale. The non-Gaussianity of the dynamics is monitored by the kurtosis of displacements distribution 
+Here $\beta$ is the stretching exponent. 
+
+The non-Gaussianity of the dynamics is monitored by the kurtosis of displacements distribution (Fig.~\ref{fig:vft}b)
 \begin{equation}
 	\alpha_2(t) = \frac{3 \left\langle {(\Delta r(t))^4} \right\rangle}{5 {\left\langle {(\Delta r(t))^2} \right\rangle}^2}-1, 
 	\label{eq:ng}
 \end{equation}
-where $\Delta r(t)= |\mbox{\boldmath$r$}(t_o+t)- \mbox{\boldmath$r$}(t_0)|$ is the displacement of
-a particle after a time interval $t$. 
-At a given volume fraction, $\alpha_2(t)$ peaks at the characteristic time scale of the dynamic heterogeneity $t^\text{dh}(\phi)$. We notice that $t^\text{dh}$ corresponds to the end of the plateau, always shorter than $\tau_\alpha$.
+where $\Delta r(t)= |\mbox{\boldmath$r$}(t_o+t)- \mbox{\boldmath$r$}(t_0)|$ is the displacement of a particle after a time interval $t$. At a given volume fraction, $\alpha_2(t)$ peaks at the characteristic time scale of the dynamic heterogeneity $t^\text{dh}(\phi)$.
+
+The volume fraction dependence of $\tau_\alpha$ is super-Arrhenius and we fit it in Fig.~\ref{fig:vft}d by the Vogel-Fulcher-Tammann (VFT) law $\tau_\alpha=\tau_\alpha^0 \exp(D\phi/(\phi_0-\phi))$, where $D$ is the fragility index, $\phi_0$ is the hypothetical ideal glass transition volume fraction, and $\tau_\alpha^0$ is the microscopic timescale.  We notice that $t^\text{dh}$ corresponds to the end of the plateau, always shorter than $\tau_\alpha$.
 
 The spatial heterogeneity of the dynamics is characterised by a four-point susceptibility $\chi_4(t)$ and a four-point structure factor $S_4(q,t)$~\cite{Flenner2011}. To the reader unfamiliar with these terms (defined in Methods), we note that $S_4(q,t)\times N/N_s$ is the structure factor of a system containing only the slow particles.
 
-The small wave-vector behaviour of $S_4(q,t)$ is well described by the asymptotic Ornstein-Zernike function in Fourier space:
+As shown in Fig.~\ref{fig:vft}c, the small wave-vector behaviour of $S_4(q,t)$ is well described by the asymptotic Ornstein-Zernike function in Fourier space:
 \begin{equation}
 	S_4(q\rightarrow 0,t) \approx \frac{\chi_4(t)}{1+\xi_4(t)^2 q^2},
 	\label{eq:OZ_Fourier}
@@ -168,7 +170,7 @@ where $W(\vec{q},t)$ is the Fourier transform of $w_i(t)$:
 \end{equation}
 
 
-Our experimental data do not have periodic boundary conditions, so we must use a window function to ensure the correct correlation, especially at small $q$. Here we use the Hamming window, but we checked that our results are not affected by other reasonable choices of the window function. The results are shown in Supplementary Figure~S\ref{S-fig:S4}.
+Our experimental data do not have periodic boundary conditions, so we must use a window function to ensure the correct correlation, especially at small $q$. Here we use the Hamming window, but we checked that our results are not affected by other reasonable choices of the window function. The results are shown in Fig.~\ref{fig:vft}c.
 
 As stressed in \citep{Flenner2011}, the value $S_4(q=0)$ is crucial for the quality of the fit in Eq.~(\ref{eq:OZ_Fourier}). Here we use the value of $\chi_4$ given by Eq.~(\ref{eq:chi_4}) and we fit $S_4(q)$ for $q<1.5/\xi_4$.
 
@@ -272,7 +274,13 @@ H. T.
 \begin{center}
 \includegraphics{fig_vft.pdf}
 \end{center}
-\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering (ISF) function computed for several volume fractions at wave vector $q=2\pi/\left\langle \sigma\right\rangle$ . Lines are stretched exponential fits from which we extract the structural relaxation time $\tau_\alpha$. {\bf b,} $\phi$-dependence of $\tau_\alpha$ (circles) and of the characteristic time of the dynamic heterogeneity $t^\text{dh}$ (squares) scaled by the Brownian time $\tau_B$. The solid curve is the VFT fit for $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$, squares) and structural correlation length ($\xi_6$, circles) scaled by their respective bare correlation length, respectively $\xi_{4,0}=0.206\sigma$ and $\xi_{6,0}=0.129\sigma$. The curve is the power-law given in the text.}
+\caption{\textbf{Dynamics of the system.} 
+	\textbf{a,} Decay of the self-intermediate scattering (ISF) function computed at wave vector $q=2\pi/\left\langle \sigma\right\rangle$ . Lines are stretched exponential fits from which we extract the structural relaxation time $\tau_\alpha$. 
+	\textbf{b,} Non gaussian parameter, whose maximum defines the characteristic time of the dynamic heterogeneity $t^\text{dh}$.
+	\textbf{c,} Collapse of the small-$q$ regimes of the four-point structure factor on the Orstein-Zernike function (solid curve).
+	\textbf{d,} $\phi$-dependence of $\tau_\alpha$ (circles) and of $t^\text{dh}$ (squares). The solid curve is the VFT fit for $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). 
+	\textbf{Inset:} Dynamical ($\xi_4$, squares) and structural ($\xi_6$, circles) correlation lengths  scaled by their respective bare correlation length, respectively $\xi_{4,0}=0.206\sigma$ and $\xi_{6,0}=0.129\sigma$. The curve is the power-law given in the text.
+	All times are scaled by the Brownian time $\tau_B$.}
 	\label{fig:vft}
 \end{figure}
 
@@ -300,23 +308,20 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 \clearpage
 
 \begin{figure}
-\begin{center}
+\includegraphics{fig_3D.pdf}
+\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{a,} Particles with more than $7$ crystalline bonds. \textbf{b,} A typical configuration of bond ordered particles. Icosahedral particles are shown in the same colour if they belong to the same cluster. If a particle is neighbouring both crystal-like and icosahedral structures, it is displayed as icosahedral. \textbf{c,} Crystal-like particles alone (the order parameter was averaged over $t^\text{dh}/2$). \textbf{d,} Slow particles with respect to the coarse-grained displacement. Due to particles going in and out of the field of view, assignment of particles located very near the edges of \textbf{c} and \textbf{d} were not accurate and have been removed.}
+	\label{fig:3D}
+\end{figure}
+\clearpage
 
+\begin{figure}
+\begin{center}
 \includegraphics{fig_percolation.pdf}
 \end{center}
 	\caption{\textbf{Imperfect icosahedral clusters.} \textbf{a,} Cluster size distribution (compatible with random percolation) for nearly percolating threshold ($w_6<-0.012$). 
 \textbf{b,} Radius of gyration (indicating a fractal dimension $d_f\approx 2$ given by the straight line) for the case of {\bf a}. \textbf{c,} Size of the largest non-percolating cluster as a function of the threshold on $w_6$. Percolation takes place near $w_6\approx -0.011$. Vertical lines indicate the position of $w_6^*$ and $w_6^\text{dod}$ respectively. \textbf{d,} Translation of \textbf{c} in terms of the fraction of activated particles (dots) together with the probability of the onset of percolation when particles are randomly activated (gray shading). We can see that activating particles as a function of icosahedral order and those activated randomly have almost the same percolation threshold ($\approx7.5\%$ of the particles activated).}
 	\label{fig:percolation}
 \end{figure}
-\clearpage
-
-\begin{figure}
-\includegraphics{fig_3D.pdf}
-\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{a,} Particles with more than $7$ crystalline bonds. \textbf{b,} A typical configuration of bond ordered particles. Icosahedral particles are shown in the same colour if they belong to the same cluster. If a particle is neighbouring both crystal-like and icosahedral structures, it is displayed as icosahedral. \textbf{c,} Crystal-like particles alone (the order parameter was averaged over $t^\text{dh}/2$). \textbf{d,} Slow particles with respect to the coarse-grained displacement. Due to particles going in and out of the field of view, assignment of particles located very near the edges of \textbf{c} and \textbf{d} were not accurate and have been removed.}
-	\label{fig:3D}
-\end{figure}
-%\clearpage
-
 
 
 \end{document}

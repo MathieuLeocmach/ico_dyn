@@ -25,7 +25,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 
 
 \begin{document}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 \tikzsetnextfilename{vft}
 \begin{figure}
 	\centering
@@ -33,13 +33,13 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 		lab/.style={above right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
 		]%
 		\pgfplotsset{fitc/.style={solid, no markers, forget plot, domain=1:1e4}}
+		\pgfplotsset{every axis/.append style={width=0.48\textwidth}}
+		\pgfplotsset{cycle list name=grade5}
 		\begin{axis}[%
-			anchor=right of south east,%
-			width=0.45\textwidth, height=0.33\textwidth, %
+			at={(0,0)},
+			height=0.33\textwidth, %
 			xlabel=$t/\tau_B$, xmode=log,%
 			ylabel={Self ISF}, ymin=0,%
-			legend columns=3, reverse legend, legend style={font=\tiny, at={(1,1.03), nodes={anchor=east}}, anchor=south east}, %
-			cycle list name=grade5,%
 			]
 			\addplot+[fitc] {0.943 * exp(-(x/4.60)^0.72)};
 			\addplot+[only marks] file {LS3954.isf};
@@ -52,48 +52,83 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 			\addplot+[fitc] {0.787 * exp(-(x/2408.)^0.70)};
 			\addplot+[only marks] file {go1.isf};
 			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
-			\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
-			\node [lab] at (rel axis cs:0,0) {a};
+			\node [lab, below left=0 and 1em] at (rel axis cs:1,1) {a};
 		\end{axis}
+		\pgfplotsset{fitc/.style={no markers, forget plot, domain=0.3:3}}
+		\begin{semilogxaxis}[%
+			at={(0.49\textwidth,0)},
+			height=0.33\textwidth, %
+			xlabel=$t/\tau_B$,%
+			xmin=1, xmax=1e4,%
+			ylabel=$\alpha_2(t)$,%
+			only marks,%
+			]
+			\addplot file {LS3954.ngp};
+			\addplot file {LS4446.ngp};
+			\addplot file {LS4582.ngp};
+			\addplot file {LS5079.ngp};
+			\addplot file {go1.ngp};
+			\node [lab, below left=0 and 1em] at (rel axis cs:1,1) {b};
+		\end{semilogxaxis}
+		\begin{loglogaxis}[%
+			at={(0,-0.4\textwidth)},
+			xlabel={$q\xi_4$}, ylabel={$S_4(q)/\chi_4$},
+			cycle list name=grade5,%
+			xmin=0.25, xmax=5, ymin=0.05,%
+			xtick={0.5, 1, 2, 4},
+			xticklabel=\pgfmathparse{exp(\tick)}%
+				\pgfmathprintnumber{\pgfmathresult},
+			legend pos=south west, reverse legend,
+			]
+			\addplot+[only marks] table[x expr={\thisrowno{0}*0.703}, y expr={\thisrowno{1}/0.634}] {LS3954.S4};
+			\addplot+[only marks] table[x expr={\thisrowno{0}*0.804}, y expr={\thisrowno{1}/0.744}] {LS4446.S4};
+			\addplot+[only marks] table[x expr={\thisrowno{0}*0.835}, y expr={\thisrowno{1}/0.778}] {LS4582.S4};
+			\addplot+[only marks] table[x expr={\thisrowno{0}*1.017}, y expr={\thisrowno{1}/1.011}] {LS5079.S4};
+			\addplot+[only marks] table[x expr={\thisrowno{0}*1.959}, y expr={\thisrowno{1}/2.950}] {go1.S4};
+			\addplot+[black, fitc] {1/(1+x^2)};
+			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
+			\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
+			\node[lab, above left=0 and 1em] at (rel axis cs:1, 0) {c};
+		\end{loglogaxis}
 		\pgfplotsset{cycle list name=black white}
+		\tikzset{every mark/.append style={scale=1.2}}
 		\begin{axis}[%
-			anchor=left of south west,%
-			width=0.45\textwidth, %
+			at={(0.49\textwidth,-0.4\textwidth)},
 			xlabel=$\phi$,%
+			xtick={0.5,0.52,...,0.6},%
 			ylabel=$\tau_\alpha/\tau_B$, ymode=log, %
-			ytick pos=right, ylabel near ticks,%
-			legend pos=south east,%
 			cycle list={{black, mark=*},{black, mark=square}},%
 			]
-			%\addplot+[mark=none, forget plot, domain=0.49:0.58] {0.7874243*exp(0.32826088*x/(0.60063652-x))};
 			\addplot+[mark=none, forget plot, domain=0.49:0.58] {exp(0.28970401*x/(0.59841615-x))};
 			\addplot+[only marks] table[x index=0, y index=1]{xi_phi.dat};
-			\addplot+[only marks] table[x index=0, y index=4]{xi_phi.dat};
-			%\legend{$\tau_\alpha$, $t^\text{dh}$};
+			\addplot+[only marks, every mark/.append style={draw=gray, scale=1.2}] table[x index=0, y index=4]{xi_phi.dat};
 			\node at (rel axis cs:0,1) (a) {};
-			\node [lab] at (rel axis cs:0,0) {b};
+			\node [lab, above left=0 and 1em] at (rel axis cs:1,0) {d};
 		\end{axis}
 		\begin{axis}[%
-			tiny, at=(a), anchor=north west, %
-			width=0.3\textwidth, %
+			at=(a), anchor=north west, %
+			width=0.33\textwidth, %
 			xlabel=$\phi$, xmin=0.49, xmax=0.58, xlabel near ticks,%
 			xtick={0.5,0.52,...,0.6},%
 			ylabel=$\xi/\xi_0$, ymax=10,
 			ytick={2,4,6,8},
 			ytick pos=right, ylabel near ticks,%
-			label style={font=\tiny}, %
-			legend pos=north west,%
-			axis background/.style={fill=white},%
 			]
-			\addplot+[only marks, fill=black, %
+			\addplot+[only marks, mark=*, %
+				every mark/.append style={fill=black, scale=1.2},
 				error bars/.cd, y dir=both, y explicit relative,%
 				] table[x index=0, y expr=\thisrowno{3}/0.126]{scale.xi};
 			\addplot+[mark=none, forget plot, domain=0.49:0.58] {(0.6/x-1)^(-2.0/3.0)};
-			\addplot+[only marks, mark=square] table[x index=0, y expr=\thisrowno{5}/0.216]{scale.xi};
-			%\legend{$\xi_6$ structural, $\xi_4$ dynamical};
+			\addplot+[only marks, mark=square, every mark/.append style={draw=gray, scale=1.2},] table[x index=0, y expr=\thisrowno{5}/0.216]{scale.xi};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering (ISF) function computed for several volume fractions at wave vector $q=2\pi/\left\langle \sigma\right\rangle$ . Lines are stretched exponential fits from which we extract the structural relaxation time $\tau_\alpha$. {\bf b,} $\phi$-dependence of $\tau_\alpha$ (circles) and of the characteristic time of the dynamic heterogeneity $t^\text{dh}$ (squares) scaled by the Brownian time $\tau_B$. The solid curve is the VFT fit for $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$, squares) and structural correlation length ($\xi_6$, circles) scaled by their respective bare correlation length, respectively $\xi_{4,0}=0.206\sigma$ and $\xi_{6,0}=0.129\sigma$. The curve is the power-law given in the text.}
+	\caption{\textbf{Dynamics of the system.} 
+	\textbf{a,} Decay of the self-intermediate scattering (ISF) function computed at wave vector $q=2\pi/\left\langle \sigma\right\rangle$ . Lines are stretched exponential fits from which we extract the structural relaxation time $\tau_\alpha$. 
+	\textbf{b,} Non gaussian parameter, whose maximum defines the characteristic time of the dynamic heterogeneity $t^\text{dh}$.
+	\textbf{c,} Collapse of the small-$q$ regimes of the four-point structure factor on the Orstein-Zernike function (solid curve).
+	\textbf{d,} $\phi$-dependence of $\tau_\alpha$ (circles) and of $t^\text{dh}$ (squares). The solid curve is the VFT fit for $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). 
+	\textbf{Inset:} Dynamical ($\xi_4$, squares) and structural ($\xi_6$, circles) correlation lengths  scaled by their respective bare correlation length, respectively $\xi_{4,0}=0.206\sigma$ and $\xi_{6,0}=0.129\sigma$. The curve is the power-law given in the text.
+	All times are scaled by the Brownian time $\tau_B$.}
 	\label{fig:vft}
 \end{figure}
 \tikzset{external/force remake=false}
@@ -377,7 +412,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\caption{\textbf{Bond order mobility.} {\bf a,} Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample ($\phi = 0.575 \pm 0.03$). The colour scale is saturated at $1.5$ times the bulk mean square displacement. Straight lines corresponds to the important thresholds: $Q_6^*$, $w_6^*$ and $w_6^\text{dod}$. {\bf b-c,} Normalised mobility for icosahedral and crystalline order parameters respectively at volume fraction $0.535$ (squares), $0.555$ (triangles) and $0.575$ (diamonds), all $\pm 0.03$. Bulk mean square displacement is scaled to be at 1. Perfect structures are on the edge of each plot. The lines are a guide for the eye, stressing the collapse of the $w_6$-mobility at all volume fractions in {\bf b} and the absence of such collapse in {\bf c}. The scattering at low volume fractions is due to poor averaging of rare structures. Examples of crystal-like cluster and distorted icosahedron at the respective threshold values are shown in \textbf{d} and \textbf{e}, respectively.}
 	\label{fig:msd_Q6_w6}
 \end{figure}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \tikzsetnextfilename{3D}
 \begin{figure}
 	\centering
@@ -574,59 +609,6 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\caption{\textbf{Imperfect icosahedral clusters.} \textbf{a,} Cluster size distribution for nearly percolating threshold ($w_6<-0.012$). The exponent of random percolation ($-2.1$) is given by the straight line. 
 \textbf{b,} Radius of gyration (indicating a fractal dimension $d_f\approx 2$ given by the straight line) for the case of {\bf a}. \textbf{c,} Size of the largest non-percolating cluster as a function of the threshold on $w_6$. Percolation takes place near $w_6\approx -0.011$. Vertical lines indicate the position of $w_6^*$ and $w_6^\text{dod}$ respectively. \textbf{d,} Translation of \textbf{c} in terms of the fraction of activated particles (dots) together with the probability of the onset of percolation when particles are randomly activated (gray shading). We can see that activating particles as a function of icosahedral order and those activated randomly have almost the same percolation threshold ($\approx7.5\%$ of the particles activated).}
 	\label{fig:percolation}
-\end{figure}
-
-\tikzset{external/force remake=false}
-\tikzsetnextfilename{S4}
-\begin{figure}
-	\centering
-	\begin{tikzpicture}[lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
-	\pgfplotsset{fitc/.style={no markers, forget plot, domain=0.3:3}}
-	\begin{loglogaxis}[%
-		xlabel={$q\sigma$}, ylabel={$S_4(q)$},
-		cycle list name=grade5,%
-		xmin=0.2, xmax=10, ymin=0.06,%
-		width=0.45\textwidth,%
-		legend pos=south west, reverse legend, legend style={font=\scriptsize}, %
-		]
-		\addplot+[fitc] {0.634/(1+0.703^2*x^2)};
-		\addplot+[only marks] file {LS3954.S4};
-		\addplot+[fitc] {0.744/(1+0.804^2*x^2)};
-		\addplot+[only marks] file {LS4446.S4};
-		\addplot+[fitc] {0.778/(1+0.835^2*x^2)};
-		\addplot+[only marks] file {LS4582.S4};
-		\addplot+[fitc] {1.011/(1+1.017^2*x^2)};
-		\addplot+[only marks] file {LS5079.S4};
-		\addplot+[fitc] {2.950/(1+1.959^2*x^2)};
-		\addplot+[only marks] file {go1.S4};
-		\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
-		\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
-		\node[lab] at (rel axis cs:0, 1) {a};
-	\end{loglogaxis}
-	\begin{loglogaxis}[%
-		at={(0.5\textwidth,0)},
-		width=0.45\textwidth,%
-		xlabel={$q\xi_4$}, ylabel={$S_4(q)/\chi_4$},
-		cycle list name=grade5,%
-		xmin=0.25, xmax=5, ymin=0.05,%
-		xtick={0.5, 1, 2, 4},
-		xticklabel=\pgfmathparse{exp(\tick)}%
-			\pgfmathprintnumber{\pgfmathresult},
-		legend pos=south west, reverse legend, legend style={font=\scriptsize}, %
-		]
-		\addplot+[only marks] table[x expr={\thisrowno{0}*0.703}, y expr={\thisrowno{1}/0.634}] {LS3954.S4};
-		\addplot+[only marks] table[x expr={\thisrowno{0}*0.804}, y expr={\thisrowno{1}/0.744}] {LS4446.S4};
-		\addplot+[only marks] table[x expr={\thisrowno{0}*0.835}, y expr={\thisrowno{1}/0.778}] {LS4582.S4};
-		\addplot+[only marks] table[x expr={\thisrowno{0}*1.017}, y expr={\thisrowno{1}/1.011}] {LS5079.S4};
-		\addplot+[only marks] table[x expr={\thisrowno{0}*1.959}, y expr={\thisrowno{1}/2.950}] {go1.S4};
-		\addplot+[black, fitc] {1/(1+x^2)};
-		\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
-		\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
-		\node[lab] at (rel axis cs:0, 1) {b};
-	\end{loglogaxis}
-	\end{tikzpicture}
-	\caption{\textbf{Four-point structure factor} at different volume fractions}
-	\label{fig:S4}
 \end{figure}
 
 \end{document}
