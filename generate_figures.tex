@@ -377,25 +377,26 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\caption{\textbf{Bond order mobility.} {\bf a,} Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample ($\phi = 0.575 \pm 0.03$). The colour scale is saturated at $1.5$ times the bulk mean square displacement. Straight lines corresponds to the important thresholds: $Q_6^*$, $w_6^*$ and $w_6^\text{dod}$. {\bf b-c,} Normalised mobility for icosahedral and crystalline order parameters respectively at volume fraction $0.535$ (squares), $0.555$ (triangles) and $0.575$ (diamonds), all $\pm 0.03$. Bulk mean square displacement is scaled to be at 1. Perfect structures are on the edge of each plot. The lines are a guide for the eye, stressing the collapse of the $w_6$-mobility at all volume fractions in {\bf b} and the absence of such collapse in {\bf c}. The scattering at low volume fractions is due to poor averaging of rare structures. Examples of crystal-like cluster and distorted icosahedron at the respective threshold values are shown in \textbf{d} and \textbf{e}, respectively.}
 	\label{fig:msd_Q6_w6}
 \end{figure}
-\tikzset{external/force remake=false}
+\tikzset{external/force remake}
 \tikzsetnextfilename{3D}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[%
 		pic3d/.style={inner sep=0}, %
-		lab/.style={below left=0 and 0, text height=0.8em, text depth=0.2em, font=\Large\bfseries},%
+		lab/.style={below left=0.4em and 0, inner sep=0, text height=0.8em, text depth=0.2em, font=\Large\bfseries},%
 		arr/.style={<->, thick, yellow!75!black}%
 		]%
 	\definecolor{turquoise}{rgb}{0.678431,0.917647,0.917647}
 	\definecolor{gold}{rgb}{0.8, 0.498039, 0.196078}
-	\node[right=0.01\textwidth, pic3d] (all) {\includegraphics[width=0.48\textwidth]{mrco_ico_scale_go1-0023.png}};
-	\node[left=0.01\textwidth, pic3d] at (all.west) (X) {\includegraphics[width=0.48\textwidth]{X_go1.png}};
-	\node[below=0.01\textwidth, pic3d] at (all.south) (dyn) {\includegraphics[width=0.48\textwidth]{cgsd_2tau.png}};
-	\node[left=0.01\textwidth, pic3d] at (dyn.west) (mrco) {\includegraphics[width=0.48\textwidth]{mrco24_scale_go1_t040_t048.png}};
-	%\draw [help lines, step=0.12\textwidth, shift=(mrco.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
-	%\draw [help lines, step=0.12\textwidth, shift=(dyn.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
+	\matrix[matrix of nodes, inner sep=0, nodes={pic3d}] (pic)
+	{
+		\includegraphics[width=0.48\textwidth]{X_go1.png} &%
+		\includegraphics[width=0.48\textwidth]{mrco_ico_scale_go1-0023.png}\\
+		\includegraphics[width=0.48\textwidth]{mrco24_scale_go1_t040_t048.png}&%
+		\includegraphics[width=0.48\textwidth]{cgsd_2tau.png}\\
+	};
 	\matrix[%
-		above left=0.01\textwidth of X.south east, font=\footnotesize,% 
+		above left=0.01\textwidth of pic-1-1.south east, font=\footnotesize,% 
 		column 1/.style={right, text height=0.8em, text depth=0.2em},%
 		column 2/.style={left, circle, shade, inner sep=0.008\textwidth},%
 		] (l)
@@ -405,10 +406,10 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		\node{Crystal-like}; & \node[ball color=green!66!black] {}; \\
 		\node{Slow}; & \node[ball color=turquoise!75!black] {}; \\
 	};
-	\node [lab] at (X.north east) {a};
-	\node [lab] at (all.north east) {b};
-	\node [lab] at (mrco.north east) {c};
-	\node [lab] at (dyn.north east) {d};
+	\node [lab] at (pic-1-1.north east) {a};
+	\node [lab] at (pic-1-2.north east) {b};
+	\node [lab] at (pic-2-1.north east) {c};
+	\node [lab] at (pic-2-2.north east) {d};
 	\end{tikzpicture}
 	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{a,} Particles with more than $7$ crystalline bonds. \textbf{b,} A typical configuration of bond ordered particles. Icosahedral particles are shown in the same colour if they belong to the same cluster. If a particle is neighbouring both crystal-like and icosahedral structures, it is displayed as icosahedral. \textbf{c,} Crystal-like particles alone (the order parameter was averaged over $t^\text{dh}/2$). \textbf{d,} Slow particles with respect to the coarse-grained displacement. Due to particles going in and out of the field of view, assignment of particles located very near the edges of \textbf{c} and \textbf{d} were not accurate and have been removed.}
 	\label{fig:3D}
@@ -501,7 +502,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\caption{\textbf{Sizing of our colloids.} \textbf{a,b} XY and XZ slices (detail) of a typical confocal 3D image of our sample. Note the excellent Z resolution, almost not affected by the point spread function. \textbf{c,} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.7\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once $23\%$ of swelling of particle diameters is taken into account (full line). \textbf{d,} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
 	\label{fig:sizing}
 \end{figure}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \tikzsetnextfilename{percolation}
 \begin{figure}
 	\centering
