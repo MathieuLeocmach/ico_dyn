@@ -99,7 +99,7 @@ In the introduction we mentioned the dynamic propensity invented by \citet{Widme
 \begin{equation}
 	\Delta r^2(w_6, t) \equiv \left\langle \frac{
 		\sum\limits_i{
-			\left\|\vec{r_i}(t)-\vec{r_i}(0)\right\|^2 \delta(w_6^i-w_6)
+			\left\|\mathbf{r_i}(t)-\mathbf{r_i}(0)\right\|^2 \delta(w_6^i-w_6)
 			}
 	}{
 		\sum\limits_i{\delta(w_6^i-w_6)}
@@ -152,7 +152,7 @@ After careful shear melting, the samples are filled into square $\unit{500}{\mic
 
 \subsection*{Dynamics}
 
-To characterise the dynamic heterogeneity, we define a microscopic overlap function $w_i(t) = \Theta [b - |\vec{r}_i(t) - \vec{r}_i(0)|]$, where $\Theta(x)$ is Heaviside’s step function, $\vec{r}_i(t)$ is the position
+To characterise the dynamic heterogeneity, we define a microscopic overlap function $w_i(t) = \Theta [b - |\mathbf{r}_i(t) - \mathbf{r}_i(0)|]$, where $\Theta(x)$ is Heaviside’s step function, $\mathbf{r}_i(t)$ is the position
 of particle $i$ at a time $t$ and $b=0.3\langle\sigma\rangle$.
 The number of overlapping particles is $N_s(t)$ and in the thermodynamic limit its fluctuations define the four-point susceptibility:
 \begin{equation}
@@ -163,12 +163,12 @@ In a simulation with a fixed number of particles $N$ and a limited size, some fl
 
 The four-point structure factor~\cite{Flenner2011} is
 \begin{equation}
-	S_4(q,t) = N^{-1}(\left\langle W(\vec{q},t) W(-\vec{q},t) \right\rangle - | \left\langle W(\vec{q},t) \right\rangle^2 |),   
+	S_4(q,t) = N^{-1}(\left\langle W(\mathbf{q},t) W(-\mathbf{q},t) \right\rangle - | \left\langle W(\mathbf{q},t) \right\rangle^2 |),   
 	\label{eq:S4}
 \end{equation}
-where $W(\vec{q},t)$ is the Fourier transform of $w_i(t)$: 
+where $W(\mathbf{q},t)$ is the Fourier transform of $w_i(t)$: 
 \begin{equation}
-	W(\vec{q},t) = \sum_i w_i(t)\exp(-\imath \vec{q}\cdot\vec{r}_i(0)).  
+	W(\mathbf{q},t) = \sum_i w_i(t)\exp(-\imath \mathbf{q}\cdot\mathbf{r}_i(0)).  
 \end{equation}
 
 
@@ -180,7 +180,7 @@ As stressed in \citep{Flenner2011}, the value $S_4(q=0)$ is crucial for the qual
 
 \citet{steinhardt1983boo} defined the \textsc{boo} of the $\ell$-fold symmetry as a $2\ell+1$ vector:
 \begin{equation}
-	q_{\ell m}(i) = \frac{1}{N_i}\sum_{0}^{N_i} Y_{\ell m}(\theta(\vec r_{ij}),\phi(\vec r_{ij})),
+	q_{\ell m}(i) = \frac{1}{N_i}\sum_{0}^{N_i} Y_{\ell m}(\theta(\mathbf{r}_{ij}),\phi(\mathbf{r}_{ij})),
 	\label{eq:qlm}
 \end{equation}
 where the $Y_{\ell m}$ are spherical harmonics and $N_i$ is the number of bonds of particle $i$. In the analysis, one uses the rotational invariants defined as:
@@ -232,7 +232,7 @@ The above definition of neighbours is used consistently in the coarse graining o
 	\bar{\Delta r^2}_i(t) = \frac{1}{N(i)+1}\left( {\Delta r^2}_i(t) + \sum_{j=0}^{N(i)} {\Delta r^2}_j(t) \right),
 	\label{eq:Mu}
 \end{equation}
-where ${\Delta r^2}_i(t) = \left\|\vec{r_i}(t)-\vec{r_i}(0)\right\|^2$ and the neighbours are defined at initial time. 
+where ${\Delta r^2}_i(t) = \left\|\mathbf{r_i}(t)-\mathbf{r_i}(0)\right\|^2$ and the neighbours are defined at initial time. 
 
 \subsection*{Icosahedral percolation}
 
