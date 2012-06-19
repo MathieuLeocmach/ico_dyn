@@ -23,15 +23,14 @@ red!30!gray, every mark/.append style={fill=red!30!gray}, mark=triangle*\\%
 red, every mark/.append style={fill=red},mark=diamond*\\%
 }
 
+\tikzset{lab/.style={above right, text height=0.8em, text depth=0.2em, font=\sffamily\Large\bfseries}}
 
 \begin{document}
-\tikzset{external/force remake}
+\tikzset{external/force remake=false}
 \tikzsetnextfilename{vft}
 \begin{figure}
 	\centering
-	\begin{tikzpicture}[
-		lab/.style={above right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
-		]%
+	\begin{tikzpicture}
 		\pgfplotsset{fitc/.style={solid, no markers, forget plot, domain=1:1e4}}
 		\pgfplotsset{every axis/.append style={width=0.48\textwidth}}
 		\pgfplotsset{cycle list name=grade5}
@@ -39,7 +38,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 			at={(0,0)},
 			height=0.33\textwidth, %
 			xlabel=$t/\tau_B$, xmode=log,%
-			ylabel={Self ISF}, ymin=0,%
+			ylabel=\sffamily{Self ISF}, ymin=0,%
 			]
 			\addplot+[fitc] {0.943 * exp(-(x/4.60)^0.72)};
 			\addplot+[only marks] file {LS3954.isf};
@@ -135,7 +134,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 \tikzsetnextfilename{maps}
 \begin{figure}
 	\begin{tikzpicture}[
-		lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
+		lab/.append style={below right}%,
 		]%
 		\pgfplotsset{
 			extra tick style={grid=major, major grid style={
@@ -294,7 +293,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 \tikzsetnextfilename{msd_Q6_w6}
 \begin{figure}
 	\begin{tikzpicture}[
-		lab/.style={anchor=north west, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
+		lab/.append style={anchor=north west}%
 		]%
 		\pgfplotsset{extra tick style={%
 			grid=major, major grid style={%
@@ -366,7 +365,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 				xtick scale label code/.code={},%
 				ylabel=${\Delta r^2(w_6,t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$,
 				extra x ticks={\wstar, -0.00782}, extra x tick labels={$w_6^*$,$w_6^\text{dod}$},%
-				extra y tick labels={bulk},%
+				extra y tick labels={\sffamily{bulk}},%
 				]
 			
 			%\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi3954.txt};
@@ -377,7 +376,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_go1.txt};
 			\addplot+[domain=-0.0521089193:0.01, sharp plot, no markers] {9.34701 * x + 1.03764};
 			\draw[->, thick] (rel axis cs:0.15, 0.1) to (rel axis cs:0, 0.1);
-			\node[right] at (rel axis cs:0.15, 0.1) {\footnotesize Icosahedron};
+			\node[right] at (rel axis cs:0.15, 0.1) {\sffamily\footnotesize Icosahedron};
 			\node [lab] at (rel axis cs:0,1) {b};
 			
 			\nextgroupplot[%
@@ -418,7 +417,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\centering
 	\begin{tikzpicture}[%
 		pic3d/.style={inner sep=0}, %
-		lab/.style={below left=0.4em and 0, inner sep=0, text height=0.8em, text depth=0.2em, font=\Large\bfseries},%
+		lab/.style={below left=0.4em and 0, inner sep=0, text height=0.8em, text depth=0.2em, font=\sffamily\Large\bfseries},%
 		arr/.style={<->, thick, yellow!75!black}%
 		]%
 	\definecolor{turquoise}{rgb}{0.678431,0.917647,0.917647}
@@ -431,7 +430,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		\includegraphics[width=0.48\textwidth]{cgsd_2tau.png}\\
 	};
 	\matrix[%
-		above left=0.01\textwidth of pic-1-1.south east, font=\footnotesize,% 
+		above left=0.01\textwidth of pic-1-1.south east, font=\sffamily\footnotesize,% 
 		column 1/.style={right, text height=0.8em, text depth=0.2em},%
 		column 2/.style={left, circle, shade, inner sep=0.008\textwidth},%
 		] (l)
@@ -456,7 +455,6 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\centering
 	\begin{tikzpicture}[
 		pic3d/.style={inner sep=0}, %
-		lab/.style={above right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
 		]%
 		\node[pic3d] (msli) {\includegraphics[width=0.28\textwidth]{comp2D3D_slices}};
 		\node[lab] at (msli.south west) {a};
@@ -484,7 +482,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\centering
 	\begin{tikzpicture}[%
 		pic3d/.style={inner sep=0}, %
-		lab/.style={below left, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
+		lab/.append style={below left}%
 		]
 	\begin{axis}[%
 		name=hist,
@@ -493,7 +491,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		xmin=1, xmax=5, xtick=\empty,%
 		axis y line*=left,
 		ymin=0, ytick=\empty,%
-		ylabel={Size distribution (a.u.)},%
+		ylabel={\sffamily{Size distribution (a.u.)}},%
 		ylabel near ticks,
 		]
 		\addplot[ybar, ybar interval] file {SEM_size_distrib.txt};
@@ -502,20 +500,20 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		%scale only axis,
 		width=0.45\textwidth,%
 		xmin=1, xmax=5,
-		xlabel={Diameters [$\micro\metre$]},%
+		xlabel={\sffamily{Diameters} [$\micro\metre$]},%
 		ymin=0, ytick=\empty,%
 		no marks,%
 		]
 		\addplot+[dashed] file {go1_intensity.sizes};
 		\addplot table [x expr ={\thisrowno{0}/1.23}, y index=1] {go1_intensity.sizes};
-		\draw[->, ultra thick] (axis cs:3.15,0.05) -- (axis cs: 3.9, 0.05) node[right] {swelling};
+		\draw[->, ultra thick] (axis cs:3.15,0.05) -- (axis cs: 3.9, 0.05) node[right] {\sffamily{swelling}};
 		\node[lab] at (rel axis cs:0.95,0.95) {c};
 	\end{axis}
 	\node[pic3d, below left=0 of hist.left of north west] (XY) {\includegraphics[width=0.14\textwidth]{sliceXY}};
 	\node[lab, below=-0.2em of XY.south east, anchor=north east] {a};
 	\node[pic3d, below=1.4em of XY] (XZ) {\includegraphics[width=0.14\textwidth]{sliceXZ}};
 	\node[lab, below=0 of XZ.south east, anchor=north east] {b};
-	\draw[black, ultra thick] (XY.south west) ++(0,-0.2em) -- ++(0.036951014\textwidth,0) node[pos=0,below right=0.2em and 0,inner sep=0] {\tiny\unit{10}{\micro\metre}};
+	\draw[black, ultra thick] (XY.south west) ++(0,-0.2em) -- ++(0.036951014\textwidth,0) node[pos=0,below right=0.2em and 0,inner sep=0] {\scriptsize\unit{10}{\micro\metre}};
 	
 	\begin{axis}[%
 		at={(hist.right of south east)},
@@ -541,12 +539,12 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 \tikzsetnextfilename{percolation}
 \begin{figure}
 	\centering
-	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
+	\begin{tikzpicture}[lab/.append style={below}]
 	\pgfplotsset{ every axis/.append style={ width=0.45\textwidth, cycle list name=black white }}
 	\pgfplotsset{cycle list name=black white}
 	\begin{loglogaxis}[%
-		xmin=10, xmax=1000, xlabel={Cluster size},%
-		ymin=1, ylabel={Number of clusters},%
+		xmin=10, xmax=1000, xlabel=\sffamily{Cluster size},%
+		ymin=1, ylabel=\sffamily{Number of clusters},%
 		]
 		\addplot+[only marks] table {go1_w6_0012_sizes_rgs_noROI.hist};
 		\addplot+[no marks, domain=50:500] {1e6*x^(-2.1)};
@@ -554,7 +552,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\end{loglogaxis}
 	\begin{loglogaxis}[%
 		at={(0.5\textwidth,0)},%
-		xmin=10, xmax=1000, xlabel={Cluster size},%
+		xmin=10, xmax=1000, xlabel=\sffamily{Cluster size},%
 		ymin=1, ylabel={$R_g/\sigma $},%
 		ytick={1,10}, minor y tick num=10,%
 		yticklabel={%
@@ -576,7 +574,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		extra x ticks={\wstar, -0.00782},%
 		extra x tick labels={,},%
 		ymin=0,%
-		ylabel={Largest cluster size},%
+		ylabel=\sffamily{Largest cluster size},%
 		]
 		\addplot+[only marks] table {go1_w6.perco};
 		\node [left] at (axis cs:\wstar,1e3) {\footnotesize $w_6^*$};
@@ -585,7 +583,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\end{axis}
 	\begin{axis}[%
 		at={(0.5\textwidth, -0.36\textwidth)},%
-		xlabel={Fraction of activated particles},%
+		xlabel=\sffamily{Fraction of activated particles},%
 		xmin=0, xmax=0.6,ymin=0,%
 		ylabel={Largest cluster size},%
 		axis y line*=left,%
@@ -598,7 +596,7 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		xmin=0, xmax=0.6, ymin=0,%
 		axis x line=none,%
 		axis y line*=right, ytick=\empty,%
-		ylabel={Percolation probability (a.u.)},%
+		ylabel=\sffamily{Percolation probability (a.u.)},%
 		ylabel near ticks,%
 		]
 		\addplot+[only marks] coordinates{(1, 0)};
