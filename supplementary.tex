@@ -62,7 +62,8 @@
 %END HACKS
 
 \begin{document}
-\title{SUPPLEMENTARY INFORMATION for ``Roles of icosahedral and crystal-like order \\ in hard spheres glass transition''} 
+\title{SUPPLEMENTARY INFORMATION \\ 
+for ``Roles of icosahedral and crystal-like order in hard spheres glass transition''} 
 %\title{Role of structural heterogeneity of the supercooled liquid\\ in the crystallization of hard spheres}
 %\title{On the origin of polymorphism during the nucleation of hard spheres}
 %\title{On the origin of crystal polymorphism in hard spheres}
@@ -114,7 +115,7 @@
 
 Particle-level confocal microscopy experiments usually access the coordinates of the particles via the algorithm proposed by \citet{Crocker1996}. The original noisy image is blurred by convolution with a Gaussian kernel of width $\sigma$ to yield a soft peak per particle. Local intensity maxima within this blurred image give the coordinates of the particles with pixel resolution. Sub-pixel resolution ($0.1\sim0.3$~pixels error) can be achieved by taking the centre of mass of a neighbourhood around the local maximum. The extension of this algorithm in 3D has been done in two ways: either tracking particles in each confocal plane and reconstructing the results (2D-flavour)~\citep{dinsmore2001tdc}, or full image analysis on three dimensional pictures (3D-flavour)~\citep{vanblaaderen1995rss, Lu2007}.
 
-The choice of the width $\sigma$ of the blurring kernel is critical: if it is too small, then the intensity profile is flat near the centre  of a particle, leading to multiple and ill-localized maxima per particle; if it is too large, then the peaks of nearby particles overlap, leading to shifts in the detected positions, or even fusion of the particles (only one particle detected instead of two). If the colloids are fairly monodisperse one can argue (at least in the 3D-flavour) that there exists a range of possible width where the choice of $\sigma$ has almost no effect on the number of particles detected. Choosing $\sigma$ within this range gives confidence in the localisation results.
+The choice of the width $\sigma$ of the blurring kernel is critical: if it is too small, then the intensity profile is flat near the centre of a particle, leading to multiple and ill-localized maxima per particle; if it is too large, then the peaks of nearby particles overlap, leading to shifts in the detected positions, or even fusion of the particles (only one particle detected instead of two). If the colloids are fairly monodisperse one can argue (at least in the 3D-flavour) that there exists a range of possible width where the choice of $\sigma$ has almost no effect on the number of particles detected. Choosing $\sigma$ within this range gives confidence in the localisation results.
 
 
 
@@ -125,7 +126,7 @@ The key notion to detect objects of unknown and possibly diverse sizes in an ima
 The \textsc{sift} is often used to match between different images from complex objects consisting of many rigidly linked blobs and further characterised by local histograms~\citep{Lowe2004}. To our knowledge, this method has never been used for the quantitative localisation and sizing of independent single-blob objects like spherical colloids. The object-by-object optimal scale determination allows us to perform the spatial sub-pixel resolution step for each object on an image that is blurred just enough to have neither a flat intensity profile nor a nearby peak overlap. This leads to a spatial resolution below $0.3$~pixels when two $10$-pixels wide particles are at hard-core contact, and less than $0.03$~pixels error ($0.3\%$ of the diameter) when any other particle's surface is further than $1$~pixel from the surface of the particle of interest.
 
 
-The analytical response of a binary ball to a Gaussian blur, at the center of the ball is a function of dimensionless ratio $x=R/\sigma$: $G(x)$. The DoG response function is the difference between the two such functions. However, the choice of the width of the two functions is not arbitrary: we make the difference between two consecutive blurred images, the image blurred by $\sigma_{j+1}$ and the image blurred by $\sigma_j$. Therefore, in each of our discrete DoG images the value at the center of the particle can be expressed as
+The analytical response of a binary ball to a Gaussian blur, at the centre of the ball is a function of dimensionless ratio $x=R/\sigma$: $G(x)$. The DoG response function is the difference between the two such functions. However, the choice of the width of the two functions is not arbitrary: we make the difference between two consecutive blurred images, the image blurred by $\sigma_{j+1}$ and the image blurred by $\sigma_j$. Therefore, in each of our discrete DoG images the value at the centre of the particle can be expressed as
 \begin{align}
 DoG(R,\sigma_j, \alpha) = DoG(x_j, \alpha) &= G(x_j/\alpha) - G(x_j),\\
 \intertext{with $\alpha=2^{1/n}$. Given sub-scale refinement, this can be written as a continuous function of $\sigma$:}
