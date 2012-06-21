@@ -52,7 +52,7 @@
 \let\oldendthebibliography=\endthebibliography
 \renewenvironment{thebibliography}[1]{%
    \oldthebibliography{#1}%
-   \setcounter{NAT@ctr}{54}%
+   \setcounter{NAT@ctr}{55}%
 }{\oldendthebibliography}
 
 %Hack to remove the separator between text and bibliography
@@ -111,7 +111,7 @@ for ``Roles of icosahedral and crystal-like order in hard spheres glass transiti
 \section*{Supplementary Methods}
 
 
-%\subsection*{Particle localisation and sizing}
+\subsection*{Particle localisation and sizing}
 
 Particle-level confocal microscopy experiments usually access the coordinates of the particles via the algorithm proposed by \citet{Crocker1996}. The original noisy image is blurred by convolution with a Gaussian kernel of width $\sigma$ to yield a soft peak per particle. Local intensity maxima within this blurred image give the coordinates of the particles with pixel resolution. Sub-pixel resolution ($0.1\sim0.3$~pixels error) can be achieved by taking the centre of mass of a neighbourhood around the local maximum. The extension of this algorithm in 3D has been done in two ways: either tracking particles in each confocal plane and reconstructing the results (2D-flavour)~\citep{dinsmore2001tdc}, or full image analysis on three dimensional pictures (3D-flavour)~\citep{vanblaaderen1995rss, Lu2007}.
 
@@ -147,7 +147,22 @@ Supplementary Figure~S\ref{fig:sizing}c shows the size distribution of the suspe
 
 The consistency of our method can be checked by constructing the radial distribution function $g(r)$. In monodisperse hard spheres, the $g(r)$ has a sharp first peak at $r=2R$ corresponding to hard core contact. Polydispersity implies hard core contacts at various $r$ and thus broadens the peak. One can recover a sharp peak by constructing $g(\hat{r})$, with $\hat{r}_{ij} = r_{ij}/(R_i+R_j)$. In Supplementary Figure~S\ref{fig:sizing}d we successfully used the sizes measured by our method to rectify the first peak.
 
-Recently \citet{Kurita2011} have designed a sizing method using particle coordinates from confocal experiments. However their method do not work at the image processing level and relies on coordinates extracted via the \citet{Crocker1996} algorithm which, as described above, is defective when the size distribution is too broad. It may be possible to combine the two methods by feeding our coordinates and size as input to their method. We would expect an increase in sizing precision when the particles are close to contact.
+Recently \citet{Kurita2011,Kurita2011b} have designed a sizing method using particle coordinates from confocal experiments. However their method do not work at the image processing level and relies on coordinates extracted via the \citet{Crocker1996} algorithm which, as described above, is defective when the size distribution is too broad. It may be possible to combine the two methods by feeding our coordinates and size as input to their method. We would expect an increase in sizing precision when the particles are close to contact.
+
+\subsection*{Dynamics}
+
+As an aside, we have also computed the mobility-mobility spatial correlation function~\cite{Donati1999}
+\begin{equation}
+	\mathcal{G}_u(r,t) = \frac{
+		\left\langle \sum_{i,j}{\delta u_i(t) \delta u_j(t) \delta(r_{ij} -r)} \right\rangle 
+	}{
+		\left\langle \sum_{i,j}{\delta(r_{ij} -r)} \right\rangle
+	},
+	\label{eq:mobility_correl}
+\end{equation}
+where $\delta u_i(t)$ is the fluctuations of the norm of the displacements $\delta u_i(t) = \Delta r_i(t)-\langle\Delta r(t)\rangle$. $\mathcal{G}_u$ is a kind of four-point correlation function~[1]. The length scale $\xi_u$ is estimated from the fit of the envelope of $\mathcal{G}_u(r,t^{dh})$ in real space, at the characteristic time of the dynamic heterogeneity, by the Ornstein-Zernike form $\propto r^{-1}\exp( -r/\xi_u)$. 
+
+We found that $\xi_u$ obeys the same power-law dependence upon $\phi$ as $\xi_4$ and $\xi_6$, but with a prefactor about two times larger. We rationalise this result by considering the distribution of the norm of the displacements, which is not symmetric compared to its mean value. Thus $\delta u_i(t)$ reaches much larger positive values for the few fast particles than low values for the slow ones. We can say that the mobility-mobility correlation reflects mainly the spatial distribution of the fastest particles, and that $\xi_u$ is the length scale of the fastest regions. By definition $\xi_4$ is the characteristic length scale of the slow regions. We know that rearranging regions are usually string-like~\cite{Donati1999} whereas in our system the slow regions are compact. Even with approximatively the same number of particles involved, the lower-dimensional fast regions should be longer than the compact slow regions.
 
 \bibliographystyle{naturemag3}
 %\bibliographystyle{unsrtnat}
