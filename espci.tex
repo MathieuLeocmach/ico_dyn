@@ -1,0 +1,1273 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+%\usecolortheme{rose}
+\usecolortheme{crane}
+%\usefonttheme{structuresmallcapsserif}
+\setbeamertemplate{navigation symbols}{}
+
+%font
+\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+%\usepackage{tgheros}
+\usepackage[sfmath, largesmallcaps]{kpfonts}
+
+
+%proper math and math symbols
+%\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{siunitx}
+
+\usepackage{multirow}
+
+% Allow the usage of graphics (.jpg, .png, etc.) in the document
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,backgrounds, positioning, intersections, decorations.markings, mindmap, shapes.geometric, matrix,patterns}
+
+\usepackage{pgfplots}
+%\usepgfplotslibrary{units}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{external}
+\tikzexternalize
+\tikzset{external/force remake=false}
+
+%beamer related package
+
+\usepackage{todonotes}
+\presetkeys{todonotes}{inline}{}
+
+
+%bibliography
+\usepackage{natbib}
+%\usepackage{bibentry}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+\pgfplotscreateplotcyclelist{grade5}{%
+blue, every mark/.append style={fill=blue},mark=*\\%
+blue!30!gray,every mark/.append style={fill=blue!30!gray},mark=square*\\%
+gray!50!black,mark=star\\%
+red!30!gray, every mark/.append style={fill=red!30!gray}, mark=triangle*\\%
+red, every mark/.append style={fill=red},mark=diamond*\\%
+}
+
+\def\simplephasediagram#1{%
+	\begin{tikzpicture}[remember picture, xscale=40]
+		\tikzset{sim marker/.style={circle, fill=black, inner sep=0, minimum size=0.3em}}
+		\tikzset{xp marker/.style={rotate=45, rectangle, draw=black, fill=white, inner sep=0, minimum size=0.5em}}
+    	\fill[blue!50] (0.44, -0.4em) rectangle (0.495, 0.4em);
+    	\fill[blue!50!red!50] (0.495, -0.4em) rectangle (0.545, 0.4em);
+    	\fill[red!50] (0.545, -0.4em) rectangle (0.59, 0.4em);
+    	\draw[->, thick] (0.44,0) -- (0.59, 0);
+    	%\foreach \x in {0.4870, 0.5075,0.5276,0.5481, 0.5678} \node[sim marker] at (\x, 0) (sim\x){};
+    	\foreach \x in {0.497, 0.535, 0.555, 0.576} \node[xp marker] at (\x, 0) (exp\x){};
+    	#1%
+	\end{tikzpicture}%
+}
+
+\newcolumntype{P}[1]{>{\raggedright}p{#1}}
+
+%silent acronym macros
+\def\ac#1{#1}
+\def\acs#1{#1}
+
+%absolute positioning
+\usepackage[absolute,overlay]{textpos}
+
+\institute[E.N.S. Lyon]{The University of Tokyo, Institute of Industrial science\\Now postdoc in E.N.S. Lyon}
+\title[icosahedral and crystal-like order]{Roles of icosahedral and crystal-like order in hard spheres glass transition}
+\author[M. Leocmach]{Mathieu Leocmach\\Hajime Tanaka}
+\date{23th September 2013}
+
+\newcommand{\wstar}{-0.023}
+\newcommand{\Qstar}{0.25}
+
+\includeonly{}
+
+\begin{document}
+\tikzset{every mark/.append style={scale=0.8}}
+\pgfplotsset{every axis/.append style={small}}
+
+\AtBeginSection[]{
+	\addtocounter{framenumber}{-1}
+	\begin{frame}[plain]
+		\tableofcontents[currentsection, hideothersubsections]
+		{\footnotesize Leocmach \& Tanaka \textit{Nature Communications} 3, 974 (2012).}
+	\end{frame}
+}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\begin{frame}[plain]
+	\tableofcontents[hidesubsections]
+	{\footnotesize Leocmach \& Tanaka \textit{Nature Communications} 3, 974 (2012).}
+\end{frame}
+\setcounter{framenumber}{0}
+%\include{current_slide}
+
+\section{Supercooled liquids and the glass transition}
+\begin{frame}{From liquid to glass}
+	\begin{columns}
+	\column{0.6\textwidth}
+	\begin{tikzpicture}[
+		temp/.style={circle, inner sep=0.01\columnwidth, outer sep=0, fill=magenta},%
+		label position=below right, label distance=-0.03\columnwidth,%
+		]
+	\begin{axis}[%
+		width=\columnwidth, height=0.8\columnwidth,%
+		xlabel=Temperature, xmin=0, xmax=1.2, axis x line=bottom, xtick=\empty,%
+		extra x ticks={0.2, 0.45, 0.7, 0.95}, extra x tick labels={$T_0$, $T_g$,,$T_m$},%
+		ylabel=Entropy, ymin=0.1, ymax=1.2, axis y line=left, ytick=\empty, ylabel near ticks,%
+		]
+		\draw (axis cs:0, 0.18) -- (axis cs:0.95, 0.28);
+		\draw (axis cs:0.45, 0.45) -- (axis cs:1.2,1.2);
+		\draw[dotted] (axis cs:0.2, 0.2)-- (axis cs:0.45, 0.45);
+		\draw[help lines] (axis cs:0.2, 0)-- (axis cs:0.2, 0.2);
+		\draw[help lines] (axis cs:0.45, 0)-- (axis cs:0.45, 0.45);
+		\draw[help lines] (axis cs:0.7, 0)-- (axis cs:0.7, 0.7);
+		\draw[help lines] (axis cs:0.95, 0)-- (axis cs:0.95, 0.95);
+		\draw[red] (axis cs:0.45, 0.45) to [out=225, out looseness=0.2, in=5] (axis cs:0,0.35);
+		\draw[orange] (axis cs:0.45, 0.45) to [out=225, out looseness=0.5, in=5] (axis cs:0,0.325);
+		\draw[yellow] (axis cs:0.45, 0.45) to [out=225, out looseness=0.8, in=5] (axis cs:0,0.3);
+		\node[temp, label=\tiny{$\tau\sim10^{-13}$}] at (axis cs:0.95, 0.95) {};
+		\node[temp, label=\tiny{$\tau\sim10^{-9}$}] at (axis cs:0.7, 0.7) {};
+		\node[temp, label=\tiny{$\tau\sim10^{3}$}] at (axis cs:0.45, 0.45) {};
+		\node[temp, label=\tiny{$\tau\rightarrow\infty$?}] at (axis cs:0.2, 0.2) {};
+		\node[above, anchor=south] at (axis cs:0.15, 0.34) (gl) {\small{glass}};
+		\node[above, anchor=south, rotate=41.5] at (axis cs:0.7,0.7) {\small{supercooled liquid}};
+		\node[above, anchor=south west, rotate=41.5] at (axis cs:0.95,0.95) {\small{liquid}};
+		\node[below, anchor=north east] at (axis cs:0.95,0.28) {\small{crystal}};
+	\end{axis}
+	\end{tikzpicture}
+	%\begin{footnotesize}\citet{cavagna2009supercooled}\end{footnotesize}
+	\column{0.4\textwidth}
+	\begin{itemize}
+		\item Avoid crystallisation
+		\item Slowing down by \alert{many} orders of magnitude
+		\item A different type of solid: Glass
+	\end{itemize}
+	\end{columns}
+	\begin{itemize}
+		\item Kinetic glass transition $T_g$
+		\item Not a thermodynamic transition but a dynamical arrest
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Glass are amorphous}
+	\begin{columns}
+	\column{0.5\textwidth}
+	Static structure factor
+	\centering
+	\includegraphics[width=\columnwidth]{sq_kob}
+	
+	{\footnotesize\citet{Kob2002}}
+	
+	\column{0.5\textwidth}
+	While dynamics changes by 4 orders of magnitude
+	\begin{itemize}
+		\item Almost no change in positional order
+		\item No characteristic length scale diverging toward $T_g$ or $T_0$
+		\item $\neq$ critical phenomena
+	\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Dynamics of supercooled liquids}
+
+	{\footnotesize\citet{kob1995tmc}}
+	\begin{columns}
+	\column{0.4\textwidth}
+	\centering
+	\begin{tikzpicture}
+		\node[above right] {\includegraphics[width=0.95\columnwidth]{msd_kob}};
+		\node at(0.9\columnwidth, 0.65\columnwidth) {$\alpha$};
+		\node at(0.2\columnwidth, 0.35\columnwidth) {$\beta$};
+	\end{tikzpicture}
+	
+	\includegraphics[width=\columnwidth]{cage_weeks}\\
+	\column{0.55\textwidth}
+	%Mean square displacement\\
+	\begin{block}{Two step relaxation}
+	\begin{itemize}
+		\item A plateau appears
+		\item $\beta$-relaxation does not change
+		\item The length of the plateau changes\\ $\Rightarrow$ slowing down by many orders of magnitude
+	\end{itemize}
+	\end{block}
+	\begin{block}{The cage theory}
+	\begin{itemize}
+		\item Hopping between cages $\ll\sigma$
+		\item Is the hopping probability really uniform?
+	\end{itemize}
+	\end{block}
+	\end{columns}
+	{\footnotesize\citet{weeks2002pcr}}
+\end{frame}
+
+\begin{frame}{Dynamic is heterogeneous}
+	\begin{columns}
+	\column{0.4\textwidth}
+	Fast and slow regions exist at intermediate times.
+	\begin{center}
+	\includegraphics[width=\columnwidth]{dh_perera}\\
+	{\footnotesize\citet{Perera1999}}
+	\end{center}
+	
+	\column{0.6\textwidth}
+	\begin{center}
+	{\footnotesize\citet{Lacevic2003}}\\
+	\includegraphics[width=0.7\columnwidth]{xi4_lacevic}
+	\end{center}
+	\begin{itemize}
+		\item Spatial correlation of the fluctuations of the dynamics.
+		\item Extract a dynamical correlation length
+		\item Grows toward the glass transition
+	\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Dynamic vs static ?}\usebeamercolor{block title}
+\begin{flushright}
+	\begin{tikzpicture}[concept/.style={scale=0.75, circle, font=\small, align=center, draw=bg, fill=bg, text width=6em, inner sep=0em}]
+		\node[concept] (root2) {criticality};
+		\node[below left=of root2, concept] (d2) {growing \alert{static} length scale};
+		\node[below right=of root2, concept] (s2) {slow down of global dynamics};
+		\path (root2) to[circle connection bar switch color=from (bg) to (bg)] (d2);
+		\path (root2) to[circle connection bar switch color=from (bg) to (bg)] (s2);
+		\draw [thick, fg, ->] (d2) to [bend right] (s2);		
+		
+		\node[below right=0.15\textwidth and 0.3\textwidth of root2, concept] (root) {glass transition};
+		\node[below right=of root, concept] (s) {slow down of dynamics};
+		\node[below=of root, concept] (d) {growing \alert{dynamic} length scale};
+		\node<2>[below left=of root, concept] (sta) {growing \alert{static} length scale};
+		\path (root) to[circle connection bar switch color=from (bg) to (bg)] (d);
+		\path (root) to[circle connection bar switch color=from (bg) to (bg)] (s);
+		\path<2> (root) to[circle connection bar switch color=from (bg) to (bg)] (sta);
+		\draw[thick, dashed, fg, ->] (d) to [bend right] (s);
+		\draw<2>[thick, dashed, fg, ->] (sta) to [bend right] (d);
+	\end{tikzpicture}
+\end{flushright}
+\end{frame}
+
+\begin{frame}{Static cause to dynamic heterogeneities}
+	\begin{columns}
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics[width=\columnwidth]{propensity}
+	\column{0.5\textwidth}
+	{\footnotesize\citet{Widmer-Cooper2005}}
+	\begin{itemize}
+		\item $N$ runs from the same initial configuration
+		\item Average out the influence of initial dynamics
+		\item Propensity to displacement
+		\item Predict fast/slow \alert{regions} ($>$~individual particle)\\{\footnotesize\citet{Berthier2007}}
+	\end{itemize}
+	\end{columns}
+	
+	\bigskip$\Rightarrow$ Glass transition may have a structural cause
+\end{frame}
+
+\begin{frame}{Candidates of structural order}
+\small{Without long-ranged positional order}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Locally favoured structure (LFS) of the liquid}
+Cannot fill space because of geometrical frustrations
+
+\centering\begin{tikzpicture}[pen/.style={regular polygon, regular polygon sides=5, draw, minimum size=1cm}]
+	\node[pen] (base) {};
+	\node[pen,anchor=south, rotate=180] at (base.side 3) {};
+	\node[pen,anchor=south, rotate=-108] at (base.side 4) {};
+\end{tikzpicture}
+\end{block}
+Example: Icosahedron
+\column{0.5\textwidth}
+\centering\includegraphics[width=0.5\textwidth]{d20.png}
+
+\includegraphics[width=0.5\textwidth]{ico_13}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Candidates of structural order}
+\small{Without long-ranged positional order}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Influence of the crystal}
+Cannot fill space because
+\begin{itemize}
+	\item Energy barrier
+	\item Other structures locally more stable
+	\item Kinetic barrier
+	\item Size polydispersity
+\end{itemize}
+\end{block}
+Example: Depends on the underlying crystal structure
+\column{0.5\textwidth}
+	\centering\begin{tikzpicture}[scale=0.2, rotate=-90]
+		\tikzset{particle/.style={circle, ball color=blue!50!white, inner sep=0, minimum size=1.5em}}
+		\tikzset{ar/.style={->, draw=red!80!black, thick}}
+		\node[particle] at (14.356, 47.436) (a) {};
+		\node[particle] at (17.000, 52.387) (b) {};
+		\node[particle] at (20.000, 48.000) (c) {};
+		\node[particle] at (17.178, 44.149) (d) {};
+		\node[particle] at (22.258, 51.951) (e) {};
+		\node[particle] at (22.822, 44.049) (f) {};
+		\node[particle] at (23.387, 56.467) (g) {};
+		\node[particle] at (27.902, 58.160) (g1) {};
+		\node[particle] at (26.773, 53.080) (h) {};
+		\node[particle] at (25.644, 48.000) (i) {};
+		\node[particle] at (31.300, 54.773) (j) {};
+		\node[particle] at (30.724, 49.693) (k) {};
+		\node[particle] at (36.000, 57.596) (k1) {};
+		\node[particle] at (35.804, 53.016) (l) {};
+		\node[particle] at (34.676, 47.436) (m) {};
+		\node[particle] at (40.320, 54.209) (n) {};
+		\node[particle] at (39.191, 49.129) (o) {};
+		\path[ar] (d) edge (c);
+		\path[ar] (c) edge (e);
+		\path[ar] (i) edge (h);
+		\path[ar] (k) edge (j);
+		\path[ar] (l) edge (k1);
+		\draw[green!50!black] (a) -- (c) -- (b);
+		\path[green!50!black,<->] (a) edge [bend left] (b);
+		\draw[green!50!black] (n) -- (l) -- (o);
+		\path[green!50!black,<->] (n) edge [bend left] (o);
+	\end{tikzpicture}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Different structural cause $\Rightarrow$ different theory}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\structure{Liquid's order}
+\begin{itemize}
+	\item Spin-glass type\\{\footnotesize\citet{steinhardt1983boo}}
+	\item Frustration-limited domain\\{\footnotesize\citet{tarjus2005fba}}
+\end{itemize}
+Icosahedral domain size\\
+Defect size
+
+\column{0.5\textwidth}
+\structure{Crystal's order}
+\begin{itemize}
+	\item Tow order parameters\\{\footnotesize\citet{TanakaGJPCM}}
+\end{itemize}
+
+\bigskip
+Bond order coherence length
+\end{columns}
+\begin{columns}
+\column{0.5\textwidth}
+\rotatebox{90}{\footnotesize \citet{Dzugutov2002}}
+\includegraphics[width=0.5\columnwidth]{Dzugutov_LFS}
+\column{0.5\textwidth}
+\begin{tabular}{cc}
+\resizebox{0.45\columnwidth}{!}{\input{kawa_nm_psi6.pdf_tex}} & \resizebox{0.45\columnwidth}{!}{\input{kawa_nm_msd.pdf_tex}} \\ 
+$\Psi_6$ & $\Delta r^2$ \\ 
+\end{tabular}
+{\footnotesize\citet{tanaka2010critical}}
+\end{columns}
+\end{frame}
+
+\begin{frame}{"Crystal" is \ldots}
+\ldots the symmetry breaking phase, avoided \alert{by definition} to get the supercooled liquid.
+\begin{itemize}
+	\item A classical crystal (\textsc{fcc, hcp, bcc}, \ldots)
+\end{itemize}
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\centering
+	\begin{itemize}\item A quasi-crystal\end{itemize}
+	\includegraphics[height=0.5\columnwidth]{Ho-Mg-ZnQuasicrystal.jpg}\\
+	{\footnotesize\citet{Doye2003}}
+	\column{0.5\textwidth}
+	\centering
+	\begin{itemize}\item A Frank-Kasper phase\end{itemize}
+	\includegraphics[height=0.5\columnwidth]{frankkasper.png}\\
+	{\footnotesize\citet{Pedersen2010, Coslovich2011}}
+\end{columns}
+
+\bigskip
+$\Rightarrow$ "Crystal" may contain icosahedral motif
+\end{frame}
+
+\begin{frame}{Slow icosahedral cluster means \dots}
+\dots \alert{nothing} if the (quasi)crystalline state of the system has icosahedral motif.
+\begin{itemize}
+	\item Dodecagonal quasi-crystal for Dzugutov system\\{\footnotesize\citet{Doye2003}}
+	\item Frank-Kasper phase for Wangstr\"om mixture\\{\footnotesize\citet{Pedersen2010, Coslovich2011}}
+\end{itemize}
+
+\begin{block}{We need a system}
+\begin{itemize}
+	\item With a known crystalline state $\nsupseteq$ icosahedral motif
+	\item Exhibiting icosahedral order
+\end{itemize}
+\centering$\Longrightarrow$ Hard spheres
+\end{block}
+\end{frame}
+
+\section{Hard spheres colloids tracked by confocal microscopy}
+\begin{frame}{Hard spheres and colloids}
+	\begin{textblock*}{0.6\textwidth}(10mm,88mm)
+		\simplephasediagram{}%
+	\end{textblock*}
+	The volume fraction $\phi$ is like an inverse temperature.
+	\bigskip
+	\def\svgwidth{\textwidth}\input{phase_diagram.pdf_tex}
+	
+	\bigskip
+	Well approximated by sterically stabilised colloids\\
+	\begin{footnotesize}\citet{pusey1987ogt}\end{footnotesize}
+\end{frame}
+
+\begin{frame}{Our colloids}
+	\begin{columns}
+	\column{0.5\textwidth}
+	\begin{center}
+	\rotatebox{90}{\qquad \small{SEM image}}\includegraphics[width=0.8\columnwidth, height=0.6\columnwidth]{SEM}
+	\end{center}
+	\structure{Solvent}
+	\begin{itemize}
+		\item Cis-decalin
+		\item Cyclohexylbromide
+	\end{itemize}
+	Matching
+	\begin{itemize}
+		\item Optical index
+		\item Density (with $T$ control)
+	\end{itemize}
+	\column{0.5\textwidth}
+	\begin{block}{PMMA particles}
+		\begin{itemize}
+			\item $\sigma \simeq \SI{3.3}{\micro\metre}$
+			\item $\Delta \simeq 6\%$ not Gaussian
+		\end{itemize}
+		Hard spheres
+		\begin{itemize}
+			\item Sterically stabilized
+			\item Salt to screen charges\\ (Debye length $<\SI{100}{\nano\metre}$)
+		\end{itemize}
+	\end{block}
+	\begin{tikzpicture}
+		\begin{axis}[%
+			width=\columnwidth, height=0.6\columnwidth,%
+			ybar,%
+			ymin=0, ylabel={Size distribution},%
+			xlabel={Sizes [\si{\micro\metre}]}
+			]
+		\usebeamercolor{palette primary}
+		\addplot[ybar interval, fill=fg!50!white] file {SEM_size_distrib.txt};
+		\end{axis}
+	\end{tikzpicture}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Confocal microscopy}
+	\begin{center}\begin{columns}[c]
+	\column{0.4\textwidth}
+	\begin{tikzpicture}[
+		font=\footnotesize, 
+		decoration={markings, mark=between positions 0.1 and 1 step 0.2\columnwidth with {\arrow{stealth}}},
+	]
+	\draw[thick] (-0.12\columnwidth,0) -- (-0.012\columnwidth,0) (0.012\columnwidth,0) -- (0.12\columnwidth,0);
+	\node[left] at (-0.12\columnwidth,0) {aperture};
+	\fill[name path=dichro, cyan, rotate around={-45:(0,-0.35\columnwidth)}]  (-0.2\columnwidth,-0.34\columnwidth) rectangle (0.2\columnwidth,-0.36\columnwidth) (0, -0.34\columnwidth) node[above, black, rotate=-45] {beam splitter};
+	\draw[thick] (-0.35\columnwidth,-0.23\columnwidth) -- (-0.35\columnwidth,-0.348\columnwidth) (-0.35\columnwidth,-0.362\columnwidth) -- (-0.35\columnwidth,-0.47\columnwidth);
+	\node[above] at (-0.35\columnwidth,-0.23\columnwidth) {pinhole};
+	\fill[cyan] (0, -\columnwidth) arc (-90:-70:0.6\columnwidth) node (lensright) {} 
+		arc (70:110:0.6\columnwidth) node (lensleft) {}
+		arc (-110:-90:0.6\columnwidth);
+	\path[name path=lensbottom] (lensleft) arc (-110:-70:0.6\columnwidth);
+	\path[name path=lenstop] (lensright) arc (70:110:0.6\columnwidth);
+	\fill[orange] (-0.15\columnwidth, -1.05\columnwidth) rectangle (0.15\columnwidth, -1.15\columnwidth);
+	\draw[dashed] (-0.2\columnwidth, -1.08\columnwidth) -- (0.2\columnwidth, -1.08\columnwidth);
+	\node[left] at (-0.2\columnwidth, -1.08\columnwidth) {focal plane};
+	\node[above] at (0,0.1\columnwidth) {light source};
+	\path[name path=iray1] (0.012\columnwidth, 0.1\columnwidth) -- (-0.12\columnwidth, -\columnwidth);
+	\path[name path=iray2] (0, -1.08\columnwidth) -- (-0.15\columnwidth, -0.95\columnwidth);
+	\path[name path=iray3] (-0.012\columnwidth, 0.1\columnwidth) -- (0.12\columnwidth, -\columnwidth);
+	\path[name path=iray4] (0, -1.08\columnwidth) -- (0.15\columnwidth, -0.95\columnwidth);
+	\draw[
+		postaction={decorate}, green!80!black,
+		name intersections={of=iray1 and dichro, by=x},
+		name intersections={of=iray3 and dichro, by=y},
+		]
+		(0.012\columnwidth, 0.1\columnwidth) -- (x)
+		(-0.012\columnwidth, 0.1\columnwidth) -- (y);
+		
+	\draw[
+		postaction={decorate}, green!80!black, dashed, dash pattern=on 5pt off 5pt, dash phase=0pt,
+		name intersections={of=iray1 and dichro, by=x}, 
+		name intersections={of=iray1 and lenstop, by=a}, 
+		name intersections={of=iray2 and lensbottom, by=b},
+		name intersections={of=iray4 and lensbottom, by=c},
+		name intersections={of=iray3 and lenstop, by=d},
+		name intersections={of=iray3 and dichro, by=y},
+		] 
+		(x) -- (a) -- (b) -- (0, -1.08\columnwidth)
+		(y) -- (d) -- (c) -- (0, -1.08\columnwidth);
+	\draw[postaction={decorate}, red!80!black, 
+		name intersections={of=iray1 and dichro, by=x}, 
+		name intersections={of=iray3 and dichro, by=y},
+		] 
+		(x) -- (-0.41\columnwidth, -0.362\columnwidth) 
+		(y) -- (-0.41\columnwidth, -0.348\columnwidth);
+	\draw[postaction={decorate}, red!80!black, dashed, dash pattern=on 5pt off 5pt, dash phase=10pt,
+		name intersections={of=iray1 and dichro, by=x}, 
+		name intersections={of=iray1 and lenstop, by=a}, 
+		name intersections={of=iray2 and lensbottom, by=b},
+		name intersections={of=iray4 and lensbottom, by=c},
+		name intersections={of=iray3 and lenstop, by=d},
+		name intersections={of=iray3 and dichro, by=y},
+		] 
+		(0, -1.08\columnwidth) -- (b) -- (a) -- (x) 
+		(0, -1.08\columnwidth) -- (c) -- (d) -- (y);
+	\draw[thick, blue] (-0.39\columnwidth, -0.33\columnwidth) arc (90:270:0.025\columnwidth);
+	\node[above left, rotate=90] at (-0.39\columnwidth, -0.33\columnwidth) {light detector};
+	\path[name path=badray1] (0,0) -- (-0.18\columnwidth, -1.1\columnwidth);
+	\path[name path=badray2] (0, -1.12\columnwidth) -- (-0.3\columnwidth, -0.85\columnwidth);
+	\path[name path=badray3] (0,0) -- (0.18\columnwidth, -1.1\columnwidth);	
+	\path[name path=badray4] (0, -1.12\columnwidth) -- (0.3\columnwidth, -0.85\columnwidth);
+	\draw[dotted,
+		name intersections={of=badray1 and dichro, by=x}, 
+		name intersections={of=badray1 and lenstop, by=a}, 
+		name intersections={of=badray2 and lensbottom, by=b},
+		name intersections={of=badray4 and lensbottom, by=c},
+		name intersections={of=badray3 and lenstop, by=d},
+		name intersections={of=badray3 and dichro, by=y},
+		] 
+		(0, -1.12\columnwidth) -- (b) -- (a) -- (x) --  (-0.35\columnwidth, -0.38\columnwidth)
+		(0, -1.12\columnwidth) -- (c) -- (d) -- (y) --  (-0.35\columnwidth, -0.33\columnwidth);
+	\end{tikzpicture}
+	\column{0.5\textwidth}
+	\begin{tikzpicture}
+	\matrix[matrix of nodes, ampersand replacement=\&, nodes={anchor=center}]
+	{
+		$XY$ slice \& \includegraphics[width=0.5\columnwidth]{sliceXY} \\
+		$XZ$ slice \& \includegraphics[width=0.5\columnwidth]{sliceXZ} \\
+	};
+	\end{tikzpicture}
+	\end{columns}\end{center}
+\end{frame}
+
+\begin{frame}<3>{Particle tracking}
+	\begin{columns}
+	\column{0.6\textwidth}
+	\only<1|handout:0>{\includegraphics[width=\columnwidth]{compare_image_tracked3D_0}}%
+	\only<2|handout:0>{\includegraphics[width=\columnwidth]{compare_image_tracked3D_1}}%
+	\only<3>{\includegraphics[width=\columnwidth]{compare_image_tracked3D_2}}\\
+	\centering{\uncover<1,3>{Image}\uncover<3>{ $+$ }\uncover<2,3>{Tracked}}
+	\column{0.4\textwidth}
+	\footnotesize{\citet{Crocker1996}}	
+	
+	\bigskip
+	
+	\begin{itemize}
+		\item All particles are tracked
+		\item Only particles are tracked
+		\item Coordinates are known within\\
+			$\SI{0.1}{pixels} \approx \sigma/100 \approx \SI{30}{\nano\metre}$
+		\item \alert{new}: arbitrary size distribution
+		\item \alert{new}: sizes measured \emph{in situ}
+	\end{itemize}
+	\end{columns}
+\end{frame}
+
+
+
+\begin{frame}{Multiscale tracking}
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[%
+		name=hist2,
+		width=0.8\columnwidth, height=0.6\columnwidth,%
+		xmin=1, xmax=5,
+		ylabel={Size distribution},
+		ymin=0, yticklabel=\empty, ylabel near ticks,%
+		legend style={legend pos=north west},
+		no marks,%
+		]
+		\addplot[ybar, ybar interval, area legend, gray!50, fill=gray!50] file {SEM_size_distrib.txt} \closedcycle;
+		\legend{\textsc{sem}}
+		\addplot+[blue,dashed] table[x expr ={2*\thisrow{r}}, y expr ={5.5*\thisrow{all}}] {all_ico_icongb_mrco_X.rdist};
+		\addlegendentry{In situ};
+		\addplot+[red] table [x expr ={2*\thisrow{r}/1.25}, y expr ={5.5*\thisrow{all}}] {all_ico_icongb_mrco_X.rdist};
+		\addlegendentry{In situ*0.8};
+		\draw[->, ultra thick] (axis cs:3.15,3) -- (axis cs: 3.9, 3) node[midway, above] {swelling};%
+	\end{axis}
+	\end{tikzpicture}%
+	\includegraphics[width=0.2\columnwidth]{comp2D3D_crop}
+	
+	{\footnotesize Leocmach \& Tanaka \textit{Soft Matter} 9, 1447--1457 (2013).}
+\end{frame}
+
+
+
+\begin{frame}{Glassy dynamics}
+	\begin{textblock*}{0.6\textwidth}(10mm,88mm)
+		\simplephasediagram{}%
+	\end{textblock*}
+From the tracked trajectories
+	\begin{tikzpicture}
+		\pgfplotsset{fitc/.style={solid, no markers, forget plot, domain=1:1e4}}
+		\pgfplotsset{every axis/.append style={width=0.48\textwidth}}
+		\pgfplotsset{cycle list name=grade5}
+		\begin{axis}[%
+			at={(0,0)},
+			height=0.33\textwidth, %
+			xlabel=$t/\tau_B$, xmode=log,%
+			ylabel=\sffamily{Self ISF}, ymin=0,%
+			legend style={at={(0,-0.5)}, anchor=north west},
+			reverse legend,
+			]
+			\addplot+[fitc] {0.943 * exp(-(x/4.60)^0.72)};
+			\addplot+[only marks] file {LS3954.isf};
+			\addplot+[fitc] {0.901 * exp(-(x/10.78)^0.72)};
+			\addplot+[only marks] file {LS4446.isf};
+			\addplot+[fitc] {0.894 * exp(-(x/15.51)^0.70)};
+			\addplot+[only marks] file {LS4582.isf};
+			\addplot+[fitc] {0.876 * exp(-(x/60.18)^0.60)};
+			\addplot+[only marks] file {LS5079.isf};
+			\addplot+[fitc] {0.787 * exp(-(x/2408.)^0.70)};
+			\addplot+[only marks] file {go1.isf};
+			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
+			\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
+		\end{axis}
+		\pgfplotsset{fitc/.style={no markers, forget plot, domain=0.3:3}}
+		\begin{semilogxaxis}[%
+			at={(0.49\textwidth,0)},
+			height=0.33\textwidth, %
+			xlabel=$t/\tau_B$,%
+			xmin=1, xmax=1e4,%
+			ylabel=$\alpha_2(t)$,%
+			only marks,%
+			]
+			\addplot file {LS3954.ngp};
+			\addplot file {LS4446.ngp};
+			\addplot file {LS4582.ngp};
+			\addplot file {LS5079.ngp};
+			\addplot file {go1.ngp};
+		\end{semilogxaxis}
+		\pgfplotsset{cycle list name=black white}
+		\tikzset{every mark/.append style={scale=1.2}}
+		\begin{axis}[%
+			at={(0.49\textwidth,-0.3\textwidth)},
+			height=0.33\textwidth, %
+			xlabel=$\phi$,%
+			xtick={0.5,0.52,...,0.6},%
+			ylabel=$\tau_\alpha/\tau_B$, ymode=log, %
+			cycle list={{black, mark=*},{black, mark=square}},%
+			]
+			\addplot+[mark=none, forget plot, domain=0.49:0.58] {exp(0.28970401*x/(0.59841615-x))};
+			\addplot+[only marks] table[x index=0, y index=1]{xi_phi.dat};
+			\addplot+[only marks, every mark/.append style={draw=gray, scale=1.2}] table[x index=0, y index=4]{xi_phi.dat};
+			\node at (rel axis cs:0,1) (a) {};
+		\end{axis}
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Dynamic heterogeneities}
+\begin{textblock*}{0.6\textwidth}(10mm,88mm)
+		\simplephasediagram{}%
+	\end{textblock*}
+\begin{columns}
+	\column{0.4\textwidth}
+	Slow particles
+	\includegraphics[width=\columnwidth]{cgsd_2tau.png}
+	\column{0.6\textwidth}
+	\begin{tikzpicture}
+		\begin{loglogaxis}[%
+			anchor=outer south,
+			title={Four-point structure factor},
+			width=0.9\textwidth,
+			height=0.5\textwidth, %
+			xlabel={$q\xi_4$}, ylabel={$S_4(q)/\chi_4$},
+			cycle list name=grade5,%
+			xmin=0.25, xmax=5, ymin=0.05,%
+			xtick={0.5, 1, 2, 4},
+			xticklabel=\pgfmathparse{exp(\tick)}%
+				\pgfmathprintnumber{\pgfmathresult},
+			%legend pos=south west, reverse legend,
+			]
+			\addplot+[only marks] table[x expr={\thisrowno{0}*0.703}, y expr={\thisrowno{1}/0.634}] {LS3954.S4};
+			\addplot+[only marks] table[x expr={\thisrowno{0}*0.804}, y expr={\thisrowno{1}/0.744}] {LS4446.S4};
+			\addplot+[only marks] table[x expr={\thisrowno{0}*0.835}, y expr={\thisrowno{1}/0.778}] {LS4582.S4};
+			\addplot+[only marks] table[x expr={\thisrowno{0}*1.017}, y expr={\thisrowno{1}/1.011}] {LS5079.S4};
+			\addplot+[only marks] table[x expr={\thisrowno{0}*1.959}, y expr={\thisrowno{1}/2.950}] {go1.S4};
+			\addplot+[black, no markers, forget plot, domain=0.3:3] {1/(1+x^2)};
+		\end{loglogaxis}
+		\pgfplotsset{cycle list name=black white}
+		\tikzset{every mark/.append style={scale=1.2}}
+		\begin{axis}[%
+			anchor=outer north,
+			title={Growing dynamic length scale},
+			%at={(0.1\textwidth,-0.6\textwidth)},
+			width=0.6\textwidth, %
+			xlabel=$\phi$, xmin=0.49, xmax=0.58, xlabel near ticks,%
+			xtick={0.5,0.52,...,0.6},%
+			ylabel=$\xi_4$, ymax=2.5,
+			ytick={0.5,1,1.5,2},
+			ylabel near ticks,%
+			]
+			\addplot+[mark=none, forget plot, domain=0.49:0.58] {0.216 * (0.6/x-1)^(-2.0/3.0)};
+			\addplot+[only marks, mark=square, every mark/.append style={draw=gray, scale=1.2},] table[x index=0, y expr=\thisrowno{5}]{scale.xi};
+		\end{axis}
+	\end{tikzpicture}
+\end{columns}
+\end{frame}
+
+\section[Structure]{Structure identification}
+
+\begin{frame}[label=local_sym_sh]{Local symmetry and spherical harmonics}
+	\begin{columns}
+	\column{0.25\textwidth}
+	\begin{center}
+	\begin{tikzpicture}[scale=0.15, rotate=-90]
+		\tikzset{particle/.style={circle, ball color=blue!50!white, inner sep=0, minimum size=1em}}
+		\tikzset{ar/.style={->, draw=red!80!black, thick}}
+		\node[particle] at (14.356, 47.436) (a) {};
+		\node[particle] at (17.000, 52.387) (b) {};
+		\node[particle] at (20.000, 48.000) (c) {};
+		\node[particle] at (17.178, 44.149) (d) {};
+		\node[particle] at (22.258, 51.951) (e) {};
+		\node[particle] at (22.822, 44.049) (f) {};
+		\node[particle] at (23.387, 56.467) (g) {};
+		\node[particle] at (27.902, 58.160) (g1) {};
+		\node[particle] at (26.773, 53.080) (h) {};
+		\node[particle] at (25.644, 48.000) (i) {};
+		\node[particle] at (31.300, 54.773) (j) {};
+		\node[particle] at (30.724, 49.693) (k) {};
+		\node[particle] at (36.000, 57.596) (k1) {};
+		\node[particle] at (35.804, 53.016) (l) {};
+		\node[particle] at (34.676, 47.436) (m) {};
+		\node[particle] at (40.320, 54.209) (n) {};
+		\node[particle] at (39.191, 49.129) (o) {};
+		\path[ar] (d) edge (c);
+		\path[ar] (c) edge (e);
+		\path[ar] (i) edge (h);
+		\path[ar] (k) edge (j);
+		\path[ar] (l) edge (k1);
+		\draw[green!50!black] (a) -- (c) -- (b);
+		\path[green!50!black,<->] (a) edge [bend left] (b);
+		\draw[green!50!black] (n) -- (l) -- (o);
+		\path[green!50!black,<->] (n) edge [bend left] (o);
+	\end{tikzpicture}
+	\end{center}
+	\column{0.75\textwidth}
+	\begin{tikzpicture}
+		\matrix (mat) [%
+			matrix of nodes, ampersand replacement=\&, nodes={anchor=center},%
+			row 1/.style={font=\tiny}, row 4/.style={font=\tiny}
+			]
+		{
+			$\ell=6, m=0$ \& \& $\ell=6, m=5$ \& \& Icosahedron\\
+			\includegraphics[width=0.25\columnwidth]{sh6-0} \& %
+			$+$ \& %
+			\includegraphics[width=0.25\columnwidth]{sh6-5} \& %
+			$=$ \& %
+			\includegraphics[width=0.25\columnwidth]{ico_13} \\
+			\includegraphics[width=0.25\columnwidth]{sh6-3} \& %
+			$+$ \& %
+			\includegraphics[width=0.25\columnwidth]{sh6-6} \& %
+			$=$ \& %
+			\includegraphics[width=0.25\columnwidth]{fcc_13} \\
+			$\ell=6, m=3$ \& \& $\ell=6, m=6$ \& \& \textsc{fcc}\\
+		};
+	\end{tikzpicture}
+	\end{columns}
+	\begin{itemize}
+		\item The orientation changes $\Rightarrow$ No positional order
+		\item The local angles stay the same $\Rightarrow$ Bond orientational order
+	\end{itemize}
+	{\footnotesize\citet{steinhardt1983boo}}
+\end{frame}
+
+
+\begin{frame}<1-3>{Second-shell bond orientational order}
+	\begin{textblock*}{0.6\textwidth}(10mm,88mm)
+		\only<2->{\simplephasediagram{%
+			\node<2-> at (0.576,0) [xp marker, fill=green!50!black] {};%
+			\node<3-> at (0.497,0) [xp marker, fill=green!50!black] {};
+			}}%
+	\end{textblock*}
+	\begin{columns}[b]
+	\column{0.5\textwidth}
+	\begin{tikzpicture}
+		\node (bcc) {\includegraphics[width=0.25\columnwidth]{bcc_15}};
+		\node[right=0 of bcc] (hcp) {\includegraphics[width=0.25\columnwidth]{hcp_13}};
+		\node[right=0 of hcp] (fcc) {\includegraphics[width=0.25\columnwidth]{fcc_13}};
+		\begin{axis}[%
+			anchor=north east, at=(fcc.south east),%
+			width=\columnwidth, height=\columnwidth,%
+			ylabel={$Q_6$}, xlabel=$Q_4$,%
+			xmin=0,xmax=0.22,%
+			ymin=0, ymax=0.6,%
+			enlargelimits=false,axis on top,
+			extra tick style={grid=major},%
+			extra y ticks={\Qstar}, extra y tick labels={},%
+			xticklabel={$\pgfmathprintnumber[fixed,precision=2]{\tick}$}
+			] 
+		\alt<-2>{\addplot graphics
+		[xmin=0,xmax=0.2,ymin=0,ymax=0.6]
+		{lechner_Q4Q6.png};
+		\matrix[
+			matrix of nodes, ampersand replacement=\&, matrix anchor=south east,%
+			nodes={inner sep=0.25em, anchor=west},%
+			column 1/.style={circle},%
+			] at (rel axis cs:1,0)
+		{
+			|[fill=black]| \& \textsc{bcc}\\
+			|[fill=orange!80!black]| \& \textsc{fcc}\\
+			|[fill=green!80!black]| \& \textsc{hcp}\\
+			|[fill=blue!80!black]| \& aperiodic\\
+		};
+		}{\addplot graphics
+		[xmin=0,xmax=0.2,ymin=0,ymax=0.6]{Q4Q6phi3954.png};}
+		
+		\node at (axis cs:0.1909, 0.5745) (infcc){};
+		\node at (axis cs:0.0972222, 0.484762) (inhcp){};
+		\node at (axis cs:0.0363696, 0.510688) (inbcc){};
+		\end{axis}
+		\draw[->, black] (bcc) -- (inbcc);
+		\draw[->, green!80!black] (hcp) -- (inhcp);
+		\draw[->, orange!80!black] (fcc) -- (infcc);
+	\end{tikzpicture}
+	\column{0.5\textwidth}
+	\alt<1>{%
+	{\footnotesize\citet{lechner2008}}
+
+	\bigskip	
+	
+	\begin{itemize}
+		\item $Q_\ell$ is the strength of the $\ell$-fold symmetry
+		\item Very good at telling apart
+			\begin{itemize}
+				\item aperiodic structures
+				\item locally periodic
+			\end{itemize}
+		\item Differentiate between crystal structures
+	\end{itemize}
+	
+	\bigskip	
+	%
+	}{
+	\begin{tikzpicture}
+		\begin{axis}[%
+			width=\columnwidth, height=\columnwidth,%
+			ylabel={$Q_6$}, xlabel=$Q_4$,%
+			xmin=0,xmax=0.22,%
+			ymin=0, ymax=0.6,%
+			enlargelimits=false,axis on top,
+			colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
+			colorbar sampled, colorbar horizontal, 
+			colorbar style={%
+				xlabel={per units of $Q_4\cdot Q_6$},% 
+				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
+				samples=6, xtick={ 0.20,0.4,0.6, 0.8},% 
+				extra y ticks={},%
+				/pgfplots/colorbar shift/.style={yshift=0.3cm},
+				at={(parent axis.north)}, anchor=below south, width=0.9*\pgfkeysvalueof{/pgfplots/parent axis width},
+				xticklabel pos=upper,%
+				label style={font=\footnotesize},
+				},%
+			xticklabel={$\pgfmathprintnumber[fixed,precision=2]{\tick}$},%
+			extra tick style={grid=major},%
+			extra y ticks={\Qstar}, extra y tick labels={},%
+			]
+		\addplot graphics
+		[xmin=0,xmax=0.2,ymin=0,ymax=0.6]
+		{Q4Q6go1};
+		\node [below] at (axis cs:0.1909, 0.5745) {\textsc{fcc}};
+		\node [below] at (axis cs:0.0972222, 0.484762) {\textsc{hcp}};
+		\node [below] at (axis cs:0.0363696, 0.510688) {\textsc{bcc}};
+		\draw[->, white,thick] (axis cs:0.05, 0.15) to [out=60, in=220] (axis cs:0.125, 0.4);
+		\end{axis}
+	\end{tikzpicture}}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Icosahedral order}
+	\begin{textblock*}{0.6\textwidth}(10mm,88mm)
+		\simplephasediagram{%
+			\node at (0.576,0) [xp marker, fill=green!50!black] {};%
+			\node at (0.497,0) [xp marker, fill=green!50!black] {};}
+	\end{textblock*}
+	\begin{columns}
+	\column{0.5\textwidth}
+	$w_6$
+		\begin{itemize}
+		\item first shell only
+		\item sensible to aperiodic
+		\item icosahedral order stands out
+		\end{itemize}
+	\column{0.5\textwidth}
+	\begin{block}{Two types of order}
+		\begin{itemize}
+		\item orthogonal
+		\item incompatible
+		\item mutual frustration
+		\end{itemize}
+	\end{block}
+	\end{columns}
+	\begin{center}
+	\begin{tikzpicture}
+		\pgfplotsset{
+			extra tick style={grid=major},%
+			every axis/.append style={%
+				height=0.4\textwidth,
+				ymin=0,ymax=0.6,%
+				extra y ticks={\Qstar}, extra y tick labels={},%
+				enlargelimits=false,axis on top,
+				colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
+				colorbar sampled,%
+				},%
+		}
+		\begin{groupplot}[
+			group style={
+				group size=2 by 1,%
+				yticklabels at=edge left,%
+				horizontal sep=0pt,%
+				},%
+			anchor=above north west,%
+			width=0.38\textwidth,%
+			xlabel=$10^2 \cdot w_6$,%
+			xmin=-0.052,xmax=0.01,%
+			extra x ticks={\wstar, -0.00782},%
+			extra x tick labels={,},%
+			xtick scale label code/.code={},%
+			colorbar right, colorbar style={%
+				samples=6, ytick={ 0.20,0.4,0.6, 0.8},% 
+				yticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
+				ylabel={per units of $w_6\cdot Q_6$},%
+				extra x ticks={},%
+				extra y ticks={},%
+				label style={font=\footnotesize},
+				},%
+			]
+		\nextgroupplot[ylabel={$Q_6$}, xtickmax=0,]
+		\addplot graphics
+		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
+		{u6Q6phi3954_scale};
+		\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
+		%\node [anchor=north east] at (rel axis cs:1, 1) {\footnotesize{$\phi = 0.497 \pm 0.03$}};
+		\node [left] at (axis cs:\wstar,0.4) {\footnotesize $w_6^*$};
+		\node [right] at (axis cs:-0.00782,0.4) {\footnotesize $w_6^{dod}$};
+		
+		\nextgroupplot
+		\addplot graphics
+		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
+		{u6Q6go1_scale};
+		\node at (axis cs:\wstar,0.6) (a) {};
+		\node at (axis cs:-0.00782,0.6) (b) {};
+		\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
+		\node [below, right] at (axis cs:-0.052, 0.05) {\textsc{Ico}};
+		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=90, in=275] (axis cs:-0.0015, 0.33);
+		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=180, in=30] (axis cs:-0.025, 0.12);
+		
+		\end{groupplot}
+	\end{tikzpicture}\end{center}
+\end{frame}
+
+\section[Link with dynamics]{Link between structures and dynamics}
+
+\begin{frame}{Bond order mobility}
+	\begin{textblock*}{0.6\textwidth}(10mm,88mm)
+		\simplephasediagram{\node at (0.576,0) [xp marker, fill=green!50!black] {};}
+	\end{textblock*}
+	\begin{columns}
+	\column{0.5\textwidth}
+	Mean \textcolor{red!80!black}{square displacement} of all the particles having  \textcolor{blue!80!black}{the same initial structure}
+	\column{0.5\textwidth}
+	\footnotesize\begin{equation*}
+		\mathcal{P}r(w_6, t) \equiv \left\langle \frac{
+			\sum\limits_i{
+				\textcolor{red!80!black}{\left\|\vec{r_i}(t)-\vec{r_i}(0)\right\|^2} \textcolor{blue!80!black}{\delta(w_6^i-w_6)}
+				}
+		}{
+			\sum\limits_i{\delta(w_6^i-w_6)}
+		}\right\rangle 
+	\end{equation*}
+	\end{columns}
+	%
+	\begin{columns}
+	\column{0.25\textwidth}
+	Ordered particles are slower
+	\column{0.75\textwidth}
+	\begin{center}\begin{tikzpicture}
+		\begin{axis}[%
+			anchor=below south,%
+			width=0.6\textwidth,%
+			height=0.6\textwidth,%
+			ylabel=$Q_6$,%
+			ymin=0,ymax=0.6,%
+			xlabel=$10^2 \cdot w_6$,%
+			xmin=-0.052,xmax=0.01,%
+			xtick scale label code/.code={},%
+			enlargelimits=false,axis on top,
+			colormap={sd}{color(0cm)=(black) rgb(1cm)=(0.5, 0, 0) rgb(2cm)=(1, 0.5, 0) color(3cm)=(yellow) rgb(4cm)=(0.5, 0.75, 1) rgb(5cm)=(0.5, 0.75, 1)},%
+			extra x ticks={\wstar, -0.00782},%
+			extra x tick style={grid=major,	tick label style={anchor=south west}},%
+			extra x tick labels={,},%
+			extra x tick style={grid=major},
+			extra y ticks={\Qstar},
+			extra y tick style={grid=major},
+			extra y tick labels={},%
+			colorbar sampled, colorbar style={%
+				samples=5, ytick={ 0, 0.25, 0.5, 0.75},% 
+				yticklabels={$0$, $0.5$, $1$, $1.5$},%
+				ylabel=${\mathcal{P}r(t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,%
+				extra x ticks={},%
+				yticklabel pos=right,%
+				label style={font=\footnotesize},
+				},%
+			]
+			\addplot graphics [xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]{sd_u6Q6_go1_color};
+			\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
+			\node [left] at (axis cs:\wstar,0.55) {\footnotesize $w_6^*$};
+			\node [left] at (axis cs:-0.00782,0.55) {\footnotesize $w_6^{dod}$};
+			\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
+			\node [below, right] at (axis cs:-0.052, 0.05) {\textsc{Ico}};
+		\end{axis}
+	\end{tikzpicture}\end{center}%
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Bond order mobility}
+	\begin{textblock*}{0.6\textwidth}(10mm,88mm)
+		\simplephasediagram{\foreach \x in {0.535, 0.555, 0.576} \node[xp marker, fill=green!50!black] at (\x, 0) {};}
+	\end{textblock*}
+	\begin{tikzpicture}
+		\pgfplotsset{every axis plot/.append style={only marks}}
+		\begin{groupplot}[%
+			group style={
+				group size=2 by 2,%
+				yticklabels at=edge left,%
+				horizontal sep=0pt,%
+				},%
+			anchor=outer north east,%
+			width=0.5\textwidth,%
+			height=0.4\textwidth,%
+			ymin=0, ymax=1.5,%
+			extra x tick style={grid=major,	tick label style={anchor=south west}},%
+			extra y ticks={1},%
+			extra y tick style={grid=major,	tick label style={anchor=south west}}, extra y tick labels={},%
+			%legend columns=5,%
+			legend style={
+				font=\tiny,
+				%at={(1,1)}, anchor=south,%
+				at={(1,1)}, anchor=north east
+				},%
+			]
+			\nextgroupplot[%
+				xlabel=$10^2 \cdot w_6$, xmin=-0.0521089193, xmax=0.01,%
+				xtickmax={0},%
+				xtick scale label code/.code={},%
+				ylabel=${\mathcal{P}r(t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,
+				extra x ticks={\wstar, -0.00782}, extra x tick labels={$w_6^*$,$w_6^{dod}$},%
+				extra y tick labels={bulk}
+				]
+			
+			%\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi3954.txt};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi4446.txt};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi5079.txt};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_go1.txt};
+			\addplot+[domain=-0.0521089193:0.01, sharp plot, no markers] {9.34701 * x + 1.03764};
+			\draw[->, thick] (rel axis cs:0.2, 0.9) to (rel axis cs:0, 0.9);
+			\node[right] at (rel axis cs:0.2, 0.9) {\footnotesize Icosahedron};
+			
+			\nextgroupplot[%
+				xlabel=$Q_6$, xmin=0, xmax=0.5745,%
+				extra x ticks={\Qstar}, extra x tick labels={$Q_6^*$},%				
+				]
+			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
+			\legend{$0.003$,%$0.497$, 
+				$0.535$, $0.555$, $0.575$};
+			%\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_3954.txt};
+			\addplot+[domain=0.05:0.3, sharp plot, no markers, forget plot] {-0.76 * x + 1.1};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_4446.txt};
+			%\addplot+[domain=0.05:0.3, sharp plot, no markers, forget plot] {1.09-1.18*x+8.95*x^2-38*x^3};
+			\addplot+[smooth, no markers, forget plot] coordinates {(0.08, 1.04) (0.2, 0.92) (0.32, .62)};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_5079.txt};
+			\addplot+[smooth, no markers, forget plot] coordinates {(0.08, 1.23) (0.1, 1.22) (0.15, 1.07) (0.25, 0.65) (0.35, 0.33) (0.45, 0.18) (0.5, 0.15)};
+			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_go1.txt};
+			\draw[->, thick] (rel axis cs:0.8, 0.45) to (rel axis cs:1, 0.45);
+			\node[left] at (rel axis cs:0.8, 0.45) {\footnotesize \textsc{fcc}};
+		\end{groupplot}
+	\end{tikzpicture}
+	\begin{columns}
+	\column{0.45\textwidth}
+	\begin{block}{Cage theory}
+	\begin{itemize}
+		\item a good cage traps better
+		\item out of the cage is as bulk
+	\end{itemize}
+	Icosahedral influence is \alert{local}
+	\end{block}
+	\column{0.45\textwidth}
+	Influence of crystal-like order is \alert{not} local
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{In real space}
+\footnotesize{Thresholds: mobility halfway between the bulk and the perfect structure.}
+	\begin{tikzpicture}[%
+		pic3d/.style={inner sep=0}, %
+		]%
+	\node[right=0.01\textwidth, pic3d] (all) {\includegraphics[width=0.6\textwidth]{mrco_ico_scale_go1-0023.png}};
+	\matrix[%
+		matrix of nodes, ampersand replacement=\&,%
+		matrix anchor=east, draw, font=\footnotesize,% 
+		column 1/.style={text height=0.8em, text depth=0.2em},%
+		column 2/.style={circle, shade, inner sep=0.008\textwidth},%
+		] (l)
+	{
+		Icosahedra \& \node[ball color=red!50!blue] (b2) {};\node[ball color=red!75!black, left] at (b2.west) {}; \node[ball color=blue!75!black, right] at (b2.east) {};\\
+		Crystal-like \& |[ball color=green!66!black]|\\
+	};
+	\node[above=0.01\textwidth of l, pic3d, label={\footnotesize $w_6=w_6^*$}, label=left:{local}] (one_ico) {\includegraphics[width=0.2\textwidth]{one_ico.png}};
+	\node[below=0.01\textwidth of l, pic3d, label=below:{\footnotesize $Q_6=Q_6^*$}, label={[text width=0.11\textwidth]left:{medium-ranged}}] (one_mrco) {\includegraphics[width=0.2\textwidth]{one_mrco.png}};
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Crystal-like order is not crystal}
+	\begin{center}
+	\begin{columns}
+	\column{0.45\textwidth}
+	Crystal-like\\
+	\includegraphics[width=\textwidth]{mrco24_scale_go1_t040_t048.png} 
+	\column{0.1\textwidth}
+	{\Large $\neq$}
+	\column{0.45\textwidth}
+	Crystal (Frenkel criteria)
+	\includegraphics[width=\textwidth]{X_go1.png}
+	\end{columns}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Growing correlation lengths}
+	\begin{textblock*}{0.6\textwidth}(10mm,88mm)
+		\simplephasediagram{}
+	\end{textblock*}
+	\begin{columns}
+	\column{0.5\textwidth}\centering
+	%\resizebox{\columnwidth}{!}{\begin{Large}\input{fit_xi.tex}\end{Large}}
+	\begin{tikzpicture}
+		\pgfplotsset{cycle list name=black white}
+		\tikzset{every mark/.append style={scale=1.2}}
+		\begin{axis}[%
+			width=\textwidth, %
+			xlabel=$\phi$, xmin=0.49, xmax=0.58, xlabel near ticks,%
+			xtick={0.5,0.52,...,0.6},%
+			ylabel=$\xi/\xi_0$, ymax=10,
+			ytick={2,4,6,8},
+			ylabel near ticks,%
+			label style={font=\tiny}, %
+			legend pos=north west,%
+			]
+			\addplot+[only marks, mark=*, %
+				every mark/.append style={fill=black, scale=1.2},
+				error bars/.cd, y dir=both, y explicit relative,%
+				] table[x index=0, y expr=\thisrowno{3}/0.126]{scale.xi};
+			\addplot+[mark=none, forget plot, domain=0.49:0.58] {(0.6/x-1)^(-2.0/3.0)};
+			\addplot+[only marks, mark=square, every mark/.append style={draw=gray, scale=1.2},] table[x index=0, y expr=\thisrowno{5}/0.216]{scale.xi};
+			\legend{$\xi_u$ dynamical, $\xi_6$ crystal-like};
+		\end{axis}
+	\end{tikzpicture}
+	\column{0.5\textwidth}
+	{\footnotesize see also~\citet{tanaka2010critical,Kawasaki2010}}
+	
+	\bigskip
+	
+	
+	Power-law fit
+	\[ \xi(\phi) \propto \xi_0 \left( \frac{\phi_0 - \phi}{\phi} \right)^{-\frac{2}{3}} \]
+	\end{columns}
+	\begin{itemize}
+		\item $\phi_0$ comes from the divergence of $\tau_\alpha$
+		\item $\xi_0$ is the only adjustable parameter
+		\item Exponent compatible with the Ising universality class
+	\end{itemize}
+	The divergence of the dynamics is linked to the crystal-like order
+\end{frame}
+
+
+\begin{frame}{Crystal-like order governs slow dynamics}
+	\begin{tikzpicture}[%
+		pic3d/.style={inner sep=0}, %
+		]%
+	\definecolor{turquoise}{rgb}{0.678431,0.917647,0.917647}
+	\node[below=0.01\textwidth, pic3d, label={Slow}] (dyn) {\includegraphics[width=0.48\textwidth]{cgsd_2tau.png}};
+	\node[left=0.01\textwidth of dyn, pic3d, label={Crystal-like}] (mrco) {\includegraphics[width=0.48\textwidth]{mrco24_scale_go1_t040_t048.png}};
+	\draw [help lines, step=0.12\textwidth, shift=(mrco.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
+	\draw [help lines, step=0.12\textwidth, shift=(dyn.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
+	\node[below=0.01\textwidth of dyn, text width=0.4\textwidth, font=\footnotesize] {$10\%$ shorter displacements after $2\tau_\alpha\approx 4.5 t^{dh}$};
+	\node[below=0.01\textwidth of mrco, text width=0.4\textwidth, font=\footnotesize] {$10\%$ higher $Q_6$ (time-averaged over $t^{dh}/2$)};
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Icosahedral order role in dynamic heterogeneity}
+	\begin{block}{Icosahedral order has}
+	\begin{itemize}
+		\item No growing length scale
+		\item No meaningful percolation
+		\item No medium range size
+		\item No spatial correlation
+	\end{itemize}
+	
+	\bigskip	
+	
+	\alert{$\Rightarrow$ no direct role} in the slowing down of the dynamics
+	\end{block}
+	But probably a frustration role on the crystallisation.
+	\begin{itemize}
+		\item allows supercooling
+		\item linked to the fragility
+	\end{itemize}
+\end{frame}
+
+\tikzset{external/force remake=false}
+
+\begin{frame}{Conclusion}
+	\begin{block}{The structural origin of the dynamical arrest}
+	\begin{itemize}
+		\item is linked to the avoided first order transition (crystallisation)
+		\item is not linked to the condensation of the order of the liquid (icosahedral)
+	\end{itemize}
+	\end{block}
+	Slow icosahedral order observed in other systems was a motif of the underlying symmetry-breaking phase (Quasicrystal, Frank-Kasper).
+	
+	\bigskip
+	
+	\begin{verse}
+	\textsc{Thou shalt not forget the crystal}
+	\end{verse}
+
+\end{frame}
+
+{
+\addtocounter{framenumber}{-1}
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{dix-commandements}}
+\begin{frame}[plain]{\textrm{\textsc{Thou shalt not forget the crystal}}}
+\end{frame}
+}
+
+
+\appendix
+\newcounter{finalframe}
+\setcounter{finalframe}{\value{framenumber}}
+
+\include{h_appendix}
+
+\include{multiscale_appendix}
+\begin{frame}[allowframebreaks]{References}
+	%\begin{thebibliography}{Lacevic2003}
+		\bibliographystyle{plainnat}
+		\bibliography{ico_dyn}
+	%\end{thebibliography}
+\end{frame}
+\setcounter{framenumber}{\value{finalframe}}
+\end{document}

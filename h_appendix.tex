@@ -484,6 +484,143 @@
 	\end{columns}
 \end{frame}
 
+\begin{frame}{Icosahedral network}
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[lab/.append style={below}]
+	\pgfplotsset{ every axis/.append style={ width=0.45\textwidth, cycle list name=black white }}
+	\pgfplotsset{cycle list name=black white}
+	\begin{loglogaxis}[%
+		xmin=10, xmax=1000, xlabel=\sffamily{Cluster size},%
+		ymin=1, ylabel=\sffamily{Number of clusters},%
+		]
+		\addplot+[only marks] table {go1_w6_0012_sizes_rgs_noROI.hist};
+		\addplot+[no marks, domain=50:500] {1e6*x^(-2.1)};
+		\node[lab] at (rel axis cs:0.5, 0.95) {a};
+	\end{loglogaxis}
+	\begin{loglogaxis}[%
+		at={(0.5\textwidth,0)},%
+		xmin=10, xmax=1000, xlabel=\sffamily{Cluster size},%
+		ymin=1, ylabel={$R_g/\sigma $},%
+		ytick={1,10}, minor y tick num=10,%
+		yticklabel={%
+			\pgfmathfloatparsenumber{\tick}%
+			\pgfmathfloatexp{\pgfmathresult}%
+			\pgfmathprintnumber{\pgfmathresult}%
+		},%
+		]
+		\addplot+[only marks] table[y expr=\thisrowno{2}/6.14] {go1_w6_0012_sizes_rgs_noROI.hist};
+		\addplot+[no marks, domain=25:100] {0.75*x^(0.5)};
+		\node[lab] at (rel axis cs:0.5, 0.95) {b};
+	\end{loglogaxis}
+	\begin{axis}[%
+		at={(0, -0.36\textwidth)},%
+		xlabel=$10^2 \cdot w_6$,%
+		xmin=-0.03, xmax=0, xtick={-0.03, -0.02, -0.01}, xticklabels={$-3$, $-2$, $-1$}, minor x tick num=1,%
+		xtick scale label code/.code={},%
+		extra tick style={grid=major},%
+		extra x ticks={\wstar, -0.00782},%
+		extra x tick labels={,},%
+		ymin=0,%
+		ylabel=\sffamily{Largest cluster size},%
+		]
+		\addplot+[only marks] table {go1_w6.perco};
+		\node [left] at (axis cs:\wstar,1e3) {\footnotesize $w_6^*$};
+		\node [right] at (axis cs:-0.00782,1e3) {\footnotesize $w_6^\text{dod}$};
+		\node[lab] at (rel axis cs:0.5, 0.95) {c};
+	\end{axis}
+	\begin{axis}[%
+		at={(0.5\textwidth, -0.36\textwidth)},%
+		xlabel=\sffamily{Fraction of activated particles},%
+		xmin=0, xmax=0.6,ymin=0,%
+		ylabel={Largest cluster size},%
+		axis y line*=left,%
+		]
+		\addplot+[only marks] table [x index=2] {go1_w6.perco};
+	\end{axis}
+	\begin{axis}[%
+		at={(0.5\textwidth, -0.36\textwidth)},%
+		%xlabel={Fraction of activated particles},%
+		xmin=0, xmax=0.6, ymin=0,%
+		axis x line=none,%
+		axis y line*=right, ytick=\empty,%
+		ylabel=\sffamily{Percolation probability (a.u.)},%
+		ylabel near ticks,%
+		]
+		\addplot+[only marks] coordinates{(1, 0)};
+		\addplot[const plot, gray, fill=gray, semitransparent, area legend] file {go1_percol_thrs.hist};
+		\node[lab] at (rel axis cs:0.5, 0.95) {d};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{\textbf{Imperfect icosahedral clusters.} \textbf{a,} Cluster size distribution for nearly percolating threshold ($w_6<-0.012$). The exponent of random percolation ($-2.1$) is given by the straight line. 
+\textbf{b,} Radius of gyration (indicating a fractal dimension $d_f\approx 2$ given by the straight line) for the case of {\bf a}. \textbf{c,} Size of the largest non-percolating cluster as a function of the threshold on $w_6$. Percolation takes place near $w_6\approx -0.011$. Vertical lines indicate the position of $w_6^*$ and $w_6^\text{dod}$ respectively. \textbf{d,} Translation of \textbf{c} in terms of the fraction of activated particles (dots) together with the probability of the onset of percolation when particles are randomly activated (gray shading). We can see that activating particles as a function of icosahedral order and those activated randomly have almost the same percolation threshold ($\approx7.5\%$ of the particles activated).}
+	\label{fig:percolation}
+\end{figure}
+\end{frame}
+
+\section{other parameters}
+
+\begin{frame}{``Ordered'' particles, various definitions}
+\begin{figure}
+	\begin{tabular}{ccc}
+	\includegraphics[width=0.3\columnwidth]{s2_slice_3D}&%
+	\includegraphics[width=0.3\columnwidth]{q6_slice_3D}&%
+	\includegraphics[width=0.3\columnwidth]{Q6_slice_3D}\\ 
+	$s_2$ & $q_6$ & $Q_6$ \\ 
+	\includegraphics[width=0.3\columnwidth]{f2_slice_3D}&%
+	\includegraphics[width=0.3\columnwidth]{w6_slice_3D}&%
+	\includegraphics[width=0.3\columnwidth]{C_slice_3D}\\ 
+	$f_2$ & $w_6$ & $C$ \\ 
+	\end{tabular}
+	\caption{\textbf{Visualisation of the ordered regions} defined by the various order parameters. All pictures correspond to a thin slice ($5\sigma$) of the same configuration at $\beta p\sigma^3=23$ and $\Delta=7\%$. Only $Q_6$ and $C$ show meaningful fluctuations.}
+	\label{fig:3D}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Length scales}
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+	\pgfplotsset{every axis/.append style={
+		height=0.6\columnwidth,%
+		width=0.95\columnwidth,
+		cycle list name=exotic,
+		xlabel={$\beta p\sigma^3$},
+		ymin=0,
+		xmin=8,
+		xtick={9,13,...,25},
+	}}
+	\begin{axis}[%
+		name=len,
+		ylabel={$\xi_x$},
+		ymax=1.6,
+		legend style={at={(1,1.03)}, anchor=south east},
+		legend columns=10,
+		]
+	\pgfplotstableread{lengths}\lengths
+	 \foreach \y in {1, 2, ..., 6} {
+          \addplot table[x index=0, y index=\y]{\lengths};
+          \pgfplotstablegetcolumnnamebyindex{\y}\of{\lengths}\to{\colname}
+          \addlegendentryexpanded{$\colname$}
+          }
+	\end{axis}
+%	\begin{axis}[%
+%		at={(len.below south west)},
+%		anchor=above north west,
+%		ylabel={$\chi_x$},
+%		ymax=2,
+%		]
+%	\pgfplotstableread{susceptibilities}\sus
+%	 \foreach \y in {1, 2, ..., 6} {
+%          \addplot table[x index=0, y index=\y]{\sus};
+%          \pgfplotstablegetcolumnnamebyindex{\y}\of{\sus}\to{\colname}
+%          }
+%	\end{axis}
+	\end{tikzpicture}
+	\caption{\textbf{Correlation length} extracted for two-body and multi-body scalar order parameters, function of the pressure.}
+	\label{fig:lengths}
+\end{figure}
+\end{frame}
 %\section{Crystallisation}
 %
 %\begin{frame}{Crystallisation at the wall}
