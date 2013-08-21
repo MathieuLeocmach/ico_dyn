@@ -38,6 +38,7 @@
 	\column{0.3\textwidth}
 	\centering
 	Good blur\\
+	\tikzsetnextfilename{not_blured_centers}
 	\begin{tikzpicture}
 		\node[inner sep=0, anchor=south west]{\includegraphics[width=\textwidth]{dillute_filtered}};
 		\fill[red!50!white] (9/64.0*\textwidth, 17/64.0*\textwidth) rectangle (10/64.0*\textwidth, 18/64.0*\textwidth);
@@ -100,6 +101,7 @@
 \begin{frame}{Scale space}
 	\footnotesize{Scale space,~\citet{Lindeberg1993}\\ Scale-invariant feature transform,~\citet{Lowe2004}}
 	
+	\tikzsetnextfilename{scale_space}%
 	\begin{tikzpicture}[%
 		minus/.style={
 			shape=circle, draw, inner sep=0, %
@@ -203,6 +205,7 @@
 	
 	\begin{columns}[T]
 	\column{0.3\textwidth}
+	\tikzsetnextfilename{binary_sphere}%
 	\begin{tikzpicture}
 		\usebeamercolor{palette primary}
 		\fill[black] (-0.5\columnwidth,-0.5\columnwidth) rectangle (0.5\columnwidth, 0.5\columnwidth);
@@ -211,6 +214,7 @@
 		\node[below, fg] at (0.125\columnwidth, 0) {$R$};
 	\end{tikzpicture}
 	\column{0.7\textwidth}
+	\tikzsetnextfilename{scale2radius}%
 	\begin{tikzpicture}
 		\begin{axis}[
 			width=0.8\columnwidth,%
@@ -226,6 +230,7 @@
 \end{frame}
 
 \begin{frame}{Isolated sphere}
+	\tikzsetnextfilename{isolated_sphere}%
 	\begin{tikzpicture}
 	\pgfplotsset{cycle list name=black white, clip marker paths=true,}
 	\begin{axis}[%
@@ -259,6 +264,7 @@
 	%\tikzset{external/force remake=false}
 	\begin{columns}[c]
 	\column{0.55\textwidth}
+	\tikzsetnextfilename{two_spheres}%
 	\begin{tikzpicture}
 	\begin{groupplot}[%
 		group style={
@@ -308,7 +314,7 @@
 \begin{frame}{Many particles}
 	%\tikzset{external/force remake=false}
 	Monodisperse simulation data from John Russo written as a 3D image with black margins.
-	
+	\tikzsetnextfilename{many_particles}
 	\begin{tikzpicture}
 	\pgfplotsset{cycle list name=black white, clip marker paths=true,}
 	\begin{axis}[%
@@ -340,6 +346,7 @@
 	\begin{columns}[c]
 	\column{0.66\textwidth}
 	$y = x \star h + \epsilon$ with $h$ the point spread function.
+	\tikzsetnextfilename{deconvolution}%
 	\begin{tikzpicture}
 		\begin{groupplot}[%
 		group style={
@@ -379,6 +386,7 @@
 	
 	
 	\column{0.33\textwidth}
+	\tikzsetnextfilename{rdf_deconv}%
 	\begin{tikzpicture}
 		\begin{axis}[%
 			anchor=outer south west,
