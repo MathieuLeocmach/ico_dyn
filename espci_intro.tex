@@ -120,8 +120,8 @@
 	\end{columns}
 \end{frame}
 
-\tikzsetnextfilename{dynamic_vs_static}
 \begin{frame}{Dynamic vs static ?}\usebeamercolor{block title}
+\alt<2>{\tikzsetnextfilename{dynamic_vs_static2}}{\tikzsetnextfilename{dynamic_vs_static1}}
 \begin{flushright}
 	\begin{tikzpicture}[concept/.style={scale=0.75, circle, font=\small, align=center, draw=bg, fill=bg, text width=6em, inner sep=0em}]
 		\node[concept] (root2) {criticality};

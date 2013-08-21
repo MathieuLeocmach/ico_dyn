@@ -412,49 +412,6 @@
 %\end{figure}
 \end{frame}
 
-\section{other parameters}
+%\section{other parameters}
 
-\begin{frame}{``Ordered'' particles, various definitions}
-\centering
-\begin{tabular}{ccc}
-	\includegraphics[width=0.25\columnwidth]{s2_slice_3D}&%
-	\includegraphics[width=0.25\columnwidth]{q6_slice_3D}&%
-	\includegraphics[width=0.25\columnwidth]{Q6_slice_3D}\\ 
-	$s_2$ & $q_6$ & $Q_6$ \\ 
-	\includegraphics[width=0.25\columnwidth]{f2_slice_3D}&%
-	\includegraphics[width=0.25\columnwidth]{w6_slice_3D}&%
-	\includegraphics[width=0.25\columnwidth]{C_slice_3D}\\ 
-	$f_2$ & $w_6$ & $C$ \\ 
-\end{tabular}
 
-{\footnotesize Leocmach, Russo, \& Tanaka \textit{J. Chem. Phys.} 138, 12A536 (2013)}
-\end{frame}
-
-\begin{frame}{Length scales}
-	\tikzsetnextfilename{two_body_multi_body_lengths}%
-	\begin{tikzpicture}
-	\pgfplotsset{every axis/.append style={
-		height=0.6\columnwidth,%
-		width=0.95\columnwidth,
-		cycle list name=exotic,
-		xlabel={$\beta p\sigma^3$},
-		ymin=0,
-		xmin=8,
-		xtick={9,13,...,25},
-	}}
-	\begin{axis}[%
-		name=len,
-		ylabel={$\xi_x$},
-		ymax=1.6,
-		legend style={at={(1,1.03)}, anchor=south east},
-		legend columns=10,
-		]
-	\pgfplotstableread{lengths}\lengths
-	 \foreach \y in {1, 2, ..., 6} {
-          \addplot table[x index=0, y index=\y]{\lengths};
-          \pgfplotstablegetcolumnnamebyindex{\y}\of{\lengths}\to{\colname}
-          \addlegendentryexpanded{$\colname$}
-          }
-	\end{axis}
-	\end{tikzpicture}
-\end{frame}

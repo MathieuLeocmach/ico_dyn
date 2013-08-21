@@ -7,7 +7,7 @@
 	Mean \textcolor{red!80!black}{square displacement} of all the particles having  \textcolor{blue!80!black}{the same initial structure}
 	\column{0.5\textwidth}
 	\footnotesize\begin{equation*}
-		\mathcal{P}r(w_6, t) \equiv \left\langle \frac{
+		\Delta r^2(w_6, t) \equiv \left\langle \frac{
 			\sum\limits_i{
 				\textcolor{red!80!black}{\left\|\vec{r_i}(t)-\vec{r_i}(0)\right\|^2} \textcolor{blue!80!black}{\delta(w_6^i-w_6)}
 				}
@@ -19,6 +19,10 @@
 	%
 	\begin{columns}
 	\column{0.25\textwidth}
+	Here $t=t^{dh}$
+	
+	\bigskip
+	
 	Ordered particles are slower
 	\column{0.75\textwidth}
 	\begin{center}\tikzsetnextfilename{mobility_2D}\begin{tikzpicture}
@@ -43,7 +47,7 @@
 			colorbar sampled, colorbar style={%
 				samples=5, ytick={ 0, 0.25, 0.5, 0.75},% 
 				yticklabels={$0$, $0.5$, $1$, $1.5$},%
-				ylabel=${\mathcal{P}r(t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,%
+				ylabel=${\Delta r^2(w_6,Q_6)}/{\langle\Delta r^2\rangle}$,%
 				extra x ticks={},%
 				yticklabel pos=right,%
 				label style={font=\footnotesize},
@@ -92,7 +96,7 @@
 				xlabel=$10^2 \cdot w_6$, xmin=-0.0521089193, xmax=0.01,%
 				xtickmax={0},%
 				xtick scale label code/.code={},%
-				ylabel=${\mathcal{P}r(t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,
+				ylabel=${\Delta r^2(w_6)}/{\langle\Delta r^2 \rangle}$,
 				extra x ticks={\wstar, -0.00782}, extra x tick labels={$w_6^*$,$w_6^{dod}$},%
 				extra y tick labels={bulk}
 				]
@@ -107,7 +111,9 @@
 			
 			\nextgroupplot[%
 				xlabel=$Q_6$, xmin=0, xmax=0.5745,%
-				extra x ticks={\Qstar}, extra x tick labels={$Q_6^*$},%				
+				extra x ticks={\Qstar}, extra x tick labels={$Q_6^*$},%
+				ylabel=${\Delta r^2(Q_6)}/{\langle\Delta r^2 \rangle}$,
+				yticklabel pos=right, ylabel near ticks,
 				]
 			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 			\legend{$0.003$,%$0.497$, 
@@ -255,4 +261,50 @@
 		\item allows supercooling
 		\item linked to the fragility
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{``Ordered'' particles, various definitions}
+\centering
+\begin{tabular}{c|c|c}
+	Two-body & Icosahedral & Crystal-like\\
+	\includegraphics[width=0.25\columnwidth]{s2_slice_3D}&%
+	\includegraphics[width=0.25\columnwidth]{q6_slice_3D}&%
+	\includegraphics[width=0.25\columnwidth]{Q6_slice_3D}\\ 
+	$s_2$ & $q_6$ & $Q_6$ \\ 
+	\includegraphics[width=0.25\columnwidth]{f2_slice_3D}&%
+	\includegraphics[width=0.25\columnwidth]{w6_slice_3D}&%
+	\includegraphics[width=0.25\columnwidth]{C_slice_3D}\\ 
+	$f_2$ & $w_6$ & $C$ \\ 
+\end{tabular}
+
+{\footnotesize Leocmach, Russo, \& Tanaka \textit{J. Chem. Phys.} 138, 12A536 (2013)}
+\end{frame}
+
+\begin{frame}{Length scales}
+	\tikzsetnextfilename{two_body_multi_body_lengths}%
+	\begin{tikzpicture}
+	\pgfplotsset{every axis/.append style={
+		height=0.6\columnwidth,%
+		width=0.95\columnwidth,
+		cycle list name=exotic,
+		xlabel={Pressure},
+		ymin=0,
+		xmin=8,
+		xtick={9,13,...,25},
+	}}
+	\begin{axis}[%
+		name=len,
+		ylabel={Correlation length},
+		ymax=1.6,
+		legend style={at={(1,1.03)}, anchor=south east},
+		legend columns=10,
+		]
+	\pgfplotstableread{lengths}\lengths
+	 \foreach \y in {1, 2, ..., 6} {
+          \addplot table[x index=0, y index=\y]{\lengths};
+          \pgfplotstablegetcolumnnamebyindex{\y}\of{\lengths}\to{\colname}
+          \addlegendentryexpanded{$\colname$}
+          }
+	\end{axis}
+	\end{tikzpicture}
 \end{frame}
