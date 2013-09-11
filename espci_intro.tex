@@ -119,20 +119,20 @@
 	\end{itemize}
 	\end{columns}
 \end{frame}
-
+\tikzset{external/force remake=true}
 \begin{frame}{Dynamic vs static ?}\usebeamercolor{block title}
 \alt<2>{\tikzsetnextfilename{dynamic_vs_static2}}{\tikzsetnextfilename{dynamic_vs_static1}}
 \begin{flushright}
 	\begin{tikzpicture}[concept/.style={scale=0.75, circle, font=\small, align=center, draw=bg, fill=bg, text width=6em, inner sep=0em}]
 		\node[concept] (root2) {criticality};
 		\node[below left=of root2, concept] (d2) {growing \alert{static} length scale};
-		\node[below right=of root2, concept] (s2) {slow down of global dynamics};
+		\node[below right=of root2, concept] (s2) {slowing down of global dynamics};
 		\path (root2) to[circle connection bar switch color=from (bg) to (bg)] (d2);
 		\path (root2) to[circle connection bar switch color=from (bg) to (bg)] (s2);
 		\draw [thick, fg, ->] (d2) to [bend right] (s2);		
 		
 		\node[below right=0.15\textwidth and 0.3\textwidth of root2, concept] (root) {glass transition};
-		\node[below right=of root, concept] (s) {slow down of dynamics};
+		\node[below right=of root, concept] (s) {slowing down of dynamics};
 		\node[below=of root, concept] (d) {growing \alert{dynamic} length scale};
 		\node<2>[below left=of root, concept] (sta) {growing \alert{static} length scale};
 		\path (root) to[circle connection bar switch color=from (bg) to (bg)] (d);
@@ -142,7 +142,7 @@
 		\draw<2>[thick, dashed, fg, ->] (sta) to [bend right] (d);
 	\end{tikzpicture}
 \end{flushright}
-\end{frame}
+\end{frame}\tikzset{external/force remake=false}
 
 \begin{frame}{Static cause to dynamic heterogeneities}
 	\begin{columns}

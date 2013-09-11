@@ -403,3 +403,37 @@
 	\end{tikzpicture}
 	\end{columns}
 \end{frame}
+
+\begin{frame}{Size distributions within local structures}
+	\begin{center}\tikzsetnextfilename{size_distrib_structures}
+	%\tikzset{external/force remake=true}
+	\begin{tikzpicture}
+	\begin{groupplot}[%
+		group style={
+			group name=distrib,
+			group size=1 by 2,
+			%horizontal sep=0.1\textwidth,
+			},%
+		width=0.9\textwidth,%
+		height=0.35\textwidth,%
+		no marks,%
+		xlabel={$R$ [$\si{\micro\metre}$]}, xmin=0.8, xmax=2.5,%
+		ylabel={Size distribution}, ymin=0, ymax=12, ytick=\empty,%
+		legend style={legend pos=north west},
+		xlabel near ticks, ylabel near ticks,
+		]
+		\nextgroupplot
+		\addplot[gray!50,fill=gray!50, area legend] table[x=r, y=all] {all_ico_icongb_mrco_X.rdist} \closedcycle;
+		\addplot[dashed,red] table[x=r, y=mrco] {all_ico_icongb_mrco_X.rdist};
+		\addplot[brown, very thick] table[x=r, y=X] {all_ico_icongb_mrco_X.rdist};
+		\legend{all, crystal-like, crystalline};
+		
+		\nextgroupplot
+		\addplot[gray!50,fill=gray!50, area legend] table[x=r, y=all] {all_ico_icongb_mrco_X.rdist} \closedcycle;
+		\addplot[dashed,blue] table[x=r, y=ico] {all_ico_icongb_mrco_X.rdist};
+		\addplot[BlueViolet, very thick] table[x=r, y=icongb] {all_ico_icongb_mrco_X.rdist};
+		\legend{all, ico. centre, ico. surf.};
+	\end{groupplot}
+	\end{tikzpicture}
+	\end{center}
+\end{frame}

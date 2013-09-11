@@ -48,7 +48,7 @@
     \put(0.23277473,0.16675349){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{F+X}}}%
     \put(0.34873684,0.16732052){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Crystal}}}%
     \put(0.05103469,0.08736625){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Fluid}}}%
-    \put(0.23561002,0.08736625){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Super cooled fluid}}}%
+    \put(0.23561002,0.08736625){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Supercooled fluid}}}%
     \put(0.61241587,0.09133561){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Glass}}}%
     \put(0.78593371,0.16703701){\color[rgb]{0.50196078,0,0}\makebox(0,0)[lb]{\smash{Equilibrium}}}%
     \put(0.78593371,0.09360381){\color[rgb]{0.50196078,0,0}\makebox(0,0)[lb]{\smash{Out of Equil.}}}%
