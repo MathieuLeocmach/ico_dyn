@@ -1,32 +1,33 @@
-\documentclass{revtex4-1} 
-\usepackage{hyperref} 
+\documentclass[11pt,a4paper]{article}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage[numbers, sort&compress]{natbib}
 \usepackage{subfig}
 \usepackage{SIunits}
 
 \usepackage{pgfplots}
 \usepgfplotslibrary{external}
 \usepgfplotslibrary{groupplots}
-%\tikzexternalize
-%\tikzset{external/force remake}
+\tikzset{external/system call={latex \tikzexternalcheckshellescape -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"; dvips -o "\image.ps" "\image.dvi"}}
+
+\tikzexternalize
+\tikzset{external/force remake}
 \tikzset{every mark/.append style={scale=0.8}}
 
 \newcommand{\wstar}{-0.023}
 \newcommand{\Qstar}{0.25}
 
-\begin{document}
-
 \title{Experimental study of the role of icosahedral order in hard spheres glass transition.}
 
-\author{Mathieu Leocmach}
-\author{Hajime Tanaka}
+\author{Mathieu Leocmach, Hajime Tanaka}
+
+\begin{document}
+
+\maketitle
 
 \begin{abstract}
 We study at particle level by confocal microscopy the structural and dynamical heterogeneities in a supercooled colloidal liquid of polydisperse hard-spheres. We identify the locally favoured structures as icosahedral and \textsc{fcc}-like order, excluding any other simple local symmetry. We find that both types of order are statistically associated with slow particles. However, when approaching the glass transition, the icosahedral order do not grow in size whereas crystal-like structures govern dynamics. This questions the influence of the icosahedral state postulated by the frustration-limited domain theory and stresses the importance of the local order compatible with the avoided first order transition.
 \end{abstract}
-
-\maketitle
 
 \section*{Introduction}
 
@@ -379,7 +380,7 @@ For some systems, the first order transition avoided upon supercooling leads to 
 
 We do not say that the local order of the liquid (icosahedral) is unimportant in the glass transition. Actually it plays a role in preventing the first order transition (crystallisation) to append, thus allowing supercooling and the glass transition. Furthermore, this frustration against crystallisation may be linked to the fragility of the glass former~\citep{tanaka1999top}.
 
-\bibliographystyle{apsrev4-1}
+\bibliographystyle{unsrtnat}
 \bibliography{ico_dyn}
 
 \end{document}
