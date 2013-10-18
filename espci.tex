@@ -2,14 +2,17 @@
 \usetheme{Boadilla}
 %\usecolortheme{rose}
 \usecolortheme{crane}
-%\usefonttheme{structuresmallcapsserif}
+\usefonttheme{structuresmallcapsserif}
 \setbeamertemplate{navigation symbols}{}
+
+\usepackage[utf8]{inputenc}
 
 %font
 \usepackage[T1]{fontenc}
 %\usepackage{lmodern}
 %\usepackage{tgheros}
-\usepackage[sfmath, largesmallcaps]{kpfonts}
+%\usepackage[sfmath, largesmallcaps]{kpfonts}
+\usepackage{kpfonts}
 
 
 %proper math and math symbols
@@ -34,6 +37,9 @@
 %\tikzset{external/force remake}
 
 \definecolor{BlueViolet}{rgb}{0.62352, 0.372549, 0.623529}
+\definecolor{FrenchBlue}{rgb}{0 0.137254902 0.584313725}
+\definecolor{FrenchRed}{rgb}{0.92941176,  0.16078431,  0.22352941}
+\definecolor{JapanRed}{rgb}{0.7372549 ,  0.        ,  0.17647059}
 
 %beamer related package
 
@@ -103,11 +109,60 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 	\titlepage
 \end{frame}
 
+\setcounter{framenumber}{0}
+
+%\tikzset{external/force remake=true}
+\begin{frame}{Between France and Japan}
+\begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}\centering
+	\tikzsetnextfilename{frenchflag}\begin{tikzpicture}
+		\fill[FrenchBlue] (0,0) rectangle (1em,2em);
+		\fill[white] (1em,0) rectangle (2em,2em);
+		\fill[FrenchRed] (2em,0) rectangle (3em,2em);
+	\end{tikzpicture}&\centering
+	\tikzsetnextfilename{japanflag}\begin{tikzpicture}
+		\filldraw[draw=black,fill=white] (0,0) rectangle (3em,2em);
+		\fill[JapanRed] (1.5em,1em) circle[radius=0.6em];
+	\end{tikzpicture}\\
+\end{tabular}\\
+\begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
+	\textbf{Ecole Polytechnique} & \\
+	$\rightarrow$ Master & \\
+	\textsc{David Quéré} & \\
+	& \textbf{University of Tokyo} (2005--2012)\\
+	& \textsc{Hajime Tanaka}\\
+	& Master \hfill$\Rightarrow$ \textit{E.P.L.} (2010)\\
+	& PhD \hfill$\Rightarrow$ \textit{Nature Comm.} (2012)\\ 
+	&\hfill\textit{Soft Matter} (2013)\\
+	& Post-doc \hfill$\Rightarrow$ \textit{J. Chem. Phys.} (2013)\\ 		
+	&\hfill\textit{Chem. Comm.} (2013)\\
+	\textbf{E.N.S. Lyon} (09/2012--) & \\
+	\textsc{Sébastien Manneville}& \\
+	Post-doc&\\
+\end{tabular}
+\end{frame}
+%\tikzset{external/force remake=false}
+
+\begin{frame}{Wrinkling and yielding of protein gels}
+\begin{columns}
+\column{0.5\textwidth}
+\includegraphics[width=\columnwidth]{pattern_100um.jpg}\\
+\includegraphics[width=\columnwidth]{collage_cut}
+
+\column{0.5\textwidth}
+\includegraphics[width=\columnwidth]{gap1mm_Y191_SSC300.jpg}
+
+
+\end{columns}
+
+\end{frame}
+
 \begin{frame}[plain]
 	\tableofcontents[hidesubsections]
 	{\footnotesize Leocmach \& Tanaka \textit{Nature Communications} 3, 974 (2012).}
 \end{frame}
-\setcounter{framenumber}{0}
+
+
+
 %\include{current_slide}
 
 \section{Supercooled liquids and the glass transition}
