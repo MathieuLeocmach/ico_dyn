@@ -1,11 +1,22 @@
 \documentclass{beamer}
-\usetheme{Boadilla}
-%\usecolortheme{rose}
-\usecolortheme{crane}
-\usefonttheme{structuresmallcapsserif}
-\setbeamertemplate{navigation symbols}{}
 
 \usepackage[utf8]{inputenc}
+\usefonttheme{structuresmallcapsserif}
+\setbeamertemplate{navigation symbols}{}
+\definecolor{Main}{rgb}{0.74, 0.13, 0.19}
+\definecolor{Accent1}{rgb}{0.76,0.36,0.13}
+\definecolor{Accent2}{rgb}{0.54,0.1,0.4}
+
+\usecolortheme{rose}
+%\useinnertheme[shadow]{circles}
+\usecolortheme{whale}
+\useoutertheme{infolines}
+\setbeamertemplate{headline}{}
+
+\usecolortheme[named=Accent1]{structure}
+
+\setbeamercolor{alerted text}{fg=Accent2}
+
 
 %font
 \usepackage[T1]{fontenc}
@@ -86,7 +97,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 \institute[E.N.S. Lyon]{The University of Tokyo, Institute of Industrial science\\Now postdoc in E.N.S. Lyon}
 \title[icosahedral and crystal-like order]{Roles of icosahedral and crystal-like order in hard spheres glass transition}
 \author[M. Leocmach]{Mathieu Leocmach\\Hajime Tanaka}
-\date{23th September 2013}
+\date{10th March 2014}
 
 \newcommand{\wstar}{-0.023}
 \newcommand{\Qstar}{0.25}
@@ -96,6 +107,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 \begin{document}
 \tikzset{every mark/.append style={scale=0.8}}
 \pgfplotsset{every axis/.append style={small}}
+\pgfplotsset{compat=1.3}
 
 \AtBeginSection[]{
 	\addtocounter{framenumber}{-1}
@@ -142,19 +154,93 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 \end{frame}
 %\tikzset{external/force remake=false}
 
-\begin{frame}{Wrinkling and yielding of protein gels}
-\begin{columns}
+%\tikzset{external/force remake=true}
+\begin{frame}{Mechanical response of of protein gels}
+\begin{block}{A brittle fracture analogue to the one of solids}
+\begin{columns}[T]
+\column{0.2\textwidth}
+\includegraphics[width=\textwidth]{TEM_yaourt_5um}
+\column{0.25\textwidth}
+{\scriptsize Kalab 1983}
+\begin{itemize}
+\item rheology
+\item velocimetry
+\item visualisation
+\end{itemize}
 \column{0.5\textwidth}
-\includegraphics[width=\columnwidth]{pattern_100um.jpg}\\
-\includegraphics[width=\columnwidth]{collage_cut}
-
-\column{0.5\textwidth}
-\includegraphics[width=\columnwidth]{gap1mm_Y191_SSC300.jpg}
-
-
+{\footnotesize reversible creep + irreversible fractures}\\
+\tikzsetnextfilename{yaourt_creep}\begin{tikzpicture}
+\begin{loglogaxis}[%
+	tiny,
+	name=g,
+	axis background/.style={fill=white},
+	width=0.5\textwidth+1em,
+	xlabel={time (s)},
+	ylabel={deformation}, ymin=0.1, ymax=2,
+	ytick={0.1,0.2,0.4,0.8,1.6},
+	yticklabels={0.1,0.2,0.4,0.8,1.6},
+	extra tick style={grid=major},
+	extra y ticks={1}, extra y tick labels={},%
+	label shift=-0.5em, 
+	no marks,
+	]
+	\addplot+[orange!50!red] table {Y39_1000Pa.txt} node[pos=0.58,left,font=\tiny,inner sep=2pt] (b) {\SI{1000}{\pascal}};
+	\addplot+[red] table {Y32_550Pa.txt};
+	\addplot+[red!75!black] table {Y25_400Pa.txt};
+	\addplot+[red!50!black] table {Y38_300Pa.txt};
+	\addplot+[red!25!black] table {Y27_200Pa.txt} node[pos=0.2,right,font=\tiny,inner sep=2pt] (a) {\SI{200}{\pascal}};
+\end{loglogaxis}
+\node[below right=0 and 5pt of g.north east,inner sep=0] (f1) {\includegraphics[width=0.25\textwidth-5pt]{yaourt_fractures_small.jpg}};
+\node[right=5pt of f1,inner sep=0] (f2) {\includegraphics[width=0.25\textwidth-5pt]{yaourt_fractures_final.jpg}};
+%\node[above right=0 of g.outer north west, font=\footnotesize, inner sep=0] {};
+\path (f1.south) -- (f2.south) node[midway, below, font=\tiny] {Couette cell};
+\end{tikzpicture}
 \end{columns}
+{\footnotesize Leocmach, Perge, Divoux \& Manneville \textit{ArXiv 1401.8234}}
+\end{block}
 
+\begin{block}{Syn\ae{}resis and confined wrinkling cascade}
+\begin{columns}
+\column{0.55\textwidth}
+\begin{itemize}
+\item solvent expulsion (pH $\rightarrow$ pI)
+\item swelling (pH < pI)
+\end{itemize}
+\column{0.3\textwidth}
+\tikzsetnextfilename{yaourt_cut}\begin{tikzpicture}
+	\matrix[matrix of nodes, inner sep=0, row sep=1pt]{
+\includegraphics[width=\columnwidth]{coupe_av10_cas8_t000.png}\\
+\includegraphics[width=\columnwidth]{coupe_av10_cas8_t014.png}\\
+\includegraphics[width=\columnwidth]{coupe_av10_cas8_t053.png}\\
+\includegraphics[width=\columnwidth]{coupe_av10_cas8_t078.png}\\
+%\includegraphics[width=\columnwidth]{coupe_av10_cas8_t088.png}\\
+};
+\end{tikzpicture}
+\end{columns}
+\tikzsetnextfilename{yaourt_times}\begin{tikzpicture}
+	\matrix[matrix of nodes, inner sep=0, column sep=0.01\textwidth, row sep=0.5em, ampersand replacement=\&] (m){
+	%33 min \& 38 min \& 43 min \& 48 min \& 1h \& 1h15 \& 2h30\\
+	\includegraphics[width=0.13\textwidth]{prise_0100_color.jpg}\&
+	\includegraphics[width=0.13\textwidth]{prise_0130_color.jpg}\&
+	\includegraphics[width=0.13\textwidth]{prise_0160_color.jpg}\&
+	\includegraphics[width=0.13\textwidth]{prise_0190_color.jpg}\&
+	\includegraphics[width=0.13\textwidth]{prise_0250_color.jpg}\&
+	\includegraphics[width=0.13\textwidth]{prise_0360_color.jpg}\&
+	\includegraphics[width=0.13\textwidth]{prise_0799_color.jpg}\\
+	\includegraphics[width=0.13\textwidth]{cas3p2_fluo0p8_GDL4_2_t047_crop_resized.jpg}\&
+	\includegraphics[width=0.13\textwidth]{cas3p2_fluo0p8_GDL4_2_t056_crop_resized.jpg}\&
+	\includegraphics[width=0.13\textwidth]{cas3p2_fluo0p8_GDL4_2_t065_crop_resized.jpg}\&
+	\includegraphics[width=0.13\textwidth]{cas3p2_fluo0p8_GDL4_2_t074_crop_resized.jpg}\&
+	\includegraphics[width=0.13\textwidth]{cas3p2_fluo0p8_GDL4_2_t092_crop_resized.jpg}\&
+	\includegraphics[width=0.13\textwidth]{cas3p2_fluo0p8_GDL4_2_t125_crop_resized.jpg}\&
+	\includegraphics[width=0.13\textwidth]{cas3p2_fluo0p8_GDL4_2_t260_crop_resized.jpg}\\
+	};
+	\draw[ultra thick] ++(m-1-1.south west) -- ++(0.023\textwidth,0) node[pos=0,below right=2pt and 0,inner sep=0,font=\tiny]{\SI{1}{\milli\metre}};
+	\draw[ultra thick] ++(m-2-1.south west) -- ++(0.1\textwidth,0) node[pos=0,below right=2pt and 0,inner sep=0,font=\tiny]{\SI{1}{\milli\metre}};
+	\end{tikzpicture}
+\end{block}
 \end{frame}
+%\tikzset{external/force remake=false}
 
 \begin{frame}[plain]
 	\tableofcontents[hidesubsections]
