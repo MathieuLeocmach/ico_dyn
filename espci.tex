@@ -40,6 +40,7 @@
 \usetikzlibrary{arrows,shapes,backgrounds, positioning, intersections, decorations.markings, mindmap, shapes.geometric, matrix,patterns}
 
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
 %\usepgfplotslibrary{units}
 \usepgfplotslibrary{groupplots}
 \usepgfplotslibrary{external}
@@ -107,7 +108,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 \begin{document}
 \tikzset{every mark/.append style={scale=0.8}}
 \pgfplotsset{every axis/.append style={small}}
-\pgfplotsset{compat=1.3}
+
 
 \AtBeginSection[]{
 	\addtocounter{framenumber}{-1}

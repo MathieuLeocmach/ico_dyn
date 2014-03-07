@@ -1,31 +1,18 @@
 \section{Monodisperse particle tracking}
 \begin{frame}{Monodisperse particle tracking}
-	\begin{columns}[T]
-	\column{0.3\textwidth}
-	Original image\\
-	\includegraphics[width=\textwidth]{dillute_raw}
-	
-	\bigskip
-	\includegraphics[width=\textwidth]{dillute_raw_gp_raster}
-	\column{0.3\textwidth}
-	Blurred\\
-	\includegraphics[width=\textwidth]{dillute_filtered}
-	
-	\bigskip
-	\includegraphics[width=\textwidth]{dillute_filtered_gp_raster}
-	\column{0.3\textwidth}
-	Local maxima\\
-	\includegraphics[width=\textwidth]{dillute_centers}
-	
-	\bigskip
-	\includegraphics[width=\textwidth]{dillute_centers_gp_raster}
-	\end{columns}
-	
+	\begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
+	Original image & Blurred & Local maxima\\
+	\includegraphics[width=0.3\textwidth]{dillute_raw}&
+	\includegraphics[width=0.3\textwidth]{dillute_filtered}&
+	\includegraphics[width=0.3\textwidth]{dillute_centers}\\
+	\includegraphics[width=0.3\textwidth]{dillute_raw_gp_raster}&
+	\includegraphics[width=0.3\textwidth]{dillute_filtered_gp_raster}&
+	\includegraphics[width=0.3\textwidth]{dillute_centers_gp_raster}\\
+	\end{tabular}
 	
 	Resolution up to $\SI{1/10}{px}$ via subpixel resolution methods.
 	
 	\bigskip
-	
 	\footnotesize{\citet{Crocker1996}}
 \end{frame}
 

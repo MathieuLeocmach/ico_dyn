@@ -133,14 +133,10 @@
 		(0, -1.12\columnwidth) -- (c) -- (d) -- (y) --  (-0.35\columnwidth, -0.33\columnwidth);
 	\end{tikzpicture}
 	\column{0.5\textwidth}
-	\tikzsetnextfilename{confocal_slices}
-	\begin{tikzpicture}
-	\matrix[matrix of nodes, ampersand replacement=\&, nodes={anchor=center}]
-	{
-		$XY$ slice \& \includegraphics[width=0.5\columnwidth]{sliceXY} \\
-		$XZ$ slice \& \includegraphics[width=0.5\columnwidth]{sliceXZ} \\
-	};
-	\end{tikzpicture}
+	\begin{tabular}{lp{0.5\columnwidth}}
+	$XY$ slice & \includegraphics[width=0.5\columnwidth]{sliceXY} \\
+		$XZ$ slice & \includegraphics[width=0.5\columnwidth]{sliceXZ} \\
+	\end{tabular}
 	\end{columns}\end{center}
 \end{frame}
 
