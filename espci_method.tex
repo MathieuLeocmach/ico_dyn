@@ -157,20 +157,26 @@
 		\item Only particles are tracked
 		\item Coordinates are known within\\
 			$\SI{0.1}{pixels} \approx \sigma/100 \approx \SI{30}{\nano\metre}$
-		\item \alert{new}: arbitrary size distribution
-		\item \alert{new}: sizes measured \emph{in situ}
+		%\item \alert{new}: arbitrary size distribution
+		%\item \alert{new}: sizes measured \emph{in situ}
 	\end{itemize}
 	\end{columns}
 \end{frame}
 
-
+%\tikzset{external/force remake=true}
 \tikzsetnextfilename{hist_SEM_vs_multiscale}
-\begin{frame}{Multiscale tracking}
-	\centering
+\begin{frame}{Multiscale tracking : Arbitrary size distribution}
+	\begin{columns}
+	\column{0.2\textwidth}
+	{\footnotesize Crocker \& Grier}\\
+	\includegraphics[height=0.3\textheight, trim=5mm 1cm 5mm 1cm, clip=true]{comp3D_monoscale_r35_crop}\\
+	{\footnotesize Our algorithm}\\
+	\includegraphics[height=0.3\textheight, trim=5mm 1cm 5mm 1cm, clip=true]{comp2D3D_crop}
+	\column{0.8\textwidth}
 	\begin{tikzpicture}
 	\begin{axis}[%
 		name=hist2,
-		width=0.8\columnwidth, height=0.6\columnwidth,%
+		width=\columnwidth, height=0.8\textheight,%
 		xmin=1, xmax=5,
 		ylabel={Size distribution},
 		ymin=0, yticklabel=\empty, ylabel near ticks,%
@@ -186,11 +192,12 @@
 		\draw[->, ultra thick] (axis cs:3.15,3) -- (axis cs: 3.9, 3) node[midway, above] {swelling};%
 	\end{axis}
 	\end{tikzpicture}%
-	\includegraphics[width=0.2\columnwidth]{comp2D3D_crop}
+	
+	\end{columns}
 	
 	{\footnotesize Leocmach \& Tanaka \textit{Soft Matter} 9, 1447--1457 (2013).}
 \end{frame}
-
+%\tikzset{external/force remake=false}
 
 \begin{frame}{Glassy dynamics}
 	\begin{textblock*}{0.6\textwidth}(10mm,88mm)
