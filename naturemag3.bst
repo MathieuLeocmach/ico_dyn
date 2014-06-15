@@ -4,7 +4,7 @@
 %%
 %% The original source files were:
 %%
-%% merlin.mbs  (with options: `head,ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-x,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,eprint,amper,and-xcom,nfss,,{}')
+%% merlin.mbs  (with options: `head,ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-x,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
 %% physjour.mbs  (with options: `ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-x,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
 %% geojour.mbs  (with options: `ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-x,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
 %% photjour.mbs  (with options: `ay,nat,seq-no,nm-rev,jnrlst,nmlm,x5,m5,keyxyr,note-yr,vol-bf,vnum-x,volp-com,pgsep-c,num-xser,jnm-x,pub-date,ppx,abr,xedn,jabr,amper,and-xcom,nfss,,{}')
@@ -57,8 +57,6 @@
 
 ENTRY
   { address
-	archive
-	archivePrefix
     author
     booktitle
     chapter
@@ -66,7 +64,6 @@ ENTRY
     edition
     editor
     eid
-    eprint
     howpublished
     institution
     journal
@@ -76,7 +73,6 @@ ENTRY
     number
     organization
     pages
-    primaryClass
     publisher
     school
     series
@@ -87,9 +83,6 @@ ENTRY
   }
   {}
   { label extra.label sort.label short.list }
-
-INTEGERS { control.key control.author control.editor control.title control.pages control.eprint control.year }
-
 INTEGERS { output.state before.all mid.sentence after.sentence after.block }
 FUNCTION {init.state.consts}
 { #0 'before.all :=
@@ -624,39 +617,6 @@ FUNCTION {bibinfo.warn}
     }
   if$
 }
-
-FUNCTION {archiv.base}
-{
-  "http://arxiv.org/abs"
-}
-
-FUNCTION {archiv.prefix.base}
-{
-  "arXiv"
-}
-
-FUNCTION {eprint.command}
-{
-  "Preprint at \eprint "
-}
-
-FUNCTION {format.eprint}
-{
-  eprint duplicate$ empty$
-  control.eprint #0 <
-  or
-    { pop$ "" }
-    {
-      ""
-        archive empty$ { pop$ archiv.base } 'skip$ if$
-        "/" *
-        swap$ *
-        "\url{" swap$ * "} " *
-      eprint.command swap$ *
-    }
-  if$
-}
-
 INTEGERS { nameptr namesleft numnames }
 
 
@@ -1291,9 +1251,6 @@ FUNCTION {article}
   new.block
   crossref missing$
     {
-      journal empty$ {
-        format.eprint output
-      }{
       journal
       "journal" bibinfo.check
       pages empty$ 'skip$ { add.doi } if$
@@ -1301,7 +1258,6 @@ FUNCTION {article}
       "journal" output.check
       add.blank
       format.vol.num.pages output
-      }if$
       format.date "year" output.check
     }
     { format.article.crossref output.nonnull
@@ -1346,7 +1302,6 @@ FUNCTION {book}
   format.edition output
   new.block
   format.note output
-  format.eprint output
   fin.entry
 }
 FUNCTION {booklet}
@@ -1361,7 +1316,6 @@ FUNCTION {booklet}
   format.date "year" output.check
   new.block
   format.note output
-  format.eprint output
   fin.entry
 }
 
@@ -1399,7 +1353,6 @@ FUNCTION {inbook}
   format.edition output
   new.block
   format.note output
-  format.eprint output
   fin.entry
 }
 
@@ -1425,7 +1378,6 @@ FUNCTION {incollection}
   if$
   new.block
   format.note output
-  format.eprint output
   fin.entry
 }
 FUNCTION {inproceedings}
@@ -1454,7 +1406,6 @@ FUNCTION {inproceedings}
   if$
   new.block
   format.note output
-  format.eprint output
   fin.entry
 }
 FUNCTION {conference} { inproceedings }
@@ -1471,7 +1422,6 @@ FUNCTION {manual}
   format.date "year" output.check
   new.block
   format.note output
-  format.eprint output
   fin.entry
 }
 
@@ -1489,7 +1439,6 @@ FUNCTION {mastersthesis}
   format.date "year" output.check
   new.block
   format.note output
-  format.eprint output
   fin.entry
 }
 
@@ -1504,7 +1453,6 @@ FUNCTION {misc}
   format.date "year" output.check
   new.block
   format.note output
-  format.eprint output
   fin.entry
 }
 FUNCTION {phdthesis}
@@ -1521,7 +1469,6 @@ FUNCTION {phdthesis}
   format.date "year" output.check
   new.block
   format.note output
-  format.eprint output
   fin.entry
 }
 
@@ -1542,7 +1489,6 @@ FUNCTION {proceedings}
   if$
   new.block
   format.note output
-  format.eprint output
   fin.entry
 }
 
@@ -1560,7 +1506,6 @@ FUNCTION {techreport}
   format.date "year" output.check
   new.block
   format.note output
-  format.eprint output
   fin.entry
 }
 
@@ -1573,7 +1518,6 @@ FUNCTION {unpublished}
   format.date "year" output.check
   new.block
   format.note "note" output.check
-  format.eprint output
   fin.entry
 }
 

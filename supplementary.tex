@@ -1,9 +1,12 @@
 
 %\documentclass[preprint,notitlepage]{revtex4-1}
-\documentclass[reprint,notitlepage]{revtex4-1}
+\documentclass[prl,twocolumn,notitlepage]{revtex4-1}
 \usepackage{graphicx}
+\usepackage{epstopdf}
 \usepackage{amsmath}
-
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{color}
 
 \usepackage{SIunits}
 \newcommand{\wstar}{-0.023}
@@ -47,23 +50,12 @@
  
 %\renewcommand{\figurename}{Figure}
  
-%Hack to make the bibliography numbering following the main text
-\let\oldthebibliography=\thebibliography
-\let\oldendthebibliography=\endthebibliography
-\renewenvironment{thebibliography}[1]{%
-   \oldthebibliography{#1}%
-   \setcounter{NAT@ctr}{55}%
-}{\oldendthebibliography}
-
-%Hack to remove the separator between text and bibliography
-\let\bibsectionbis\bibsection
-\renewcommand{\bibsection}{\section*{Supplementary references}}
-
+ 
+ 
 %END HACKS
 
 \begin{document}
-\title{SUPPLEMENTARY INFORMATION \\ 
-for ``Roles of icosahedral and crystal-like order in hard spheres glass transition''} 
+\title{SUPPLEMENTARY INFORMATION for ``Roles of icosahedral and crystal-like order \\ in hard spheres glass transition''} 
 %\title{Role of structural heterogeneity of the supercooled liquid\\ in the crystallization of hard spheres}
 %\title{On the origin of polymorphism during the nucleation of hard spheres}
 %\title{On the origin of crystal polymorphism in hard spheres}
@@ -85,48 +77,36 @@ for ``Roles of icosahedral and crystal-like order in hard spheres glass transiti
 %\date{}
 
 \maketitle
-\onecolumngrid
 
-\section*{Supplementary Figures}
+\section*{Particle localisation and sizing}
 
-\begin{figure*}[!h]
-\begin{center}
-\includegraphics{fig_sizing.pdf}
-\end{center}
-	\caption{\textbf{Sizing of our colloids.} \textbf{a,b,} XY and XZ slices (detail) of a typical confocal 3D image of our sample. Note the excellent Z resolution, almost not affected by the point spread function. \textbf{c,} Size distribution estimated in situ (dashed line) by our multiscale algorithm ($\sim 1.7\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once $23\%$ of swelling of particle diameters is taken into account (full line). \textbf{d,} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
-	\label{fig:sizing}
-\end{figure*}
+Particle-level confocal microscopy experiments usually access the coordinates of the particles via the algorithm proposed by \citet{Crocker1996}. The original noisy image is blurred by convolution with a Gaussian kernel of width $\sigma$ to yield a soft peak per particle. Local intensity maxima within this blurred image give the coordinates of the particles with pixel resolution. Sub-pixel resolution ($0.1\sim0.3$~pixels error) can be achieved by taking the centre of mass of a neighbourhood around the local maximum. The extension of this algorithm in 3D has been done in two ways: either tracking particles in each confocal plane and reconstructing the results (2D-flavour)~\citep{dinsmore2001tdc}, or full image analysis on three dimensional pictures (3D-flavour)~\citep{vanblaaderen1995rss, Lu2007}.
+
+The choice of the width $\sigma$ of the blurring kernel is critical: if it is too small, then the intensity profile is flat near the centre  of a particle, leading to multiple and ill-localized maxima per particle; if it is too large, then the peaks of nearby particles overlap, leading to shifts in the detected positions, or even fusion of the particles (only one particle detected instead of two). If the colloids are fairly monodisperse one can argue (at least in the 3D-flavour) that there exists a range of possible width where the choice of $\sigma$ has almost no effect on the number of particles detected. Choosing $\sigma$ within this range gives confidence in the localisation results.
 
 \begin{figure*}
 \begin{center}
-\includegraphics{fig_localise}
+\includegraphics{generate_figures-figure5.pdf}
 \end{center}
 \caption{\textbf{Visualisation of the results of various tracking methods for the same portion of image.} The circles on each picture are identical and result from 2D multiscale tracking of each XY slice of the 3D pictures. \textbf{a,} XZ and YZ slices of the image (fake colours). \textbf{b,} Multiscale 3D tracking. Spheres are drawn with the radius determined by the tracking methods. \textbf{c-h,} 3D Crocker-Grier tracking with blurring radius increasing from \unit{2}{px} to \unit{4.5}{px} by steps of \unit{0.5}{px} (Sphere radii correspond to the blurring radii).}
 	\label{fig:localise}
 \end{figure*}
-\clearpage
-\twocolumngrid
+\begin{figure*}
+\begin{center}
+\includegraphics{generate_figures-figure6.pdf}
+\end{center}
+	\caption{\textbf{Sizing of our colloids.} \textbf{a,b,} XY and XZ slices (detail) of a typical confocal 3D image of our sample. Note the excellent Z resolution, almost not affected by the point spread function. \textbf{c,} Size distribution estimated \emph{in situ} (dashed line) by our multiscale algorithm ($\sim 1.7\times 10^6$ instantaneous sizing). Comparison with the size distribution estimated from \textsc{sem} of only $140$ dry particles (steps) is possible once $23\%$ of swelling of particle diameters is taken into account (full line). \textbf{d,} First peak of the radial distribution function with (full line) and without (dashed) the individual sizes data. Taking into account the measured sizes rectifies the effect of the polydispersity: the peak is thinner and higher.}
+	\label{fig:sizing}
+\end{figure*}
 
+However, we found that no such ``good blur width'' exists in our polydisperse sample (see Supplementary Fig.~S\ref{fig:localise}c-h). The detection of smaller particles with small blurring widths leads to the failure in detecting properly the larger particles. This unacceptable failure of the \citet{Crocker1996} algorithm, as well as the want of the particles' radii data, triggered our design of a novel localisation algorithm that would be robust even for a system of finite polydispersity, which is unavoidable in real experiments. Here we briefly disclose our method, leaving full details to a future publication.
 
-\section*{Supplementary Methods}
-
-
-\subsection*{Particle localisation and sizing}
-
-Particle-level confocal microscopy experiments usually access the coordinates of the particles via the algorithm proposed by \citet{Crocker1996}. The original noisy image is blurred by convolution with a Gaussian kernel of width $\sigma$ to yield a soft peak per particle. Local intensity maxima within this blurred image give the coordinates of the particles with pixel resolution. Sub-pixel resolution ($0.1\sim0.3$~pixels error) can be achieved by taking the centre of mass of a neighbourhood around the local maximum. The extension of this algorithm in 3D has been done in two ways: either tracking particles in each confocal plane and reconstructing the results (2D-flavour)~\citep{dinsmore2001tdc}, or full image analysis on three dimensional pictures (3D-flavour)~\citep{vanblaaderen1995rss, Lu2007}.
-
-The choice of the width $\sigma$ of the blurring kernel is critical: if it is too small, then the intensity profile is flat near the centre of a particle, leading to multiple and ill-localized maxima per particle; if it is too large, then the peaks of nearby particles overlap, leading to shifts in the detected positions, or even fusion of the particles (only one particle detected instead of two). If the colloids are fairly monodisperse one can argue (at least in the 3D-flavour) that there exists a range of possible width where the choice of $\sigma$ has almost no effect on the number of particles detected. Choosing $\sigma$ within this range gives confidence in the localisation results.
-
-
-
-However, we found that no such ``good blur width'' exists in our polydisperse sample (see Supplementary Figure~S\ref{fig:localise}c-h). The detection of smaller particles with small blurring widths leads to the failure in detecting properly the larger particles. This unacceptable failure of the \citet{Crocker1996} algorithm, as well as the want of the particles' radii data, triggered our design of a novel localisation algorithm that would be robust even for a system of finite polydispersity, which is unavoidable in real experiments. Here we briefly disclose our method, leaving full details to a future publication.
-
-The key notion to detect objects of unknown and possibly diverse sizes in an image is the scale space~\cite{Lindeberg1993}. A popular implementation for isotropic objects (or ``blobs'') is the Scale Invariant Feature Transform (\textsc{sift}) of \citet{Lowe2004}. It consists  in blurring the image by Gaussian kernels of logarithmically increasing widths ($\sigma_{i+1} = 2^{1/n} \sigma_i$, with $n$ a fixed integer, $n=3$ being a good choice and used here) and taking the difference between consecutive blurred images (6 images for $n=3$). The difference of Gaussians (DoG) response function defined in this way depends on the position in space and on the scale. Bright objects in the original image are detected as local minima of the DoG in both space and scale, thus localisation and size are determined simultaneously, without any assumption on the target size (see Supplementary Figure~S\ref{fig:localise}b).
+The key notion to detect objects of unknown and possibly diverse sizes in an image is the \emph{scale space}~\cite{Lindeberg1993}. A popular implementation for isotropic objects (or ``blobs'') is the Scale Invariant Feature Transform (\textsc{sift}) of \citet{Lowe2004}. It consists  in blurring the image by Gaussian kernels of logarithmically increasing widths ($\sigma_{i+1} = 2^{1/n} \sigma_i$, with $n$ a fixed integer, $n=3$ being a good choice and used here) and taking the difference between consecutive blurred images (6 images for $n=3$). The difference of Gaussians (DoG) response function defined in this way depends on the position in space and on the scale. Bright objects in the original image are detected as local minima of the DoG in both space and scale, thus localisation and \emph{size} are determined simultaneously, without any assumption on the target size (see Supplementary Fig.~S\ref{fig:localise}b).
 
 The \textsc{sift} is often used to match between different images from complex objects consisting of many rigidly linked blobs and further characterised by local histograms~\citep{Lowe2004}. To our knowledge, this method has never been used for the quantitative localisation and sizing of independent single-blob objects like spherical colloids. The object-by-object optimal scale determination allows us to perform the spatial sub-pixel resolution step for each object on an image that is blurred just enough to have neither a flat intensity profile nor a nearby peak overlap. This leads to a spatial resolution below $0.3$~pixels when two $10$-pixels wide particles are at hard-core contact, and less than $0.03$~pixels error ($0.3\%$ of the diameter) when any other particle's surface is further than $1$~pixel from the surface of the particle of interest.
 
 
-The analytical response of a binary ball to a Gaussian blur, at the centre of the ball is a function of dimensionless ratio $x=R/\sigma$: $G(x)$. The DoG response function is the difference between the two such functions. However, the choice of the width of the two functions is not arbitrary: we make the difference between two consecutive blurred images, the image blurred by $\sigma_{j+1}$ and the image blurred by $\sigma_j$. Therefore, in each of our discrete DoG images the value at the centre of the particle can be expressed as
+\textcolor{blue}{The analytical response of a binary ball to a Gaussian blur, at the center of the ball is a function of dimensionless ratio $x=R/\sigma$: $G(x)$. The DoG response function is the difference between the two such functions. However, the choice of the width of the two functions is not arbitrary: we make the difference between two consecutive blurred images, the image blurred by $\sigma_{j+1}$ and the image blurred by $\sigma_j$. Therefore, in each of our discrete DoG images the value at the center of the particle can be expressed as
 \begin{align}
 DoG(R,\sigma_j, \alpha) = DoG(x_j, \alpha) &= G(x_j/\alpha) - G(x_j),\\
 \intertext{with $\alpha=2^{1/n}$. Given sub-scale refinement, this can be written as a continuous function of $\sigma$:}
@@ -137,19 +117,27 @@ Here it is clear that minimizing $DoG(x, \alpha)$ with respect to $x$ yields a v
 	x^* = R/\sigma^* = \sqrt{\frac{6\ln \alpha}{1-\alpha^{-2}}}, 
 	\label{eq:scale_dil}
 \end{equation}
-Practically one obtains $\sigma^*$, the value of $\sigma$ that minimises $DoG(R,\sigma, \alpha)$, by a polynomial fit for discrete data $\sigma_j$. Eq.~(S\ref{eq:scale_dil}) allows to translate the $n$-dependent $\sigma^*$ to the parameter-free real radius of the particle, $R$. The error on $R$ does depend on the number of subdivisions.
+Practically one obtains $\sigma^*$, the value of $\sigma$ that minimises $DoG(R,\sigma, \alpha)$, by a polynomial fit for discrete data $\sigma_j$. Eq.~(S\ref{eq:scale_dil}) allows to translate the $n$-dependent $\sigma^*$ to the parameter-free real radius of the particle, $R$.} The error on $R$ does depend on the number of subdivisions.
 
 We found that the radius of an isolated pixelated ball can be indeed measured within $0.3\%$ relative error with this method. The point spread function of real confocal images acts like an blur in the Z direction. As long as this blur can be approximated to a Gaussian, one can show that it affects the proportionality constant without adding a constant term in Eq.~(S\ref{eq:scale_dil}).
 
 In dense suspensions, the neighbouring particles influence the scale dependence of DoG response. This effectively shifts the minima of the DoG towards smaller scales, leading to smaller radii if one uses Eq.~(S\ref{eq:scale_dil}) alone. Assuming once again binary ball objects, one can take this coupling into account and construct an $N\times N$ system, with $N$ the number of particles, whose solutions are the radii and whose coefficients depend on the inter-particle distances. This system is actually very sparse (less than two dozen non-zero coefficients per line, even in the dense suspensions studied here) and the results converge in about two iterations. In synthetic images we measured the error in the resulting radii to be around $1\%$. In an experimental image, the particles are not uniformly bright due to synthesis imperfection (quantity of dye fixed by each particle) and photo bleaching. If one does not take into account the relative brightness of the particles the less bright will appear smaller. We were able to relate the magnitude of the DoG response (environment-dependent) to a measure of the brightness and thus correct the influence of the relative brightness on the sizing.
 
-Supplementary Figure~S\ref{fig:sizing}c shows the size distribution of the suspensions investigated in the main text. Once a solvent swelling of $23\%$ in radius is taken into account, our in situ measurements compare very well with the size distribution obtained from scanning electron microscopy (\textsc{sem}) of the same `dry' colloids. The polydispersity measured in situ is $6.9\%$, where the polydispersity computed from \textsc{sem} is $6.2\%$.
+Supplementary Figure~S\ref{fig:sizing}c shows the size distribution of the suspensions investigated in the main text. Once a solvent swelling of $23\%$ in radius is taken into account, our \emph{in situ} measurements compare very well with the size distribution obtained from scanning electron microscopy (\textsc{sem}) of the same `dry' colloids. The polydispersity measured \emph{in situ} is $6.9\%$, where the polydispersity computed from \textsc{sem} is $6.2\%$.
 
-The consistency of our method can be checked by constructing the radial distribution function $g(r)$. In monodisperse hard spheres, the $g(r)$ has a sharp first peak at $r=2R$ corresponding to hard core contact. Polydispersity implies hard core contacts at various $r$ and thus broadens the peak. One can recover a sharp peak by constructing $g(\hat{r})$, with $\hat{r}_{ij} = r_{ij}/(R_i+R_j)$. In Supplementary Figure~S\ref{fig:sizing}d we successfully used the sizes measured by our method to rectify the first peak.
+The consistency of our method can be checked by constructing the radial distribution function $g(r)$. In monodisperse hard spheres, the $g(r)$ has a sharp first peak at $r=2R$ corresponding to hard core contact. Polydispersity implies hard core contacts at various $r$ and thus broadens the peak. One can recover a sharp peak by constructing $g(\hat{r})$, with $\hat{r}_{ij} = r_{ij}/(R_i+R_j)$. In Supplementary Fig.~S\ref{fig:sizing}d we successfully used the sizes measured by our method to rectify the first peak.
 
 Recently \citet{Kurita2011,Kurita2011b} have designed a sizing method using particle coordinates from confocal experiments. However their method do not work at the image processing level and relies on coordinates extracted via the \citet{Crocker1996} algorithm which, as described above, is defective when the size distribution is too broad. It may be possible to combine the two methods by feeding our coordinates and size as input to their method. We would expect an increase in sizing precision when the particles are close to contact.
 
-\subsection*{Dynamics}
+\section*{Dynamics}
+
+\begin{figure*}
+\begin{center}
+\includegraphics{generate_figures-figure8.pdf}
+\end{center}
+\caption{\textbf{Four-point structure factor} at different volume fractions, computed for a time difference $t=t_{\chi_4}$ so that $\chi_4(t)$ is maximum. \textbf{a} Fit to Ornsein-Zernike. \textbf{b} Collapse of the small-$q$ regimes.}
+	\label{fig:S4}
+\end{figure*}
 
 As an aside, we have also computed the mobility-mobility spatial correlation function~\cite{Donati1999}
 \begin{equation}
@@ -160,12 +148,14 @@ As an aside, we have also computed the mobility-mobility spatial correlation fun
 	},
 	\label{eq:mobility_correl}
 \end{equation}
-where $\delta u_i(t)$ is the fluctuations of the norm of the displacements $\delta u_i(t) = \Delta r_i(t)-\langle\Delta r(t)\rangle$. $\mathcal{G}_u$ is a kind of four-point correlation function~[1]. The length scale $\xi_u$ is estimated from the fit of the envelope of $\mathcal{G}_u(r,t^{dh})$ in real space, at the characteristic time of the dynamic heterogeneity, by the Ornstein-Zernike form $\propto r^{-1}\exp( -r/\xi_u)$. 
+where $\delta u_i(t)$ is the fluctuations of the norm of the displacements $\delta u_i(t) = \Delta r_i(t)-\langle\Delta r(t)\rangle$. $\mathcal{G}_u$ is a kind of four-point correlation function~\cite{cavagna2009supercooled}. The length scale $\xi_u$ is estimated from the fit of the envelope of $\mathcal{G}_u(r,t^{dh})$ in real space, at the characteristic time of the dynamic heterogeneity, by the Ornstein-Zernike form $\propto r^{-1}\exp( -r/\xi_u)$. 
 
 We found that $\xi_u$ obeys the same power-law dependence upon $\phi$ as $\xi_4$ and $\xi_6$, but with a prefactor about two times larger. We rationalise this result by considering the distribution of the norm of the displacements, which is not symmetric compared to its mean value. Thus $\delta u_i(t)$ reaches much larger positive values for the few fast particles than low values for the slow ones. We can say that the mobility-mobility correlation reflects mainly the spatial distribution of the fastest particles, and that $\xi_u$ is the length scale of the fastest regions. By definition $\xi_4$ is the characteristic length scale of the slow regions. We know that rearranging regions are usually string-like~\cite{Donati1999} whereas in our system the slow regions are compact. Even with approximatively the same number of particles involved, the lower-dimensional fast regions should be longer than the compact slow regions.
 
+
 \bibliographystyle{naturemag3}
-%\bibliographystyle{unsrtnat}
+%\bibliographystyle{apsrev4-1}
 \bibliography{ico_dyn}
+
 
 \end{document}

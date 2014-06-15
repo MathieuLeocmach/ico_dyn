@@ -8,133 +8,84 @@
 \usetikzlibrary{matrix}
 \usetikzlibrary{shadows}
 \tikzexternalize
-\tikzsetexternalprefix{fig_}
-%\tikzset{external/force remake}
+\tikzset{external/force remake}
 \tikzset{every mark/.append style={scale=0.8}}
-\pgfplotsset{every axis/.append style={small, %
-	axis x line=bottom, axis y line=left
-	}}
-	
-\pgfplotscreateplotcyclelist{grade5}{%
-blue, every mark/.append style={fill=blue},mark=*\\%
-blue!30!gray,every mark/.append style={fill=blue!30!gray},mark=square*\\%
-gray!50!black,mark=star\\%
-red!30!gray, every mark/.append style={fill=red!30!gray}, mark=triangle*\\%
-red, every mark/.append style={fill=red},mark=diamond*\\%
-}
-
-\tikzset{lab/.style={above right, text height=0.8em, text depth=0.2em, font=\sffamily\Large\bfseries}}
+\pgfplotsset{every axis/.append style={small}}
 
 \begin{document}
-\tikzset{external/force remake=false}
-\tikzsetnextfilename{vft}
+\tikzset{external/force remake}
 \begin{figure}
 	\centering
-	\begin{tikzpicture}
+	\begin{tikzpicture}[
+		lab/.style={above right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
+		]%
+		\pgfplotsset{cycle list name=black white}
 		\pgfplotsset{fitc/.style={solid, no markers, forget plot, domain=1:1e4}}
-		\pgfplotsset{every axis/.append style={width=0.48\textwidth}}
-		\pgfplotsset{cycle list name=grade5}
 		\begin{axis}[%
-			at={(0,0)},
-			height=0.33\textwidth, %
+			anchor=right of south east,%
+			width=0.45\textwidth, height=0.33\textwidth, %
 			xlabel=$t/\tau_B$, xmode=log,%
-			ylabel=\sffamily{Self ISF}, ymin=0,%
+			ylabel={Self ISF}, ymin=0,%
+			legend columns=3, reverse legend, legend style={font=\tiny, at={(1,1.03), nodes={anchor=east}}, anchor=south east}, %
 			]
-			\addplot+[fitc] {0.943 * exp(-(x/4.60)^0.72)};
 			\addplot+[only marks] file {LS3954.isf};
-			\addplot+[fitc] {0.901 * exp(-(x/10.78)^0.72)};
 			\addplot+[only marks] file {LS4446.isf};
-			\addplot+[fitc] {0.894 * exp(-(x/15.51)^0.70)};
 			\addplot+[only marks] file {LS4582.isf};
-			\addplot+[fitc] {0.876 * exp(-(x/60.18)^0.60)};
 			\addplot+[only marks] file {LS5079.isf};
-			\addplot+[fitc] {0.787 * exp(-(x/2408.)^0.70)};
 			\addplot+[only marks] file {go1.isf};
-			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
-			\node [lab, below left=0 and 1em] at (rel axis cs:1,1) {a};
-		\end{axis}
-		\pgfplotsset{fitc/.style={no markers, forget plot, domain=0.3:3}}
-		\begin{semilogxaxis}[%
-			at={(0.49\textwidth,0)},
-			height=0.33\textwidth, %
-			xlabel=$t/\tau_B$,%
-			xmin=1, xmax=1e4,%
-			ylabel=$\alpha_2(t)$,%
-			only marks,%
-			]
-			\addplot file {LS3954.ngp};
-			\addplot file {LS4446.ngp};
-			\addplot file {LS4582.ngp};
-			\addplot file {LS5079.ngp};
-			\addplot file {go1.ngp};
-			\node [lab, below left=0 and 1em] at (rel axis cs:1,1) {b};
-		\end{semilogxaxis}
-		\begin{loglogaxis}[%
-			at={(0,-0.4\textwidth)},
-			xlabel={$q\xi_4$}, ylabel={$S_4(q)/\chi_4$},
-			cycle list name=grade5,%
-			xmin=0.25, xmax=5, ymin=0.05,%
-			xtick={0.5, 1, 2, 4},
-			xticklabel=\pgfmathparse{exp(\tick)}%
-				\pgfmathprintnumber{\pgfmathresult},
-			legend pos=south west, reverse legend,
-			]
-			\addplot+[only marks] table[x expr={\thisrowno{0}*0.703}, y expr={\thisrowno{1}/0.634}] {LS3954.S4};
-			\addplot+[only marks] table[x expr={\thisrowno{0}*0.804}, y expr={\thisrowno{1}/0.744}] {LS4446.S4};
-			\addplot+[only marks] table[x expr={\thisrowno{0}*0.835}, y expr={\thisrowno{1}/0.778}] {LS4582.S4};
-			\addplot+[only marks] table[x expr={\thisrowno{0}*1.017}, y expr={\thisrowno{1}/1.011}] {LS5079.S4};
-			\addplot+[only marks] table[x expr={\thisrowno{0}*1.959}, y expr={\thisrowno{1}/2.950}] {go1.S4};
-			\addplot+[black, fitc] {1/(1+x^2)};
+			\addplot+[fitc] {0.943 * exp(-(x/4.60)^0.72)};
+			\addplot+[fitc] {0.901 * exp(-(x/10.78)^0.72)};
+			\addplot+[fitc] {0.894 * exp(-(x/15.51)^0.70)};
+			\addplot+[fitc] {0.876 * exp(-(x/60.18)^0.60)};
+			\addplot+[fitc] {0.787 * exp(-(x/2408.)^0.70)};
 			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
 			\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
-			\node[lab, above left=0 and 1em] at (rel axis cs:1, 0) {c};
-		\end{loglogaxis}
-		\pgfplotsset{cycle list name=black white}
-		\tikzset{every mark/.append style={scale=1.2}}
-		\begin{axis}[%
-			at={(0.49\textwidth,-0.4\textwidth)},
-			xlabel=$\phi$,%
-			xtick={0.5,0.52,...,0.6},%
-			ylabel=$\tau_\alpha/\tau_B$, ymode=log, %
-			cycle list={{black, mark=*},{black, mark=square}},%
-			]
-			\addplot+[mark=none, forget plot, domain=0.49:0.58] {exp(0.28970401*x/(0.59841615-x))};
-			\addplot+[only marks] table[x index=0, y index=1]{xi_phi.dat};
-			\addplot+[only marks, every mark/.append style={draw=gray, scale=1.2}] table[x index=0, y index=4]{xi_phi.dat};
-			\node at (rel axis cs:0,1) (a) {};
-			\node [lab, above left=0 and 1em] at (rel axis cs:1,0) {d};
+			\node [lab] at (rel axis cs:0,0) {a};
 		\end{axis}
 		\begin{axis}[%
-			at=(a), anchor=north west, %
-			width=0.33\textwidth, %
+			anchor=left of south west,%
+			width=0.45\textwidth, %
+			xlabel=$\phi$,%
+			ylabel=$\tau_\alpha/\tau_B$, ymode=log, %
+			ytick pos=right, ylabel near ticks,%
+			legend pos=south east,%
+			cycle list={{black, mark=*},{black, mark=square}},%
+			]
+			%\addplot+[mark=none, forget plot, domain=0.49:0.58] {0.7874243*exp(0.32826088*x/(0.60063652-x))};
+			\addplot+[mark=none, forget plot, domain=0.49:0.58] {exp(0.28970401*x/(0.59841615-x))};
+			\addplot+[only marks] table[x index=0, y index=1]{xi_phi.dat};
+			\addplot+[only marks] table[x index=0, y index=4]{xi_phi.dat};
+			\legend{$\tau_\alpha$, $t^{dh}$};
+			\node at (rel axis cs:0,1) (a) {};
+			\node [lab] at (rel axis cs:0,0) {b};
+		\end{axis}
+		\begin{axis}[%
+			tiny, at=(a), anchor=north west, %
+			width=0.3\textwidth, %
 			xlabel=$\phi$, xmin=0.49, xmax=0.58, xlabel near ticks,%
 			xtick={0.5,0.52,...,0.6},%
 			ylabel=$\xi/\xi_0$, ymax=10,
 			ytick={2,4,6,8},
 			ytick pos=right, ylabel near ticks,%
+			label style={font=\tiny}, %
+			legend pos=north west,%
+			axis background/.style={fill=white},%
 			]
-			\addplot+[only marks, mark=*, %
-				every mark/.append style={fill=black, scale=1.2},
+			\addplot+[only marks, fill=black, %
 				error bars/.cd, y dir=both, y explicit relative,%
-				] table[x index=0, y expr=\thisrowno{3}/0.126]{scale.xi};
+				] table[x index=0, y expr=\thisrowno{3}/0.126, y error index=6]{scale.xi};
 			\addplot+[mark=none, forget plot, domain=0.49:0.58] {(0.6/x-1)^(-2.0/3.0)};
-			\addplot+[only marks, mark=square, every mark/.append style={draw=gray, scale=1.2},] table[x index=0, y expr=\thisrowno{5}/0.216]{scale.xi};
+			\addplot+[only marks, mark=square] table[x index=0, y expr=\thisrowno{5}/0.216]{scale.xi};
+			\legend{$\xi_6$ structural, $\xi_4$ dynamical};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{\textbf{Dynamics of the system.} 
-	\textbf{a,} Decay of the self-intermediate scattering (ISF) function computed at wave vector $q=2\pi/\left\langle \sigma\right\rangle$ . Lines are stretched exponential fits from which we extract the structural relaxation time $\tau_\alpha$. 
-	\textbf{b,} Non gaussian parameter, whose maximum defines the characteristic time of the dynamic heterogeneity $t^\text{dh}$.
-	\textbf{c,} Collapse of the small-$q$ regimes of the four-point structure factor on the Orstein-Zernike function (solid curve).
-	\textbf{d,} $\phi$-dependence of $\tau_\alpha$ (circles) and of $t^\text{dh}$ (squares). The solid curve is the VFT fit for $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). 
-	\textbf{Inset:} Dynamical ($\xi_4$, squares) and structural ($\xi_6$, circles) correlation lengths  scaled by their respective bare correlation length, respectively $\xi_{4,0}=0.206\sigma$ and $\xi_{6,0}=0.129\sigma$. The curve is the power-law given in the text.
-	All times are scaled by the Brownian time $\tau_B$.}
+	\caption{\textbf{Dynamics of the system.} {\bf a,} Decay of the self-intermediate scattering function computed from the positions for several volume fractions. Lines are stretched exponential fit from which is extracted the structural relaxation time $\tau_\alpha$ {\bf b,} $\tau_\alpha$ and the characteristic time of the dynamic heterogeneity $t^{dh}$ scaled by the Brownian time $\tau_B$ as a function of $\phi$. The solid curve is the VFT fit of $\tau_\alpha$ ($\phi_0=0.600$, $D=0.328$). Inset: Dynamical ($\xi_4$) and structural correlation length ($\xi_6$) scaled by their respective bare correlation length, respectively $\xi_{4,0}=0.206\sigma$ and $\xi_{6,0}=0.126\sigma$. The curve is the power-law given in the text.}
 	\label{fig:vft}
 \end{figure}
 \tikzset{external/force remake=false}
-\tikzsetnextfilename{maps}
 \begin{figure}
 	\begin{tikzpicture}[
-		lab/.append style={below right}%,
+		lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
 		]%
 		\pgfplotsset{
 			extra tick style={grid=major, major grid style={
@@ -142,27 +93,38 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 				black}},%
 			every axis/.append style={%
 				height=0.4\textwidth,
-				ylabel={$Q_6$},%
 				ymin=0,ymax=0.6,%
 				extra y ticks={\Qstar}, extra y tick labels={},%
 				enlargelimits=false,axis on top,
+				colormap={bw}{gray(0cm)=(1); gray(1cm)=(1); gray(10cm)=(0)},%
+				colorbar sampled,%
 				},%
 		}
 		\begin{groupplot}[
 			group style={
-				group name=X,
-				group size=2 by 2,%
-				horizontal sep=0.1\textwidth,
-				vertical sep=0.1\textwidth,
+				group size=2 by 1,%
+				yticklabels at=edge left,%
+				horizontal sep=0pt,%
 				},%
 			anchor=below south west,%
-			width=0.48\textwidth,%
+			width=0.45\textwidth,%
 			xtick scale label code/.code={},%
+			colorbar horizontal, colorbar style={%
+				samples=6, xtick={ 0.20,0.4,0.6, 0.8},% 
+				extra y ticks={},%
+				/pgfplots/colorbar shift/.style={yshift=0.3cm},
+				at={(parent axis.north)}, anchor=below south, width=0.9*\pgfkeysvalueof{/pgfplots/parent axis width},
+				xticklabel pos=upper,%
+				label style={font=\footnotesize},
+				},%
 			]
 		\nextgroupplot[%
-			xlabel=$Q_4$,%
+			ylabel={$Q_6$}, xlabel=$Q_4$,%
 			xmin=0,xmax=0.22,%
-			xtick = {0,0.05,...,0.25},%
+			colorbar style={%
+				xlabel={per units of $Q_4\cdot Q_6$},% 
+				xticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
+				},%
 			xticklabel={$\pgfmathprintnumber[fixed,precision=2]{\tick}$}
 			]
 		\addplot graphics
@@ -179,6 +141,10 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 			xmin=-0.002,xmax=0.002,%
 			xtickmin=-0.0015,%
 			extra x ticks=0, extra x tick labels={},
+			colorbar style={%
+				xlabel={per units of $w_4\cdot Q_6$},% 
+				xticklabels={$10^{3}$, $10^{4}$, $10^{5}$, $10^{6}$},%
+				},%
 			]
 		\addplot graphics
 		[xmin=-0.002,xmax=0.002,ymin=0,ymax=0.6]
@@ -191,15 +157,32 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 		\draw[->, white,thick] (axis cs:0, 0.15) to [out=120, in=280] (axis cs:-0.0005, 0.4);
 		\draw[->, white,thick] (axis cs:0, 0.15) to (axis cs:7E-05, 0.35);
 		
+		\end{groupplot}
 		
-		\nextgroupplot[
-			xtickmax=0,%
-			xmin=-0.052,%xmax=0.01,%
+		\begin{groupplot}[
+			group style={
+				group size=2 by 1,%
+				yticklabels at=edge left,%
+				horizontal sep=0pt,%
+				},%
+			anchor=above north west,%
+			width=0.38\textwidth,%
 			xlabel=$10^2 \cdot w_6$,%
+			xmin=-0.052,xmax=0.01,%
 			extra x ticks={\wstar, -0.00782},%
 			extra x tick labels={,},%
 			xtick scale label code/.code={},%
+			colorbar right, colorbar style={%
+				samples=6, ytick={ 0.20,0.4,0.6, 0.8},% 
+				yticklabels={$10^{1}$, $10^{2}$, $10^{3}$, $10^{4}$},%
+				ylabel={per units of $w_6\cdot Q_6$},%
+				extra x ticks={},%
+				extra y ticks={},%
+				label style={font=\footnotesize},
+				},%
 			]
+		
+		\nextgroupplot[ylabel={$Q_6$}, xtickmax=0,]
 		\addplot graphics
 		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
 		{u6Q6go1_scale};
@@ -211,14 +194,7 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=90, in=275] (axis cs:-0.0015, 0.33);
 		\draw[->, white,thick] (axis cs:-0.001, 0.15) to [out=180, in=30] (axis cs:-0.025, 0.12);
 		
-		\nextgroupplot[
-			xtickmax=0,%
-			xmin=-0.052,%xmax=0.01,%
-			xlabel=$10^2 \cdot w_6$,%
-			extra x ticks={\wstar, -0.00782},%
-			extra x tick labels={,},%
-			xtick scale label code/.code={},%
-			]
+		\nextgroupplot
 		\addplot graphics
 		[xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]
 		{u6Q6phi3954_scale};
@@ -226,74 +202,18 @@ red, every mark/.append style={fill=red},mark=diamond*\\%
 		\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
 		%\node [anchor=north east] at (rel axis cs:1, 1) {\footnotesize{$\phi = 0.497 \pm 0.03$}};
 		\node [left] at (axis cs:\wstar,0.4) {\footnotesize $w_6^*$};
-		\node [right] at (axis cs:-0.00782,0.4) {\footnotesize $w_6^\text{dod}$};
+		\node [right] at (axis cs:-0.00782,0.4) {\footnotesize $w_6^{dod}$};
 		
 		\end{groupplot}
-		
-		color scales by hand
-		\matrix (l1) [at={(X c1r1.above north)}, matrix of nodes, minimum width=2em, minimum height=1em, inner sep=0, draw=black]
-		{
-			|[fill=white]| & 
-			|[fill=black!25!white]| &
-			|[fill=black!50!white]| &
-			|[fill=black!75!white]| &
-			|[fill=black]| \\
-		};
-		\node[above, at=(l1-1-1.north east)] {$10^1$};
-		\node[above, at=(l1-1-2.north east)] {$10^2$};
-		\node[above, at=(l1-1-3.north east)] {$10^3$};
-		\node[above, at=(l1-1-4.north east)] {$10^4$};
-		
-		\matrix (l2) [at={(X c2r1.above north)}, matrix of nodes, minimum width=2em, minimum height=1em, inner sep=0, draw=black]
-		{
-			|[fill=white]| & 
-			|[fill=black!25!white]| &
-			|[fill=black!50!white]| &
-			|[fill=black!75!white]| &
-			|[fill=black]| \\
-		};
-		\node[above, at=(l2-1-1.north east)] {$10^3$};
-		\node[above, at=(l2-1-2.north east)] {$10^4$};
-		\node[above, at=(l2-1-3.north east)] {$10^5$};
-		\node[above, at=(l2-1-4.north east)] {$10^6$};
-		
-		\fill[white] (X c1r2.east) ++(0, 6em) rectangle ++(-5em, -12em);
-		\matrix (l3) [left=of X c1r2.right of east, matrix of nodes, minimum width=1em, minimum height=2em, inner sep=0, draw=black]
-		{
-			|[fill=black]| \\ 
-			|[fill=black!75!white]| \\
-			|[fill=black!50!white]| \\
-			|[fill=black!25!white]| \\
-			|[fill=white]| \\
-		};
-		\node[right, at=(l3-1-1.south east)] {$10^4$};
-		\node[right, at=(l3-2-1.south east)] {$10^3$};
-		\node[right, at=(l3-3-1.south east)] {$10^2$};
-		\node[right, at=(l3-4-1.south east)] {$10^1$};
-		
-		\fill[white] (X c2r2.east) ++(0, 6em) rectangle ++(-5em, -12em);
-		\matrix (l4) [left=of X c2r2.right of east, matrix of nodes, minimum width=1em, minimum height=2em, inner sep=0, draw=black]
-		{
-			|[fill=black]| \\ 
-			|[fill=black!75!white]| \\
-			|[fill=black!50!white]| \\
-			|[fill=black!25!white]| \\
-			|[fill=white]| \\
-		};
-		\node[right, at=(l4-1-1.south east)] {$10^4$};
-		\node[right, at=(l4-2-1.south east)] {$10^3$};
-		\node[right, at=(l4-3-1.south east)] {$10^2$};
-		\node[right, at=(l4-4-1.south east)] {$10^1$};
 	\end{tikzpicture}
-	\caption{\textbf{Population of local particle configurations specified by the }\textsc{boo}\textbf{ parameters}. The value of \textsc{boo} parameter for a perfect structure is  indicated by its name's position on each map. \textbf{a} in the $(Q_4,Q_6)$-plane, \textbf{b} $(w_4,Q_6)$-plane and \textbf{c-d} $(w_6,Q_6)$-plane. \textbf{a-c} are the population at deep supercooling ($\phi=0.575\pm 0.03$); \textbf{d} is the same as \textbf{c} but for a liquid near the freezing point ($\phi = 0.497 \pm 0.03$). Colour represents the population having the structure  specified by a combination of a couple of \textsc{boo}'s (log scale, per units of area in the respective planes). The arrows stress the ordering tendencies: the tendency towards \textsc{fcc} is always visible, a weak tendency towards \textsc{hcp} can also be distinguished in \textbf{b}, and the tendency towards icosahedral order (\textsc{ico}) is visible in \textbf{c}. 
-Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a manifestation of competing orderings, or frustration, between them. Straight lines are drawn at important thresholds: $Q_6^*$, $w_6^*$, $w_6^\text{dod}$ and $w_4=0$ that differentiates between \textsc{fcc} and \textsc{hcp}.}
+	\caption{Population of local structures function of \textsc{boo}. (a-c) For our deepest supercooled sample ($\phi=0.575\pm 0.03$) in the $(Q_4,Q_6)$-plane (a), $(w_4,Q_6)$-plane (b) and $(w_6,Q_6)$-plane (c). (d) is the same as (c) but for a liquid near the freezing point ($\phi = 0.497 \pm 0.03$). Colour represent the probability to find the structure (log scale). The arrows stress the ordering tendencies: the tendency toward \textsc{fcc} is always visible, but a tendency toward \textsc{hcp} can be distinguished in (b) and the tendency toward icosahedral order is visible in (c).}
 	\label{fig:maps}
 \end{figure}
 \tikzset{external/force remake=false}
-\tikzsetnextfilename{msd_Q6_w6}
+
 \begin{figure}
 	\begin{tikzpicture}[
-		lab/.append style={anchor=north west}%
+		lab/.style={anchor=north west, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
 		]%
 		\pgfplotsset{extra tick style={%
 			grid=major, major grid style={%
@@ -302,57 +222,51 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		\begin{axis}[%
 			name=twod,%
 			at={(0, 0.425\textwidth)},
-			width=0.48\textwidth,%
-			height=0.48\textwidth,%
+			width=0.5\textwidth,%
+			height=0.5\textwidth,%
 			ylabel=$Q_6$,%
 			ymin=0,ymax=0.6,%
 			xlabel=$10^2 \cdot w_6$,%
 			xmin=-0.052,xmax=0.01,%
 			xtick scale label code/.code={},%
 			enlargelimits=false,axis on top,
+			colormap={sd}{color(0cm)=(black) rgb(1cm)=(0.5, 0, 0) rgb(2cm)=(1, 0.5, 0) color(3cm)=(yellow) rgb(4cm)=(0.5, 0.75, 1) rgb(5cm)=(0.5, 0.75, 1)},%
 			extra x ticks={\wstar, -0.00782},%
 			extra x tick style={grid=major,	tick label style={anchor=south west}},%
 			extra x tick labels={,},%
 			extra y ticks={\Qstar},
 			extra y tick labels={},%
+			colorbar sampled, colorbar style={%
+				samples=5, ytick={ 0, 0.25, 0.5, 0.75},% 
+				yticklabels={$0$, $0.5$, $1$, $1.5$},%
+				ylabel=${\Delta r^2(w_6, Q_6, t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,%
+				extra x ticks={},%
+				yticklabel pos=right,%
+				label style={font=\footnotesize},
+				},%
 			]
 			\addplot graphics [xmin=-0.052,xmax=0.052,ymin=0,ymax=0.6]{sd_u6Q6_go1_color};
 			\node [lab] at (rel axis cs:0,1) {a};
 			\node [above] at (axis cs:-0.04, \Qstar) {\footnotesize{$Q_6^*$}};
-			%\node [anchor=west] at (rel axis cs:0, 0.8) {\footnotesize{$\phi = 0.575 \pm 0.03$}};
+			\node [anchor=west] at (rel axis cs:0, 0.8) {\footnotesize{$\phi = 0.575 \pm 0.03$}};
 			\node [left] at (axis cs:\wstar,0.55) {\footnotesize $w_6^*$};
-			\node [left] at (axis cs:-0.00782,0.55) {\footnotesize $w_6^\text{dod}$};
+			\node [left] at (axis cs:-0.00782,0.55) {\footnotesize $w_6^{dod}$};
 			\node [below] at (axis cs:-0.0026, 0.5745) {\textsc{fcc}};
 			\node [below, right] at (axis cs:-0.052, 0.05) {\textsc{Ico}};
 		\end{axis}
-		%color scales by hand
-		\definecolor{mybrown}{rgb}{0.5, 0, 0}
-		\definecolor{myblue}{rgb}{0.5, 0.75, 1}
-		\matrix (l3) [right=0.0125\textwidth of twod.right of east, matrix of nodes, minimum width=1em, minimum height=4em, inner sep=0, draw=black]
-		{
-			|[fill=myblue]| \\
-			|[fill=yellow]| \\
-			|[fill=orange]| \\
-			|[fill=mybrown]| \\
-		};
-		\node[right, at=(l3-1-1.south east)] {$1.5$};
-		\node[right, at=(l3-2-1.south east)] {$1$};
-		\node[right, at=(l3-3-1.south east)] {$0.5$};
-		\node[right, at=(l3-4-1.south east)] {$0$};
-		\node[right=0.05\textwidth of l3.east, rotate=90, anchor=north] {${\Delta r^2(w_6, Q_6, t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$};
-		
 		\pgfplotsset{every axis plot/.append style={only marks}}
 		\begin{groupplot}[%
 			group style={
-				group size=2 by 1,%
-				horizontal sep=0.1\textwidth,%
+				group size=2 by 2,%
+				yticklabels at=edge left,%
+				horizontal sep=0pt,%
 				},%
-			width=0.48\textwidth,%
+			width=0.5\textwidth,%
 			ymin=0, ymax=1.5,%
 			extra x tick style={grid=major,	tick label style={anchor=south west}},%
 			extra y ticks={1},%
 			extra y tick style={grid=major,	tick label style={anchor=south west}}, extra y tick labels={},%
-			cycle list name=grade5,%
+			%legend columns=5,%
 			legend style={
 				font=\footnotesize,
 				%at={(1,1)}, anchor=south,%
@@ -363,33 +277,31 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 				xlabel=$10^2 \cdot w_6$, xmin=-0.0521089193, xmax=0.01,%
 				xtickmax={0},%
 				xtick scale label code/.code={},%
-				ylabel=${\Delta r^2(w_6,t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$,
-				extra x ticks={\wstar, -0.00782}, extra x tick labels={$w_6^*$,$w_6^\text{dod}$},%
-				extra y tick labels={\sffamily{bulk}},%
+				ylabel=${\Delta r^2(w_6,Q_6,t^{dh})}/{\langle\Delta r^2(t^{dh}) \rangle}$,
+				extra x ticks={\wstar, -0.00782}, extra x tick labels={$w_6^*$,$w_6^{dod}$},%
+				extra y tick labels={bulk}
 				]
 			
 			%\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi3954.txt};
-			\pgfplotsset{cycle list shift=1}
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi4446.txt};
-			\pgfplotsset{cycle list shift=2}
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_phi5079.txt};
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_u6_go1.txt};
 			\addplot+[domain=-0.0521089193:0.01, sharp plot, no markers] {9.34701 * x + 1.03764};
 			\draw[->, thick] (rel axis cs:0.15, 0.1) to (rel axis cs:0, 0.1);
-			\node[right] at (rel axis cs:0.15, 0.1) {\sffamily\footnotesize Icosahedron};
+			\node[right] at (rel axis cs:0.15, 0.1) {\footnotesize Icosahedron};
 			\node [lab] at (rel axis cs:0,1) {b};
 			
 			\nextgroupplot[%
 				xlabel=$Q_6$, xmin=0, xmax=0.5745,%
-				extra x ticks={\Qstar}, extra x tick labels={$Q_6^*$},%	
-				ylabel=${\Delta r^2(Q_6,t^\text{dh})}/{\langle\Delta r^2(t^\text{dh}) \rangle}$,			
+				extra x ticks={\Qstar}, extra x tick labels={$Q_6^*$},%				
 				]
+			\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
+			\legend{$0.003$,%$0.497$, 
+				$0.535$, $0.555$, $0.575$};
 			%\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_3954.txt};
-			\pgfplotsset{cycle list shift=1}
 			\addplot+[domain=0.05:0.3, sharp plot, no markers, forget plot] {-0.76 * x + 1.1};
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_4446.txt};
 			%\addplot+[domain=0.05:0.3, sharp plot, no markers, forget plot] {1.09-1.18*x+8.95*x^2-38*x^3};
-			\pgfplotsset{cycle list shift=2}
 			\addplot+[smooth, no markers, forget plot] coordinates {(0.08, 1.04) (0.2, 0.92) (0.32, .62)};
 			\addplot table[x index=0, y expr={\thisrowno{1}/\thisrowno{2}}]{sd_nb_Q6_5079.txt};
 			\addplot+[smooth, no markers, forget plot] coordinates {(0.08, 1.23) (0.1, 1.22) (0.15, 1.07) (0.25, 0.65) (0.35, 0.33) (0.45, 0.18) (0.5, 0.15)};
@@ -398,39 +310,38 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 			\node[left] at (rel axis cs:0.8, 0.45) {\footnotesize \textsc{fcc}};
 			\node [lab] at (rel axis cs:0,1) {c};
 		\end{groupplot}
-		\path (twod.outer south) ++(0.575\textwidth, 0.6em) 
+		\path (twod.outer south) ++(0.525\textwidth, 0.6em) 
 			node[anchor=south] {$w_6=w_6^*$} 
-			node[inner sep=0, above=0] (one_ico) {\includegraphics[width=0.2\textwidth]{one_ico.png}};
+			node[inner sep=0, above=0] (one_ico) {\includegraphics[width=0.22\textwidth]{one_ico.png}};
 		\node at(one_ico.south){$w_6=w_6^*$};
-		\path (twod.outer north) ++(0.575\textwidth, -0.6em)
-			node[inner sep=0, below=0] (one_mrco) {\includegraphics[width=0.2\textwidth]{one_mrco.png}};
+		\path (twod.outer north) ++(0.525\textwidth, -0.6em)
+			node[inner sep=0, below=0] (one_mrco) {\includegraphics[width=0.22\textwidth]{one_mrco.png}};
 		\node at (one_mrco.south) {$Q_6=Q_6^*$};
 		\node [lab] at (one_mrco.north west) {d};
 		\node [lab] at (one_ico.north west) {e};
 	\end{tikzpicture}
-	\caption{\textbf{Bond order mobility.} {\bf a,} Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample ($\phi = 0.575 \pm 0.03$). The colour scale is saturated at $1.5$ times the bulk mean square displacement. Straight lines corresponds to the important thresholds: $Q_6^*$, $w_6^*$ and $w_6^\text{dod}$. {\bf b-c,} Normalised mobility for icosahedral and crystalline order parameters respectively at volume fraction $0.535$ (squares), $0.555$ (triangles) and $0.575$ (diamonds), all $\pm 0.03$. Bulk mean square displacement is scaled to be at 1. Perfect structures are on the edge of each plot. The lines are a guide for the eye, stressing the collapse of the $w_6$-mobility at all volume fractions in {\bf b} and the absence of such collapse in {\bf c}. The scattering at low volume fractions is due to poor averaging of rare structures. Examples of crystal-like cluster and distorted icosahedron at the respective threshold values are shown in \textbf{d} and \textbf{e}, respectively.}
+	\caption{\textbf{Bond order mobility.} {\bf a,} Normalised mobility in the $(w_6, Q_6)$-plane for our most deeply supercooled sample. The colour scale is saturated at $1.5$ times the bulk mean square displacement. {\bf b-c,} Normalised mobility for icosahedral and crystalline order parameters respectively. Bulk mean square displacement is scaled to be at 1. Perfect structures are on the edge of each plot. The lines are a guide for the eye, stressing the collapse of the $w_6$-mobility at all volume fractions in {\bf b} and the absence of collapse in {\bf c}. The scattering at low volume fractions is due to poor averaging of rare structures. Example of \textbf{d} crystal-like cluster and \textbf{e} distorted icosahedron at the respective threshold values.}
 	\label{fig:msd_Q6_w6}
 \end{figure}
-\tikzset{external/force remake=false}
-\tikzsetnextfilename{3D}
+\tikzset{external/force remake}
+
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[%
 		pic3d/.style={inner sep=0}, %
-		lab/.style={below left=0.4em and 0, inner sep=0, text height=0.8em, text depth=0.2em, font=\sffamily\Large\bfseries},%
+		lab/.style={below left=0.5em and 0.5em, text height=0.8em, text depth=0.2em, font=\Large\bfseries},%
 		arr/.style={<->, thick, yellow!75!black}%
 		]%
 	\definecolor{turquoise}{rgb}{0.678431,0.917647,0.917647}
 	\definecolor{gold}{rgb}{0.8, 0.498039, 0.196078}
-	\matrix[matrix of nodes, inner sep=0, nodes={pic3d}] (pic)
-	{
-		\includegraphics[width=0.48\textwidth]{X_go1.png} &%
-		\includegraphics[width=0.48\textwidth]{mrco_ico_scale_go1-0023.png}\\
-		\includegraphics[width=0.48\textwidth]{mrco24_scale_go1_t040_t048.png}&%
-		\includegraphics[width=0.48\textwidth]{cgsd_2tau.png}\\
-	};
+	\node[right=0.01\textwidth, pic3d] (all) {\includegraphics[width=0.48\textwidth]{mrco_ico_scale_go1-0023.png}};
+	\node[left=0.01\textwidth, pic3d] at (all.west) (X) {\includegraphics[width=0.48\textwidth]{X_go1.png}};
+	\node[below=0.01\textwidth, pic3d] at (all.south) (dyn) {\includegraphics[width=0.48\textwidth]{cgsd_2tau.png}};
+	\node[left=0.01\textwidth, pic3d] at (dyn.west) (mrco) {\includegraphics[width=0.48\textwidth]{mrco24_scale_go1_t040_t048.png}};
+	\draw [help lines, step=0.12\textwidth, shift=(mrco.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
+	\draw [help lines, step=0.12\textwidth, shift=(dyn.south west)] (0, 0) grid (0.48\textwidth, 0.48\textwidth);
 	\matrix[%
-		above left=0.01\textwidth of pic-1-1.south east, font=\sffamily\footnotesize,% 
+		above left=0.01\textwidth of X.south east, font=\footnotesize,% 
 		column 1/.style={right, text height=0.8em, text depth=0.2em},%
 		column 2/.style={left, circle, shade, inner sep=0.008\textwidth},%
 		] (l)
@@ -440,21 +351,45 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		\node{Crystal-like}; & \node[ball color=green!66!black] {}; \\
 		\node{Slow}; & \node[ball color=turquoise!75!black] {}; \\
 	};
-	\node [lab] at (pic-1-1.north east) {a};
-	\node [lab] at (pic-1-2.north east) {b};
-	\node [lab] at (pic-2-1.north east) {c};
-	\node [lab] at (pic-2-2.north east) {d};
+	\node [lab] at (X.north east) {a};
+	\node [lab] at (all.north east) {b};
+	\node [lab] at (mrco.north east) {c};
+	\node [lab] at (dyn.north east) {d};
 	\end{tikzpicture}
-	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{a,} Particles with more than $7$ crystalline bonds. \textbf{b,} A typical configuration of bond ordered particles. Icosahedral particles are shown in the same colour if they belong to the same cluster. If a particle is neighbouring both crystal-like and icosahedral structures, it is displayed as icosahedral. \textbf{c,} Crystal-like particles alone (the order parameter was averaged over $t^\text{dh}/2$). \textbf{d,} Slow particles with respect to the coarse-grained displacement. Due to particles going in and out of the field of view, assignment of particles located very near the edges of \textbf{c} and \textbf{d} were not accurate and have been removed.}
+	\caption{\textbf{Computer reconstruction from confocal microscopy coordinates in our most deeply supercooled sample.} Depth is $\sim 12\sigma$. Only particles of interest and their neighbours are displayed. Each particle is plotted with its real radius. \textbf{a} Particles with more than $7$ crystalline bonds. \textbf{b,} A typical configuration of bond ordered particles. Two icosahedral particle are shown in the same shade if they belong to the same cluster. If a particle is neighbouring both kind of structures, it is displayed as icosahedral. \textbf{c,} Crystal-like particles alone (the order parameter was averaged over $t^{dh}/2$). \textbf{d,} Slow particles (see text). Due to particles going in and out of the field of view, the edges of \textbf{c} and \textbf{d} were not accurate and have been removed.}
 	\label{fig:3D}
 \end{figure}
-
 \tikzset{external/force remake=false}
-\tikzsetnextfilename{localise}
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[%
+		pic3d/.style={inner sep=0}, %
+		lab/.style={below left=0.5em and 0.5em, text height=0.8em, text depth=0.2em, font=\Large\bfseries},%
+		]%
+	\node[above=0.01\textwidth, pic3d] (X) {\includegraphics[width=0.48\textwidth]{X_go1.png}};
+	\node[below=0.01\textwidth, pic3d] (mrco) {\includegraphics[width=0.48\textwidth]{X_mrco_go1.png}};
+	\matrix[%
+		above left=0.1\textwidth of X.south east, matrix of nodes, ampersand replacement=\&,%
+		draw,%
+		%every even column/.style={text height=0.8em, text depth=0.2em},%
+		every odd column/.style={circle, shade, inner sep=0.25em, above},%
+		]{%
+		|[ball color=magenta]| \& Crystal \\
+		%|[ball color=cyan]| \& Crystal neighbour \&
+		|[ball color=green!66!black]| \& Crystal-like \\
+	};
+	\node [lab] at (X.north east) {a};
+	\node [lab] at (mrco.north east) {b};
+	\end{tikzpicture}
+	\caption{\textbf{Particles with more than $7$ crystalline bonds.} Particles with $Q_6>Q_6^*$ and their neighbours are also plotted in \textbf{b} for comparison. Crystalline particles are always included in high $Q_6$ regions. However, the fluctuations of the crystal-like order cannot be reduced to sub-critical nucleation.}
+	\label{fig:X_3D}
+\end{figure}
+%\tikzset{external/force remake}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[
 		pic3d/.style={inner sep=0}, %
+		lab/.style={above right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
 		]%
 		\node[pic3d] (msli) {\includegraphics[width=0.28\textwidth]{comp2D3D_slices}};
 		\node[lab] at (msli.south west) {a};
@@ -476,22 +411,21 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\caption{\textbf{Visualisation of the results of various tracking methods for the same portion of image.} The circles on each picture are identical and result from 2D multiscale tracking of each XY slice of the 3D pictures. \textbf{a} XZ and YZ slices of the image (fake colors). \textbf{b} Multiscale 3D tracking. Spheres are drawn with the radius determined by the tracking methods. \textbf{c-h} Crocker and Grier in 3D with blurring radius increasing from \unit{2}{px} to \unit{4.5}{px} by steps of \unit{0.5}{px} (Sphere radii correspond to the blurring radius).}
 	\label{fig:localise}
 \end{figure}
-\tikzset{external/force remake=false}
-\tikzsetnextfilename{sizing}
+%\tikzset{external/force remake}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[%
 		pic3d/.style={inner sep=0}, %
-		lab/.append style={below left}%
+		lab/.style={below left, text height=0.8em, text depth=0.2em, font=\Large\bfseries}%
 		]
 	\begin{axis}[%
 		name=hist,
 		width=0.45\textwidth,%
 		%scale only axis,
-		xmin=1, xmax=5, xtick=\empty,%
+		xmin=1, xmax=5,
 		axis y line*=left,
 		ymin=0, ytick=\empty,%
-		ylabel={\sffamily{Size distribution (a.u.)}},%
+		ylabel={Size distribution (a.u.)},%
 		ylabel near ticks,
 		]
 		\addplot[ybar, ybar interval] file {SEM_size_distrib.txt};
@@ -500,20 +434,21 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		%scale only axis,
 		width=0.45\textwidth,%
 		xmin=1, xmax=5,
-		xlabel={\sffamily{Diameters} [$\micro\metre$]},%
+		axis y line*=right,
+		xlabel={Diameters [$\micro\metre$]},%
 		ymin=0, ytick=\empty,%
 		no marks,%
 		]
 		\addplot+[dashed] file {go1_intensity.sizes};
 		\addplot table [x expr ={\thisrowno{0}/1.23}, y index=1] {go1_intensity.sizes};
-		\draw[->, ultra thick] (axis cs:3.15,0.05) -- (axis cs: 3.9, 0.05) node[right] {\sffamily{swelling}};
+		\draw[->, ultra thick] (axis cs:3.15,0.05) -- (axis cs: 3.9, 0.05) node[right] {swelling};
 		\node[lab] at (rel axis cs:0.95,0.95) {c};
 	\end{axis}
 	\node[pic3d, below left=0 of hist.left of north west] (XY) {\includegraphics[width=0.14\textwidth]{sliceXY}};
 	\node[lab, below=-0.2em of XY.south east, anchor=north east] {a};
 	\node[pic3d, below=1.4em of XY] (XZ) {\includegraphics[width=0.14\textwidth]{sliceXZ}};
 	\node[lab, below=0 of XZ.south east, anchor=north east] {b};
-	\draw[black, ultra thick] (XY.south west) ++(0,-0.2em) -- ++(0.036951014\textwidth,0) node[pos=0,below right=0.2em and 0,inner sep=0] {\scriptsize\unit{10}{\micro\metre}};
+	\draw[black, ultra thick] (XY.south west) ++(0,-0.2em) -- ++(0.036951014\textwidth,0) node[pos=0,below right=0.2em and 0,inner sep=0] {\tiny\unit{10}{\micro\metre}};
 	
 	\begin{axis}[%
 		at={(hist.right of south east)},
@@ -536,23 +471,24 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 	\label{fig:sizing}
 \end{figure}
 \tikzset{external/force remake=false}
-\tikzsetnextfilename{percolation}
 \begin{figure}
 	\centering
-	\begin{tikzpicture}[lab/.append style={below}]
+	\begin{tikzpicture}[lab/.style={below, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
 	\pgfplotsset{ every axis/.append style={ width=0.45\textwidth, cycle list name=black white }}
 	\pgfplotsset{cycle list name=black white}
 	\begin{loglogaxis}[%
-		xmin=10, xmax=1000, xlabel=\sffamily{Cluster size},%
-		ymin=1, ylabel=\sffamily{Number of clusters},%
+		xmin=10, xmax=1000, xlabel={Cluster size},%
+		ymin=1, ylabel={Number of clusters},%
 		]
 		\addplot+[only marks] table {go1_w6_0012_sizes_rgs_noROI.hist};
 		\addplot+[no marks, domain=50:500] {1e6*x^(-2.1)};
+		\node[above right] at (axis cs:100,100) {$x^{-2.1}$};
+		\node[below left] at (rel axis cs:0.95,0.8) {$w_6<-0.012$};
 		\node[lab] at (rel axis cs:0.5, 0.95) {a};
 	\end{loglogaxis}
 	\begin{loglogaxis}[%
 		at={(0.5\textwidth,0)},%
-		xmin=10, xmax=1000, xlabel=\sffamily{Cluster size},%
+		xmin=10, xmax=1000, xlabel={Cluster size},%
 		ymin=1, ylabel={$R_g/\sigma $},%
 		ytick={1,10}, minor y tick num=10,%
 		yticklabel={%
@@ -563,6 +499,12 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		]
 		\addplot+[only marks] table[y expr=\thisrowno{2}/6.14] {go1_w6_0012_sizes_rgs_noROI.hist};
 		\addplot+[no marks, domain=25:100] {0.75*x^(0.5)};
+		\node[left] at (axis cs:40,6) {$d_f=2$};
+		\addplot+[no marks, domain=100:1000] {x^(1/3.)};
+		\node[below right] at (axis cs:100,5) {$d_f=3$};
+		\addplot+[no marks, domain=20:30] {0.1*x};
+		\node[below right] at (axis cs:30,3) {$d_f=1$};
+		\node[below right] at (rel axis cs:0.05,0.8) {$w_6<-0.012$};
 		\node[lab] at (rel axis cs:0.5, 0.95) {b};
 	\end{loglogaxis}
 	\begin{axis}[%
@@ -574,16 +516,16 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		extra x ticks={\wstar, -0.00782},%
 		extra x tick labels={,},%
 		ymin=0,%
-		ylabel=\sffamily{Largest cluster size},%
+		ylabel={Largest cluster size},%
 		]
 		\addplot+[only marks] table {go1_w6.perco};
 		\node [left] at (axis cs:\wstar,1e3) {\footnotesize $w_6^*$};
-		\node [right] at (axis cs:-0.00782,1e3) {\footnotesize $w_6^\text{dod}$};
+		\node [right] at (axis cs:-0.00782,1e3) {\footnotesize $w_6^{dod}$};
 		\node[lab] at (rel axis cs:0.5, 0.95) {c};
 	\end{axis}
 	\begin{axis}[%
 		at={(0.5\textwidth, -0.36\textwidth)},%
-		xlabel=\sffamily{Fraction of activated particles},%
+		xlabel={Fraction of activated particles},%
 		xmin=0, xmax=0.6,ymin=0,%
 		ylabel={Largest cluster size},%
 		axis y line*=left,%
@@ -596,17 +538,68 @@ Conflicting tendencies towards \textsc{fcc} and \textsc{ico} in \textbf{c} is a 
 		xmin=0, xmax=0.6, ymin=0,%
 		axis x line=none,%
 		axis y line*=right, ytick=\empty,%
-		ylabel=\sffamily{Percolation probability (a.u.)},%
+		ylabel={Percolation probability (a.u.)},%
 		ylabel near ticks,%
 		]
 		\addplot+[only marks] coordinates{(1, 0)};
 		\addplot[const plot, gray, fill=gray, semitransparent, area legend] file {go1_percol_thrs.hist};
+		\legend{{by $w_6$},random}
 		\node[lab] at (rel axis cs:0.5, 0.95) {d};
 	\end{axis}
 	\end{tikzpicture}
-	\caption{\textbf{Imperfect icosahedral clusters.} \textbf{a,} Cluster size distribution for nearly percolating threshold ($w_6<-0.012$). The exponent of random percolation ($-2.1$) is given by the straight line. 
-\textbf{b,} Radius of gyration (indicating a fractal dimension $d_f\approx 2$ given by the straight line) for the case of {\bf a}. \textbf{c,} Size of the largest non-percolating cluster as a function of the threshold on $w_6$. Percolation takes place near $w_6\approx -0.011$. Vertical lines indicate the position of $w_6^*$ and $w_6^\text{dod}$ respectively. \textbf{d,} Translation of \textbf{c} in terms of the fraction of activated particles (dots) together with the probability of the onset of percolation when particles are randomly activated (gray shading). We can see that activating particles as a function of icosahedral order and those activated randomly have almost the same percolation threshold ($\approx7.5\%$ of the particles activated).}
+	\caption{\textbf{Imperfect icosahedral network.} \textbf{a} Cluster size distribution (compatible with random percolation) and \textbf{b} radius of gyration (indicating a fractal dimension $d_f\approx 2$) for nearly percolating threshold ($w_6<-0.012$). \textbf{c} Size of the largest non percolating cluster function of the threshold on $w_6$. Percolation takes place near $w_6\approx -0.011$. \textbf{d} translates \textbf{c} in terms of fraction of activated particles (dots) and also shows the probability of the onset of percolation when particles are randomly activated (line). Activating particles function of icosahedral order or randomly do not change the position of the percolation ($\approx7.5\%$ of the particles activated).}
 	\label{fig:percolation}
+\end{figure}
+
+\tikzset{external/force remake}
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[lab/.style={below right, text height=0.8em, text depth=0.2em, font=\Large\bfseries}]
+	\pgfplotsset{fitc/.style={no markers, forget plot, domain=0.3:3}}
+	\begin{loglogaxis}[%
+		xlabel={$q\sigma$}, ylabel={$S_4(q)$},
+		cycle list name=mark list,%
+		xmin=0.2, xmax=10, ymin=0.06,%
+		width=0.45\textwidth,%
+		legend pos=south west, reverse legend, legend style={font=\scriptsize}, %
+		]
+		\addplot+[blue, fitc] {0.634/(1+0.703^2*x^2)};
+		\addplot+[blue, only marks] file {LS3954.S4};
+		\addplot+[blue!30!gray, fitc] {0.744/(1+0.804^2*x^2)};
+		\addplot+[blue!30!gray, only marks] file {LS4446.S4};
+		\addplot+[gray, fitc] {0.778/(1+0.835^2*x^2)};
+		\addplot+[gray, only marks] file {LS4582.S4};
+		\addplot+[red!50!gray, fitc] {1.011/(1+1.017^2*x^2)};
+		\addplot+[red!50!gray, only marks] file {LS5079.S4};
+		\addplot+[red, fitc] {2.950/(1+1.959^2*x^2)};
+		\addplot+[red, only marks] file {go1.S4};
+		\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
+		\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
+		\node[lab] at (rel axis cs:0, 1) {a};
+	\end{loglogaxis}
+	\begin{loglogaxis}[%
+		at={(0.5\textwidth,0)},
+		width=0.45\textwidth,%
+		xlabel={$q\xi_4$}, ylabel={$S_4(q)/\chi_4$},
+		cycle list name=mark list,%
+		xmin=0.25, xmax=5, ymin=0.05,%
+		xtick={0.5, 1, 2, 4},
+		xticklabel=\pgfmathparse{exp(\tick)}\pgfmathprintnumber{\pgfmathresult},
+		legend pos=south west, reverse legend, legend style={font=\scriptsize}, %
+		]
+		\addplot+[blue, only marks] table[x expr={\thisrowno{0}*0.703}, y expr={\thisrowno{1}/0.634}] {LS3954.S4};
+		\addplot+[blue!30!gray, only marks] table[x expr={\thisrowno{0}*0.804}, y expr={\thisrowno{1}/0.744}] {LS4446.S4};
+		\addplot+[gray, only marks] table[x expr={\thisrowno{0}*0.835}, y expr={\thisrowno{1}/0.778}] {LS4582.S4};
+		\addplot+[red!50!gray, only marks] table[x expr={\thisrowno{0}*1.017}, y expr={\thisrowno{1}/1.011}] {LS5079.S4};
+		\addplot+[red, only marks] table[x expr={\thisrowno{0}*1.959}, y expr={\thisrowno{1}/2.950}] {go1.S4};
+		\addplot+[black, fitc] {1/(1+x^2)};
+		\addlegendimage{legend image code/.code={\node[right] {$\phi\;\pm$};}};
+		\legend{$0.497$, $0.535$, $0.540$, $0.555$, $0.575$, $0.003$};
+		\node[lab] at (rel axis cs:0, 1) {b};
+	\end{loglogaxis}
+	\end{tikzpicture}
+	\caption{\textbf{Four-point structure factor} at different volume fractions}
+	\label{fig:S4}
 \end{figure}
 
 \end{document}
